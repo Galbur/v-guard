@@ -20,9 +20,8 @@ export interface Review {
 // The phone number shown on the site is a default (F11 ОЧІКУЄ). Clickable tel: and wa.me
 // links never use it: they go to TEST_PHONE (E.164) from .env.local or the Netlify env.
 // Without TEST_PHONE the number is plain text and the Bellen / WhatsApp buttons are hidden,
-// so nobody calls or messages a random number. Ignored on Netlify production builds.
-const testPhone: string | null =
-  process.env.CONTEXT !== 'production' ? import.meta.env?.TEST_PHONE || process.env.TEST_PHONE || null : null;
+// so nobody calls or messages a random number. TEST_PHONE only works before launch: it is
+// ignored as soon as LIVE_PAGES is not empty (see linkPhone below).
 
 export const site = {
   name: 'V Guard Studio', // F1 ПІДТВЕРДЖЕНО
@@ -130,7 +129,8 @@ export function waDigits(e164: string): string {
 }
 
 /** E.164 number that tel: and wa.me links may use, or null (links hidden). */
-export const linkPhone: string | null = testPhone;
+export const linkPhone: string | null =
+  LIVE_PAGES.length === 0 ? import.meta.env?.TEST_PHONE || process.env.TEST_PHONE || null : null;
 
 /** tel: link, or null when no TEST_PHONE is set. */
 export function telUrl(): string | null {
