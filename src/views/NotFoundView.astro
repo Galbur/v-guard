@@ -1,0 +1,89 @@
+---
+// 404 for both languages: mockup 10.
+import Base from '../layouts/Base.astro';
+import { notFoundCopy } from '../copy/pages.ts';
+import { isLinked } from '../config/site.ts';
+import { t } from '../i18n/index.ts';
+import { localizedPath, type Locale } from '../i18n/routes.ts';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const c = notFoundCopy[locale];
+---
+
+<Base locale={locale} title={c.title}>
+  <div class="nf container">
+    <p class="nf__code" aria-hidden="true">404</p>
+    <h1 class="nf__title">{c.h1}</h1>
+    <p class="nf__text">{c.text}</p>
+    <div class="nf__actions">
+      <a class="btn btn--ghost" href={localizedPath('home', locale)}>{t('cta.home', locale)}</a>
+      {isLinked('contact') && <a class="btn btn--primary" href={localizedPath('contact', locale)}>{t('cta.quote', locale)}</a>}
+    </div>
+  </div>
+</Base>
+
+<style>
+  .nf {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 16px;
+    min-height: calc(100svh - var(--header-h) - var(--sticky-h));
+    padding-block: 32px;
+  }
+
+  .nf__code {
+    font-size: 72px;
+    line-height: 1;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    color: var(--c-gold);
+  }
+
+  .nf__title {
+    font-size: 28px;
+    line-height: 1.15;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  .nf__text {
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--c-muted);
+  }
+
+  .nf__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 8px;
+  }
+
+  @media (min-width: 64rem) {
+    .nf {
+      min-height: 560px;
+    }
+
+    .nf__code {
+      font-size: 120px;
+    }
+
+    .nf__title {
+      font-size: 44px;
+    }
+
+    .nf__text {
+      font-size: 17px;
+    }
+
+    .nf__actions {
+      flex-direction: row;
+      gap: 12px;
+    }
+  }
+</style>
