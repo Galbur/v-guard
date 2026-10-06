@@ -9,7 +9,7 @@ Facts, prices, decisions: `docs/canon/vguard-site-truth-vN.md` (highest N). Stru
 ## Stack
 
 - Astro, static output. Plain CSS with tokens in `src/styles/tokens.css`. No UI framework, no Tailwind.
-- JS only for: mobile menu, form steps, optional selector. No hydration frameworks.
+- JS only for: mobile menu, form steps, optional selector, before/after slider (Site Truth D13; must work as two static images without JS). No hydration frameworks.
 - Netlify hosting, Netlify Forms, one function `netlify/functions/submission-created.ts`.
 
 ## Structure
@@ -21,7 +21,7 @@ src/
   content/projects/     one file per project (car, service, film, image, caption nl/uk)
   i18n/nl.ts, uk.ts     UI strings; t(key, locale)
   i18n/routes.ts        page pairs NL ↔ UA; localizedPath()
-  components/           Header, Footer, StickyMobileBar, Hero, ProofStrip, ServiceCards,
+  components/           Header, Footer, StickyMobileBar, Hero, ProofStrip, ServiceCards, LegalDiagram, BeforeAfter,
                         ProcessSteps, PackageCards, PriceTable, LegalNote, ProjectGallery,
                         TrustBlock, ReviewsBlock, FAQ, CtaBand, ContactBlock, QuoteForm
   layouts/Base.astro    head, SEO, hreflang, JSON-LD
@@ -33,8 +33,8 @@ docs/canon/, docs/blueprints/, docs/prompts/
 
 ## Hard rules
 
-1. No placeholders in site content: `TODO`, `TBD`, `[[`, `lorem`, fake phone numbers. A missing fact means the block does not render and the gap is reported.
-2. Prices only from `src/data/services.ts`, and only when `priceStatus === 'confirmed'`. Format `€200`, «vanaf €200». Ranges with a hyphen.
+1. No placeholders in site content: `TODO`, `TBD`, `[[`, `lorem`, fake phone numbers. A missing fact means the block does not render and the gap is reported. Exception (owner decision R1, 06.10.2026): defaults from the design prompt (⟦value | hint⟧) are allowed before launch. They live only in `src/config/site.ts` and `src/data/services.ts` (captions: project frontmatter) with `status: 'default'` and the hint in code. Before launch `npm run check:defaults` = 0 or explicit owner approval.
+2. Prices only from `src/data/services.ts`, and only when `priceStatus === 'confirmed'`. Exception (owner decision R2, 06.10.2026): `priceStatus === 'default'` renders before launch; before launch `npm run check:defaults` = 0 or explicit owner approval. Format `€200`, «vanaf €200», thousands with a dot (`€1.795`). Ranges with a hyphen.
 3. NAP only from `src/config/site.ts`. Site, JSON-LD and footer read the same values.
 4. No U+2014 (em dash) or U+2013 (en dash) anywhere in copy.
 5. No video, no iframe, no third-party script, font or image before a user click. Fonts self-hosted. Google Maps only as a link or click-to-load.
