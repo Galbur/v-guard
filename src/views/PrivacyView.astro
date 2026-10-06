@@ -1,0 +1,76 @@
+---
+// Privacy (/privacy/, /uk/privacy/): plain text page in the site style (no mockup).
+import Base from '../layouts/Base.astro';
+import PageIntro from '../components/PageIntro.astro';
+import { privacyCopy } from '../copy/privacy.ts';
+import type { Locale } from '../i18n/routes.ts';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const c = privacyCopy[locale];
+---
+
+<Base locale={locale} pageKey="privacy" title={c.title} description={c.description}>
+  <PageIntro h1={c.h1} sub={c.intro} />
+  <div class="container prose">
+    {
+      c.sections.map((s) => (
+        <section>
+          <h2>{s.title}</h2>
+          {s.paragraphs?.map((p) => <p>{p}</p>)}
+          {s.list && (
+            <ul>
+              {s.list.map((li) => (
+                <li>{li}</li>
+              ))}
+            </ul>
+          )}
+        </section>
+      ))
+    }
+  </div>
+</Base>
+
+<style>
+  .prose {
+    max-width: calc(720px + 2 * var(--gutter));
+    margin-inline: 0;
+    padding-block: 32px var(--section-gap);
+    color: var(--c-text-soft);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  .prose section + section {
+    margin-top: 32px;
+  }
+
+  h2 {
+    margin-bottom: 8px;
+    color: var(--c-off-white);
+    font-size: 20px;
+    line-height: 1.25;
+    font-weight: 600;
+  }
+
+  p + p,
+  p + ul {
+    margin-top: 8px;
+  }
+
+  ul {
+    padding-left: 20px;
+  }
+
+  @media (min-width: 64rem) {
+    .prose {
+      margin-inline: auto;
+      max-width: var(--container);
+      padding-left: var(--gutter);
+      padding-right: calc(var(--container) - 720px - var(--gutter));
+    }
+  }
+</style>
