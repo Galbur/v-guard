@@ -45,7 +45,7 @@ test('formats the message in the block specs order with NL labels', () => {
 
 test('advice request without option and with missing fields', () => {
   const message = formatMessage({ dienst: 'advies', naam: 'A', telefoon: '0600000000', taal: 'uk' });
-  assert.match(message, /^Dienst: Advies$/m);
+  assert.match(message, /^Dienst: Ik wil advies$/m);
   assert.match(message, /^Optie: -$/m);
   assert.match(message, /^Auto: -$/m);
   assert.doesNotMatch(message, /privacy|bot-field/i);

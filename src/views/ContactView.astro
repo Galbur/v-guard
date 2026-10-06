@@ -1,0 +1,41 @@
+---
+// Contact (/contact/, /uk/kontakty/): mockups 7a-7f. Form above the fold on 375,
+// «Studio in Vroomshoop» below it.
+import Base from '../layouts/Base.astro';
+import PageIntro from '../components/PageIntro.astro';
+import QuoteForm from '../components/QuoteForm.astro';
+import ContactBlock from '../components/ContactBlock.astro';
+import { contactCopy } from '../copy/pages.ts';
+import type { Locale } from '../i18n/routes.ts';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const c = contactCopy[locale];
+---
+
+<Base locale={locale} pageKey="contact" title={c.title} description={c.description}>
+  <PageIntro h1={c.h1} sub={c.sub} long />
+  <div class="container contact__form">
+    <QuoteForm locale={locale} />
+  </div>
+  <ContactBlock locale={locale} />
+</Base>
+
+<style>
+  .contact__form {
+    padding-top: 20px;
+  }
+
+  @media (min-width: 64rem) {
+    .contact__form > :global(*) {
+      max-width: 720px;
+    }
+
+    .contact__form {
+      padding-top: 32px;
+    }
+  }
+</style>

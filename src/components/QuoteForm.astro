@@ -1,10 +1,11 @@
 ---
-// Base quote form (Blueprint section 6, block specs section 4). Without JS all steps
-// are visible and the form posts natively to Netlify; with JS it becomes a 4-step
-// flow with validation, Back that keeps values, and a success state with the
-// WhatsApp continuation.
+// Base quote form (Blueprint v1.2 section 6, design prompt section 11, mockups 7a-7f).
+// Without JS all steps are visible and the form posts natively to Netlify; with JS it is a
+// 4-step flow with validation, «Terug» that keeps values, ?service= / &option= preselect,
+// and a success state with the WhatsApp continuation.
+import Icon from './Icon.astro';
 import { site, waDigits } from '../config/site.ts';
-import { adviceOption, bodyTypes, services } from '../data/services.ts';
+import { adviceOption, bodyTypes, optionDetail, services } from '../data/services.ts';
 import { t, type UiKey } from '../i18n/index.ts';
 import { localizedPath, type Locale } from '../i18n/routes.ts';
 
@@ -34,13 +35,13 @@ const messageKeys: UiKey[] = [
   'form.wa.car',
 ];
 const messages = Object.fromEntries(messageKeys.map((k) => [k, t(k, locale)]));
-const wa = site.whatsapp ? waDigits(site.whatsapp) : '';
+const wa = waDigits(site.phone.value.e164);
 const pagePath = localizedPath('contact', locale);
 ---
 
 <div class="quote" data-quote data-wa={wa} data-messages={JSON.stringify(messages)}>
   <form
-    class="quote__form"
+    class="quote__card surface-light"
     name="offerte"
     method="POST"
     data-netlify="true"
@@ -57,16 +58,20 @@ const pagePath = localizedPath('contact', locale);
       </label>
     </p>
 
-    <p class="quote__progress" data-progress hidden></p>
+    <div class="quote__progress" data-progress hidden>
+      <p data-progress-text></p>
+      <div class="quote__bars" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+    </div>
 
     <fieldset class="quote__step" data-step="service">
       <legend><h2 class="quote__title" tabindex="-1">{t('form.step.service', locale)}</h2></legend>
-      <div class="choices">
+      <div class="tiles">
         {
           serviceChoices.map((c) => (
-            <label class="choice">
-              <input type="radio" name="dienst" value={c.id} required aria-describedby="err-dienst" />
-              <span>{c.label}</span>
+            <label class="tile">
+              <input class="visually-hidden" type="radio" name="dienst" value={c.id} required aria-describedby="err-dienst" />
+              <Icon name="check" size={22} class="tile__check" />
+              <span class="tile__label">{c.label}</span>
             </label>
           ))
         }
@@ -78,12 +83,28 @@ const pagePath = localizedPath('contact', locale);
       <legend><h2 class="quote__title" tabindex="-1">{t('form.step.car', locale)}</h2></legend>
       <div class="field">
         <label for="f-merk">{t('form.merk', locale)}</label>
-        <input id="f-merk" name="merk" type="text" required autocomplete="off" aria-describedby="err-merk" />
+        <input
+          id="f-merk"
+          name="merk"
+          type="text"
+          required
+          autocomplete="off"
+          placeholder={t('form.merk.placeholder', locale)}
+          aria-describedby="err-merk"
+        />
         <p class="field__error" id="err-merk" hidden></p>
       </div>
       <div class="field">
         <label for="f-model">{t('form.model', locale)}</label>
-        <input id="f-model" name="model" type="text" required autocomplete="off" aria-describedby="err-model" />
+        <input
+          id="f-model"
+          name="model"
+          type="text"
+          required
+          autocomplete="off"
+          placeholder={t('form.model.placeholder', locale)}
+          aria-describedby="err-model"
+        />
         <p class="field__error" id="err-model" hidden></p>
       </div>
       <div class="field">
@@ -95,17 +116,25 @@ const pagePath = localizedPath('contact', locale);
           inputmode="numeric"
           maxlength="4"
           autocomplete="off"
+          placeholder={t('form.bouwjaar.placeholder', locale)}
           aria-describedby="err-bouwjaar"
         />
         <p class="field__error" id="err-bouwjaar" hidden></p>
       </div>
       <fieldset class="field">
         <legend>{t('form.carrosserie', locale)}</legend>
-        <div class="choices choices--compact">
+        <div class="pills">
           {
             bodyTypes.map((b) => (
-              <label class="choice">
-                <input type="radio" name="carrosserie" value={b.id} required aria-describedby="err-carrosserie" />
+              <label class="pill">
+                <input
+                  class="visually-hidden"
+                  type="radio"
+                  name="carrosserie"
+                  value={b.id}
+                  required
+                  aria-describedby="err-carrosserie"
+                />
                 <span>{b.label[locale]}</span>
               </label>
             ))
@@ -119,14 +148,21 @@ const pagePath = localizedPath('contact', locale);
       <legend><h2 class="quote__title" tabindex="-1">{t('form.step.option', locale)}</h2></legend>
       {
         services.map((s) => (
-          <div class="choices" data-options-for={s.slug}>
-            <p class="choices__service">{s.label[locale]}</p>
-            {s.options.map((o) => (
-              <label class="choice">
-                <input type="radio" name="optie" value={o.id} aria-describedby="err-optie" />
-                <span>{o.label[locale]}</span>
-              </label>
-            ))}
+          <div class="options" data-options-for={s.slug}>
+            <p class="options__service">{s.label[locale]}</p>
+            {s.options.map((o) => {
+              const detail = optionDetail(s.slug, o.id, locale);
+              return (
+                <label class="option">
+                  <input class="visually-hidden" type="radio" name="optie" value={o.id} aria-describedby="err-optie" />
+                  <span>
+                    <span class="option__title">{o.label[locale]}</span>
+                    {detail && <span class="option__detail">{detail}</span>}
+                  </span>
+                  <Icon name="check-circle" size={24} class="option__check" />
+                </label>
+              );
+            })}
           </div>
         ))
       }
@@ -142,14 +178,7 @@ const pagePath = localizedPath('contact', locale);
       </div>
       <div class="field">
         <label for="f-telefoon">{t('form.telefoon', locale)}</label>
-        <input
-          id="f-telefoon"
-          name="telefoon"
-          type="tel"
-          required
-          autocomplete="tel"
-          aria-describedby="err-telefoon"
-        />
+        <input id="f-telefoon" name="telefoon" type="tel" required autocomplete="tel" aria-describedby="err-telefoon" />
         <p class="field__error" id="err-telefoon" hidden></p>
       </div>
       <div class="field">
@@ -159,36 +188,38 @@ const pagePath = localizedPath('contact', locale);
       </div>
       <div class="field">
         <label for="f-opmerking">{t('form.opmerking', locale)}</label>
-        <textarea id="f-opmerking" name="opmerking" rows="4"></textarea>
+        <textarea id="f-opmerking" name="opmerking" rows="3" placeholder={t('form.opmerking.placeholder', locale)}
+        ></textarea>
       </div>
-      <div class="field field--check">
+      <div class="check">
         <input id="f-privacy" name="privacy" type="checkbox" value="ja" required aria-describedby="err-privacy" />
         <label for="f-privacy">
           {t('form.privacy.before', locale)}
-          <a href={localizedPath('privacy', locale)} target="_blank">{t('form.privacy.link', locale)}</a>
+          <a href={localizedPath('privacy', locale)} target="_blank">{t('form.privacy.link', locale)}</a>{
+            t('form.privacy.after', locale)
+          }
         </label>
         <p class="field__error" id="err-privacy" hidden></p>
       </div>
     </fieldset>
 
     <div class="quote__nav">
-      <button class="btn" type="button" data-back hidden>{t('form.back', locale)}</button>
+      <button class="btn btn--ghost-light" type="button" data-back hidden>{t('form.back', locale)}</button>
       <button class="btn btn--primary" type="button" data-next hidden>{t('form.next', locale)}</button>
       <button class="btn btn--primary" type="submit" data-submit>{t('form.submit', locale)}</button>
     </div>
-    <p class="field__error" data-submit-error role="alert" hidden></p>
+    <p class="field__error quote__submit-error" data-submit-error role="alert" hidden></p>
   </form>
 
-  <div class="quote__success" data-success hidden>
+  <div class="quote__card quote__success surface-light" data-success hidden>
+    <Icon name="check-circle" size={40} class="success__icon" />
     <h2 tabindex="-1">{t('form.success.title', locale)}</h2>
     <p>{t('form.success.text', locale)}</p>
-    {
-      wa && (
-        <a class="btn btn--primary" data-wa-link href={`https://wa.me/${wa}`} target="_blank" rel="noopener">
-          {t('form.success.wa', locale)}
-        </a>
-      )
-    }
+    <a class="btn btn--primary btn--block" data-wa-link href={`https://wa.me/${wa}`} target="_blank" rel="noopener">
+      <Icon name="whatsapp" size={18} />
+      {t('form.success.wa', locale)}
+    </a>
+    <a class="success__home" href={localizedPath('home', locale)}>{t('form.success.home', locale)}</a>
   </div>
 </div>
 
@@ -207,6 +238,8 @@ const pagePath = localizedPath('contact', locale);
     const messages: Messages = JSON.parse(root.dataset.messages ?? '{}');
     const steps = Array.from(form.querySelectorAll<HTMLFieldSetElement>('[data-step]'));
     const progress = form.querySelector<HTMLElement>('[data-progress]')!;
+    const progressText = form.querySelector<HTMLElement>('[data-progress-text]')!;
+    const bars = Array.from(progress.querySelectorAll<HTMLElement>('.quote__bars span'));
     const back = form.querySelector<HTMLButtonElement>('[data-back]')!;
     const next = form.querySelector<HTMLButtonElement>('[data-next]')!;
     const submit = form.querySelector<HTMLButtonElement>('[data-submit]')!;
@@ -227,10 +260,11 @@ const pagePath = localizedPath('contact', locale);
     };
     const checkedLabel = (name: string): string => {
       const input = form.querySelector<HTMLInputElement>(`input[name="${name}"]:checked:not(:disabled)`);
-      return input?.closest('label')?.textContent?.trim() ?? '';
+      const label = input?.closest('label');
+      return (label?.querySelector('.option__title, .tile__label') ?? label)?.textContent?.trim() ?? '';
     };
     const service = () => value('dienst');
-    // Until a service is chosen the option step counts; Advies has no options.
+    // Until a service is chosen the option step counts; advice has no options.
     const hasOptions = () => !service() || optionGroups.some((g) => g.dataset.optionsFor === service());
 
     // Only the option group of the chosen service is enabled and submitted.
@@ -276,8 +310,8 @@ const pagePath = localizedPath('contact', locale);
         errors.push(['naam', value('naam') ? null : messages['form.err.required']]);
         const phone = value('telefoon');
         const digits = phone.replace(/\D/g, '');
-        const phoneOk = /^[+\d\s().-]+$/.test(phone) && digits.length >= 8 && digits.length <= 15;
-        errors.push(['telefoon', !phone ? messages['form.err.required'] : phoneOk ? null : messages['form.err.phone']]);
+        const phoneOk = /^[+\d\s().-]+$/.test(phone) && digits.length >= 10 && digits.length <= 15;
+        errors.push(['telefoon', phoneOk ? null : messages['form.err.phone']]);
         const email = value('email');
         errors.push(['email', !email || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ? null : messages['form.err.email']]);
         const privacy = field('privacy') as HTMLInputElement;
@@ -296,20 +330,26 @@ const pagePath = localizedPath('contact', locale);
       current = Math.max(0, Math.min(index, visible.length - 1));
       steps.forEach((s) => (s.hidden = s !== visible[current]));
       progress.hidden = false;
-      progress.textContent = fill(messages['form.progress'], { n: current + 1, total: visible.length });
+      bars.forEach((bar, i) => {
+        bar.hidden = i >= visible.length;
+        bar.classList.toggle('is-done', i <= current);
+      });
+      progressText.textContent = fill(messages['form.progress'], { n: current + 1, total: visible.length });
       back.hidden = current === 0;
       next.hidden = current === visible.length - 1;
       submit.hidden = current !== visible.length - 1;
+      form.dataset.first = current === 0 ? 'true' : 'false';
       if (focus) visible[current].querySelector<HTMLElement>('.quote__title')?.focus();
     }
 
-    function currentStep(): StepId {
-      return visibleSteps()[current].dataset.step as StepId;
-    }
+    const currentStep = (): StepId => visibleSteps()[current].dataset.step as StepId;
 
     form.addEventListener('change', (e) => {
       const target = e.target as HTMLInputElement;
-      if (target.name === 'dienst') syncOptions();
+      if (target.name === 'dienst') {
+        syncOptions();
+        show(current, false);
+      }
       if (target.type === 'radio' || target.type === 'checkbox') setError(target.name, null);
     });
 
@@ -369,7 +409,7 @@ const pagePath = localizedPath('contact', locale);
       success.querySelector<HTMLElement>('h2')?.focus();
     }
 
-    // Preselect from /contact/?service=ppf&optie=full-front (QuoteEntry, PackageCards).
+    // Preselect from ?service=ppf&option=full-front (QuoteEntry, PackageCards, CtaBand).
     const params = new URLSearchParams(location.search);
     const preService = form.querySelector<HTMLInputElement>(
       `input[name="dienst"][value="${CSS.escape(params.get('service') ?? '')}"]`,
@@ -377,7 +417,7 @@ const pagePath = localizedPath('contact', locale);
     if (preService) preService.checked = true;
     syncOptions();
     const preOption = form.querySelector<HTMLInputElement>(
-      `input[name="optie"]:not(:disabled)[value="${CSS.escape(params.get('optie') ?? '')}"]`,
+      `input[name="optie"]:not(:disabled)[value="${CSS.escape(params.get('option') ?? params.get('optie') ?? '')}"]`,
     );
     if (preOption) preOption.checked = true;
     show(preService ? 1 : 0, false);
@@ -387,158 +427,366 @@ const pagePath = localizedPath('contact', locale);
 </script>
 
 <style>
-  .quote {
-    max-width: 36rem;
+  .quote__card {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 20px 16px;
   }
 
   .quote__step {
-    border: 0;
-    margin: 0 0 var(--space-6);
-    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
     min-width: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
   }
 
   .quote__step > legend {
+    float: left;
+    width: 100%;
     padding: 0;
   }
 
   .quote__title {
-    font-size: var(--text-xl);
-    margin: 0 0 var(--space-4);
+    font-size: 20px;
+    line-height: 1.2;
+    font-weight: 600;
   }
 
   .quote__title:focus {
     outline: none;
   }
 
-  .quote__title:focus-visible {
-    outline: 3px solid var(--color-focus);
-  }
-
   .quote__progress {
-    margin: 0 0 var(--space-2);
-    color: var(--color-text-muted);
-    font-size: var(--text-sm);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--c-muted-light);
   }
 
+  .quote__bars {
+    display: flex;
+    gap: 4px;
+  }
+
+  .quote__bars span {
+    flex: 1;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--c-line-light);
+  }
+
+  .quote__bars span.is-done {
+    background: var(--c-gold);
+  }
+
+  /* Step 1 tiles */
+  .tiles {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .tile {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 92px;
+    padding: 12px;
+    border: 1px solid var(--c-muted);
+    border-radius: var(--r-card);
+    background: var(--c-white);
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.2;
+    cursor: pointer;
+  }
+
+  .tile :global(.tile__check) {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    display: none;
+    color: var(--c-gold-text);
+  }
+
+  .tile:has(input:checked) {
+    border: 2px solid var(--c-gold);
+    padding: 11px;
+  }
+
+  .tile:has(input:checked) :global(.tile__check) {
+    display: block;
+  }
+
+  /* Inputs */
   .field {
     display: flex;
     flex-direction: column;
-    gap: var(--space-1);
-    margin: 0 0 var(--space-4);
+    gap: 6px;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
     border: 0;
-    padding: 0;
-  }
-
-  .field > legend {
-    padding: 0;
-    margin-bottom: var(--space-1);
   }
 
   .field > label,
   .field > legend {
+    padding: 0;
+    font-size: 13px;
     font-weight: 600;
   }
 
-  .field input:not([type='checkbox']),
+  .field > legend {
+    margin-bottom: 8px;
+  }
+
+  .field input,
   .field textarea {
-    min-height: var(--tap);
-    padding: var(--space-2) var(--space-3);
-    border: 1px solid var(--color-text-muted);
-    border-radius: var(--radius);
+    min-height: 48px;
+    padding: 0 14px;
+    border: 1px solid var(--c-muted);
+    border-radius: var(--r-btn);
+    background: var(--c-white);
+    color: var(--c-black);
     font: inherit;
-    color: var(--color-text);
-    background: var(--color-bg);
+    font-size: 16px;
   }
 
-  .field--check {
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: var(--space-3);
+  .field textarea {
+    min-height: 88px;
+    padding: 12px 14px;
+    resize: vertical;
   }
 
-  .field--check input {
-    width: 24px;
-    height: 24px;
-    margin: 10px;
+  .field ::placeholder {
+    color: #767672;
   }
 
-  .field--check label {
-    flex: 1;
-    font-weight: 400;
+  .field input[aria-invalid='true'] {
+    border: 2px solid var(--c-error);
+    padding: 0 13px;
   }
 
-  .field--check .field__error {
-    flex-basis: 100%;
-  }
-
-  [aria-invalid='true'] {
-    border-color: var(--color-error) !important;
-  }
-
-  .field__error {
-    margin: 0;
-    color: var(--color-error);
-    font-size: var(--text-sm);
-  }
-
-  .choices {
-    display: grid;
-    gap: var(--space-2);
-  }
-
-  .choices--compact {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .choices__service {
-    margin: 0;
-    font-weight: 600;
-  }
-
-  [data-enhanced] .choices__service {
-    display: none;
-  }
-
-  .choice {
+  /* Body type pills */
+  .pills {
     display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .pill {
+    display: inline-flex;
     align-items: center;
-    gap: var(--space-3);
-    min-height: var(--tap);
-    padding: var(--space-2) var(--space-3);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius);
+    min-height: 44px;
+    padding: 0 14px;
+    border: 1px solid var(--c-muted);
+    border-radius: var(--r-pill);
+    background: var(--c-white);
+    font-size: 14px;
+    font-weight: 500;
     cursor: pointer;
   }
 
-  .choice:has(input:checked) {
-    border-color: var(--color-primary);
-    box-shadow: inset 0 0 0 1px var(--color-primary);
+  .pill:has(input:checked) {
+    border: 2px solid var(--c-gold);
+    padding: 0 13px;
+    font-weight: 600;
   }
 
-  .choice input {
-    width: 20px;
-    height: 20px;
-    margin: 0;
-  }
-
-  .quote__nav {
+  /* Step 3 options */
+  .options {
     display: flex;
-    gap: var(--space-3);
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .options__service {
+    font-weight: 600;
+  }
+
+  [data-enhanced] .options__service {
+    display: none;
+  }
+
+  .option {
+    display: flex;
+    align-items: center;
     justify-content: space-between;
+    gap: 12px;
+    min-height: 64px;
+    padding: 14px 16px;
+    border: 1px solid var(--c-muted);
+    border-radius: var(--r-card);
+    background: var(--c-white);
+    cursor: pointer;
+  }
+
+  .option__title {
+    display: block;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .option__detail {
+    display: block;
+    margin-top: 2px;
+    font-size: 13px;
+    color: var(--c-muted-light);
+  }
+
+  .option :global(.option__check) {
+    flex: none;
+    display: none;
+    color: var(--c-gold);
+    --icon-fg: var(--c-black);
+  }
+
+  .option:has(input:checked) {
+    border: 2px solid var(--c-gold);
+    padding: 13px 15px;
+  }
+
+  .option:has(input:checked) :global(.option__check) {
+    display: block;
+  }
+
+  /* Focus on visually hidden radios shows on the card */
+  .tile:has(input:focus-visible),
+  .pill:has(input:focus-visible),
+  .option:has(input:focus-visible) {
+    outline: var(--focus);
+    outline-color: var(--c-gold-text);
+    outline-offset: 2px;
+  }
+
+  .tile:has(input[aria-invalid='true']),
+  .pill:has(input[aria-invalid='true']),
+  .option:has(input[aria-invalid='true']) {
+    border-color: var(--c-error);
+  }
+
+  /* Privacy checkbox */
+  .check {
+    display: grid;
+    grid-template-columns: 22px 1fr;
+    gap: 6px 12px;
+    align-items: start;
+    min-height: 44px;
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
+  .check input {
+    width: 22px;
+    height: 22px;
+    margin: 1px 0 0;
+    accent-color: var(--c-gold-text);
+  }
+
+  .check a {
+    color: var(--c-gold-text);
+    text-decoration: underline;
+  }
+
+  .check .field__error {
+    grid-column: 1 / -1;
+  }
+
+  .field__error {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin: 0;
+    color: var(--c-error);
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  .field__error::before {
+    content: '';
+    flex: none;
+    width: 16px;
+    height: 16px;
+    background: currentColor;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M12 8v5M12 16h.01'/%3E%3C/svg%3E")
+      center / contain no-repeat;
+  }
+
+  /* Navigation */
+  .quote__nav {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 10px;
+    margin-top: 4px;
   }
 
   .quote__nav [data-next],
   .quote__nav [data-submit] {
-    margin-left: auto;
+    grid-column: 2;
+  }
+
+  form[data-first='true'] .quote__nav,
+  form:not([data-first]) .quote__nav {
+    grid-template-columns: 1fr;
+  }
+
+  form[data-first='true'] .quote__nav [data-next],
+  form:not([data-first]) .quote__nav [data-submit] {
+    grid-column: 1;
+  }
+
+  /* Success */
+  .quote__success {
+    align-items: flex-start;
+    gap: 14px;
+    padding: 32px 20px;
+  }
+
+  .quote__success :global(.success__icon) {
+    color: var(--c-gold);
+    --icon-fg: var(--c-black);
   }
 
   .quote__success h2 {
-    font-size: var(--text-xl);
+    font-size: 26px;
+    line-height: 1.15;
+    font-weight: 600;
+    letter-spacing: -0.01em;
   }
 
   .quote__success h2:focus {
     outline: none;
+  }
+
+  .quote__success p {
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--c-muted-light);
+  }
+
+  .quote__success .btn {
+    margin-top: 8px;
+  }
+
+  .success__home {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--c-gold-text);
+  }
+
+  @media (min-width: 64rem) {
+    .quote__card {
+      padding: 32px;
+    }
   }
 </style>
