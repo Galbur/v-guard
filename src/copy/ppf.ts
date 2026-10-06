@@ -19,6 +19,7 @@ export const ppf = {
     description: `PPF en steenslagfolie in Vroomshoop, Twente: Full Front vanaf ${price.front}, Full Body of losse delen. Voorbereiding in 5 stappen. Vraag een prijs voor jouw auto aan.`,
     h1: 'PPF in Vroomshoop: bescherm je lak tegen steenslag',
     sub: 'Transparante folie voor de voorkant, losse delen of de hele auto.',
+    heroAlt: 'Auto in de studio van V Guard Studio in Vroomshoop',
     whatsapp: 'Hoi V Guard, ik wil een prijs voor PPF op mijn auto.',
     chips: ['5 stappen voorbereiding', `${years} jaar garantie op werk`, join(brands, 'en')],
     answer:
@@ -71,6 +72,7 @@ export const ppf = {
     description: `Антигравійна плівка PPF у Vroomshoop, Твенте: Full Front від ${price.front}, Full Body або окремі деталі. Підготовка у 5 кроків. Отримайте ціну для свого авто.`,
     h1: 'PPF у Vroomshoop: захист лаку від сколів',
     sub: 'Прозора плівка на передню частину, окремі деталі або все авто.',
+    heroAlt: 'Авто в студії V Guard Studio у Vroomshoop',
     whatsapp: 'Вітаю! Хочу дізнатися ціну PPF для мого авто.',
     chips: ['Підготовка у 5 кроків', `${years} роки гарантії на роботу`, join(brands, 'і')],
     answer:

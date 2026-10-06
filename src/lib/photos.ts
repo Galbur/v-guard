@@ -13,7 +13,14 @@ export function photo(file: string): ImageMetadata {
   return entry.default;
 }
 
+export interface HeroPhoto {
+  file: string;
+  position: string;
+  /** Empty (decorative) by default; AI illustrations always stay empty (D18). */
+  alt?: string;
+}
+
 export interface HeroPhotos {
-  mobile: { file: string; position: string };
-  desktop: { file: string; position: string };
+  mobile: HeroPhoto;
+  desktop: HeroPhoto;
 }

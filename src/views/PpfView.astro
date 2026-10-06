@@ -1,6 +1,6 @@
 ---
 // PPF (/ppf/, /uk/ppf/): mockup «VG Site 02 PPF v2», Blueprint v1.3 service template.
-// Hero and step photos are AI-generated illustrations (owner decision 06.10.2026), alt="".
+// Hero 1280 and step photos are AI-generated illustrations (D18), alt=""; Hero 375 is a real photo.
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Hero from '../components/Hero.astro';
@@ -46,7 +46,8 @@ const schema = [
     service="ppf"
     waText={c.whatsapp}
     photos={{
-      mobile: { file: 'ppf-hero-375.webp', position: 'center 70%' },
+      // 375: real photo as in the mockup (the AI frame put the car behind the H1); 1280: AI frame, alt="" (D18)
+      mobile: { file: 'bmw-34-p.png', position: 'center 55%', alt: c.heroAlt },
       desktop: { file: 'ppf-hero-1280.jpg', position: '70% center' },
     }}
   />
