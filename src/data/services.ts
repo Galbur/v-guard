@@ -63,7 +63,7 @@ export const services: Service[] = [
     options: [
       { id: 'full-front', label: { nl: 'Full Front', uk: 'Full Front' } },
       { id: 'full-body', label: { nl: 'Full Body', uk: 'Full Body' } },
-      { id: 'gedeeltelijk', label: { nl: 'Gedeeltelijk', uk: 'Частково' } },
+      { id: 'gedeeltelijk', label: { nl: 'Custom (losse delen)', uk: 'Custom (окремі деталі)' } },
     ],
   },
   {
@@ -133,6 +133,14 @@ const ppfParts = [
   { label: { nl: 'Spiegelkappen', uk: 'Ковпаки дзеркал' }, price: price(79, 'default', 'ціни за деталь', { from: true }) },
 ];
 
+/** «Bijv. koplampen», «instaplijsten», ... from the priced parts. */
+function partExamples(locale: Locale, prefix: string): string[] {
+  return ppfParts.map((p, i) => {
+    const label = p.label[locale].toLowerCase();
+    return i === 0 ? `${prefix} ${label}` : label;
+  });
+}
+
 export const ppfPackages: Package[] = [
   {
     id: 'full-front',
@@ -174,13 +182,11 @@ export const ppfPackages: Package[] = [
     title: { nl: 'Custom (losse delen)', uk: 'Custom (окремі деталі)' },
     description: { nl: 'Alleen de delen die jij kiest.', uk: 'Лише деталі, які оберете ви.' },
     highlight: 'spots',
+    // Zones = the priced parts, so «vanaf» matches the parts listed on the card.
     zones: fact(
-      {
-        nl: ['Bijv. voorbumper', 'deurgreepbakjes', 'deurranden', 'instaplijsten', 'laaddrempel'],
-        uk: ['Напр. передній бампер', 'ніші ручок', 'торці дверей', 'пороги', 'поріг багажника'],
-      },
+      { nl: partExamples('nl', 'Bijv.'), uk: partExamples('uk', 'Напр.') },
       'default',
-      'приклади деталей V Guard',
+      'деталі з ppfParts (ціни за деталь)',
     ),
     parts: ppfParts,
     price: price(Math.min(...ppfParts.map((p) => p.price.amount)), 'default', 'найнижча ціна за деталь', { from: true }),

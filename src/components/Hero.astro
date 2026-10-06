@@ -1,7 +1,9 @@
 ---
 // Hero with a real V Guard photo under a dark gradient (mockups 1, 3, 4, 5). Separate crops
 // for 375 (portrait) and 1280 (landscape); never lazy. Primary: quote form with ?service=,
-// secondary: WhatsApp.
+// secondary: WhatsApp. When the two photos need a different alt (real photo on 375, AI
+// illustration with alt="" on 1280, D18), each gets its own <picture>; the one for the other
+// breakpoint resolves to a 1x1 transparent GIF, so each viewport downloads one photo.
 import { getImage } from 'astro:assets';
 import ProofStrip from './ProofStrip.astro';
 import { isLinked, whatsappUrl } from '../config/site.ts';
@@ -43,27 +45,68 @@ const sources = {
   desktopWebp: await srcset(photos.desktop.file, desktopWidths, 'webp'),
 };
 const fallback = await getImage({ src: photo(photos.mobile.file), width: 750, format: 'webp' });
+const altMobile = photos.mobile.alt ?? '';
+const altDesktop = photos.desktop.alt ?? '';
+const split = altMobile !== altDesktop;
+const desktopFallback = split ? await getImage({ src: photo(photos.desktop.file), width: 1280, format: 'webp' }) : undefined;
+const blank = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+const mqMobile = '(max-width: 63.99rem)';
 const quoteHref = `${localizedPath('contact', locale)}${service ? `?service=${service}` : ''}`;
 const mq = '(min-width: 64rem)';
 const wa = whatsappUrl(waText);
 ---
 
 <section class:list={['hero', `hero--${align}`]} style={`--pos-m:${photos.mobile.position};--pos-d:${photos.desktop.position}`}>
-  <picture class="hero__media">
-    <source media={mq} type="image/avif" srcset={sources.desktopAvif} sizes="100vw" />
-    <source media={mq} type="image/webp" srcset={sources.desktopWebp} sizes="100vw" />
-    <source type="image/avif" srcset={sources.mobileAvif} sizes="100vw" />
-    <source type="image/webp" srcset={sources.mobileWebp} sizes="100vw" />
-    <img
-      src={fallback.src}
-      width={fallback.attributes.width}
-      height={fallback.attributes.height}
-      alt=""
-      fetchpriority="high"
-      loading="eager"
-      decoding="async"
-    />
-  </picture>
+  {
+    split && desktopFallback ? (
+      <>
+        <picture class="hero__media hero__media--mobile">
+          <source media={mq} srcset={blank} />
+          <source type="image/avif" srcset={sources.mobileAvif} sizes="100vw" />
+          <source type="image/webp" srcset={sources.mobileWebp} sizes="100vw" />
+          <img
+            src={fallback.src}
+            width={fallback.attributes.width}
+            height={fallback.attributes.height}
+            alt={altMobile}
+            fetchpriority="high"
+            loading="eager"
+            decoding="async"
+          />
+        </picture>
+        <picture class="hero__media hero__media--desktop">
+          <source media={mqMobile} srcset={blank} />
+          <source type="image/avif" srcset={sources.desktopAvif} sizes="100vw" />
+          <source type="image/webp" srcset={sources.desktopWebp} sizes="100vw" />
+          <img
+            src={desktopFallback.src}
+            width={desktopFallback.attributes.width}
+            height={desktopFallback.attributes.height}
+            alt={altDesktop}
+            fetchpriority="high"
+            loading="eager"
+            decoding="async"
+          />
+        </picture>
+      </>
+    ) : (
+      <picture class="hero__media">
+        <source media={mq} type="image/avif" srcset={sources.desktopAvif} sizes="100vw" />
+        <source media={mq} type="image/webp" srcset={sources.desktopWebp} sizes="100vw" />
+        <source type="image/avif" srcset={sources.mobileAvif} sizes="100vw" />
+        <source type="image/webp" srcset={sources.mobileWebp} sizes="100vw" />
+        <img
+          src={fallback.src}
+          width={fallback.attributes.width}
+          height={fallback.attributes.height}
+          alt={altMobile}
+          fetchpriority="high"
+          loading="eager"
+          decoding="async"
+        />
+      </picture>
+    )
+  }
   <div class="hero__shade" aria-hidden="true"></div>
   <div class="hero__content">
     <h1 class:list={['h1', { 'h1--long': long }]}>{h1}</h1>
@@ -116,6 +159,10 @@ const wa = whatsappUrl(waText);
     object-position: var(--pos-m);
   }
 
+  .hero__media--desktop {
+    display: none;
+  }
+
   .hero__shade {
     z-index: -1;
     background: linear-gradient(
@@ -150,6 +197,14 @@ const wa = whatsappUrl(waText);
 
     .hero__media img {
       object-position: var(--pos-d);
+    }
+
+    .hero__media--mobile {
+      display: none;
+    }
+
+    .hero__media--desktop {
+      display: block;
     }
 
     .hero--left .hero__shade {
