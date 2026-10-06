@@ -1,10 +1,5 @@
 ---
-import Base from '../layouts/Base.astro';
-import { t } from '../i18n/index.ts';
-
-const title = t('page.tint.title', 'nl');
+import TintView from '../views/TintView.astro';
 ---
 
-<Base locale="nl" pageKey="tint" title={title}>
-  <h1>{title}</h1>
-</Base>
+<TintView locale="nl" />

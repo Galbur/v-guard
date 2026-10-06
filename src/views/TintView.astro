@@ -1,0 +1,117 @@
+---
+// Ramen blinderen (/ramen-blinderen/, /uk/tonuvannia/): mockup «VG Site 03», Blueprint v1.2
+// deviation: layer 1 = Hero · ProofStrip · AnswerBox · LegalDiagram · PriceTable · BeforeAfter.
+import { getCollection, getEntry } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import AnswerBox from '../components/AnswerBox.astro';
+import LegalDiagram from '../components/LegalDiagram.astro';
+import PriceTable from '../components/PriceTable.astro';
+import BeforeAfter from '../components/BeforeAfter.astro';
+import ProcessSteps from '../components/ProcessSteps.astro';
+import ProjectGallery from '../components/ProjectGallery.astro';
+import FAQ from '../components/FAQ.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { tintCopy } from '../copy/tint.ts';
+import { headings } from '../copy/shared.ts';
+import { tint, tintBodyPrices, tintFrom, tintOptionPrices } from '../data/services.ts';
+import { localizedPath, type Locale } from '../i18n/routes.ts';
+import { photo } from '../lib/photos.ts';
+import { faqSchema, serviceSchema } from '../lib/schema.ts';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const c = tintCopy[locale];
+const projects = (await getCollection('projects', (p) => p.data.service === 'ramen-blinderen'))
+  .sort((a, b) => a.data.order - b.data.order)
+  .filter((p) => !p.id.includes('volvo'))
+  .slice(0, 6);
+const ford = await getEntry('projects', 'ford-focus-achterzijde');
+const fordCaption = ford ? [ford.data.car[locale], ford.data.detail[locale]].join(' · ') : '';
+const fordCar = ford?.data.car[locale] ?? 'Ford Focus';
+const steps = tint.steps.value.map((s) => ({ title: s.title[locale], text: s.text[locale] }));
+const url = new URL(localizedPath('tint', locale), Astro.site ?? 'http://localhost').href;
+const schema = [
+  serviceSchema({
+    name: c.h1,
+    serviceType: 'Window tinting',
+    url,
+    offers: [
+      { name: locale === 'nl' ? 'Achterzijde' : 'Задня частина', price: tintFrom },
+      ...tintOptionPrices.map((r) => ({ name: r.label[locale], price: r.price })),
+    ],
+  }),
+  faqSchema(c.faq),
+];
+---
+
+<Base locale={locale} pageKey="tint" title={c.title} description={c.description} schema={schema}>
+  <Hero
+    locale={locale}
+    h1={c.h1}
+    sub={c.sub}
+    chips={c.chips}
+    long
+    service="ramen-blinderen"
+    photos={{ mobile: { file: 'bmw-front-p.png', position: 'center 45%' }, desktop: { file: 'bmw-windshield-l.jpg', position: '60% 50%' } }}
+  />
+  <AnswerBox title={c.answerTitle} text={c.answer} />
+  <LegalDiagram title={c.legalTitle} items={c.legal} darker={c.legalDarker} sourceLabel={c.legalSource} sourceLink={c.legalSourceLink} />
+  <section class="section container prices">
+    <h2 class="h2 prices__title">{c.pricesTitle}</h2>
+    <div class="prices__grid">
+      <PriceTable locale={locale} caption={c.bodyCaption} head={c.bodyHead} rows={tintBodyPrices} />
+      <div class="prices__col">
+        <PriceTable locale={locale} caption={c.optionsCaption} head={c.optionsHead} rows={tintOptionPrices} />
+        <p class="note">{c.pricesNote}</p>
+      </div>
+    </div>
+  </section>
+  <BeforeAfter
+    locale={locale}
+    title={c.beforeAfterTitle}
+    before={photo('ford-before.jpg')}
+    after={photo('ford-after.jpg')}
+    caption={fordCaption}
+    alt={{
+      before: locale === 'nl' ? `${fordCar} voor ramen blinderen door V Guard Studio in Vroomshoop` : `${fordCar} до тонування від V Guard Studio у Vroomshoop`,
+      after: locale === 'nl' ? `${fordCar} met ramen blinderen door V Guard Studio in Vroomshoop` : `${fordCar}: тонування від V Guard Studio у Vroomshoop`,
+    }}
+  />
+  <ProcessSteps title={headings.process[locale]} steps={steps} />
+  <ProjectGallery locale={locale} title={c.galleryTitle} items={projects} />
+  <FAQ title={headings.faq[locale]} items={c.faq} />
+  <CtaBand locale={locale} title={c.cta.title} text={c.cta.text} service="ramen-blinderen" />
+</Base>
+
+<style>
+  .prices__title {
+    margin-bottom: 16px;
+  }
+
+  .prices__grid,
+  .prices__col {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .prices__grid {
+    gap: 24px;
+  }
+
+  @media (min-width: 64rem) {
+    .prices__title {
+      margin-bottom: 32px;
+    }
+
+    .prices__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: start;
+    }
+  }
+</style>

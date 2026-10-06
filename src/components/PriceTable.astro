@@ -1,0 +1,122 @@
+---
+// Price table (tint): scrolls inside its own container on 375, the page never scrolls sideways.
+import { cellLabel, isPriceShown, type PriceRow } from '../data/services.ts';
+import type { Locale } from '../i18n/routes.ts';
+
+interface Props {
+  locale: Locale;
+  caption: string;
+  head: string[];
+  rows: PriceRow[];
+}
+
+const { locale, caption, head, rows } = Astro.props;
+const shown = rows.filter((r) => isPriceShown(r.price));
+---
+
+{
+  shown.length > 0 && (
+    <div class="pt">
+      <p class="pt__caption" aria-hidden="true">
+        {caption}
+      </p>
+      <div class="pt__scroll surface-light" role="region" aria-label={caption} tabindex="0">
+        <table>
+          <caption class="visually-hidden">{caption}</caption>
+          <thead>
+            <tr>
+              <th scope="col">{head[0]}</th>
+              <th scope="col">{head[1]}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {shown.map((r) => (
+              <tr>
+                <th scope="row">{r.label[locale]}</th>
+                <td>{cellLabel(r.price, locale)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  )
+}
+
+<style>
+  .pt {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .pt__caption {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--c-gold);
+    letter-spacing: 0.04em;
+  }
+
+  .pt__scroll {
+    overflow-x: auto;
+  }
+
+  table {
+    width: 100%;
+    min-width: 300px;
+    border-collapse: collapse;
+    font-size: 15px;
+  }
+
+  thead th {
+    padding: 14px 16px 10px;
+    border-bottom: 1px solid var(--c-line-light);
+    color: var(--c-muted-light);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-align: left;
+  }
+
+  thead th:last-child,
+  td {
+    text-align: right;
+  }
+
+  tbody th,
+  td {
+    padding: 13px 16px;
+    border-bottom: 1px solid var(--c-line-light-2);
+    line-height: 1.35;
+  }
+
+  tbody th {
+    font-weight: 400;
+    text-align: left;
+  }
+
+  td {
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  tbody tr:last-child > * {
+    border-bottom: 0;
+  }
+
+  @media (min-width: 64rem) {
+    table {
+      font-size: 16px;
+    }
+
+    thead th {
+      padding: 16px 22px 12px;
+    }
+
+    tbody th,
+    td {
+      padding: 15px 22px;
+    }
+  }
+</style>

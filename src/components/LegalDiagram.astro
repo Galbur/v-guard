@@ -1,0 +1,174 @@
+---
+// «Wat mag in Nederland»: top view with 3 window zones + legend (Site Truth F10, D14).
+// The legend list is the text alternative; the drawing is decorative.
+import { links } from '../config/site.ts';
+
+interface Props {
+  title: string;
+  items: { zone: string; label: string; text: string }[];
+  darker: string;
+  sourceLabel: string;
+  sourceLink: string;
+}
+
+const { title, items, darker, sourceLabel, sourceLink } = Astro.props;
+---
+
+<section class="section container">
+  <h2 class="h2 ld__title">{title}</h2>
+  <div class="ld panel">
+    <svg class="ld__car" viewBox="0 0 220 420" aria-hidden="true">
+      <rect x="40" y="18" width="140" height="384" rx="44" fill="#232428" stroke="#3A3B3F" stroke-width="2"></rect>
+      <path d="M62 112 Q110 96 158 112 L166 150 L54 150 Z" fill="#D7D4CE"></path>
+      <rect x="46" y="156" width="12" height="52" rx="3" fill="#D7D4CE"></rect>
+      <rect x="162" y="156" width="12" height="52" rx="3" fill="#D7D4CE"></rect>
+      <rect x="46" y="214" width="12" height="64" rx="3" fill="#0B0B0C" stroke="#C4A24D" stroke-width="2"></rect>
+      <rect x="162" y="214" width="12" height="64" rx="3" fill="#0B0B0C" stroke="#C4A24D" stroke-width="2"></rect>
+      <path d="M58 290 L162 290 L154 326 Q110 338 66 326 Z" fill="#0B0B0C" stroke="#C4A24D" stroke-width="2"></path>
+      <rect x="22" y="140" width="18" height="10" rx="3" fill="#C4A24D"></rect>
+      <rect x="180" y="140" width="18" height="10" rx="3" fill="#C4A24D"></rect>
+      <text x="110" y="136" text-anchor="middle" font-size="13" font-weight="600" fill="#0B0B0C">55%</text>
+      <text x="110" y="318" text-anchor="middle" font-size="13" font-weight="600" fill="#C4A24D">{darker}</text>
+    </svg>
+    <div class="ld__legend">
+      <ul role="list">
+        {
+          items.map((item) => (
+            <li>
+              <span class:list={['ld__swatch', `ld__swatch--${item.zone}`]} aria-hidden="true" />
+              <span>
+                <b>{item.label}</b> {item.text}
+              </span>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="ld__source">
+        {sourceLabel}{' '}
+        <a href={links.rijksoverheid} target="_blank" rel="noopener">{sourceLink}</a>
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .ld__title {
+    margin-bottom: 20px;
+  }
+
+  .ld {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+  }
+
+  .ld__car {
+    display: block;
+    width: 190px;
+    height: auto;
+    font-family: var(--font);
+  }
+
+  .ld__legend {
+    width: 100%;
+  }
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    list-style: none;
+    padding: 0;
+  }
+
+  li {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    font-size: 14px;
+    line-height: 1.45;
+  }
+
+  b {
+    font-weight: 600;
+  }
+
+  .ld__swatch {
+    flex: none;
+    width: 16px;
+    height: 16px;
+    margin-top: 2px;
+    border-radius: 3px;
+  }
+
+  .ld__swatch--light {
+    background: var(--c-text-soft);
+  }
+
+  .ld__swatch--dark {
+    background: var(--c-black);
+    border: 2px solid var(--c-gold);
+  }
+
+  .ld__source {
+    margin-top: 16px;
+    font-size: 12px;
+    color: var(--c-muted);
+  }
+
+  .ld__source a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    color: var(--c-gold);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 64rem) {
+    .ld__title {
+      margin-bottom: 32px;
+    }
+
+    .ld {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 56px;
+      padding: 40px 48px;
+    }
+
+    .ld__car {
+      width: 220px;
+    }
+
+    ul {
+      gap: 20px;
+    }
+
+    li {
+      gap: 16px;
+      font-size: 19px;
+      line-height: 1.4;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--c-line-dark);
+    }
+
+    li:last-child {
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+
+    .ld__swatch {
+      width: 20px;
+      height: 20px;
+      margin-top: 3px;
+      border-radius: 4px;
+    }
+
+    .ld__source {
+      margin-top: 20px;
+      font-size: 14px;
+    }
+  }
+</style>
