@@ -1,27 +1,23 @@
 ---
-import { isLinked, site } from '../config/site.ts';
+// Footer 375 / 1280 (mockup 8e, 8f). NAP from site.ts only (CLAUDE.md rule 3).
+// Socials render only with a URL (F16 ОЧІКУЄ).
+import Logo from './Logo.astro';
+import { fullAddress, isLinked, site } from '../config/site.ts';
 import { t, type UiKey } from '../i18n/index.ts';
-import { localizedPath, pageKeys, type Locale, type PageKey } from '../i18n/routes.ts';
+import { localizedPath, type Locale, type PageKey } from '../i18n/routes.ts';
 
 interface Props {
   locale: Locale;
 }
 
 const { locale } = Astro.props;
-const pageLabel: Record<PageKey, UiKey> = {
-  home: 'nav.home',
-  ppf: 'nav.ppf',
-  tint: 'nav.tint',
-  wrap: 'nav.wrap',
-  projects: 'nav.projects',
-  contact: 'nav.contact',
-  privacy: 'nav.privacy',
-};
-const pages = pageKeys.filter(isLinked);
-// NAP from site.ts only; parts that are null are left out.
-const addressLine = [site.address.street, [site.address.postalCode, site.address.locality].filter(Boolean).join(' ')]
-  .filter(Boolean)
-  .join(', ');
+const link = (key: PageKey, label: UiKey) => ({ key, href: localizedPath(key, locale), label: t(label, locale) });
+const servicesLinks = [link('ppf', 'nav.ppf'), link('tint', 'nav.tint'), link('wrap', 'nav.wrap')].filter((l) => isLinked(l.key));
+const studioLinks = [link('home', 'nav.home'), link('projects', 'nav.projects'), link('contact', 'nav.contact')].filter((l) =>
+  isLinked(l.key),
+);
+// Mobile order from mockup 8e: Home, PPF, Ramen blinderen, Car wrapping, Projecten, Contact.
+const mobileLinks = [studioLinks[0], ...servicesLinks, ...studioLinks.slice(1)].filter(Boolean);
 const socials = [
   { label: 'TikTok', href: site.socials.tiktok },
   { label: 'Instagram', href: site.socials.instagram },
@@ -29,115 +25,183 @@ const socials = [
 ].filter((s): s is { label: string; href: string } => s.href !== null);
 ---
 
-<footer class="site-footer">
-  <div class="container site-footer__grid">
-    <div>
-      <p class="site-footer__name">{site.name}</p>
-      <address>
-        {addressLine && <span>{addressLine}</span>}
-        {site.phone && <a href={`tel:${site.phone}`}>{site.phone}</a>}
-      </address>
+<footer class="ftr">
+  <div class="ftr__inner">
+    <div class="ftr__grid">
+      <div class="ftr__brand">
+        <Logo variant="footer" withStudio={false} />
+        <p class="ftr__name">{site.name}</p>
+        <p>
+          {fullAddress}<br />
+          <a href={`tel:${site.phone.value.e164}`}>{site.phone.value.display}</a><br />
+          {site.hours.value.label[locale]}
+        </p>
+      </div>
+
+      <nav class="ftr__links ftr__links--mobile" aria-label={t('footer.studio', locale)}>
+        {mobileLinks.map((l) => <a href={l.href}>{l.label}</a>)}
+      </nav>
+
+      <nav class="ftr__col" aria-label={t('footer.services', locale)}>
+        <p class="ftr__heading">{t('footer.services', locale)}</p>
+        {servicesLinks.map((l) => <a href={l.href}>{l.label}</a>)}
+      </nav>
+      <nav class="ftr__col" aria-label={t('footer.studio', locale)}>
+        <p class="ftr__heading">{t('footer.studio', locale)}</p>
+        {studioLinks.map((l) => <a href={l.href}>{l.label}</a>)}
+      </nav>
       {
-        site.openingHours && (
-          <>
-            <p class="site-footer__heading">{t('footer.hours', locale)}</p>
-            <ul>
-              {site.openingHours.map((h) => (
-                <li>{h}</li>
-              ))}
-            </ul>
-          </>
+        socials.length > 0 && (
+          <div class="ftr__col ftr__col--socials">
+            <p class="ftr__heading">{t('footer.socials', locale)}</p>
+            {socials.map((s) => (
+              <a href={s.href} target="_blank" rel="noopener">
+                {s.label}
+              </a>
+            ))}
+          </div>
         )
       }
     </div>
 
-    <nav aria-label={t('footer.pages', locale)}>
-      <p class="site-footer__heading">{t('footer.pages', locale)}</p>
-      <ul>
-        {
-          pages.map((key) => (
-            <li>
-              <a href={localizedPath(key, locale)}>{t(pageLabel[key], locale)}</a>
-            </li>
-          ))
-        }
-      </ul>
-    </nav>
-
-    {
-      socials.length > 0 && (
-        <div>
-          <p class="site-footer__heading">{t('footer.socials', locale)}</p>
-          <ul>
-            {socials.map((s) => (
-              <li>
-                <a href={s.href} rel="noopener" target="_blank">
-                  {s.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )
-    }
-
-    {
-      (site.legalName || site.kvk) && (
-        <p class="site-footer__legal">
-          {site.legalName}
-          {site.kvk && ` · ${t('footer.kvk', locale)} ${site.kvk}`}
-        </p>
-      )
-    }
+    <div class="ftr__bottom">
+      {isLinked('privacy') && <a href={localizedPath('privacy', locale)}>{t('nav.privacy', locale)}</a>}
+      <span>{t('footer.kvk', locale)} {site.kvk.value}</span>
+    </div>
   </div>
 </footer>
 
 <style>
-  .site-footer {
-    border-top: 1px solid var(--color-border);
-    background: var(--color-surface);
-    padding-block: var(--space-8);
-    font-size: var(--text-sm);
+  .ftr {
+    background: var(--c-footer);
+    border-top: 1px solid var(--c-line-dark);
+    color: var(--c-muted);
+    font-size: 13px;
+    line-height: 1.6;
   }
 
-  .site-footer__grid {
-    display: grid;
-    gap: var(--space-6);
+  .ftr__inner {
+    max-width: var(--container);
+    margin-inline: auto;
+    padding: 40px 16px 24px;
   }
 
-  @media (min-width: 48rem) {
-    .site-footer__grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
-
-  .site-footer__name,
-  .site-footer__heading {
-    font-weight: 700;
-    margin: 0 0 var(--space-2);
-  }
-
-  address {
-    font-style: normal;
+  .ftr__grid {
     display: flex;
     flex-direction: column;
+    gap: 28px;
   }
 
-  ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  .ftr__brand {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
   }
 
-  a {
+  .ftr__name {
+    color: var(--c-off-white);
+    font-weight: 500;
+  }
+
+  .ftr__brand a {
+    display: inline-flex;
+    min-height: 0;
+  }
+
+  .ftr__links--mobile {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 16px;
+  }
+
+  .ftr__links--mobile a,
+  .ftr__col a {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    color: var(--c-off-white);
+  }
+
+  .ftr__col {
+    display: none;
+  }
+
+  .ftr__col--socials {
+    display: flex;
+    gap: 20px;
+  }
+
+  .ftr__col--socials .ftr__heading {
+    display: none;
+  }
+
+  .ftr__heading {
+    color: var(--c-off-white);
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .ftr__bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 28px;
+    padding-top: 16px;
+    border-top: 1px solid var(--c-line-dark);
+    font-size: 12px;
+  }
+
+  .ftr__bottom a {
     display: inline-flex;
     align-items: center;
-    min-height: var(--tap);
+    min-height: 44px;
   }
 
-  .site-footer__legal {
-    grid-column: 1 / -1;
-    margin: 0;
-    color: var(--color-text-muted);
+  @media (min-width: 64rem) {
+    .ftr {
+      font-size: 14px;
+    }
+
+    .ftr__inner {
+      padding: 56px 40px 28px;
+    }
+
+    .ftr__grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1fr;
+      gap: 48px;
+    }
+
+    .ftr__brand {
+      gap: 14px;
+    }
+
+    .ftr__links--mobile {
+      display: none;
+    }
+
+    .ftr__col,
+    .ftr__col--socials {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .ftr__col--socials .ftr__heading {
+      display: block;
+    }
+
+    .ftr__col a {
+      min-height: 0;
+      color: var(--c-text-soft);
+    }
+
+    .ftr__bottom {
+      margin-top: 48px;
+      padding-top: 20px;
+      font-size: 13px;
+    }
   }
 </style>

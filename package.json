@@ -9,9 +9,11 @@
     "preview": "astro preview",
     "check": "node scripts/check.ts",
     "typecheck": "astro check",
-    "test": "node --test tests/*.test.ts"
+    "test": "node --test tests/*.test.ts",
+    "check:defaults": "node scripts/check-defaults.ts"
   },
   "dependencies": {
+    "@fontsource/instrument-sans": "^5.3.0",
     "astro": "^7.3.6"
   },
   "devDependencies": {

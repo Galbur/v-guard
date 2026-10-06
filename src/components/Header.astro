@@ -1,7 +1,13 @@
 ---
-import { isLinked, site } from '../config/site.ts';
-import { t } from '../i18n/index.ts';
-import { locales, localizedPath, navKeys, type Locale, type PageKey } from '../i18n/routes.ts';
+// Header 375 / 1280 and the mobile menu (mockup 8a, 8b, 8d). The menu is a native
+// popover: no JS, Esc and outside click close it.
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
+import LangSwitch from './LangSwitch.astro';
+import { fullAddress, isLinked, site } from '../config/site.ts';
+import { fromLabel, isPriceShown, serviceFrom, type ServiceSlug } from '../data/services.ts';
+import { t, type UiKey } from '../i18n/index.ts';
+import { localizedPath, type Locale, type PageKey } from '../i18n/routes.ts';
 
 interface Props {
   locale: Locale;
@@ -9,236 +15,264 @@ interface Props {
 }
 
 const { locale, pageKey } = Astro.props;
-const navLabel = {
+
+const labels: Partial<Record<PageKey, UiKey>> = {
+  home: 'nav.home',
   ppf: 'nav.ppf',
   tint: 'nav.tint',
   wrap: 'nav.wrap',
   projects: 'nav.projects',
   contact: 'nav.contact',
-} as const;
-const items = navKeys.filter((key) => key in navLabel && isLinked(key)) as (keyof typeof navLabel)[];
-// Language switcher goes to the pair of the current page; 404 falls back to home.
-const langLinks = locales.map((l) => ({
-  locale: l,
-  href: localizedPath(pageKey ?? 'home', l),
-  current: l === locale,
-}));
+};
+const serviceOf: Partial<Record<PageKey, ServiceSlug>> = { ppf: 'ppf', tint: 'ramen-blinderen', wrap: 'car-wrapping' };
+const toItem = (key: PageKey) => {
+  const service = serviceOf[key];
+  const price = service ? serviceFrom[service] : undefined;
+  return {
+    key,
+    href: localizedPath(key, locale),
+    label: t(labels[key]!, locale),
+    price: isPriceShown(price) ? fromLabel(price, locale) : null,
+    current: key === pageKey,
+  };
+};
+const desktopItems = (['ppf', 'tint', 'wrap', 'projects', 'contact'] as PageKey[]).filter(isLinked).map(toItem);
+const menuItems = (['home', 'ppf', 'tint', 'wrap', 'projects', 'contact'] as PageKey[]).filter(isLinked).map(toItem);
+const contactHref = localizedPath('contact', locale);
 ---
 
-<header class="site-header">
-  <div class="container site-header__bar">
-    <a class="site-header__logo" href={localizedPath('home', locale)}>{site.name}</a>
+<header class="hdr">
+  <div class="hdr__bar">
+    <a class="hdr__logo" href={localizedPath('home', locale)} aria-label={t('a11y.home', locale)}><Logo /></a>
 
-    <ul class="lang" aria-label={t('lang.label', locale)}>
+    <nav class="hdr__nav" aria-label={t('nav.label', locale)}>
       {
-        langLinks.map((l) => (
-          <li>
-            <a
-              href={l.href}
-              hreflang={l.locale}
-              lang={l.locale}
-              aria-label={t(`lang.${l.locale}`, locale)}
-              aria-current={l.current ? 'page' : undefined}
-            >
-              {t(`lang.short.${l.locale}`, locale)}
-            </a>
-          </li>
+        desktopItems.map((item) => (
+          <a href={item.href} aria-current={item.current ? 'page' : undefined}>
+            {item.label}
+          </a>
         ))
       }
-    </ul>
+    </nav>
 
-    <button class="menu-toggle" type="button" popovertarget="site-nav" popovertargetaction="show">
-      {t('nav.menu', locale)}
-    </button>
-
-    <nav id="site-nav" class="site-nav" popover aria-label={t('nav.label', locale)}>
-      <button class="menu-close" type="button" popovertarget="site-nav" popovertargetaction="hide">
-        {t('nav.menuClose', locale)}
-      </button>
-      <ul class="site-nav__list">
-        {
-          items.map((key) => (
-            <li>
-              <a href={localizedPath(key, locale)} aria-current={key === pageKey ? 'page' : undefined}>
-                {t(navLabel[key], locale)}
-              </a>
-            </li>
-          ))
-        }
-      </ul>
+    <div class="hdr__end">
+      <LangSwitch locale={locale} pageKey={pageKey} />
       {
         isLinked('contact') && (
-          <a class="btn btn--primary site-nav__cta" href={localizedPath('contact', locale)}>
+          <a class="btn btn--primary hdr__cta" href={contactHref}>
             {t('cta.quote', locale)}
           </a>
         )
       }
-    </nav>
+      <button class="hdr__icon-btn hdr__burger" type="button" popovertarget="menu" aria-label={t('nav.menuOpen', locale)}>
+        <Icon name="menu" size={22} />
+      </button>
+    </div>
+  </div>
+</header>
 
+<div id="menu" class="menu" popover>
+  <div class="menu__bar">
+    <a class="hdr__logo" href={localizedPath('home', locale)} aria-label={t('a11y.home', locale)}><Logo /></a>
+    <div class="hdr__end">
+      <LangSwitch locale={locale} pageKey={pageKey} />
+      <button
+        class="hdr__icon-btn"
+        type="button"
+        popovertarget="menu"
+        popovertargetaction="hide"
+        aria-label={t('nav.menuClose', locale)}
+      >
+        <Icon name="close" size={20} />
+      </button>
+    </div>
+  </div>
+  <nav class="menu__nav" aria-label={t('nav.label', locale)}>
+    {
+      menuItems.map((item) => (
+        <a class="menu__link" href={item.href} aria-current={item.current ? 'page' : undefined}>
+          {item.label}
+          {item.price && <span class="menu__price">{item.price}</span>}
+        </a>
+      ))
+    }
     {
       isLinked('contact') && (
-        <a class="btn btn--primary site-header__cta" href={localizedPath('contact', locale)}>
+        <a class="btn btn--primary btn--block menu__cta" href={contactHref}>
           {t('cta.quote', locale)}
         </a>
       )
     }
-  </div>
-</header>
+    <p class="menu__nap">
+      {fullAddress}<br />
+      {site.phone.value.display} · {site.hours.value.label[locale]}
+    </p>
+  </nav>
+</div>
 
 <style>
-  .site-header {
-    border-bottom: 1px solid var(--color-border);
-    background: var(--color-bg);
+  .hdr {
+    background: var(--c-black);
+    border-bottom: 1px solid var(--c-line-dark);
   }
 
-  .site-header__bar {
+  .hdr__bar,
+  .menu__bar {
     display: flex;
     align-items: center;
-    gap: var(--space-4);
-    min-height: var(--header-h);
+    justify-content: space-between;
+    height: 56px;
+    padding: 0 8px 0 16px;
+    max-width: var(--container);
+    margin-inline: auto;
   }
 
-  .site-header__logo {
-    font-weight: 700;
-    text-decoration: none;
-    margin-right: auto;
-    min-height: var(--tap);
+  .hdr__logo {
     display: inline-flex;
     align-items: center;
+    min-height: 44px;
   }
 
-  .lang {
+  .hdr__end {
     display: flex;
-    gap: var(--space-1);
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-
-  .lang a {
-    display: inline-flex;
     align-items: center;
-    justify-content: center;
-    min-width: var(--tap);
-    min-height: var(--tap);
-    text-decoration: none;
-    font-weight: 600;
-    color: var(--color-text-muted);
+    gap: 4px;
   }
 
-  .lang a[aria-current='page'] {
-    color: var(--color-text);
-    text-decoration: underline;
-    text-underline-offset: 4px;
-  }
-
-  .menu-toggle,
-  .menu-close {
-    min-height: var(--tap);
-    min-width: var(--tap);
-    padding: var(--space-2) var(--space-3);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius);
-    background: var(--color-bg);
-    color: var(--color-text);
-    font: inherit;
-    cursor: pointer;
-  }
-
-  /* Mobile: the nav is a native popover panel (no JS needed, Esc closes it). */
-  .site-nav {
-    position: fixed;
-    inset: 0 0 0 auto;
-    width: min(20rem, 100vw);
-    height: 100dvh;
-    margin: 0;
-    padding: var(--space-4);
-    border: 0;
-    border-left: 1px solid var(--color-border);
-    background: var(--color-bg);
-    color: var(--color-text);
-    flex-direction: column;
-    gap: var(--space-4);
-  }
-
-  .site-nav:popover-open {
-    display: flex;
-  }
-
-  .site-nav::backdrop {
-    background: rgb(0 0 0 / 0.4);
-  }
-
-  .menu-close {
-    align-self: flex-end;
-  }
-
-  .site-header__cta {
+  .hdr__nav,
+  .hdr__cta {
     display: none;
   }
 
-  .site-nav__list {
-    list-style: none;
+  .hdr__icon-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: 0;
+    border-radius: var(--r-btn);
+    background: none;
+    color: var(--c-off-white);
+    cursor: pointer;
+  }
+
+  /* Mobile menu: full screen above the page, sticky bar stays visible below it */
+  .menu {
+    position: fixed;
+    inset: 0 0 calc(var(--sticky-h) + env(safe-area-inset-bottom)) 0;
+    width: 100%;
+    max-width: none;
+    height: auto;
+    max-height: none;
     margin: 0;
     padding: 0;
+    border: 0;
+    background: var(--c-black);
+    color: var(--c-off-white);
+    flex-direction: column;
+    overflow-y: auto;
   }
 
-  .site-nav__list a {
+  .menu:popover-open {
+    display: flex;
+  }
+
+  .menu::backdrop {
+    background: transparent;
+  }
+
+  .menu__bar {
+    flex: none;
+    width: 100%;
+    border-bottom: 1px solid var(--c-line-dark);
+  }
+
+  .menu__nav {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 16px 16px 0;
+  }
+
+  .menu__link {
     display: flex;
     align-items: center;
-    min-height: var(--tap);
-    text-decoration: none;
+    justify-content: space-between;
+    min-height: 60px;
+    border-bottom: 1px solid var(--c-line-dark);
+    font-size: 22px;
+    font-weight: 600;
   }
 
-  .site-nav__list a[aria-current='page'] {
-    font-weight: 700;
-    text-decoration: underline;
-    text-underline-offset: 4px;
+  .menu__link[aria-current='page'] {
+    color: var(--c-gold);
+  }
+
+  .menu__price {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--c-muted);
+  }
+
+  .menu__cta {
+    margin-top: 24px;
+    min-height: 52px;
+    font-size: 16px;
+  }
+
+  .menu__nap {
+    margin-top: auto;
+    padding: 24px 0;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--c-muted);
   }
 
   @media (min-width: 64rem) {
-    .lang {
-      order: 1;
+    .hdr__bar {
+      height: 72px;
+      padding: 0 40px;
     }
 
-    .site-header__cta {
-      order: 2;
-    }
-
-    .menu-toggle,
-    .menu-close {
-      display: none;
-    }
-
-    .site-header__logo {
-      margin-right: 0;
-    }
-
-    .site-nav {
+    .hdr__nav {
       display: flex;
-      flex: 1;
-      position: static;
-      width: auto;
-      height: auto;
-      padding: 0;
-      border: 0;
-      flex-direction: row;
-      align-items: center;
-      overflow: visible;
+      gap: 28px;
+      font-size: 15px;
+      font-weight: 500;
     }
 
-    .site-nav__list {
-      display: flex;
-      gap: var(--space-4);
-      margin-left: auto;
-    }
-
-    .site-nav__cta {
-      display: none;
-    }
-
-    .site-header__cta {
+    .hdr__nav a {
       display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      border-bottom: 1px solid transparent;
+    }
+
+    .hdr__nav a[aria-current='page'] {
+      color: var(--c-gold);
+    }
+
+    .hdr__nav a[aria-current='page'] {
+      border-bottom-color: var(--c-gold);
+      min-height: 0;
+      padding-bottom: 2px;
+    }
+
+    .hdr__end {
+      gap: 20px;
+    }
+
+    .hdr__cta {
+      display: inline-flex;
+      min-height: 44px;
+      font-size: 14px;
+    }
+
+    .hdr__burger,
+    .menu {
+      display: none !important;
     }
   }
 </style>

@@ -1,0 +1,76 @@
+---
+// «NL / UA»: each link goes to the pair of the current page (CLAUDE.md rule 7); 404 goes home.
+import { t } from '../i18n/index.ts';
+import { locales, localizedPath, type Locale, type PageKey } from '../i18n/routes.ts';
+
+interface Props {
+  locale: Locale;
+  pageKey?: PageKey;
+}
+
+const { locale, pageKey } = Astro.props;
+---
+
+<ul class="lang" aria-label={t('lang.label', locale)}>
+  {
+    locales.map((l, i) => (
+      <li>
+        {i > 0 && (
+          <span class="lang__sep" aria-hidden="true">
+            /
+          </span>
+        )}
+        <a
+          href={localizedPath(pageKey ?? 'home', l)}
+          hreflang={l}
+          lang={l}
+          aria-label={t(`lang.${l}`, locale)}
+          aria-current={l === locale ? 'true' : undefined}
+        >
+          {t(`lang.short.${l}`, locale)}
+        </a>
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  .lang {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  .lang li {
+    display: flex;
+    align-items: center;
+  }
+
+  .lang a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 36px;
+    min-height: 44px;
+    padding: 0 4px;
+    color: var(--c-muted);
+  }
+
+  .lang a[aria-current='true'] {
+    color: var(--c-off-white);
+  }
+
+  .lang__sep {
+    color: var(--c-slash);
+  }
+
+  @media (min-width: 64rem) {
+    .lang {
+      font-size: 14px;
+    }
+  }
+</style>

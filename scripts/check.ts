@@ -1,5 +1,5 @@
-// Content and route guard (CLAUDE.md hard rules 1, 4, 7). Run with `npm run check`.
-// 1. No placeholders or forbidden dashes anywhere in src/.
+// Content and route guard (CLAUDE.md hard rules 1, 4, 7, 8). Run with `npm run check`.
+// 1. No placeholders, ⟦⟧ markers, forbidden dashes or forbidden wording anywhere in src/.
 // 2. Every NL page has a UA pair: each route key has both page files, and every
 //    page file is registered in src/i18n/routes.ts.
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
@@ -18,6 +18,13 @@ const patterns: [RegExp, string][] = [
   [/lorem/i, 'lorem'],
   [/—/, 'em dash U+2014'],
   [/–/, 'en dash U+2013'],
+  [/[⟦⟧]/, 'unresolved ⟦default | hint⟧ marker'],
+  // CLAUDE.md rule 8
+  [/\bnr\.\s?1\b|№\s?1/i, 'forbidden wording «nr. 1»'],
+  [/\bde beste\b/i, 'forbidden wording «de beste»'],
+  [/\bperfect\b/i, 'forbidden wording «perfect»'],
+  [/\bsnelste\b/i, 'forbidden wording «snelste»'],
+  [/XPEL\s+(certified|dealer)/i, 'forbidden wording «XPEL certified/dealer»'],
 ];
 
 function walk(dir: string): string[] {

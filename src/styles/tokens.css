@@ -1,40 +1,74 @@
-/* Neutral design tokens. Brand style (black + gold) waits for the approved style guide (D10). */
+/* Design tokens from mockup «VG Site 06 Global & Tokens» (style approved by owner, 06.10.2026). */
 :root {
-  /* Colour: all text pairs meet WCAG AA on their background */
-  --color-bg: #ffffff;
-  --color-surface: #f4f4f5;
-  --color-text: #18181b;
-  --color-text-muted: #52525b;
-  --color-border: #d4d4d8;
-  --color-primary: #27272a;
-  --color-primary-text: #ffffff;
-  --color-focus: #2563eb;
-  --color-error: #b91c1c;
-  --color-success: #15803d;
+  /* Colour */
+  --c-black: #0b0b0c; /* page background */
+  --c-footer: #060607;
+  --c-graphite: #16171a; /* panels, CTA band, icon cards */
+  --c-graphite-2: #232428; /* diagram car body */
+  --c-line-dark: #2a2b2f;
+  --c-border-dark: #3a3b3f;
+  --c-off-white: #f2efe9; /* text on dark; cards, tables, form */
+  --c-text-soft: #d7d4ce;
+  --c-muted: #a3a39f;
+  --c-muted-light: #5c5c58; /* secondary text on light */
+  --c-line-light: #d9d6cf;
+  --c-line-light-2: #e3e0d9;
+  --c-white: #ffffff;
+  --c-gold: #c4a24d;
+  --c-gold-text: #7f6820; /* gold text on light (AA) */
+  --c-error: #b3261e;
+  --c-slash: #5c5d62;
+  --c-chip-border: rgb(242 239 233 / 0.4);
+  --c-overlay: 11 11 12; /* rgb of --c-black for gradients */
 
-  /* Type: system stack, no web fonts until self-hosted brand fonts exist */
-  --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  --text-sm: 0.875rem;
-  --text-base: 1rem;
-  --text-lg: 1.125rem;
-  --text-xl: 1.5rem;
-  --text-2xl: 2rem;
-  --leading: 1.5;
+  /* Type: Instrument Sans, self-hosted (latin, latin-ext). Cyrillic falls back to the system stack. */
+  --font: 'Instrument Sans', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
 
-  /* Space */
-  --space-1: 0.25rem;
-  --space-2: 0.5rem;
-  --space-3: 0.75rem;
-  --space-4: 1rem;
-  --space-6: 1.5rem;
-  --space-8: 2rem;
-  --space-12: 3rem;
+  /* Space: base 4 */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 20px;
+  --s-6: 24px;
+  --s-8: 32px;
+  --s-10: 40px;
+  --s-12: 48px;
+  --s-16: 64px;
+  --s-22: 88px;
+  --s-28: 112px;
 
-  /* Shape and layout */
-  --radius: 0.5rem;
+  /* Layout */
+  --gutter: 16px;
+  --container: 1280px;
+  --section-gap: 64px;
+  --grid-gap: 12px;
+  --header-h: 56px;
+  --sticky-h: 68px;
+
+  /* Controls */
+  --btn-h: 48px;
+  --btn-h-hero: 48px;
   --tap: 44px;
-  --container: 72rem;
-  --gutter: 1rem;
-  --header-h: 3.5rem;
-  --sticky-h: 3.75rem;
+
+  /* Radius */
+  --r-badge: 4px;
+  --r-btn: 6px;
+  --r-card: 10px;
+  --r-pill: 999px;
+
+  /* Focus ring */
+  --focus: 3px solid var(--c-gold);
+  --focus-offset: 3px;
+}
+
+@media (min-width: 64rem) {
+  :root {
+    --gutter: 40px;
+    --section-gap: 112px;
+    --grid-gap: 24px;
+    --header-h: 72px;
+    --sticky-h: 0px;
+    --btn-h-hero: 52px;
+  }
 }

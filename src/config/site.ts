@@ -1,59 +1,118 @@
+// Single source for NAP, contact channels, trust facts and launch state.
+// Site, JSON-LD, footer and contact blocks read these values (CLAUDE.md rule 3).
+// Values with status 'default' or 'spoken' render in preview (owner decision R1) and are
+// listed by `npm run check:defaults`.
 import type { PageKey } from '../i18n/routes.ts';
+import { fact, type Localized } from '../data/fact.ts';
 
-// Single source for NAP, contact channels and launch state.
-// Every value maps to a Site Truth fact ID. Only ПІДТВЕРДЖЕНО facts get a value;
-// everything else stays null and the components that need it do not render.
-
-export interface Address {
-  street: string | null; // F2 ОЧІКУЄ
-  postalCode: string | null; // F2 ОЧІКУЄ
-  locality: string; // F2: Vroomshoop (exact address and spelling ОЧІКУЄ)
-  country: 'NL';
+export interface Phone {
+  /** As shown on the site, e.g. «06 12 34 56 78». */
+  display: string;
+  /** E.164 for tel: and wa.me, e.g. «+31612345678». */
+  e164: string;
 }
 
-export interface Socials {
-  tiktok: string | null; // F16 ОЧІКУЄ
-  instagram: string | null; // F16 ОЧІКУЄ
-  facebook: string | null; // F16 ОЧІКУЄ
+export interface Review {
+  quote: Localized;
+  author: string;
 }
 
-export interface SiteConfig {
-  name: string;
-  legalName: string | null;
-  kvk: string | null;
-  address: Address;
-  phone: string | null; // E.164, e.g. +31...
-  whatsapp: string | null; // E.164, e.g. +31...
-  emailNotify: string | null;
-  openingHours: string[] | null; // schema.org format, e.g. 'Mo-Fr 09:00-18:00'
-  socials: Socials;
-}
-
-// Local QA only: TEST_PHONE from .env.local fills phone and WhatsApp so the
-// sticky bar and the WhatsApp continuation can be tested. Ignored on Netlify
-// production builds and never committed.
+// Local or Netlify preview QA: TEST_PHONE (E.164) replaces the default phone so that
+// test clicks never reach a stranger. Ignored on Netlify production builds.
 const testPhone: string | null =
   process.env.CONTEXT !== 'production' ? import.meta.env?.TEST_PHONE || null : null;
 
-export const site: SiteConfig = {
+function phoneFromE164(e164: string): Phone {
+  const national = e164.replace(/^\+31/, '0');
+  return { display: national.replace(/^(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})$/, '$1 $2 $3 $4 $5'), e164 };
+}
+
+export const site = {
   name: 'V Guard Studio', // F1 ПІДТВЕРДЖЕНО
-  legalName: null, // F14 ОЧІКУЄ
-  kvk: null, // F14 ОЧІКУЄ
+  // F2 ПІДТВЕРДЖЕНО. «14 D» must match GBP character for character.
   address: {
-    street: null,
-    postalCode: null,
+    street: 'Twentelaan 14 D',
+    postalCode: '7681 NE',
     locality: 'Vroomshoop',
+    region: 'Overijssel',
     country: 'NL',
   },
-  phone: testPhone, // F11 ОЧІКУЄ
-  whatsapp: testPhone, // F11 ОЧІКУЄ
-  emailNotify: null, // F13 ОЧІКУЄ; Netlify Forms notifications are set in the Netlify UI
-  openingHours: null, // F15 ОЧІКУЄ
+  // F11 ОЧІКУЄ
+  phone: testPhone
+    ? fact<Phone>(phoneFromE164(testPhone), 'default', 'TEST_PHONE з env (лише preview)')
+    : fact<Phone>({ display: '06 12 34 56 78', e164: '+31612345678' }, 'default', 'телефон V Guard (F11)'),
+  // F15 ОЧІКУЄ
+  hours: fact(
+    {
+      label: { nl: 'ma-vr 9:00-18:00, za 10:00-16:00', uk: 'пн-пт 9:00-18:00, сб 10:00-16:00' } as Localized,
+      schema: ['Mo-Fr 09:00-18:00', 'Sa 10:00-16:00'],
+    },
+    'default',
+    'години V Guard (F15)',
+  ),
+  legalName: null as string | null, // F14 ОЧІКУЄ
+  kvk: fact('12345678', 'default', 'KvK V Guard (F14)'),
+  emailNotify: null as string | null, // F13 ОЧІКУЄ; Netlify Forms notifications are set in the Netlify UI
+  // F16 ОЧІКУЄ. No URL, no link: a guessed profile URL could point to someone else.
   socials: {
-    tiktok: null,
-    instagram: null,
-    facebook: null,
+    tiktok: null as string | null,
+    instagram: null as string | null,
+    facebook: null as string | null,
   },
+  // Not from the design prompt: proposed by the developer for the privacy page, V Guard to confirm.
+  retentionMonths: fact(12, 'default', 'термін зберігання заявок; запропоновано розробником, V Guard підтверджує'),
+  responseTime: fact<Localized>(
+    { nl: 'binnen 1 werkdag', uk: 'протягом робочого дня' },
+    'default',
+    'термін відповіді V Guard',
+  ),
+};
+
+// Trust facts (Site Truth section 5). F6 and F9 are ОЗВУЧЕНО; rendered in preview per R1.
+export const trust = {
+  workWarrantyYears: fact(3, 'spoken', 'F6 ОЗВУЧЕНО'),
+  filmWarrantyYears: fact({ ppf: 10, tint: 7 }, 'default', 'F7: PPF 5/7/10 залежно від бренду, тонування 5-7'),
+  certifiedPpf: fact(true, 'default', 'F8: після скану сертифіката Валери'),
+  brands: fact(['XPEL', 'BRAVIXX', 'LLumar'], 'spoken', 'F9 ОЗВУЧЕНО'),
+  ppfBrands: fact(['XPEL', 'BRAVIXX'], 'default', 'F9: бренди саме для PPF'),
+  tintBrands: fact(['LLumar', 'XPEL'], 'spoken', 'F9 ОЗВУЧЕНО: бренди для тонування з макета'),
+};
+
+// Google reviews (Blueprint ReviewsBlock). Defaults from the design prompt; owner decision
+// R1 06.10.2026: render in preview, replace with real Google reviews before launch.
+export const reviews = fact<Review[]>(
+  [
+    {
+      quote: { nl: 'Strak gewerkt, de ramen zien er top uit.', uk: 'Акуратна робота, вікна виглядають чудово.' },
+      author: 'Mark, Hardenberg',
+    },
+    {
+      quote: { nl: 'Full Front PPF op mijn Model 3, netjes afgewerkt.', uk: 'Full Front PPF на мою Model 3, охайно зроблено.' },
+      author: 'Sandra, Almelo',
+    },
+    {
+      quote: { nl: 'Snel geholpen en goed advies over wat mag.', uk: 'Швидко допомогли і добре порадили, що дозволено.' },
+      author: 'Dennis, Ommen',
+    },
+  ],
+  'default',
+  'реальні відгуки Google після запуску профілю',
+);
+
+export const fullAddress = `${site.address.street}, ${site.address.postalCode} ${site.address.locality}`;
+const mapsQuery = encodeURIComponent(`${site.name}, ${fullAddress}`);
+
+export const links = {
+  // Plain links to Google Maps; nothing loads before a click (D7).
+  route: `https://www.google.com/maps/dir/?api=1&destination=${mapsQuery}`,
+  reviews: fact(
+    `https://www.google.com/maps/search/?api=1&query=${mapsQuery}`,
+    'default',
+    'пряме посилання на відгуки GBP після активації профілю',
+  ),
+  // F10, F10b source
+  rijksoverheid:
+    'https://www.rijksoverheid.nl/onderwerpen/verkeersveiligheid/vraag-en-antwoord/mag-ik-folie-of-coating-aanbrengen-op-mijn-autoruiten',
 };
 
 // F17 ОЧІКУЄ. When set, it is the canonical origin; until then astro.config.mjs
@@ -73,4 +132,9 @@ export function isLinked(key: PageKey): boolean {
 /** Digits only, for wa.me links. */
 export function waDigits(e164: string): string {
   return e164.replace(/\D/g, '');
+}
+
+export function whatsappUrl(text?: string): string {
+  const base = `https://wa.me/${waDigits(site.phone.value.e164)}`;
+  return text ? `${base}?text=${encodeURIComponent(text)}` : base;
 }
