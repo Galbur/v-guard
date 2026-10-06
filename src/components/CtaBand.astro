@@ -1,0 +1,84 @@
+---
+// Closing CTA (headline up to 6 words): quote form with ?service= and WhatsApp.
+import { isLinked, whatsappUrl } from '../config/site.ts';
+import { t } from '../i18n/index.ts';
+import { localizedPath, type Locale } from '../i18n/routes.ts';
+
+interface Props {
+  locale: Locale;
+  title: string;
+  text: string;
+  service?: string;
+}
+
+const { locale, title, text, service } = Astro.props;
+const href = `${localizedPath('contact', locale)}${service ? `?service=${service}` : ''}`;
+---
+
+<section class="section container">
+  <div class="cta panel">
+    <div>
+      <h2 class="cta__title">{title}</h2>
+      <p class="cta__text">{text}</p>
+    </div>
+    <div class="cta__actions">
+      {isLinked('contact') && <a class="btn btn--primary btn--hero" href={href}>{t('cta.quote', locale)}</a>}
+      <a class="btn btn--ghost btn--hero" href={whatsappUrl()} target="_blank" rel="noopener">{t('cta.whatsapp', locale)}</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 28px 20px;
+    border-top: 2px solid var(--c-gold);
+  }
+
+  .cta__title {
+    font-size: 24px;
+    line-height: 1.15;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  .cta__text {
+    margin-top: 10px;
+    font-size: 15px;
+    line-height: 1.45;
+    color: var(--c-muted);
+  }
+
+  .cta__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  @media (min-width: 64rem) {
+    .cta {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      gap: 48px;
+      padding: 48px;
+    }
+
+    .cta__title {
+      font-size: 32px;
+      letter-spacing: -0.02em;
+    }
+
+    .cta__text {
+      font-size: 16px;
+    }
+
+    .cta__actions {
+      flex: none;
+      flex-direction: row;
+      gap: 12px;
+    }
+  }
+</style>

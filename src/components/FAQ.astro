@@ -1,0 +1,122 @@
+---
+// Accordion with details/summary: answers are in the HTML, first item open.
+// FAQPage JSON-LD is built from the same items on the page (visible FAQ only).
+import type { Faq } from '../copy/shared.ts';
+
+interface Props {
+  title: string;
+  items: Faq[];
+}
+
+const { title, items } = Astro.props;
+---
+
+<section class="section container faq">
+  <h2 class="h2 faq__title">{title}</h2>
+  <div class="faq__list">
+    {
+      items.map((item, i) => (
+        <details class="faq__item" open={i === 0}>
+          <summary>
+            <span>{item.q}</span>
+            <span class="faq__sign" aria-hidden="true" />
+          </summary>
+          <p>{item.a}</p>
+        </details>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .faq__title {
+    margin-bottom: 12px;
+  }
+
+  .faq__list {
+    border-bottom: 1px solid var(--c-line-dark);
+  }
+
+  .faq__item {
+    border-top: 1px solid var(--c-line-dark);
+    padding: 16px 0;
+  }
+
+  summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    min-height: 44px;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.35;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq__sign {
+    position: relative;
+    flex: none;
+    width: 24px;
+    height: 24px;
+    color: var(--c-gold);
+  }
+
+  .faq__sign::before,
+  .faq__sign::after {
+    content: '';
+    position: absolute;
+    left: 6px;
+    right: 6px;
+    top: 11px;
+    height: 1.6px;
+    background: currentColor;
+  }
+
+  .faq__sign::after {
+    transform: rotate(90deg);
+  }
+
+  details[open] .faq__sign::after {
+    display: none;
+  }
+
+  .faq__item p {
+    margin-top: 8px;
+    padding-right: 40px;
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--c-muted);
+  }
+
+  @media (min-width: 64rem) {
+    .faq {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    .faq__item {
+      padding: 20px 0;
+    }
+
+    summary {
+      gap: 24px;
+      font-size: 19px;
+    }
+
+    .faq__item p {
+      margin-top: 10px;
+      max-width: 680px;
+      padding-right: 0;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+  }
+</style>

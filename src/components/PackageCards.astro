@@ -1,0 +1,169 @@
+---
+// PPF packages «Kies je bescherming»: zones, price, duration, button to the form with the
+// package preselected (?service=ppf&option=...). No «most popular» badge (block specs).
+import { euro } from '../data/fact.ts';
+import { fromLabel, isPriceShown, type Package } from '../data/services.ts';
+import { t } from '../i18n/index.ts';
+import { localizedPath, type Locale } from '../i18n/routes.ts';
+
+interface Props {
+  locale: Locale;
+  title: string;
+  note: string;
+  service: string;
+  packages: Package[];
+}
+
+const { locale, title, note, service, packages } = Astro.props;
+const contact = localizedPath('contact', locale);
+---
+
+<section class="section container">
+  <h2 class="h2 pk__title">{title}</h2>
+  <div class="pk">
+    {
+      packages.map((p) => (
+        <article class="pk__card surface-light">
+          <h3 class="pk__name">{p.title[locale]}</h3>
+          <p class="pk__desc">{p.description[locale]}</p>
+          <p class="pk__zones">
+            {p.zones && (
+              <>
+                <span class="pk__label">{t('common.zones', locale)}</span> {p.zones.value[locale]}
+              </>
+            )}
+            {p.parts &&
+              p.parts
+                .filter((part) => isPriceShown(part.price))
+                .map((part) => `${part.label[locale]} ${t('common.from', locale)} ${euro(part.price.amount)}`)
+                .join(' · ')}
+          </p>
+          <div class="pk__meta">
+            {isPriceShown(p.price) && <p class="pk__price">{fromLabel(p.price, locale)}</p>}
+            <p class="pk__dur">{p.duration.value[locale]}</p>
+          </div>
+          <a class="btn btn--primary btn--block pk__btn" href={`${contact}?service=${service}&option=${p.formOption}`}>
+            {t('cta.quote', locale)}
+          </a>
+        </article>
+      ))
+    }
+  </div>
+  <p class="note pk__note">{note}</p>
+</section>
+
+<style>
+  .pk__title {
+    margin-bottom: 16px;
+  }
+
+  .pk {
+    display: grid;
+    gap: 16px;
+  }
+
+  .pk__card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px 18px;
+  }
+
+  .pk__name {
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  .pk__desc {
+    font-size: 14px;
+    line-height: 1.45;
+    color: var(--c-muted-light);
+  }
+
+  .pk__zones {
+    flex: 1;
+    padding-top: 10px;
+    border-top: 1px solid var(--c-line-light);
+    font-size: 14px;
+    line-height: 1.55;
+  }
+
+  .pk__label {
+    color: var(--c-muted-light);
+  }
+
+  .pk__meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+  }
+
+  .pk__price {
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  .pk__dur {
+    font-size: 13px;
+    color: var(--c-muted-light);
+  }
+
+  .pk__btn {
+    margin-top: 4px;
+    min-height: 46px;
+    font-size: 14px;
+  }
+
+  .pk__note {
+    margin-top: 16px;
+  }
+
+  @media (min-width: 64rem) {
+    .pk__title {
+      margin-bottom: 32px;
+    }
+
+    .pk {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .pk__card {
+      gap: 12px;
+      padding: 28px 26px;
+    }
+
+    .pk__name {
+      font-size: 24px;
+    }
+
+    .pk__desc {
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    .pk__zones {
+      padding-top: 12px;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .pk__price {
+      font-size: 24px;
+    }
+
+    .pk__dur {
+      font-size: 14px;
+    }
+
+    .pk__btn {
+      min-height: 48px;
+      font-size: 15px;
+    }
+
+    .pk__note {
+      margin-top: 20px;
+    }
+  }
+</style>
