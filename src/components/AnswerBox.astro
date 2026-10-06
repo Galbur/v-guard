@@ -1,15 +1,16 @@
 ---
 // «Wat is ...» answer block: plain HTML text inside the first 100 words (design prompt 13).
+// Without a title it renders as a panel (mockup PPF v2).
 interface Props {
-  title: string;
+  title?: string;
   text: string;
 }
 
 const { title, text } = Astro.props;
 ---
 
-<section class="answer container">
-  <h2 class="h2">{title}</h2>
+<section class:list={['answer container', { 'answer--panel': !title }]}>
+  {title && <h2 class="h2">{title}</h2>}
   <p class="answer__text">{text}</p>
 </section>
 
@@ -28,6 +29,14 @@ const { title, text } = Astro.props;
     text-wrap: pretty;
   }
 
+  .answer--panel .answer__text {
+    padding: 20px 18px;
+    background: var(--c-graphite);
+    border: 1px solid var(--c-line-dark);
+    border-radius: var(--r-card);
+    color: var(--c-off-white);
+  }
+
   @media (min-width: 64rem) {
     .answer {
       display: grid;
@@ -39,6 +48,15 @@ const { title, text } = Astro.props;
     .answer__text {
       font-size: 20px;
       max-width: 720px;
+    }
+
+    .answer--panel {
+      display: block;
+    }
+
+    .answer--panel .answer__text {
+      max-width: none;
+      padding: 32px 40px;
     }
   }
 </style>

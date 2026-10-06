@@ -114,7 +114,10 @@ export interface Package {
   formOption: string;
   title: Localized;
   description: Localized;
-  zones?: Fact<Localized>;
+  /** Silhouette highlight on the package card: front, whole body or spots (mockup PPF v2). */
+  highlight: 'front' | 'full' | 'spots';
+  zones: Fact<Localized<string[]>>;
+  /** Priced single parts (quote form step 3); the card shows zones and the lowest price. */
   parts?: { label: Localized; price: Price }[];
   price: Price;
   duration: Fact<Localized>;
@@ -137,33 +140,48 @@ export const ppfPackages: Package[] = [
     title: { nl: 'Full Front', uk: 'Full Front' },
     description: {
       nl: 'De voorkant, waar de meeste steenslag terechtkomt.',
-      uk: 'Передня частина, куди потрапляє найбільше сколів.',
+      uk: 'Передня частина, куди летить найбільше сколів.',
     },
+    highlight: 'front',
     zones: fact(
       {
-        nl: 'voorbumper, motorkap, voorschermen, spiegelkappen, koplampen',
-        uk: 'передній бампер, капот, передні крила, ковпаки дзеркал, фари',
+        nl: ['Voorbumper', 'volledige motorkap', 'voorschermen', 'spiegelkappen', 'koplampen'],
+        uk: ['Передній бампер', 'увесь капот', 'передні крила', 'корпуси дзеркал', 'фари'],
       },
       'default',
       'точні зони V Guard',
     ),
     price: price(895, 'default', 'Full Front, агресивний вхід; ринок ~€1.000-2.000', { from: true }),
-    duration: fact({ nl: '1-2 dagen', uk: '1-2 дні' }, 'default', 'тривалість V Guard'),
+    duration: fact({ nl: '1-2 werkdagen', uk: '1-2 робочі дні' }, 'default', 'тривалість V Guard'),
   },
   {
     id: 'full-body',
     formOption: 'full-body',
     title: { nl: 'Full Body', uk: 'Full Body' },
     description: { nl: 'Alle gelakte delen van de auto onder folie.', uk: 'Усі пофарбовані деталі авто під плівкою.' },
-    zones: fact({ nl: 'alle gelakte panelen', uk: 'усі пофарбовані панелі' }, 'default', 'точні зони V Guard'),
+    highlight: 'full',
+    zones: fact(
+      { nl: ['Alle gelakte carrosseriedelen'], uk: ['Усі пофарбовані деталі кузова'] },
+      'default',
+      'точні зони V Guard',
+    ),
     price: price(2995, 'default', 'ринок ~€3.500-6.000', { from: true }),
-    duration: fact({ nl: '3-5 dagen', uk: '3-5 днів' }, 'default', 'тривалість V Guard'),
+    duration: fact({ nl: '3-5 werkdagen', uk: '3-5 робочих днів' }, 'default', 'тривалість V Guard'),
   },
   {
     id: 'gedeeltelijk',
     formOption: 'gedeeltelijk',
-    title: { nl: 'Gedeeltelijk', uk: 'Частково' },
-    description: { nl: 'Alleen de delen die jij kiest.', uk: 'Лише деталі, які ви оберете.' },
+    title: { nl: 'Custom (losse delen)', uk: 'Custom (окремі деталі)' },
+    description: { nl: 'Alleen de delen die jij kiest.', uk: 'Лише деталі, які оберете ви.' },
+    highlight: 'spots',
+    zones: fact(
+      {
+        nl: ['Bijv. voorbumper', 'deurgreepbakjes', 'deurranden', 'instaplijsten', 'laaddrempel'],
+        uk: ['Напр. передній бампер', 'ніші ручок', 'торці дверей', 'пороги', 'поріг багажника'],
+      },
+      'default',
+      'приклади деталей V Guard',
+    ),
     parts: ppfParts,
     price: price(Math.min(...ppfParts.map((p) => p.price.amount)), 'default', 'найнижча ціна за деталь', { from: true }),
     duration: fact({ nl: 'per onderdeel', uk: 'за деталь' }, 'default', 'тривалість V Guard'),
@@ -172,8 +190,8 @@ export const ppfPackages: Package[] = [
 
 export const ppfCare = fact<Localized>(
   {
-    nl: 'De eerste week niet wassen. Daarna handwas of contactloos, en geen hogedrukspuit op de randen van de folie.',
-    uk: 'Перший тиждень не мити. Далі ручне або безконтактне миття, без мийки високого тиску на краї плівки.',
+    nl: 'Was de auto de eerste 7 dagen niet, zodat de folie goed hecht. Daarna kun je normaal wassen. Richt een hogedrukspuit niet direct op de randen van de folie.',
+    uk: 'Перші 7 днів не мийте авто, щоб плівка добре схопилася. Далі мийте як звичайно. Не спрямовуйте мийку високого тиску прямо на краї плівки.',
   },
   'default',
   'догляд V Guard',

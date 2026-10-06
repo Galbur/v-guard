@@ -21,9 +21,11 @@ interface Props {
   long?: boolean;
   /** Preselect for the quote form. */
   service?: string;
+  /** Prefilled wa.me text. */
+  waText?: string;
 }
 
-const { locale, h1, sub, chips, photos, align = 'left', long = false, service } = Astro.props;
+const { locale, h1, sub, chips, photos, align = 'left', long = false, service, waText } = Astro.props;
 
 async function srcset(file: string, widths: number[], format: 'avif' | 'webp') {
   const src = photo(file);
@@ -43,7 +45,7 @@ const sources = {
 const fallback = await getImage({ src: photo(photos.mobile.file), width: 750, format: 'webp' });
 const quoteHref = `${localizedPath('contact', locale)}${service ? `?service=${service}` : ''}`;
 const mq = '(min-width: 64rem)';
-const wa = whatsappUrl();
+const wa = whatsappUrl(waText);
 ---
 
 <section class:list={['hero', `hero--${align}`]} style={`--pos-m:${photos.mobile.position};--pos-d:${photos.desktop.position}`}>
