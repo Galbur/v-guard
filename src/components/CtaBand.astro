@@ -9,11 +9,13 @@ interface Props {
   title: string;
   text: string;
   service?: string;
+  /** Prefilled wa.me text. */
+  waText?: string;
 }
 
-const { locale, title, text, service } = Astro.props;
+const { locale, title, text, service, waText } = Astro.props;
 const href = `${localizedPath('contact', locale)}${service ? `?service=${service}` : ''}`;
-const wa = whatsappUrl();
+const wa = whatsappUrl(waText);
 ---
 
 <section class="section container">

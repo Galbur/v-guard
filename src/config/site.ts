@@ -68,7 +68,15 @@ export const trust = {
   filmWarrantyYears: fact({ ppf: 10, tint: 7 }, 'default', 'F7: PPF 5/7/10 залежно від бренду, тонування 5-7'),
   certifiedPpf: fact(true, 'default', 'F8: після скану сертифіката Валери'),
   brands: fact(['XPEL', 'BRAVIXX', 'LLumar'], 'spoken', 'F9 ОЗВУЧЕНО'),
-  ppfBrands: fact(['XPEL', 'BRAVIXX'], 'default', 'F9: бренди саме для PPF'),
+  // PPF page: manufacturer warranty per brand (F7 ОЗВУЧЕНО) and what it covers (default).
+  ppfFilmWarranty: fact(
+    {
+      years: [5, 7, 10],
+      covers: { nl: 'vergelen en loslaten', uk: 'пожовтіння і відшарування' } as Localized,
+    },
+    'default',
+    'F7 ОЗВУЧЕНО: 5/7/10 залежно від бренду; покриття (vergelen, loslaten) за умовами виробника',
+  ),
   tintBrands: fact(['LLumar', 'XPEL'], 'spoken', 'F9 ОЗВУЧЕНО: бренди для тонування з макета'),
 };
 

@@ -32,10 +32,13 @@ const view = items.map((entry) => {
   const p = entry.data;
   const car = p.car[locale];
   const detail = p.detail[locale];
+  // PPF on service pages: «{merk model} · PPF {pakket}».
   const parts =
     caption === 'service'
       ? [car, getService(p.service)?.label[locale], detail]
-      : [car, detail || getService(p.service)?.label[locale].toLowerCase(), p.film];
+      : p.service === 'ppf'
+        ? [car, `PPF ${detail}`.trim()]
+        : [car, detail || getService(p.service)?.label[locale].toLowerCase(), p.film];
   return {
     id: entry.id,
     service: p.service,
@@ -45,7 +48,9 @@ const view = items.map((entry) => {
     alt:
       locale === 'nl'
         ? `${car} met ${dienst[p.service].nl} door V Guard Studio in Vroomshoop`
-        : `${car}: ${dienst[p.service].uk} від V Guard Studio у Vroomshoop`,
+        : p.service === 'ppf'
+          ? `${car} з PPF від V Guard Studio у Vroomshoop`
+          : `${car}: ${dienst[p.service].uk} від V Guard Studio у Vroomshoop`,
   };
 });
 const servicesPresent = [...new Set(view.map((v) => v.service))];

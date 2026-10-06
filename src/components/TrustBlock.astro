@@ -4,7 +4,8 @@ import Icon from './Icon.astro';
 import type { TrustIcon } from '../copy/shared.ts';
 
 interface Props {
-  title: string;
+  /** Optional: the PPF page lists the items without a heading (mockup PPF v2). */
+  title?: string;
   items: { icon: TrustIcon; text: string }[];
 }
 
@@ -12,7 +13,7 @@ const { title, items } = Astro.props;
 ---
 
 <section class="section container">
-  <h2 class="h2 trust__title">{title}</h2>
+  {title && <h2 class="h2 trust__title">{title}</h2>}
   <ul class="trust" role="list">
     {
       items.map((item) => (

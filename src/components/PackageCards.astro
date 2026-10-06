@@ -1,7 +1,9 @@
 ---
-// PPF packages «Kies je bescherming»: zones, price, duration, button to the form with the
-// package preselected (?service=ppf&option=...). No «most popular» badge (block specs).
-import { euro } from '../data/fact.ts';
+// PPF packages «Kies hoeveel je beschermt» (mockup PPF v2, frames 1-4): three equal cards with
+// a generic top-view silhouette, zones, «vanaf» price and a button to the form with the package
+// preselected (?service=ppf&option=...). No «most popular» badge (block specs).
+// Silhouette highlight: front = front zones gold, full = whole body gold, spots = gold dots
+// on single parts. The SVG is decorative; the zone list is the text.
 import { fromLabel, isPriceShown, type Package } from '../data/services.ts';
 import { t } from '../i18n/index.ts';
 import { localizedPath, type Locale } from '../i18n/routes.ts';
@@ -23,25 +25,34 @@ const contact = localizedPath('contact', locale);
   <div class="pk">
     {
       packages.map((p) => (
-        <article class="pk__card surface-light">
+        <article class:list={['pk__card surface-light', `pk__card--${p.highlight}`]}>
+          <svg class="pk__car" viewBox="0 0 260 120" aria-hidden="true" focusable="false">
+            <rect class="pk__wheel" x="40" y="8" width="30" height="104" rx="4" />
+            <rect class="pk__wheel" x="190" y="8" width="30" height="104" rx="4" />
+            <rect class="pk__body" x="6" y="14" width="248" height="92" rx="22" />
+            <path class="pk__front" d="M28 14H80V106H28A22 22 0 0 1 6 84V36A22 22 0 0 1 28 14Z" />
+            <path class="pk__glass" d="M80 18L104 30V90L80 102Z" />
+            <path class="pk__glass" d="M168 30L188 20V100L168 90Z" />
+            <rect class="pk__front" x="84" y="2" width="14" height="12" rx="3" />
+            <rect class="pk__front" x="84" y="106" width="14" height="12" rx="3" />
+            <rect class="pk__lamp" x="10" y="22" width="6" height="18" rx="2" />
+            <rect class="pk__lamp" x="10" y="80" width="6" height="18" rx="2" />
+            <g class="pk__spots">
+              <circle cx="14" cy="60" r="7" />
+              <circle cx="122" cy="26" r="7" />
+              <circle cx="122" cy="94" r="7" />
+              <rect x="106" y="100" width="60" height="9" rx="4.5" />
+              <circle cx="246" cy="60" r="7" />
+            </g>
+          </svg>
           <h3 class="pk__name">{p.title[locale]}</h3>
           <p class="pk__desc">{p.description[locale]}</p>
-          <p class="pk__zones">
-            {p.zones && (
-              <>
-                <span class="pk__label">{t('common.zones', locale)}</span> {p.zones.value[locale]}
-              </>
-            )}
-            {p.parts &&
-              p.parts
-                .filter((part) => isPriceShown(part.price))
-                .map((part) => `${part.label[locale]} ${t('common.from', locale)} ${euro(part.price.amount)}`)
-                .join(' · ')}
-          </p>
-          <div class="pk__meta">
-            {isPriceShown(p.price) && <p class="pk__price">{fromLabel(p.price, locale)}</p>}
-            <p class="pk__dur">{p.duration.value[locale]}</p>
-          </div>
+          <ul class="pk__zones">
+            {p.zones.value[locale].map((zone) => (
+              <li>{zone}</li>
+            ))}
+          </ul>
+          {isPriceShown(p.price) && <p class="pk__price">{fromLabel(p.price, locale)}</p>}
           <a class="btn btn--primary btn--block pk__btn" href={`${contact}?service=${service}&option=${p.formOption}`}>
             {t('cta.quote', locale)}
           </a>
@@ -65,13 +76,55 @@ const contact = localizedPath('contact', locale);
   .pk__card {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
     padding: 20px 18px;
+  }
+
+  .pk__car {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .pk__wheel {
+    fill: var(--c-muted);
+  }
+
+  .pk__body,
+  .pk__front {
+    fill: var(--c-line-light);
+  }
+
+  .pk__glass {
+    fill: var(--c-slash);
+  }
+
+  .pk__lamp {
+    fill: var(--c-off-white);
+    opacity: 0.8;
+  }
+
+  .pk__spots {
+    display: none;
+    fill: var(--c-gold);
+    stroke: var(--c-black);
+    stroke-width: 1.5;
+  }
+
+  .pk__card--front .pk__front,
+  .pk__card--full .pk__body,
+  .pk__card--full .pk__front {
+    fill: var(--c-gold);
+  }
+
+  .pk__card--spots .pk__spots {
+    display: inline;
   }
 
   .pk__name {
     font-size: 20px;
     font-weight: 600;
+    line-height: 1.2;
   }
 
   .pk__desc {
@@ -82,35 +135,38 @@ const contact = localizedPath('contact', locale);
 
   .pk__zones {
     flex: 1;
-    padding-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 10px 0 0;
     border-top: 1px solid var(--c-line-light);
     font-size: 14px;
-    line-height: 1.55;
+    line-height: 1.4;
+    list-style: none;
   }
 
-  .pk__label {
-    color: var(--c-muted-light);
-  }
-
-  .pk__meta {
+  .pk__zones li {
     display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 12px;
+    gap: 8px;
+    align-items: flex-start;
+  }
+
+  .pk__zones li::before {
+    content: '';
+    flex: none;
+    width: 6px;
+    height: 6px;
+    margin-top: 7px;
+    border-radius: var(--r-pill);
+    background: var(--c-gold);
   }
 
   .pk__price {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 600;
   }
 
-  .pk__dur {
-    font-size: 13px;
-    color: var(--c-muted-light);
-  }
-
   .pk__btn {
-    margin-top: 4px;
     min-height: 46px;
     font-size: 14px;
   }
@@ -130,7 +186,7 @@ const contact = localizedPath('contact', locale);
     }
 
     .pk__card {
-      gap: 12px;
+      gap: 14px;
       padding: 28px 26px;
     }
 
@@ -146,15 +202,11 @@ const contact = localizedPath('contact', locale);
     .pk__zones {
       padding-top: 12px;
       font-size: 15px;
-      line-height: 1.6;
+      line-height: 1.5;
     }
 
     .pk__price {
-      font-size: 24px;
-    }
-
-    .pk__dur {
-      font-size: 14px;
+      font-size: 22px;
     }
 
     .pk__btn {
