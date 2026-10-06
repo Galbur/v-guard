@@ -13,6 +13,7 @@ interface Props {
 
 const { locale, title, text, service } = Astro.props;
 const href = `${localizedPath('contact', locale)}${service ? `?service=${service}` : ''}`;
+const wa = whatsappUrl();
 ---
 
 <section class="section container">
@@ -23,7 +24,13 @@ const href = `${localizedPath('contact', locale)}${service ? `?service=${service
     </div>
     <div class="cta__actions">
       {isLinked('contact') && <a class="btn btn--primary btn--hero" href={href}>{t('cta.quote', locale)}</a>}
-      <a class="btn btn--ghost btn--hero" href={whatsappUrl()} target="_blank" rel="noopener">{t('cta.whatsapp', locale)}</a>
+      {
+        wa && (
+          <a class="btn btn--ghost btn--hero" href={wa} target="_blank" rel="noopener">
+            {t('cta.whatsapp', locale)}
+          </a>
+        )
+      }
     </div>
   </div>
 </section>

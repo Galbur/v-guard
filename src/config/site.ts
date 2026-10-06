@@ -17,15 +17,12 @@ export interface Review {
   author: string;
 }
 
-// Local or Netlify preview QA: TEST_PHONE (E.164) replaces the default phone so that
-// test clicks never reach a stranger. Ignored on Netlify production builds.
+// The phone number shown on the site is a default (F11 ОЧІКУЄ). Clickable tel: and wa.me
+// links never use it: they go to TEST_PHONE (E.164) from .env.local or the Netlify env.
+// Without TEST_PHONE the number is plain text and the Bellen / WhatsApp buttons are hidden,
+// so nobody calls or messages a random number. Ignored on Netlify production builds.
 const testPhone: string | null =
-  process.env.CONTEXT !== 'production' ? import.meta.env?.TEST_PHONE || null : null;
-
-function phoneFromE164(e164: string): Phone {
-  const national = e164.replace(/^\+31/, '0');
-  return { display: national.replace(/^(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})$/, '$1 $2 $3 $4 $5'), e164 };
-}
+  process.env.CONTEXT !== 'production' ? import.meta.env?.TEST_PHONE || process.env.TEST_PHONE || null : null;
 
 export const site = {
   name: 'V Guard Studio', // F1 ПІДТВЕРДЖЕНО
@@ -38,9 +35,7 @@ export const site = {
     country: 'NL',
   },
   // F11 ОЧІКУЄ
-  phone: testPhone
-    ? fact<Phone>(phoneFromE164(testPhone), 'default', 'TEST_PHONE з env (лише preview)')
-    : fact<Phone>({ display: '06 12 34 56 78', e164: '+31612345678' }, 'default', 'телефон V Guard (F11)'),
+  phone: fact<Phone>({ display: '06 12 34 56 78', e164: '+31612345678' }, 'default', 'телефон V Guard (F11)'),
   // F15 ОЧІКУЄ
   hours: fact(
     {
@@ -134,7 +129,17 @@ export function waDigits(e164: string): string {
   return e164.replace(/\D/g, '');
 }
 
-export function whatsappUrl(text?: string): string {
-  const base = `https://wa.me/${waDigits(site.phone.value.e164)}`;
+/** E.164 number that tel: and wa.me links may use, or null (links hidden). */
+export const linkPhone: string | null = testPhone;
+
+/** tel: link, or null when no TEST_PHONE is set. */
+export function telUrl(): string | null {
+  return linkPhone ? `tel:${linkPhone}` : null;
+}
+
+/** wa.me link, or null when no TEST_PHONE is set. */
+export function whatsappUrl(text?: string): string | null {
+  if (!linkPhone) return null;
+  const base = `https://wa.me/${waDigits(linkPhone)}`;
   return text ? `${base}?text=${encodeURIComponent(text)}` : base;
 }

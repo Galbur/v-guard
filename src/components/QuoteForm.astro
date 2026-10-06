@@ -4,7 +4,7 @@
 // 4-step flow with validation, «Terug» that keeps values, ?service= / &option= preselect,
 // and a success state with the WhatsApp continuation.
 import Icon from './Icon.astro';
-import { site, waDigits } from '../config/site.ts';
+import { linkPhone, waDigits } from '../config/site.ts';
 import { adviceOption, bodyTypes, optionDetail, services } from '../data/services.ts';
 import { t, type UiKey } from '../i18n/index.ts';
 import { localizedPath, type Locale } from '../i18n/routes.ts';
@@ -35,7 +35,8 @@ const messageKeys: UiKey[] = [
   'form.wa.car',
 ];
 const messages = Object.fromEntries(messageKeys.map((k) => [k, t(k, locale)]));
-const wa = waDigits(site.phone.value.e164);
+// Empty without TEST_PHONE: the WhatsApp continuation button is then not rendered.
+const wa = linkPhone ? waDigits(linkPhone) : '';
 const pagePath = localizedPath('contact', locale);
 ---
 
@@ -215,10 +216,14 @@ const pagePath = localizedPath('contact', locale);
     <Icon name="check-circle" size={40} class="success__icon" />
     <h2 tabindex="-1">{t('form.success.title', locale)}</h2>
     <p>{t('form.success.text', locale)}</p>
-    <a class="btn btn--primary btn--block" data-wa-link href={`https://wa.me/${wa}`} target="_blank" rel="noopener">
-      <Icon name="whatsapp" size={18} />
-      {t('form.success.wa', locale)}
-    </a>
+    {
+      wa && (
+        <a class="btn btn--primary btn--block" data-wa-link href={`https://wa.me/${wa}`} target="_blank" rel="noopener">
+          <Icon name="whatsapp" size={18} />
+          {t('form.success.wa', locale)}
+        </a>
+      )
+    }
     <a class="success__home" href={localizedPath('home', locale)}>{t('form.success.home', locale)}</a>
   </div>
 </div>

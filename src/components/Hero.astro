@@ -43,6 +43,7 @@ const sources = {
 const fallback = await getImage({ src: photo(photos.mobile.file), width: 750, format: 'webp' });
 const quoteHref = `${localizedPath('contact', locale)}${service ? `?service=${service}` : ''}`;
 const mq = '(min-width: 64rem)';
+const wa = whatsappUrl();
 ---
 
 <section class:list={['hero', `hero--${align}`]} style={`--pos-m:${photos.mobile.position};--pos-d:${photos.desktop.position}`}>
@@ -73,9 +74,13 @@ const mq = '(min-width: 64rem)';
           </a>
         )
       }
-      <a class="btn btn--ghost btn--hero" href={whatsappUrl()} target="_blank" rel="noopener">
-        {t('cta.whatsapp', locale)}
-      </a>
+      {
+        wa && (
+          <a class="btn btn--ghost btn--hero" href={wa} target="_blank" rel="noopener">
+            {t('cta.whatsapp', locale)}
+          </a>
+        )
+      }
     </div>
     <ProofStrip chips={chips} />
   </div>

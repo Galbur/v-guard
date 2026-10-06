@@ -1,7 +1,7 @@
 ---
 // «Studio in Vroomshoop»: NAP from site.ts, route link (no map embed, D7), WhatsApp.
 import Photo from './Photo.astro';
-import { fullAddress, links, site, whatsappUrl } from '../config/site.ts';
+import { fullAddress, links, site, telUrl, whatsappUrl } from '../config/site.ts';
 import { headings } from '../copy/shared.ts';
 import { t } from '../i18n/index.ts';
 import type { Locale } from '../i18n/routes.ts';
@@ -14,6 +14,8 @@ interface Props {
 }
 
 const { locale, image } = Astro.props;
+const wa = whatsappUrl();
+const tel = telUrl();
 ---
 
 <section class="section container studio">
@@ -21,12 +23,18 @@ const { locale, image } = Astro.props;
     <h2 class="h2">{headings.studio[locale]}</h2>
     <address class="studio__nap">
       {fullAddress}<br />
-      <a href={`tel:${site.phone.value.e164}`}>{site.phone.value.display}</a><br />
+      {tel ? <a href={tel}>{site.phone.value.display}</a> : site.phone.value.display}<br />
       {site.hours.value.label[locale]}
     </address>
     <div class="studio__actions">
       <a class="btn btn--primary" href={links.route} target="_blank" rel="noopener">{t('cta.route', locale)}</a>
-      <a class="btn btn--ghost" href={whatsappUrl()} target="_blank" rel="noopener">{t('cta.whatsapp', locale)}</a>
+      {
+        wa && (
+          <a class="btn btn--ghost" href={wa} target="_blank" rel="noopener">
+            {t('cta.whatsapp', locale)}
+          </a>
+        )
+      }
     </div>
   </div>
   {

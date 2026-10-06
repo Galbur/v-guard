@@ -1,7 +1,7 @@
 ---
 // Always-visible mobile CTA bar (mockup 8c): WhatsApp · Bellen · Offerte. Hidden from 1024 px.
 import Icon from './Icon.astro';
-import { isLinked, site, whatsappUrl } from '../config/site.ts';
+import { isLinked, telUrl, whatsappUrl } from '../config/site.ts';
 import { t } from '../i18n/index.ts';
 import { localizedPath, type Locale } from '../i18n/routes.ts';
 
@@ -10,15 +10,27 @@ interface Props {
 }
 
 const { locale } = Astro.props;
+const wa = whatsappUrl();
+const tel = telUrl();
 ---
 
 <nav class="sticky" aria-label={t('sticky.label', locale)}>
-  <a class="sticky__btn" href={whatsappUrl()} target="_blank" rel="noopener">
-    <Icon name="whatsapp" size={18} />{t('sticky.whatsapp', locale)}
-  </a>
-  <a class="sticky__btn" href={`tel:${site.phone.value.e164}`}>
-    <Icon name="phone" size={18} />{t('sticky.call', locale)}
-  </a>
+  {
+    wa && (
+      <a class="sticky__btn" href={wa} target="_blank" rel="noopener">
+        <Icon name="whatsapp" size={18} />
+        {t('sticky.whatsapp', locale)}
+      </a>
+    )
+  }
+  {
+    tel && (
+      <a class="sticky__btn" href={tel}>
+        <Icon name="phone" size={18} />
+        {t('sticky.call', locale)}
+      </a>
+    )
+  }
   {
     isLinked('contact') && (
       <a class="sticky__btn sticky__btn--primary" href={localizedPath('contact', locale)}>

@@ -2,7 +2,7 @@
 // Footer 375 / 1280 (mockup 8e, 8f). NAP from site.ts only (CLAUDE.md rule 3).
 // Socials render only with a URL (F16 ОЧІКУЄ).
 import Logo from './Logo.astro';
-import { fullAddress, isLinked, site } from '../config/site.ts';
+import { fullAddress, isLinked, site, telUrl } from '../config/site.ts';
 import { t, type UiKey } from '../i18n/index.ts';
 import { localizedPath, type Locale, type PageKey } from '../i18n/routes.ts';
 
@@ -11,6 +11,7 @@ interface Props {
 }
 
 const { locale } = Astro.props;
+const tel = telUrl();
 const link = (key: PageKey, label: UiKey) => ({ key, href: localizedPath(key, locale), label: t(label, locale) });
 const servicesLinks = [link('ppf', 'nav.ppf'), link('tint', 'nav.tint'), link('wrap', 'nav.wrap')].filter((l) => isLinked(l.key));
 const studioLinks = [link('home', 'nav.home'), link('projects', 'nav.projects'), link('contact', 'nav.contact')].filter((l) =>
@@ -33,7 +34,7 @@ const socials = [
         <p class="ftr__name">{site.name}</p>
         <p>
           {fullAddress}<br />
-          <a href={`tel:${site.phone.value.e164}`}>{site.phone.value.display}</a><br />
+          {tel ? <a href={tel}>{site.phone.value.display}</a> : site.phone.value.display}<br />
           {site.hours.value.label[locale]}
         </p>
       </div>
