@@ -57,3 +57,11 @@ Form `name="offerte"` with `data-netlify="true"`, `netlify-honeypot="bot-field"`
 - Commit messages in English, imperative.
 - Never push, open a PR or deploy without an explicit command.
 - Report: what changed, commits, QA results, screenshots at 375 and 1280, «Не виконано / потрібне рішення».
+
+## Git і деплой
+
+1. Never commit or push directly to `main`. `main` changes only by merging a PR, and every merge deploys to production on Netlify right away.
+2. Every task: a new branch from a fresh `origin/main`, named after its content (for example `fix-alt-hero`, `tint-page-v2`); commits go there.
+3. Push the branch and open a PR into `main` only on Oleksii's command. Netlify builds a Deploy Preview for the PR by itself; give its link in the report.
+4. Merge a PR only on a separate command from Oleksii, after he has reviewed the Deploy Preview.
+5. After the merge: align local `main` with `origin/main`, delete the branch locally and on origin.
