@@ -1,0 +1,68 @@
+---
+// Car wrapping (/car-wrapping/, /uk/car-wrapping/): mockup «VG Site 04», Blueprint v1.2
+// deviation: ProjectGallery right after the cards.
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import AnswerBox from '../components/AnswerBox.astro';
+import WrapCards from '../components/WrapCards.astro';
+import ProjectGallery from '../components/ProjectGallery.astro';
+import ProcessSteps from '../components/ProcessSteps.astro';
+import FAQ from '../components/FAQ.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { wrapCopy } from '../copy/wrap.ts';
+import { headings, prepSteps } from '../copy/shared.ts';
+import { wrap, wrapCards } from '../data/services.ts';
+import { localizedPath, type Locale } from '../i18n/routes.ts';
+import { faqSchema, serviceSchema } from '../lib/schema.ts';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const c = wrapCopy[locale];
+const projects = (await getCollection('projects', (p) => p.data.service === 'car-wrapping'))
+  .sort((a, b) => a.data.order - b.data.order)
+  .slice(0, 3);
+const url = new URL(localizedPath('wrap', locale), Astro.site ?? 'http://localhost').href;
+const schema = [
+  serviceSchema({
+    name: c.h1,
+    serviceType: 'Car wrapping',
+    url,
+    offers: wrapCards.map((w) => ({ name: w.title[locale], price: w.price })),
+  }),
+  faqSchema(c.faq),
+];
+---
+
+<Base locale={locale} pageKey="wrap" title={c.title} description={c.description} schema={schema}>
+  <Hero
+    locale={locale}
+    h1={c.h1}
+    sub={c.sub}
+    chips={c.chips}
+    long
+    service="car-wrapping"
+    photos={{ mobile: { file: 'bmw-34-p.png', position: 'center 55%' }, desktop: { file: 'bmw-34-p.png', position: 'center 62%' } }}
+  />
+  <AnswerBox title={c.answerTitle} text={c.answer} />
+  <WrapCards
+    locale={locale}
+    title={c.cardsTitle}
+    cards={wrapCards}
+    finishesLabel={c.finishesLabel}
+    finishes={wrap.finishes.value[locale]}
+    note={c.cardsNote}
+  />
+  <ProjectGallery
+    locale={locale}
+    title={c.galleryTitle}
+    items={projects}
+    more={{ href: localizedPath('projects', locale), label: c.galleryMore }}
+  />
+  <ProcessSteps title={headings.process[locale]} steps={prepSteps[locale]} />
+  <FAQ title={headings.faq[locale]} items={c.faq} />
+  <CtaBand locale={locale} title={c.cta.title} text={c.cta.text} service="car-wrapping" />
+</Base>
