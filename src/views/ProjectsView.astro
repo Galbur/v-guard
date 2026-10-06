@@ -1,0 +1,24 @@
+---
+// Projecten (/projecten/, /uk/proiekty/): mockup 6. Only projects with a real photo (R4).
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import PageIntro from '../components/PageIntro.astro';
+import ProjectGallery from '../components/ProjectGallery.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { projectsCopy } from '../copy/pages.ts';
+import type { Locale } from '../i18n/routes.ts';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const c = projectsCopy[locale];
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+---
+
+<Base locale={locale} pageKey="projects" title={c.title} description={c.description}>
+  <PageIntro h1={c.h1} sub={c.sub} />
+  <ProjectGallery locale={locale} items={projects} caption="service" filter headingLevel="none" />
+  <CtaBand locale={locale} title={c.cta.title} text={c.cta.text} />
+</Base>

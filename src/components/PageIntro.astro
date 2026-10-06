@@ -1,0 +1,40 @@
+---
+// Short hero without a photo (Projecten, Contact, Privacy): H1 + subheading.
+interface Props {
+  h1: string;
+  sub?: string;
+  long?: boolean;
+}
+
+const { h1, sub, long = false } = Astro.props;
+---
+
+<div class="intro container">
+  <h1 class:list={['h1', 'intro__h1', { 'h1--long': long }]}>{h1}</h1>
+  {sub && <p class="lead intro__sub">{sub}</p>}
+  <slot />
+</div>
+
+<style>
+  .intro {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-top: 40px;
+  }
+
+  @media (min-width: 64rem) {
+    .intro {
+      gap: 16px;
+      padding-top: 72px;
+    }
+
+    .intro__h1 {
+      max-width: 900px;
+    }
+
+    .intro__sub {
+      max-width: 720px;
+    }
+  }
+</style>
