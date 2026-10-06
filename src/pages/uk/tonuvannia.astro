@@ -1,0 +1,10 @@
+---
+import Base from '../../layouts/Base.astro';
+import { t } from '../../i18n/index.ts';
+
+const title = t('page.tint.title', 'uk');
+---
+
+<Base locale="uk" pageKey="tint" title={title}>
+  <h1>{title}</h1>
+</Base>

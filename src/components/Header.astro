@@ -1,0 +1,244 @@
+---
+import { isLinked, site } from '../config/site.ts';
+import { t } from '../i18n/index.ts';
+import { locales, localizedPath, navKeys, type Locale, type PageKey } from '../i18n/routes.ts';
+
+interface Props {
+  locale: Locale;
+  pageKey?: PageKey;
+}
+
+const { locale, pageKey } = Astro.props;
+const navLabel = {
+  ppf: 'nav.ppf',
+  tint: 'nav.tint',
+  wrap: 'nav.wrap',
+  projects: 'nav.projects',
+  contact: 'nav.contact',
+} as const;
+const items = navKeys.filter((key) => key in navLabel && isLinked(key)) as (keyof typeof navLabel)[];
+// Language switcher goes to the pair of the current page; 404 falls back to home.
+const langLinks = locales.map((l) => ({
+  locale: l,
+  href: localizedPath(pageKey ?? 'home', l),
+  current: l === locale,
+}));
+---
+
+<header class="site-header">
+  <div class="container site-header__bar">
+    <a class="site-header__logo" href={localizedPath('home', locale)}>{site.name}</a>
+
+    <ul class="lang" aria-label={t('lang.label', locale)}>
+      {
+        langLinks.map((l) => (
+          <li>
+            <a
+              href={l.href}
+              hreflang={l.locale}
+              lang={l.locale}
+              aria-label={t(`lang.${l.locale}`, locale)}
+              aria-current={l.current ? 'page' : undefined}
+            >
+              {t(`lang.short.${l.locale}`, locale)}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <button class="menu-toggle" type="button" popovertarget="site-nav" popovertargetaction="show">
+      {t('nav.menu', locale)}
+    </button>
+
+    <nav id="site-nav" class="site-nav" popover aria-label={t('nav.label', locale)}>
+      <button class="menu-close" type="button" popovertarget="site-nav" popovertargetaction="hide">
+        {t('nav.menuClose', locale)}
+      </button>
+      <ul class="site-nav__list">
+        {
+          items.map((key) => (
+            <li>
+              <a href={localizedPath(key, locale)} aria-current={key === pageKey ? 'page' : undefined}>
+                {t(navLabel[key], locale)}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      {
+        isLinked('contact') && (
+          <a class="btn btn--primary site-nav__cta" href={localizedPath('contact', locale)}>
+            {t('cta.quote', locale)}
+          </a>
+        )
+      }
+    </nav>
+
+    {
+      isLinked('contact') && (
+        <a class="btn btn--primary site-header__cta" href={localizedPath('contact', locale)}>
+          {t('cta.quote', locale)}
+        </a>
+      )
+    }
+  </div>
+</header>
+
+<style>
+  .site-header {
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-bg);
+  }
+
+  .site-header__bar {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    min-height: var(--header-h);
+  }
+
+  .site-header__logo {
+    font-weight: 700;
+    text-decoration: none;
+    margin-right: auto;
+    min-height: var(--tap);
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .lang {
+    display: flex;
+    gap: var(--space-1);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .lang a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: var(--tap);
+    min-height: var(--tap);
+    text-decoration: none;
+    font-weight: 600;
+    color: var(--color-text-muted);
+  }
+
+  .lang a[aria-current='page'] {
+    color: var(--color-text);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  .menu-toggle,
+  .menu-close {
+    min-height: var(--tap);
+    min-width: var(--tap);
+    padding: var(--space-2) var(--space-3);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background: var(--color-bg);
+    color: var(--color-text);
+    font: inherit;
+    cursor: pointer;
+  }
+
+  /* Mobile: the nav is a native popover panel (no JS needed, Esc closes it). */
+  .site-nav {
+    position: fixed;
+    inset: 0 0 0 auto;
+    width: min(20rem, 100vw);
+    height: 100dvh;
+    margin: 0;
+    padding: var(--space-4);
+    border: 0;
+    border-left: 1px solid var(--color-border);
+    background: var(--color-bg);
+    color: var(--color-text);
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .site-nav:popover-open {
+    display: flex;
+  }
+
+  .site-nav::backdrop {
+    background: rgb(0 0 0 / 0.4);
+  }
+
+  .menu-close {
+    align-self: flex-end;
+  }
+
+  .site-header__cta {
+    display: none;
+  }
+
+  .site-nav__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .site-nav__list a {
+    display: flex;
+    align-items: center;
+    min-height: var(--tap);
+    text-decoration: none;
+  }
+
+  .site-nav__list a[aria-current='page'] {
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  @media (min-width: 64rem) {
+    .lang {
+      order: 1;
+    }
+
+    .site-header__cta {
+      order: 2;
+    }
+
+    .menu-toggle,
+    .menu-close {
+      display: none;
+    }
+
+    .site-header__logo {
+      margin-right: 0;
+    }
+
+    .site-nav {
+      display: flex;
+      flex: 1;
+      position: static;
+      width: auto;
+      height: auto;
+      padding: 0;
+      border: 0;
+      flex-direction: row;
+      align-items: center;
+      overflow: visible;
+    }
+
+    .site-nav__list {
+      display: flex;
+      gap: var(--space-4);
+      margin-left: auto;
+    }
+
+    .site-nav__cta {
+      display: none;
+    }
+
+    .site-header__cta {
+      display: inline-flex;
+    }
+  }
+</style>

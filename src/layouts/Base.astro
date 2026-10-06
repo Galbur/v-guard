@@ -1,0 +1,82 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import StickyMobileBar from '../components/StickyMobileBar.astro';
+import { site, LIVE_PAGES } from '../config/site.ts';
+import { t } from '../i18n/index.ts';
+import { hreflang, locales, localizedPath, type Locale, type PageKey } from '../i18n/routes.ts';
+
+interface Props {
+  locale: Locale;
+  /** Undefined for 404 pages: no canonical, no alternates. */
+  pageKey?: PageKey;
+  title: string;
+  /** Rendered only when real copy exists. */
+  description?: string;
+}
+
+const { locale, pageKey, title, description } = Astro.props;
+const origin = Astro.site;
+
+const isLive = pageKey !== undefined && LIVE_PAGES.includes(pageKey);
+const fullTitle = pageKey === 'home' ? site.name : `${title} | ${site.name}`;
+const abs = (path: string) => (origin ? new URL(path, origin).href : null);
+const canonical = pageKey ? abs(localizedPath(pageKey, locale)) : null;
+const alternates =
+  pageKey && origin
+    ? [
+        ...locales.map((l) => ({ hreflang: hreflang[l], href: abs(localizedPath(pageKey, l))! })),
+        { hreflang: 'x-default', href: abs(localizedPath(pageKey, 'nl'))! },
+      ]
+    : [];
+
+// AutoRepair JSON-LD from site.ts; null fields are left out.
+const address = Object.fromEntries(
+  Object.entries({
+    '@type': 'PostalAddress',
+    streetAddress: site.address.street,
+    postalCode: site.address.postalCode,
+    addressLocality: site.address.locality,
+    addressCountry: site.address.country,
+  }).filter(([, v]) => v !== null),
+);
+const sameAs = Object.values(site.socials).filter((v): v is string => v !== null);
+const jsonLd = Object.fromEntries(
+  Object.entries({
+    '@context': 'https://schema.org',
+    '@type': 'AutoRepair',
+    name: site.name,
+    legalName: site.legalName,
+    url: abs('/'),
+    telephone: site.phone,
+    address,
+    openingHours: site.openingHours,
+    sameAs: sameAs.length ? sameAs : null,
+  }).filter(([, v]) => v !== null),
+);
+const jsonLdHtml = JSON.stringify(jsonLd).replace(/</g, '\\u003c');
+---
+
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    {description && <meta name="description" content={description} />}
+    {!isLive && <meta name="robots" content="noindex, nofollow" />}
+    {canonical && <link rel="canonical" href={canonical} />}
+    {alternates.map((a) => <link rel="alternate" hreflang={a.hreflang} href={a.href} />)}
+    <script type="application/ld+json" set:html={jsonLdHtml} />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">{t('a11y.skip', locale)}</a>
+    <Header locale={locale} pageKey={pageKey} />
+    <main id="main" class="container" tabindex="-1">
+      <slot />
+    </main>
+    <Footer locale={locale} />
+    <StickyMobileBar locale={locale} />
+  </body>
+</html>

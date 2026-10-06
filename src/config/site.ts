@@ -1,3 +1,5 @@
+import type { PageKey } from '../i18n/routes.ts';
+
 // Single source for NAP, contact channels and launch state.
 // Every value maps to a Site Truth fact ID. Only ПІДТВЕРДЖЕНО facts get a value;
 // everything else stays null and the components that need it do not render.
@@ -61,7 +63,12 @@ export const SITE_URL: string | null = null;
 // Page keys from src/i18n/routes.ts that are launched. Empty until launch:
 // every page is noindex and the sitemap is empty. While empty, the whole site is
 // a preview and all pages are linked; after launch only live pages are linked.
-export const LIVE_PAGES: string[] = [];
+export const LIVE_PAGES: PageKey[] = [];
+
+/** Whether header, footer and other internal links may point to a page. */
+export function isLinked(key: PageKey): boolean {
+  return LIVE_PAGES.length === 0 || LIVE_PAGES.includes(key);
+}
 
 /** Digits only, for wa.me links. */
 export function waDigits(e164: string): string {
