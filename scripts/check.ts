@@ -2,9 +2,11 @@
 // 1. No placeholders, ⟦⟧ markers, forbidden dashes or forbidden wording anywhere in src/.
 // 2. Every NL page has a UA pair: each route key has both page files, and every
 //    page file is registered in src/i18n/routes.ts.
+// 3. D18: AI illustrations never in the list of work (scripts/illustrations-guard.ts).
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
 import { join, relative, sep } from 'node:path';
 import { locales, routes } from '../src/i18n/routes.ts';
+import { checkIllustrations } from './illustrations-guard.ts';
 
 const root = join(import.meta.dirname, '..');
 const srcDir = join(root, 'src');
@@ -74,8 +76,10 @@ for (const file of walk(pagesDir).filter((f) => isSpecial(f) && !f.includes(`${s
   if (!existsSync(pair)) problems.push(`${relative(root, file)}: missing UA pair ${relative(root, pair)}`);
 }
 
+problems.push(...checkIllustrations(root));
+
 if (problems.length) {
   console.error(`check: ${problems.length} problem(s)\n${problems.map((p) => `  ${p}`).join('\n')}`);
   process.exit(1);
 }
-console.log(`check: ok (${Object.keys(routes).length} route pairs, no placeholders or forbidden dashes in src/)`);
+console.log(`check: ok (${Object.keys(routes).length} route pairs, no placeholders or forbidden dashes in src/, no AI illustrations in the list of work)`);
