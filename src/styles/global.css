@@ -17,6 +17,9 @@ body {
   line-height: var(--leading);
   color: var(--color-text);
   background: var(--color-bg);
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
   padding-bottom: calc(var(--sticky-h) + env(safe-area-inset-bottom));
 }
 
@@ -100,6 +103,7 @@ a {
 }
 
 main {
+  flex: 1;
   padding-block: var(--space-8);
 }
 
