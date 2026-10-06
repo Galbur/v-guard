@@ -1,0 +1,223 @@
+---
+// Real project photos with captions (block specs: car + service + film, up to 12 words).
+// Only entries with a real photo exist (R4); with no entries the block does not render.
+// Optional filter on Projecten: CSS only (radio + :has), no JS.
+import type { CollectionEntry } from 'astro:content';
+import Photo from './Photo.astro';
+import { getService } from '../data/services.ts';
+import { t } from '../i18n/index.ts';
+import type { Locale } from '../i18n/routes.ts';
+
+interface Props {
+  locale: Locale;
+  title?: string;
+  items: CollectionEntry<'projects'>[];
+  /** detail: «car · detail · film» (service pages, home); service: «car · service · detail» (Projecten). */
+  caption?: 'detail' | 'service';
+  more?: { href: string; label: string };
+  filter?: boolean;
+  /** Projecten has the H1 above; no own section heading. */
+  headingLevel?: 2 | 'none';
+}
+
+const { locale, title, items, caption = 'detail', more, filter = false, headingLevel = 2 } = Astro.props;
+
+const dienst: Record<string, Record<Locale, string>> = {
+  ppf: { nl: 'PPF', uk: 'PPF' },
+  'ramen-blinderen': { nl: 'ramen blinderen', uk: 'тонування' },
+  'car-wrapping': { nl: 'car wrapping', uk: 'car wrapping' },
+};
+
+const view = items.map((entry) => {
+  const p = entry.data;
+  const car = p.car[locale];
+  const detail = p.detail[locale];
+  const parts =
+    caption === 'service'
+      ? [car, getService(p.service)?.label[locale], detail]
+      : [car, detail || getService(p.service)?.label[locale].toLowerCase(), p.film];
+  return {
+    id: entry.id,
+    service: p.service,
+    image: p.image,
+    position: p.position,
+    caption: parts.filter(Boolean).join(' · '),
+    alt:
+      locale === 'nl'
+        ? `${car} met ${dienst[p.service].nl} door V Guard Studio in Vroomshoop`
+        : `${car}: ${dienst[p.service].uk} від V Guard Studio у Vroomshoop`,
+  };
+});
+const servicesPresent = [...new Set(view.map((v) => v.service))];
+const filters = filter && servicesPresent.length > 1 ? servicesPresent : [];
+---
+
+{
+  view.length > 0 && (
+    <section class:list={['gallery container', headingLevel === 'none' ? 'gallery--bare' : 'section']}>
+      {headingLevel !== 'none' && title && (
+        <div class="gallery__head">
+          <h2 class="h2">{title}</h2>
+          {more && (
+            <a class="btn btn--ghost gallery__more gallery__more--top" href={more.href}>
+              {more.label}
+            </a>
+          )}
+        </div>
+      )}
+      {filters.length > 0 && (
+        <fieldset class="gallery__filter">
+          <legend class="visually-hidden">{t('gallery.filter', locale)}</legend>
+          <input class="visually-hidden" type="radio" name="project-filter" id="pf-all" value="all" checked />
+          <label class="gallery__chip" for="pf-all">
+            {t('gallery.all', locale)}
+          </label>
+          {filters.map((s) => (
+            <>
+              <input class="visually-hidden" type="radio" name="project-filter" id={`pf-${s}`} value={s} />
+              <label class="gallery__chip" for={`pf-${s}`}>
+                {getService(s)?.label[locale]}
+              </label>
+            </>
+          ))}
+        </fieldset>
+      )}
+      <ul class="gallery__grid" role="list">
+        {view.map((item) => (
+          <li data-service={item.service}>
+            <figure>
+              <Photo
+                src={item.image}
+                alt={item.alt}
+                position={item.position}
+                ratio="4/3"
+                class="gallery__img"
+                widths={[360, 540, 720]}
+                sizes="(min-width: 64rem) 384px, calc(50vw - 22px)"
+              />
+              <figcaption>{item.caption}</figcaption>
+            </figure>
+          </li>
+        ))}
+      </ul>
+      {more && (
+        <a class="btn btn--ghost btn--block gallery__more gallery__more--bottom" href={more.href}>
+          {more.label}
+        </a>
+      )}
+    </section>
+  )
+}
+
+<style>
+  .gallery__head {
+    margin-bottom: 20px;
+  }
+
+  .gallery--bare {
+    padding-top: 28px;
+  }
+
+  .gallery__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px 12px;
+    list-style: none;
+    padding: 0;
+  }
+
+  :global(.gallery__img) {
+    border-radius: var(--r-btn);
+  }
+
+  figcaption {
+    margin-top: 6px;
+    font-size: 12px;
+    line-height: 1.4;
+    color: var(--c-muted);
+  }
+
+  .gallery__more--top {
+    display: none;
+  }
+
+  .gallery__more--bottom {
+    margin-top: 20px;
+  }
+
+  .gallery__filter {
+    display: flex;
+    gap: 8px;
+    margin: 0 calc(-1 * var(--gutter)) 24px;
+    padding: 0 var(--gutter);
+    border: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .gallery__chip {
+    display: inline-flex;
+    align-items: center;
+    flex: none;
+    height: 44px;
+    padding: 0 14px;
+    border: 1px solid var(--c-border-dark);
+    border-radius: var(--r-pill);
+    font-size: 13px;
+    font-weight: 500;
+    white-space: nowrap;
+    cursor: pointer;
+  }
+
+  .gallery__filter input:checked + .gallery__chip {
+    background: var(--c-gold);
+    border-color: var(--c-gold);
+    color: var(--c-black);
+    font-weight: 600;
+  }
+
+  .gallery__filter input:focus-visible + .gallery__chip {
+    outline: var(--focus);
+    outline-offset: var(--focus-offset);
+  }
+
+  .gallery:has(#pf-ppf:checked) li:not([data-service='ppf']),
+  .gallery:has(#pf-ramen-blinderen:checked) li:not([data-service='ramen-blinderen']),
+  .gallery:has(#pf-car-wrapping:checked) li:not([data-service='car-wrapping']) {
+    display: none;
+  }
+
+  @media (min-width: 64rem) {
+    .gallery__head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      margin-bottom: 32px;
+    }
+
+    .gallery__more--top {
+      display: inline-flex;
+      min-height: 46px;
+    }
+
+    .gallery__more--bottom {
+      display: none;
+    }
+
+    .gallery__grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 32px 24px;
+    }
+
+    figcaption {
+      margin-top: 10px;
+      font-size: 14px;
+    }
+
+    .gallery__filter {
+      flex-wrap: wrap;
+      margin: 0 0 32px;
+      padding: 0;
+    }
+  }
+</style>

@@ -1,0 +1,141 @@
+---
+// «Wat we doen» on Home: PPF, ramen blinderen, car wrapping (block specs order).
+// A card without a real photo has no image slot (R4).
+import Photo from './Photo.astro';
+import { fromLabel, isPriceShown, serviceFrom, type ServiceSlug } from '../data/services.ts';
+import type { Locale } from '../i18n/routes.ts';
+import { photo } from '../lib/photos.ts';
+
+interface Card {
+  slug: ServiceSlug;
+  title: string;
+  text: string;
+  more: string;
+  href: string;
+  image?: { file: string; position: string; alt: string };
+}
+
+interface Props {
+  locale: Locale;
+  title: string;
+  cards: Card[];
+}
+
+const { locale, title, cards } = Astro.props;
+---
+
+<section class="section container">
+  <h2 class="h2 section-title">{title}</h2>
+  <div class="cards">
+    {
+      cards.map((card) => {
+        const price = serviceFrom[card.slug];
+        return (
+          <article class="card surface-light">
+            {card.image && (
+              <Photo
+                src={photo(card.image.file)}
+                alt={card.image.alt}
+                position={card.image.position}
+                ratio="4/3"
+                sizes="(min-width: 64rem) 400px, calc(100vw - 32px)"
+              />
+            )}
+            <div class="card__body">
+              <h3 class="card__title">{card.title}</h3>
+              <p class="card__text">{card.text}</p>
+              {isPriceShown(price) && <p class="card__price">{fromLabel(price, locale)}</p>}
+              <a class="btn btn--ghost-light btn--block card__more" href={card.href}>
+                {card.more}
+              </a>
+            </div>
+          </article>
+        );
+      })
+    }
+  </div>
+</section>
+
+<style>
+  .section-title {
+    margin-bottom: 20px;
+  }
+
+  .cards {
+    display: grid;
+    gap: 20px;
+  }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .card__body {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 8px;
+    padding: 16px 16px 18px;
+  }
+
+  .card__title {
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  .card__text {
+    font-size: 14px;
+    line-height: 1.45;
+    color: var(--c-muted-light);
+  }
+
+  .card__price {
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  .card__more {
+    margin-top: 6px;
+    min-height: 44px;
+    font-size: 14px;
+  }
+
+  @media (min-width: 48rem) {
+    .cards {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--grid-gap);
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .section-title {
+      margin-bottom: 32px;
+    }
+
+    .card__body {
+      gap: 10px;
+      padding: 22px 22px 24px;
+    }
+
+    .card__title {
+      font-size: 22px;
+    }
+
+    .card__text {
+      flex: 1;
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    .card__price {
+      font-size: 17px;
+    }
+
+    .card__more {
+      min-height: 46px;
+      font-size: 15px;
+    }
+  }
+</style>

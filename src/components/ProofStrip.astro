@@ -1,0 +1,44 @@
+---
+// 2-3 trust chips under the hero. On 375 they scroll sideways in their own container (R6).
+interface Props {
+  chips: string[];
+  label?: string;
+}
+
+const { chips, label } = Astro.props;
+---
+
+{
+  chips.length >= 2 && (
+    <ul class="proof" aria-label={label}>
+      {chips.map((c) => (
+        <li class="chip">{c}</li>
+      ))}
+    </ul>
+  )
+}
+
+<style>
+  .proof {
+    display: flex;
+    gap: 8px;
+    margin: 4px calc(-1 * var(--gutter)) 0;
+    padding: 0 var(--gutter);
+    list-style: none;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .proof::-webkit-scrollbar {
+    display: none;
+  }
+
+  @media (min-width: 64rem) {
+    .proof {
+      flex-wrap: wrap;
+      margin: 8px 0 0;
+      padding: 0;
+      overflow: visible;
+    }
+  }
+</style>

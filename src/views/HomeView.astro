@@ -1,0 +1,76 @@
+---
+// Home (/ and /uk/): mockup «VG Site 01 Home», Blueprint v1.2 section 3.
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import ServiceCards from '../components/ServiceCards.astro';
+import ProcessSteps from '../components/ProcessSteps.astro';
+import ProjectGallery from '../components/ProjectGallery.astro';
+import TrustBlock from '../components/TrustBlock.astro';
+import ReviewsBlock from '../components/ReviewsBlock.astro';
+import QuoteEntry from '../components/QuoteEntry.astro';
+import ContactBlock from '../components/ContactBlock.astro';
+import { home } from '../copy/home.ts';
+import { prepSteps, trustItems } from '../copy/shared.ts';
+import { t } from '../i18n/index.ts';
+import { localizedPath, type Locale } from '../i18n/routes.ts';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const c = home[locale];
+const alt = (car: string, nl: string, uk: string) =>
+  locale === 'nl' ? `${car} met ${nl} door V Guard Studio in Vroomshoop` : `${car}: ${uk} від V Guard Studio у Vroomshoop`;
+const recent = (await getCollection('projects', (p) => p.data.home)).sort((a, b) => a.data.order - b.data.order).slice(0, 6);
+---
+
+<Base locale={locale} pageKey="home" title={c.title} description={c.description}>
+  <Hero
+    locale={locale}
+    h1={c.h1}
+    sub={c.sub}
+    chips={c.chips}
+    align="right"
+    photos={{ mobile: { file: 'bmw-34-p.png', position: 'center 55%' }, desktop: { file: 'suv-blue-1.jpg', position: '35% 55%' } }}
+  />
+  <ServiceCards
+    locale={locale}
+    title={c.servicesTitle}
+    cards={[
+      { slug: 'ppf', ...c.cards.ppf, href: localizedPath('ppf', locale) },
+      {
+        slug: 'ramen-blinderen',
+        ...c.cards['ramen-blinderen'],
+        href: localizedPath('tint', locale),
+        image: { file: 'passat-rear-1.jpg', position: 'center 60%', alt: alt('Volkswagen Passat', 'ramen blinderen', 'тонування') },
+      },
+      {
+        slug: 'car-wrapping',
+        ...c.cards['car-wrapping'],
+        href: localizedPath('wrap', locale),
+        image: { file: 'bmw-front-p.png', position: 'center 58%', alt: alt('BMW 3 Serie', 'car wrapping', 'car wrapping') },
+      },
+    ]}
+  />
+  <ProcessSteps
+    title={c.processTitle}
+    sub={c.processSub}
+    steps={prepSteps[locale]}
+    image={{ file: 'hex-van-l2.jpg', alt: alt('Ford Transit Custom', 'ramen blinderen', 'тонування') }}
+  />
+  <ProjectGallery
+    locale={locale}
+    title={c.recentTitle}
+    items={recent}
+    more={{ href: localizedPath('projects', locale), label: t('cta.allProjects', locale) }}
+  />
+  <TrustBlock title={c.whyTitle} items={trustItems[locale]} />
+  <ReviewsBlock locale={locale} title={c.reviewsTitle} linkLabel={c.reviewsLink} />
+  <QuoteEntry locale={locale} title={c.quoteTitle} text={c.quoteText} />
+  <ContactBlock
+    locale={locale}
+    image={{ file: 'passat-rear-1.jpg', position: 'center 40%', alt: alt('Volkswagen Passat', 'ramen blinderen', 'тонування') }}
+  />
+</Base>

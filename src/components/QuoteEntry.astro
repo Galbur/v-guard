@@ -1,0 +1,100 @@
+---
+// «Waarvoor wil je een offerte?» on Home: four buttons into the form with ?service=.
+import { adviceOption, services } from '../data/services.ts';
+import { localizedPath, type Locale } from '../i18n/routes.ts';
+
+interface Props {
+  locale: Locale;
+  title: string;
+  text: string;
+}
+
+const { locale, title, text } = Astro.props;
+const contact = localizedPath('contact', locale);
+const buttons = [
+  ...services.map((s) => ({ id: s.slug, label: s.label[locale] })),
+  { id: adviceOption.id, label: adviceOption.label[locale] },
+];
+---
+
+<section class="section container">
+  <div class="entry panel">
+    <div>
+      <h2 class="entry__title">{title}</h2>
+      <p class="entry__text">{text}</p>
+    </div>
+    <div class="entry__buttons">
+      {
+        buttons.map((b) => (
+          <a class="btn btn--ghost" href={`${contact}?service=${b.id}`}>
+            {b.label}
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .entry {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 24px 16px;
+  }
+
+  .entry__title {
+    font-size: 22px;
+    line-height: 1.2;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  .entry__text {
+    margin-top: 8px;
+    font-size: 14px;
+    line-height: 1.45;
+    color: var(--c-muted);
+  }
+
+  .entry__buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .entry__buttons .btn {
+    padding: 0 8px;
+    font-size: 14px;
+  }
+
+  @media (min-width: 64rem) {
+    .entry {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 48px;
+      align-items: center;
+      padding: 48px;
+    }
+
+    .entry__title {
+      font-size: 32px;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+    }
+
+    .entry__text {
+      margin-top: 12px;
+      font-size: 16px;
+    }
+
+    .entry__buttons {
+      gap: 12px;
+    }
+
+    .entry__buttons .btn {
+      min-height: 52px;
+      font-size: 15px;
+    }
+  }
+</style>

@@ -1,0 +1,120 @@
+---
+// Google reviews: quote cards without star widgets, plus a link to all reviews.
+// Values come from site.ts (status default until real reviews exist, owner decision R1).
+import { links, reviews } from '../config/site.ts';
+import type { Locale } from '../i18n/routes.ts';
+
+interface Props {
+  locale: Locale;
+  title: string;
+  linkLabel: string;
+}
+
+const { locale, title, linkLabel } = Astro.props;
+const items = reviews.value;
+---
+
+{
+  items.length > 0 && (
+    <section class="section container rv">
+      <h2 class="h2 rv__title">{title}</h2>
+      <a class="rv__link" href={links.reviews.value} target="_blank" rel="noopener">
+        {linkLabel} <span aria-hidden="true">→</span>
+      </a>
+      <ul class="rv__list" role="list">
+        {items.map((r) => (
+          <li class="rv__item surface-light">
+            <blockquote>
+              <p>«{r.quote[locale]}»</p>
+            </blockquote>
+            <p class="rv__who">{r.author}</p>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )
+}
+
+<style>
+  .rv {
+    display: grid;
+    grid-template-areas: 'title' 'list' 'link';
+  }
+
+  .rv__title {
+    grid-area: title;
+    margin-bottom: 20px;
+  }
+
+  .rv__list {
+    grid-area: list;
+    display: grid;
+    gap: 12px;
+    list-style: none;
+    padding: 0;
+  }
+
+  .rv__link {
+    grid-area: link;
+    justify-self: start;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 44px;
+    margin-top: 4px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--c-gold);
+  }
+
+  .rv__item {
+    padding: 18px;
+  }
+
+  blockquote {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.45;
+    font-weight: 500;
+  }
+
+  .rv__who {
+    margin-top: 10px;
+    font-size: 13px;
+    color: var(--c-muted-light);
+  }
+
+  @media (min-width: 64rem) {
+    .rv {
+      grid-template-areas: 'title link' 'list list';
+      align-items: end;
+    }
+
+    .rv__title {
+      margin-bottom: 32px;
+    }
+
+    .rv__link {
+      justify-self: end;
+      margin: 0 0 32px;
+    }
+
+    .rv__list {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .rv__item {
+      padding: 28px;
+    }
+
+    blockquote {
+      font-size: 19px;
+    }
+
+    .rv__who {
+      margin-top: 16px;
+      font-size: 14px;
+    }
+  }
+</style>

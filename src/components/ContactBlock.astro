@@ -1,0 +1,101 @@
+---
+// «Studio in Vroomshoop»: NAP from site.ts, route link (no map embed, D7), WhatsApp.
+import Photo from './Photo.astro';
+import { fullAddress, links, site, whatsappUrl } from '../config/site.ts';
+import { headings } from '../copy/shared.ts';
+import { t } from '../i18n/index.ts';
+import type { Locale } from '../i18n/routes.ts';
+import { photo } from '../lib/photos.ts';
+
+interface Props {
+  locale: Locale;
+  /** Photo on the right at 1280 (home mockup). */
+  image?: { file: string; position: string; alt: string };
+}
+
+const { locale, image } = Astro.props;
+---
+
+<section class="section container studio">
+  <div class="studio__text">
+    <h2 class="h2">{headings.studio[locale]}</h2>
+    <address class="studio__nap">
+      {fullAddress}<br />
+      <a href={`tel:${site.phone.value.e164}`}>{site.phone.value.display}</a><br />
+      {site.hours.value.label[locale]}
+    </address>
+    <div class="studio__actions">
+      <a class="btn btn--primary" href={links.route} target="_blank" rel="noopener">{t('cta.route', locale)}</a>
+      <a class="btn btn--ghost" href={whatsappUrl()} target="_blank" rel="noopener">{t('cta.whatsapp', locale)}</a>
+    </div>
+  </div>
+  {
+    image && (
+      <Photo
+        src={photo(image.file)}
+        alt={image.alt}
+        position={image.position}
+        ratio="16/9"
+        class="studio__img"
+        sizes="576px"
+      />
+    )
+  }
+</section>
+
+<style>
+  .studio__text {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .studio__nap {
+    font-style: normal;
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--c-text-soft);
+  }
+
+  .studio__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 8px;
+  }
+
+  :global(.studio__img) {
+    display: none;
+    border-radius: var(--r-btn);
+  }
+
+  @media (min-width: 64rem) {
+    .studio {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .studio__text {
+      gap: 16px;
+    }
+
+    .studio__nap {
+      font-size: 17px;
+    }
+
+    .studio__actions {
+      flex-direction: row;
+      gap: 12px;
+    }
+
+    .studio__actions .btn {
+      padding: 0 24px;
+    }
+
+    :global(.studio__img) {
+      display: block;
+    }
+  }
+</style>

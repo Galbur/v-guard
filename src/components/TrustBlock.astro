@@ -1,0 +1,76 @@
+---
+// Warranty, certificate, brands as text (F6-F9). Brands without logos.
+import Icon from './Icon.astro';
+import type { TrustIcon } from '../copy/shared.ts';
+
+interface Props {
+  title: string;
+  items: { icon: TrustIcon; text: string }[];
+}
+
+const { title, items } = Astro.props;
+---
+
+<section class="section container">
+  <h2 class="h2 trust__title">{title}</h2>
+  <ul class="trust" role="list">
+    {
+      items.map((item) => (
+        <li class="trust__item panel">
+          <Icon name={item.icon} size={24} class="trust__icon" />
+          <span>{item.text}</span>
+        </li>
+      ))
+    }
+  </ul>
+</section>
+
+<style>
+  .trust__title {
+    margin-bottom: 20px;
+  }
+
+  .trust {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    list-style: none;
+    padding: 0;
+  }
+
+  .trust__item {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px;
+    font-size: 14px;
+    line-height: 1.4;
+    font-weight: 500;
+  }
+
+  :global(.trust__icon) {
+    color: var(--c-gold);
+  }
+
+  @media (min-width: 64rem) {
+    .trust__title {
+      margin-bottom: 32px;
+    }
+
+    .trust {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .trust__item {
+      gap: 16px;
+      padding: 24px;
+      font-size: 16px;
+    }
+
+    :global(.trust__icon) {
+      width: 28px;
+      height: 28px;
+    }
+  }
+</style>

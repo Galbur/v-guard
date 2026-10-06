@@ -1,0 +1,163 @@
+---
+// Key diagram «quality through process»: numbered list, vertical on 375, columns on 1280.
+// The ordered list is the text alternative (block specs).
+import Photo from './Photo.astro';
+import { photo } from '../lib/photos.ts';
+import type { Step } from '../copy/shared.ts';
+
+interface Props {
+  title: string;
+  sub?: string;
+  steps: Step[];
+  image?: { file: string; alt: string };
+}
+
+const { title, sub, steps, image } = Astro.props;
+---
+
+<section class="section container process" style={`--cols:${steps.length}`}>
+  <div class:list={['process__head', { 'process__head--media': image }]}>
+    <div>
+      <h2 class="h2">{title}</h2>
+      {sub && <p class="process__sub">{sub}</p>}
+    </div>
+    {
+      image && (
+        <Photo
+          src={photo(image.file)}
+          alt={image.alt}
+          ratio="16/9"
+          class="process__img"
+          sizes="(min-width: 64rem) 576px, calc(100vw - 32px)"
+        />
+      )
+    }
+  </div>
+  <ol class="process__list">
+    {
+      steps.map((step, i) => (
+        <li class="process__step">
+          <span class="process__n" aria-hidden="true">
+            {String(i + 1).padStart(2, '0')}
+          </span>
+          <div>
+            <h3 class="process__title">{step.title}</h3>
+            <p class="process__text">{step.text}</p>
+          </div>
+        </li>
+      ))
+    }
+  </ol>
+</section>
+
+<style>
+  .process__head {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  .process__sub {
+    margin-top: 8px;
+    font-size: 15px;
+    line-height: 1.45;
+    color: var(--c-muted);
+  }
+
+  :global(.process__img) {
+    margin: 12px 0 8px;
+    border-radius: var(--r-btn);
+  }
+
+  .process__list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .process__step {
+    display: grid;
+    grid-template-columns: 36px 1fr;
+    gap: 14px;
+    padding: 16px 0;
+    border-top: 1px solid var(--c-line-dark);
+  }
+
+  .process__n {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--c-gold);
+    border-radius: var(--r-pill);
+    color: var(--c-gold);
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .process__title {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+
+  .process__text {
+    margin-top: 4px;
+    font-size: 14px;
+    line-height: 1.45;
+    color: var(--c-muted);
+  }
+
+  @media (min-width: 64rem) {
+    .process__head {
+      margin-bottom: 40px;
+    }
+
+    .process__head--media {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: end;
+    }
+
+    .process__sub {
+      margin-top: 12px;
+      font-size: 17px;
+    }
+
+    :global(.process__img) {
+      margin: 0;
+    }
+
+    .process__list {
+      display: grid;
+      grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .process__step {
+      display: block;
+      padding: 20px 0 0;
+      border-top-color: var(--c-gold);
+    }
+
+    .process__n {
+      display: block;
+      width: auto;
+      height: auto;
+      border: 0;
+      letter-spacing: 0.08em;
+    }
+
+    .process__title {
+      margin-top: 12px;
+      font-size: 19px;
+    }
+
+    .process__text {
+      margin-top: 8px;
+      line-height: 1.5;
+    }
+  }
+</style>

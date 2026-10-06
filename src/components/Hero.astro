@@ -1,0 +1,208 @@
+---
+// Hero with a real V Guard photo under a dark gradient (mockups 1, 3, 4, 5). Separate crops
+// for 375 (portrait) and 1280 (landscape); never lazy. Primary: quote form with ?service=,
+// secondary: WhatsApp.
+import { getImage } from 'astro:assets';
+import ProofStrip from './ProofStrip.astro';
+import { isLinked, whatsappUrl } from '../config/site.ts';
+import { t } from '../i18n/index.ts';
+import { localizedPath, type Locale } from '../i18n/routes.ts';
+import { photo, type HeroPhotos } from '../lib/photos.ts';
+
+interface Props {
+  locale: Locale;
+  h1: string;
+  sub: string;
+  chips: string[];
+  photos: HeroPhotos;
+  /** Text block on the right at 1280 (home) or left (service pages). */
+  align?: 'left' | 'right';
+  /** Smaller H1 for long titles (28/50 px). */
+  long?: boolean;
+  /** Preselect for the quote form. */
+  service?: string;
+}
+
+const { locale, h1, sub, chips, photos, align = 'left', long = false, service } = Astro.props;
+
+async function srcset(file: string, widths: number[], format: 'avif' | 'webp') {
+  const src = photo(file);
+  const usable = widths.filter((w) => w <= src.width);
+  const images = await Promise.all(usable.map((width) => getImage({ src, width, format })));
+  return images.map((img) => `${img.src} ${img.attributes.width}w`).join(', ');
+}
+
+const mobileWidths = [375, 750, 1125];
+const desktopWidths = [1024, 1280, 1600];
+const sources = {
+  mobileAvif: await srcset(photos.mobile.file, mobileWidths, 'avif'),
+  mobileWebp: await srcset(photos.mobile.file, mobileWidths, 'webp'),
+  desktopAvif: await srcset(photos.desktop.file, desktopWidths, 'avif'),
+  desktopWebp: await srcset(photos.desktop.file, desktopWidths, 'webp'),
+};
+const fallback = await getImage({ src: photo(photos.mobile.file), width: 750, format: 'webp' });
+const quoteHref = `${localizedPath('contact', locale)}${service ? `?service=${service}` : ''}`;
+const mq = '(min-width: 64rem)';
+---
+
+<section class:list={['hero', `hero--${align}`]} style={`--pos-m:${photos.mobile.position};--pos-d:${photos.desktop.position}`}>
+  <picture class="hero__media">
+    <source media={mq} type="image/avif" srcset={sources.desktopAvif} sizes="100vw" />
+    <source media={mq} type="image/webp" srcset={sources.desktopWebp} sizes="100vw" />
+    <source type="image/avif" srcset={sources.mobileAvif} sizes="100vw" />
+    <source type="image/webp" srcset={sources.mobileWebp} sizes="100vw" />
+    <img
+      src={fallback.src}
+      width={fallback.attributes.width}
+      height={fallback.attributes.height}
+      alt=""
+      fetchpriority="high"
+      loading="eager"
+      decoding="async"
+    />
+  </picture>
+  <div class="hero__shade" aria-hidden="true"></div>
+  <div class="hero__content">
+    <h1 class:list={['h1', { 'h1--long': long }]}>{h1}</h1>
+    <p class="lead">{sub}</p>
+    <div class="hero__actions">
+      {
+        isLinked('contact') && (
+          <a class="btn btn--primary btn--hero" href={quoteHref}>
+            {t('cta.quote', locale)}
+          </a>
+        )
+      }
+      <a class="btn btn--ghost btn--hero" href={whatsappUrl()} target="_blank" rel="noopener">
+        {t('cta.whatsapp', locale)}
+      </a>
+    </div>
+    <ProofStrip chips={chips} />
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    min-height: max(520px, calc(100svh - var(--header-h) - var(--sticky-h)));
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  .hero__media,
+  .hero__media img,
+  .hero__shade {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .hero__media {
+    z-index: -2;
+  }
+
+  .hero__media img {
+    object-fit: cover;
+    object-position: var(--pos-m);
+  }
+
+  .hero__shade {
+    z-index: -1;
+    background: linear-gradient(
+      180deg,
+      rgb(var(--c-overlay) / 0.1) 0%,
+      rgb(var(--c-overlay) / 0.25) 35%,
+      rgb(var(--c-overlay) / 0.9) 62%,
+      var(--c-black) 100%
+    );
+  }
+
+  .hero__content {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    padding: 0 var(--gutter) 16px;
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 4px;
+  }
+
+  @media (min-width: 64rem) {
+    .hero {
+      min-height: 720px;
+      align-items: flex-end;
+    }
+
+    .hero__media img {
+      object-position: var(--pos-d);
+    }
+
+    .hero--left .hero__shade {
+      background:
+        linear-gradient(
+          180deg,
+          rgb(var(--c-overlay) / 0.3) 0%,
+          rgb(var(--c-overlay) / 0) 30%,
+          rgb(var(--c-overlay) / 0.6) 80%,
+          var(--c-black) 100%
+        ),
+        linear-gradient(
+          90deg,
+          rgb(var(--c-overlay) / 0.94) 0%,
+          rgb(var(--c-overlay) / 0.8) 36%,
+          rgb(var(--c-overlay) / 0.2) 68%,
+          rgb(var(--c-overlay) / 0) 100%
+        );
+    }
+
+    .hero--right .hero__shade {
+      background:
+        linear-gradient(
+          180deg,
+          rgb(var(--c-overlay) / 0.2) 0%,
+          rgb(var(--c-overlay) / 0) 30%,
+          rgb(var(--c-overlay) / 0.6) 80%,
+          var(--c-black) 100%
+        ),
+        linear-gradient(
+          270deg,
+          rgb(var(--c-overlay) / 0.92) 0%,
+          rgb(var(--c-overlay) / 0.8) 32%,
+          rgb(var(--c-overlay) / 0.2) 60%,
+          rgb(var(--c-overlay) / 0) 100%
+        );
+    }
+
+    .hero__content {
+      gap: 20px;
+      max-width: var(--container);
+      margin-inline: auto;
+      padding: 0 40px 80px;
+    }
+
+    .hero__content > * {
+      max-width: 640px;
+    }
+
+    .hero--right .hero__content {
+      align-items: flex-end;
+    }
+
+    .hero--right .hero__content > * {
+      width: 600px;
+    }
+
+    .hero__actions {
+      flex-direction: row;
+      gap: 12px;
+    }
+  }
+</style>
