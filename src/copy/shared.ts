@@ -23,7 +23,7 @@ const filmYears = trust.filmWarrantyYears.value;
 const join = (list: readonly string[], last: string) =>
   list.length < 2 ? list.join('') : `${list.slice(0, -1).join(', ')} ${last} ${list[list.length - 1]}`;
 
-/** PPF and wrap preparation, Site Truth F5 (content confirmed, wording by V Guard). */
+/** PPF and wrap preparation, Site Truth F5: content ПІДТВЕРДЖЕНО; wording still to be agreed with V Guard. */
 export const prepSteps: Record<Locale, Step[]> = {
   nl: [
     { title: 'Wassen', text: 'Grondige reiniging van de auto in meerdere fasen.' },

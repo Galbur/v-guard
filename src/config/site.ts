@@ -59,8 +59,8 @@ export const site = {
     instagram: null as string | null,
     facebook: null as string | null,
   },
-  // Not from the design prompt: proposed by the developer for the privacy page, V Guard to confirm.
-  retentionMonths: fact(12, 'default', 'термін зберігання заявок; запропоновано розробником, V Guard підтверджує'),
+  // Not from the design prompt: proposed by the developer for the privacy page, to be checked with V Guard.
+  retentionMonths: fact(12, 'default', 'термін зберігання заявок; запропоновано розробником, перевірити з V Guard'),
   responseTime: fact<Localized>(
     { nl: 'binnen 1 werkdag', uk: 'протягом робочого дня' },
     'default',

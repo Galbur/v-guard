@@ -23,8 +23,8 @@ const projects = defineCollection({
       home: z.boolean().default(false),
       order: z.number(),
       date: z.coerce.date().optional(),
-      // Caption status for check:defaults (R1).
-      status: z.enum(['confirmed', 'default']).default('confirmed'),
+      // Caption status for check:defaults (R1). Never confirmed by default.
+      status: z.enum(['confirmed', 'default']).default('default'),
       hint: z.string().optional(),
     }),
 });

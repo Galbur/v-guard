@@ -6,7 +6,7 @@ position: "22% 48%"
 detail: { nl: "spiegelkappen", uk: "ковпаки дзеркал" }
 home: false
 order: 6
-# Caption from the approved mockup; real car, film and shade still to confirm with V Guard.
+# Caption from the mockups in docs/design (the client has not seen them yet); car, film and shade to be checked with V Guard.
 status: default
 hint: "реальні авто і плівки з проєктів"
 ---
