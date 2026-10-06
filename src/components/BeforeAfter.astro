@@ -24,7 +24,7 @@ const sizes = '(min-width: 64rem) 960px, calc(100vw - 32px)';
 
 <section class="section container">
   <h2 class="h2 ba__title">{title}</h2>
-  <figure class="ba" style="--pos:50">
+  <figure class="ba">
     <div class="ba__frame">
       <div class="ba__pane ba__pane--before">
         <Photo src={before} alt={alt.before} position={position} ratio="3/2" sizes={sizes} widths={[480, 720, 960, 1280]} />
@@ -59,6 +59,11 @@ const sizes = '(min-width: 64rem) 960px, calc(100vw - 32px)';
 </script>
 
 <style>
+  /* Start position of the slider; JS updates it via CSSOM (allowed by the CSP, style="" is not). */
+  .ba {
+    --pos: 50;
+  }
+
   .ba__title {
     margin-bottom: 20px;
   }

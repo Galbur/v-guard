@@ -39,13 +39,13 @@ export const wrapCopy = {
   },
   uk: {
     title: 'Car wrapping у Vroomshoop | V Guard Studio',
-    description: `Car wrapping у Vroomshoop: повний wrap від ${full}, дах, ковпаки дзеркал і chrome delete. Подивіться кольори, фініші і наші роботи.`,
+    description: `Car wrapping у Vroomshoop: повний wrap від ${full}, дах, корпуси дзеркал і chrome delete. Подивіться кольори, фініші і наші роботи.`,
     h1: 'Car wrapping у Vroomshoop, повністю чи частково',
     sub: 'Новий колір або фініш плівкою, у нашій студії.',
     chips: [chipWarranty.uk, `Повний wrap від ${full}`, chipPrep.uk],
     answerTitle: 'Що таке car wrapping',
     answer:
-      'Car wrapping це обклеювання лаку кольоровою плівкою. Можна обрати повний wrap або лише частини авто, як-от дах, ковпаки дзеркал чи хром. V Guard Studio робить wrap у Vroomshoop, Твенте.',
+      'Car wrapping це обклеювання лаку кольоровою плівкою. Можна обрати повний wrap або лише частини авто, як-от дах, корпуси дзеркал чи хром. V Guard Studio робить wrap у Vroomshoop, Твенте.',
     cardsTitle: 'Повністю чи частково',
     finishesLabel: 'Фініші:',
     cardsNote: 'Ціни з BTW. Остаточна ціна залежить від авто, плівки і деталей.',

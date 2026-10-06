@@ -4,7 +4,7 @@ Local car studio in Vroomshoop (NL): PPF, ramen blinderen, car wrapping. Small, 
 
 ## Canon
 
-Facts, prices, decisions: `docs/canon/vguard-site-truth-vN.md` (highest N). Structure and blocks: `docs/canon/vguard-site-blueprint-vN.md`. Page blueprints: `docs/blueprints/`. If a prompt conflicts with the canon, stop and report. Never invent a fact, price, warranty, brand or address.
+Facts, prices, decisions: `docs/canon/vguard-site-truth-vN.md` (highest N, currently `vguard-site-truth-v6.md`). Structure and blocks: `docs/canon/vguard-site-blueprint-vN.md`. Page blueprints: `docs/blueprints/`. If a prompt conflicts with the canon, stop and report. Never invent a fact, price, warranty, brand or address.
 
 ## Stack
 
@@ -44,6 +44,7 @@ docs/canon/, docs/blueprints/, docs/prompts/
 9. Tint legality text only from Site Truth F10 and F10b.
 10. Accessibility: one H1, labelled form fields, focus visible, AA contrast, tap targets at least 44 px.
 11. Preview builds are `noindex` until launch; `LIVE_PAGES` controls sitemap and links.
+12. AI-ілюстрації лише з src/assets/illustrations/, ніколи в src/content/projects/ чи ProjectGallery (D18). `npm run check` fails on any such use.
 
 ## Lead flow
 
@@ -56,3 +57,11 @@ Form `name="offerte"` with `data-netlify="true"`, `netlify-honeypot="bot-field"`
 - Commit messages in English, imperative.
 - Never push, open a PR or deploy without an explicit command.
 - Report: what changed, commits, QA results, screenshots at 375 and 1280, «Не виконано / потрібне рішення».
+
+## Git і деплой
+
+1. Never commit or push directly to `main`. `main` changes only by merging a PR, and every merge deploys to production on Netlify right away.
+2. Every task: a new branch from a fresh `origin/main`, named after its content (for example `fix-alt-hero`, `tint-page-v2`); commits go there.
+3. Push the branch and open a PR into `main` only on Oleksii's command. Netlify builds a Deploy Preview for the PR by itself; give its link in the report.
+4. Merge a PR only on a separate command from Oleksii, after he has reviewed the Deploy Preview.
+5. After the merge: align local `main` with `origin/main`, delete the branch locally and on origin.

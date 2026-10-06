@@ -1,6 +1,7 @@
 ---
 // Key diagram «quality through process»: numbered list, vertical on 375, columns on 1280.
 // The ordered list is the text alternative (block specs).
+// Optional photo per step (PPF): decorative illustrations, alt="", thumbnail on 375, on top at 1280.
 import Photo from './Photo.astro';
 import { photo } from '../lib/photos.ts';
 import type { Step } from '../copy/shared.ts';
@@ -10,12 +11,14 @@ interface Props {
   sub?: string;
   steps: Step[];
   image?: { file: string; alt: string };
+  /** File per step, same order as steps (src/assets/photos or src/assets/illustrations). */
+  photos?: string[];
 }
 
-const { title, sub, steps, image } = Astro.props;
+const { title, sub, steps, image, photos } = Astro.props;
 ---
 
-<section class="section container process" style={`--cols:${steps.length}`}>
+<section class="section container process">
   <div class:list={['process__head', { 'process__head--media': image }]}>
     <div>
       <h2 class="h2">{title}</h2>
@@ -36,7 +39,7 @@ const { title, sub, steps, image } = Astro.props;
   <ol class="process__list">
     {
       steps.map((step, i) => (
-        <li class="process__step">
+        <li class:list={['process__step', { 'process__step--photo': photos?.[i] }]}>
           <span class="process__n" aria-hidden="true">
             {String(i + 1).padStart(2, '0')}
           </span>
@@ -44,6 +47,18 @@ const { title, sub, steps, image } = Astro.props;
             <h3 class="process__title">{step.title}</h3>
             <p class="process__text">{step.text}</p>
           </div>
+          {photos?.[i] && (
+            <div class="process__media">
+              <Photo
+                src={photo(photos[i])}
+                alt=""
+                ratio="4/3"
+                class="process__photo"
+                widths={[192, 288, 480]}
+                sizes="(min-width: 64rem) 230px, 96px"
+              />
+            </div>
+          )}
         </li>
       ))
     }
@@ -81,6 +96,15 @@ const { title, sub, steps, image } = Astro.props;
     gap: 14px;
     padding: 16px 0;
     border-top: 1px solid var(--c-line-dark);
+  }
+
+  .process__step--photo {
+    grid-template-columns: 36px 1fr 96px;
+    align-items: start;
+  }
+
+  :global(.process__photo) {
+    border-radius: var(--r-btn);
   }
 
   .process__n {
@@ -131,8 +155,10 @@ const { title, sub, steps, image } = Astro.props;
     }
 
     .process__list {
+      /* One column per step without an inline style: the CSP (style-src 'self') blocks style="". */
       display: grid;
-      grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+      grid-auto-flow: column;
+      grid-auto-columns: minmax(0, 1fr);
       gap: 24px;
     }
 
@@ -140,6 +166,16 @@ const { title, sub, steps, image } = Astro.props;
       display: block;
       padding: 20px 0 0;
       border-top-color: var(--c-gold);
+    }
+
+    .process__step--photo {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .process__media {
+      order: -1;
+      margin-bottom: 16px;
     }
 
     .process__n {

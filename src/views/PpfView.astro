@@ -1,5 +1,6 @@
 ---
-// PPF (/ppf/, /uk/ppf/): mockup «VG Site 02 PPF», Blueprint v1.3 service template.
+// PPF (/ppf/, /uk/ppf/): mockup «VG Site 02 PPF v2», Blueprint v1.3 service template.
+// Hero 1280 and step photos are AI-generated illustrations (D18), alt=""; Hero 375 is a real photo.
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Hero from '../components/Hero.astro';
@@ -11,8 +12,9 @@ import TrustBlock from '../components/TrustBlock.astro';
 import FAQ from '../components/FAQ.astro';
 import CtaBand from '../components/CtaBand.astro';
 import { ppf } from '../copy/ppf.ts';
-import { headings, prepSteps, trustItems } from '../copy/shared.ts';
+import { headings, prepSteps } from '../copy/shared.ts';
 import { ppfPackages } from '../data/services.ts';
+import { t } from '../i18n/index.ts';
 import { localizedPath, type Locale } from '../i18n/routes.ts';
 import { faqSchema, serviceSchema } from '../lib/schema.ts';
 
@@ -42,13 +44,28 @@ const schema = [
     sub={c.sub}
     chips={c.chips}
     service="ppf"
-    photos={{ mobile: { file: 'hex-van-p2.jpg', position: 'center 40%' }, desktop: { file: 'hex-van-l1.jpg', position: 'center 60%' } }}
+    waText={c.whatsapp}
+    photos={{
+      // 375: real photo as in the mockup (the AI frame put the car behind the H1); 1280: AI frame, alt="" (D18)
+      mobile: { file: 'bmw-34-p.png', position: 'center 55%', alt: c.heroAlt },
+      desktop: { file: 'ppf-hero-1280.jpg', position: '70% center' },
+    }}
   />
-  <AnswerBox title={c.answerTitle} text={c.answer} />
+  <AnswerBox text={c.answer} />
   <PackageCards locale={locale} title={c.packagesTitle} note={c.packagesNote} service="ppf" packages={ppfPackages} />
-  <ProcessSteps title={headings.process[locale]} steps={prepSteps[locale]} />
-  <ProjectGallery locale={locale} title={c.galleryTitle} items={projects} />
-  <TrustBlock title={c.trustTitle} items={trustItems[locale]} />
+  <ProcessSteps
+    title={c.processTitle}
+    sub={c.processSub}
+    steps={prepSteps[locale]}
+    photos={['ppf-step-wash.webp', 'ppf-step-clay.webp', 'ppf-step-degrease.webp', 'ppf-step-install.jpg', 'ppf-step-check.webp']}
+  />
+  <ProjectGallery
+    locale={locale}
+    title={c.galleryTitle}
+    items={projects}
+    more={{ href: localizedPath('projects', locale), label: t('cta.allProjects', locale) }}
+  />
+  <TrustBlock items={c.trust} />
   <FAQ title={headings.faq[locale]} items={c.faq} />
-  <CtaBand locale={locale} title={c.cta.title} text={c.cta.text} service="ppf" />
+  <CtaBand locale={locale} title={c.cta.title} text={c.cta.text} service="ppf" waText={c.whatsapp} />
 </Base>
