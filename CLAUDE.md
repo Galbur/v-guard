@@ -41,7 +41,7 @@ docs/canon/, docs/blueprints/, docs/prompts/
 6. Secrets (`TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID`) only in Netlify env vars, read in the function. Never in `src/`.
 7. Every NL page has a UA pair with the same facts. Language switcher goes to the pair, not to the homepage.
 8. Forbidden wording: «nr. 1», «de beste», «perfect», «snelste», «XPEL certified/dealer», competitor names, any guarantee of results.
-9. Tint legality text only from Site Truth F10.
+9. Tint legality text only from Site Truth F10 and F10b.
 10. Accessibility: one H1, labelled form fields, focus visible, AA contrast, tap targets at least 44 px.
 11. Preview builds are `noindex` until launch; `LIVE_PAGES` controls sitemap and links.
 

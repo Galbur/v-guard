@@ -1,4 +1,4 @@
-# V Guard Studio: Site Blueprint v1.2
+# V Guard Studio: Site Blueprint v1.3
 
 Дата: 2026-10-06. Канон фактів: `vguard-site-truth-v4.md`. Статус: чинний.
 
@@ -37,7 +37,7 @@ NL (корінь)                      UA (/uk/)
 
 | Тип | Сторінки | Блоки по порядку (шар 1 жирним) | Пілот |
 |---|---|---|---|
-| Головна | `/`, `/uk/` | **Hero · ProofStrip · ServiceCards · ProcessSteps** · ProjectGallery (6) · TrustBlock · PriceTeaser · ReviewsBlock* · QuoteEntry · ContactBlock | ПІЛОТ 1, не затверджено |
+| Головна | `/`, `/uk/` | **Hero · ProofStrip · ServiceCards · ProcessSteps** · ProjectGallery (6) · TrustBlock · ReviewsBlock* · QuoteEntry · ContactBlock | ПІЛОТ 1, не затверджено |
 | Послуга | PPF, tint, wrap | **Hero · ProofStrip · AnswerBox · PackageCards або PriceTable** · ProcessSteps · LegalNote (лише tint) · ProjectGallery (фільтр послуги) · TrustBlock · FAQ · CtaBand | ПІЛОТ 2 = PPF, не затверджено |
 
 Відхилення по сторінках послуг (v1.2):
@@ -48,7 +48,7 @@ NL (корінь)                      UA (/uk/)
 | Контакти | `/contact/` | **Hero (короткий) · QuoteForm / QuoteSelector** · ContactBlock | після пілоту 1 |
 | Юридична | Privacy | Текст | без макета |
 
-\* ReviewsBlock рендериться лише коли є реальні відгуки Google. Блок без реального контенту не рендериться.
+\* ReviewsBlock: до запуску на сайті стоять дефолтні відгуки (status: 'default'); на запуск лише реальні відгуки Google.
 
 ## 4. Бюджети слів (мобільний вирішує)
 
@@ -111,8 +111,8 @@ UA-версія тримає ті самі слоти; якщо UA довша н
 
 | Пілот | Сторінка | Статус |
 |---|---|---|
-| 1 | Головна NL | не почато |
-| 2 | PPF NL | не почато |
+| 1 | Головна NL | макети docs/design/ взято за основу збірки; клієнт їх ще не бачив |
+| 2 | PPF NL | макети docs/design/ взято за основу збірки; клієнт їх ще не бачив |
 
 Сторінки типу без затвердженого пілоту не будуються.
 
@@ -123,3 +123,4 @@ UA-версія тримає ті самі слоти; якщо UA довша н
 | v1 | 2026-10-05 | Створено з ТЗ docx розділи 8-11 і Site Truth v1; канон фактів оновлено до v2 |
 | v1.1 | 2026-10-06 | Посилання на Site Truth v3; шлях block-specs у репо |
 | v1.2 | 2026-10-06 | Site Truth v4; блоки LegalDiagram і BeforeAfter; відхилення сторінок тонування і wrap; правило ProofStrip 2+; опція форми «voorste zijruiten (binnen 55%)»; обробка фото D12; JS для слайдера D13 |
+| v1.3 | 2026-10-06 | Статус пілотів: макети docs/design/ взято за основу збірки, клієнт їх ще не бачив; ReviewsBlock: дефолтні відгуки до запуску, на запуск лише реальні відгуки Google; PriceTeaser прибрано з порядку блоків Home |

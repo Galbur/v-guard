@@ -50,7 +50,7 @@ export interface Service {
   order: number;
   /** Short name: nav, form, Telegram. */
   label: Localized;
-  /** Option ids for quote form step 3 (Blueprint v1.2 section 6). */
+  /** Option ids for quote form step 3 (Blueprint v1.3 section 6). */
   options: ServiceOption[];
 }
 
@@ -81,7 +81,7 @@ export const services: Service[] = [
     slug: 'car-wrapping',
     order: 3,
     label: { nl: 'Car wrapping', uk: 'Car wrapping' },
-    // Blueprint v1.2: volledig / gedeeltelijk + finish; finish goes into «opmerking».
+    // Blueprint v1.3: volledig / gedeeltelijk + finish; finish goes into «opmerking».
     options: [
       { id: 'volledig', label: { nl: 'Volledig', uk: 'Повністю' } },
       { id: 'gedeeltelijk', label: { nl: 'Gedeeltelijk', uk: 'Частково' } },
