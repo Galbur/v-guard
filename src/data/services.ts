@@ -130,7 +130,7 @@ const ppfParts = [
     label: { nl: 'Laadrand achterbumper', uk: 'Край заднього бампера' },
     price: price(79, 'default', 'ціни за деталь', { from: true }),
   },
-  { label: { nl: 'Spiegelkappen', uk: 'Ковпаки дзеркал' }, price: price(79, 'default', 'ціни за деталь', { from: true }) },
+  { label: { nl: 'Spiegelkappen', uk: 'Корпуси дзеркал' }, price: price(79, 'default', 'ціни за деталь', { from: true }) },
 ];
 
 /** «Bijv. koplampen», «instaplijsten», ... from the priced parts. */
@@ -332,9 +332,9 @@ export const wrapCards: WrapCard[] = [
   {
     id: 'spiegelkappen',
     formOption: 'gedeeltelijk',
-    title: { nl: 'Spiegelkappen', uk: 'Ковпаки дзеркал' },
+    title: { nl: 'Spiegelkappen', uk: 'Корпуси дзеркал' },
     description: { nl: 'Kleine upgrade, groot verschil.', uk: 'Невелике оновлення, помітна різниця.' },
-    price: price(69, 'default', 'ковпаки дзеркал', { from: true }),
+    price: price(69, 'default', 'корпуси дзеркал', { from: true }),
     duration: oneDay,
     photo: { file: 'bmw-34-p.png', position: '22% 48%' },
   },
