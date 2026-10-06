@@ -29,6 +29,9 @@ const patterns: [RegExp, string][] = [
   [/XPEL\s+(certified|dealer)/i, 'forbidden wording «XPEL certified/dealer»'],
 ];
 
+// Netlify CSP (style-src 'self') ignores inline styles: layout values must live in bundled CSS.
+const inlineStyle: [RegExp, string] = [/\sstyle=(\{|"[^"])/, 'inline style="" (blocked by the CSP in netlify.toml)'];
+
 function walk(dir: string): string[] {
   return readdirSync(dir).flatMap((name) => {
     const path = join(dir, name);
@@ -44,6 +47,7 @@ for (const file of walk(srcDir).filter((f) => textFile.test(f))) {
       for (const [re, label] of patterns) {
         if (re.test(line)) problems.push(`${relative(root, file)}:${i + 1}: ${label}`);
       }
+      if (file.endsWith('.astro') && inlineStyle[0].test(line)) problems.push(`${relative(root, file)}:${i + 1}: ${inlineStyle[1]}`);
     });
 }
 

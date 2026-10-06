@@ -10,6 +10,8 @@ import { isLinked, whatsappUrl } from '../config/site.ts';
 import { t } from '../i18n/index.ts';
 import { localizedPath, type Locale } from '../i18n/routes.ts';
 import { photo, type HeroPhotos } from '../lib/photos.ts';
+import { positionClasses } from '../lib/position.ts';
+import '../styles/object-position.css';
 
 interface Props {
   locale: Locale;
@@ -56,7 +58,14 @@ const mq = '(min-width: 64rem)';
 const wa = whatsappUrl(waText);
 ---
 
-<section class:list={['hero', `hero--${align}`]} style={`--pos-m:${photos.mobile.position};--pos-d:${photos.desktop.position}`}>
+<section
+  class:list={[
+    'hero',
+    `hero--${align}`,
+    ...positionClasses(photos.mobile.position),
+    ...positionClasses(photos.desktop.position, 'd'),
+  ]}
+>
   {
     split && desktopFallback ? (
       <>
@@ -156,7 +165,7 @@ const wa = whatsappUrl(waText);
 
   .hero__media img {
     object-fit: cover;
-    object-position: var(--pos-m);
+    object-position: var(--ox, 50%) var(--oy, 50%);
   }
 
   .hero__media--desktop {
@@ -196,7 +205,7 @@ const wa = whatsappUrl(waText);
     }
 
     .hero__media img {
-      object-position: var(--pos-d);
+      object-position: var(--dox, 50%) var(--doy, 50%);
     }
 
     .hero__media--mobile {
