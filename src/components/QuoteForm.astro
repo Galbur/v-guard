@@ -1,0 +1,544 @@
+---
+// Base quote form (Blueprint section 6, block specs section 4). Without JS all steps
+// are visible and the form posts natively to Netlify; with JS it becomes a 4-step
+// flow with validation, Back that keeps values, and a success state with the
+// WhatsApp continuation.
+import { site, waDigits } from '../config/site.ts';
+import { adviceOption, bodyTypes, services } from '../data/services.ts';
+import { t, type UiKey } from '../i18n/index.ts';
+import { localizedPath, type Locale } from '../i18n/routes.ts';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const serviceChoices = [
+  ...services.map((s) => ({ id: s.slug, label: s.label[locale] })),
+  { id: adviceOption.id, label: adviceOption.label[locale] },
+];
+const messageKeys: UiKey[] = [
+  'form.progress',
+  'form.err.required',
+  'form.err.choose',
+  'form.err.phone',
+  'form.err.email',
+  'form.err.year',
+  'form.err.privacy',
+  'form.err.submit',
+  'form.sending',
+  'form.submit',
+  'form.wa.intro',
+  'form.wa.service',
+  'form.wa.option',
+  'form.wa.car',
+];
+const messages = Object.fromEntries(messageKeys.map((k) => [k, t(k, locale)]));
+const wa = site.whatsapp ? waDigits(site.whatsapp) : '';
+const pagePath = localizedPath('contact', locale);
+---
+
+<div class="quote" data-quote data-wa={wa} data-messages={JSON.stringify(messages)}>
+  <form
+    class="quote__form"
+    name="offerte"
+    method="POST"
+    data-netlify="true"
+    netlify-honeypot="bot-field"
+    aria-label={t('form.label', locale)}
+  >
+    <input type="hidden" name="form-name" value="offerte" />
+    <input type="hidden" name="taal" value={locale} />
+    <input type="hidden" name="pagina" value={pagePath} />
+    <p class="visually-hidden" aria-hidden="true">
+      <label>
+        {t('form.honeypot', locale)}
+        <input name="bot-field" tabindex="-1" autocomplete="off" />
+      </label>
+    </p>
+
+    <p class="quote__progress" data-progress hidden></p>
+
+    <fieldset class="quote__step" data-step="service">
+      <legend><h2 class="quote__title" tabindex="-1">{t('form.step.service', locale)}</h2></legend>
+      <div class="choices">
+        {
+          serviceChoices.map((c) => (
+            <label class="choice">
+              <input type="radio" name="dienst" value={c.id} required aria-describedby="err-dienst" />
+              <span>{c.label}</span>
+            </label>
+          ))
+        }
+      </div>
+      <p class="field__error" id="err-dienst" hidden></p>
+    </fieldset>
+
+    <fieldset class="quote__step" data-step="car">
+      <legend><h2 class="quote__title" tabindex="-1">{t('form.step.car', locale)}</h2></legend>
+      <div class="field">
+        <label for="f-merk">{t('form.merk', locale)}</label>
+        <input id="f-merk" name="merk" type="text" required autocomplete="off" aria-describedby="err-merk" />
+        <p class="field__error" id="err-merk" hidden></p>
+      </div>
+      <div class="field">
+        <label for="f-model">{t('form.model', locale)}</label>
+        <input id="f-model" name="model" type="text" required autocomplete="off" aria-describedby="err-model" />
+        <p class="field__error" id="err-model" hidden></p>
+      </div>
+      <div class="field">
+        <label for="f-bouwjaar">{t('form.bouwjaar', locale)}</label>
+        <input
+          id="f-bouwjaar"
+          name="bouwjaar"
+          type="text"
+          inputmode="numeric"
+          maxlength="4"
+          autocomplete="off"
+          aria-describedby="err-bouwjaar"
+        />
+        <p class="field__error" id="err-bouwjaar" hidden></p>
+      </div>
+      <fieldset class="field">
+        <legend>{t('form.carrosserie', locale)}</legend>
+        <div class="choices choices--compact">
+          {
+            bodyTypes.map((b) => (
+              <label class="choice">
+                <input type="radio" name="carrosserie" value={b.id} required aria-describedby="err-carrosserie" />
+                <span>{b.label[locale]}</span>
+              </label>
+            ))
+          }
+        </div>
+        <p class="field__error" id="err-carrosserie" hidden></p>
+      </fieldset>
+    </fieldset>
+
+    <fieldset class="quote__step" data-step="option">
+      <legend><h2 class="quote__title" tabindex="-1">{t('form.step.option', locale)}</h2></legend>
+      {
+        services.map((s) => (
+          <div class="choices" data-options-for={s.slug}>
+            <p class="choices__service">{s.label[locale]}</p>
+            {s.options.map((o) => (
+              <label class="choice">
+                <input type="radio" name="optie" value={o.id} aria-describedby="err-optie" />
+                <span>{o.label[locale]}</span>
+              </label>
+            ))}
+          </div>
+        ))
+      }
+      <p class="field__error" id="err-optie" hidden></p>
+    </fieldset>
+
+    <fieldset class="quote__step" data-step="contact">
+      <legend><h2 class="quote__title" tabindex="-1">{t('form.step.contact', locale)}</h2></legend>
+      <div class="field">
+        <label for="f-naam">{t('form.naam', locale)}</label>
+        <input id="f-naam" name="naam" type="text" required autocomplete="name" aria-describedby="err-naam" />
+        <p class="field__error" id="err-naam" hidden></p>
+      </div>
+      <div class="field">
+        <label for="f-telefoon">{t('form.telefoon', locale)}</label>
+        <input
+          id="f-telefoon"
+          name="telefoon"
+          type="tel"
+          required
+          autocomplete="tel"
+          aria-describedby="err-telefoon"
+        />
+        <p class="field__error" id="err-telefoon" hidden></p>
+      </div>
+      <div class="field">
+        <label for="f-email">{t('form.email', locale)}</label>
+        <input id="f-email" name="email" type="email" autocomplete="email" aria-describedby="err-email" />
+        <p class="field__error" id="err-email" hidden></p>
+      </div>
+      <div class="field">
+        <label for="f-opmerking">{t('form.opmerking', locale)}</label>
+        <textarea id="f-opmerking" name="opmerking" rows="4"></textarea>
+      </div>
+      <div class="field field--check">
+        <input id="f-privacy" name="privacy" type="checkbox" value="ja" required aria-describedby="err-privacy" />
+        <label for="f-privacy">
+          {t('form.privacy.before', locale)}
+          <a href={localizedPath('privacy', locale)} target="_blank">{t('form.privacy.link', locale)}</a>
+        </label>
+        <p class="field__error" id="err-privacy" hidden></p>
+      </div>
+    </fieldset>
+
+    <div class="quote__nav">
+      <button class="btn" type="button" data-back hidden>{t('form.back', locale)}</button>
+      <button class="btn btn--primary" type="button" data-next hidden>{t('form.next', locale)}</button>
+      <button class="btn btn--primary" type="submit" data-submit>{t('form.submit', locale)}</button>
+    </div>
+    <p class="field__error" data-submit-error role="alert" hidden></p>
+  </form>
+
+  <div class="quote__success" data-success hidden>
+    <h2 tabindex="-1">{t('form.success.title', locale)}</h2>
+    <p>{t('form.success.text', locale)}</p>
+    {
+      wa && (
+        <a class="btn btn--primary" data-wa-link href={`https://wa.me/${wa}`} target="_blank" rel="noopener">
+          {t('form.success.wa', locale)}
+        </a>
+      )
+    }
+  </div>
+</div>
+
+<script>
+  type Messages = Record<string, string>;
+  type StepId = 'service' | 'car' | 'option' | 'contact';
+
+  const MIN_YEAR = 1950;
+
+  function fill(template: string, params: Record<string, string | number>): string {
+    return template.replace(/\{(\w+)\}/g, (m, k: string) => (k in params ? String(params[k]) : m));
+  }
+
+  function init(root: HTMLElement) {
+    const form = root.querySelector<HTMLFormElement>('form')!;
+    const messages: Messages = JSON.parse(root.dataset.messages ?? '{}');
+    const steps = Array.from(form.querySelectorAll<HTMLFieldSetElement>('[data-step]'));
+    const progress = form.querySelector<HTMLElement>('[data-progress]')!;
+    const back = form.querySelector<HTMLButtonElement>('[data-back]')!;
+    const next = form.querySelector<HTMLButtonElement>('[data-next]')!;
+    const submit = form.querySelector<HTMLButtonElement>('[data-submit]')!;
+    const submitError = form.querySelector<HTMLElement>('[data-submit-error]')!;
+    const success = root.querySelector<HTMLElement>('[data-success]')!;
+    const optionGroups = Array.from(form.querySelectorAll<HTMLElement>('[data-options-for]'));
+    const maxYear = new Date().getFullYear() + 1;
+    let current = 0;
+
+    form.noValidate = true;
+    root.dataset.enhanced = '';
+    form.querySelector<HTMLInputElement>('[name="pagina"]')!.value = location.pathname + location.search;
+
+    const field = (name: string) => form.elements.namedItem(name);
+    const value = (name: string): string => {
+      const el = field(name);
+      return el && 'value' in el ? String(el.value).trim() : '';
+    };
+    const checkedLabel = (name: string): string => {
+      const input = form.querySelector<HTMLInputElement>(`input[name="${name}"]:checked:not(:disabled)`);
+      return input?.closest('label')?.textContent?.trim() ?? '';
+    };
+    const service = () => value('dienst');
+    // Until a service is chosen the option step counts; Advies has no options.
+    const hasOptions = () => !service() || optionGroups.some((g) => g.dataset.optionsFor === service());
+
+    // Only the option group of the chosen service is enabled and submitted.
+    function syncOptions() {
+      for (const group of optionGroups) {
+        const active = group.dataset.optionsFor === service();
+        group.hidden = !active;
+        group.querySelectorAll<HTMLInputElement>('input').forEach((i) => (i.disabled = !active));
+      }
+    }
+
+    const visibleSteps = () => steps.filter((s) => s.dataset.step !== 'option' || hasOptions());
+
+    // Controls behind a field name; for optie only the enabled group.
+    function controls(name: string): HTMLInputElement[] {
+      const selector = name === 'optie' ? 'input[name="optie"]:not(:disabled)' : `[name="${name}"]`;
+      return Array.from(form.querySelectorAll<HTMLInputElement>(selector));
+    }
+
+    function setError(name: string, message: string | null) {
+      const el = form.querySelector<HTMLElement>(`#err-${name}`);
+      if (el) {
+        el.textContent = message ?? '';
+        el.hidden = !message;
+      }
+      controls(name).forEach((c) => c.setAttribute('aria-invalid', message ? 'true' : 'false'));
+    }
+
+    function validate(step: StepId): HTMLElement | null {
+      const errors: [string, string | null][] = [];
+      if (step === 'service') {
+        errors.push(['dienst', service() ? null : messages['form.err.choose']]);
+      } else if (step === 'car') {
+        errors.push(['merk', value('merk') ? null : messages['form.err.required']]);
+        errors.push(['model', value('model') ? null : messages['form.err.required']]);
+        const year = value('bouwjaar');
+        const yearOk = !year || (/^\d{4}$/.test(year) && +year >= MIN_YEAR && +year <= maxYear);
+        errors.push(['bouwjaar', yearOk ? null : fill(messages['form.err.year'], { max: maxYear })]);
+        errors.push(['carrosserie', value('carrosserie') ? null : messages['form.err.choose']]);
+      } else if (step === 'option') {
+        errors.push(['optie', checkedLabel('optie') ? null : messages['form.err.choose']]);
+      } else {
+        errors.push(['naam', value('naam') ? null : messages['form.err.required']]);
+        const phone = value('telefoon');
+        const digits = phone.replace(/\D/g, '');
+        const phoneOk = /^[+\d\s().-]+$/.test(phone) && digits.length >= 8 && digits.length <= 15;
+        errors.push(['telefoon', !phone ? messages['form.err.required'] : phoneOk ? null : messages['form.err.phone']]);
+        const email = value('email');
+        errors.push(['email', !email || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ? null : messages['form.err.email']]);
+        const privacy = field('privacy') as HTMLInputElement;
+        errors.push(['privacy', privacy.checked ? null : messages['form.err.privacy']]);
+      }
+      let first: HTMLElement | null = null;
+      for (const [name, message] of errors) {
+        setError(name, message);
+        if (message && !first) first = controls(name)[0] ?? null;
+      }
+      return first;
+    }
+
+    function show(index: number, focus = true) {
+      const visible = visibleSteps();
+      current = Math.max(0, Math.min(index, visible.length - 1));
+      steps.forEach((s) => (s.hidden = s !== visible[current]));
+      progress.hidden = false;
+      progress.textContent = fill(messages['form.progress'], { n: current + 1, total: visible.length });
+      back.hidden = current === 0;
+      next.hidden = current === visible.length - 1;
+      submit.hidden = current !== visible.length - 1;
+      if (focus) visible[current].querySelector<HTMLElement>('.quote__title')?.focus();
+    }
+
+    function currentStep(): StepId {
+      return visibleSteps()[current].dataset.step as StepId;
+    }
+
+    form.addEventListener('change', (e) => {
+      const target = e.target as HTMLInputElement;
+      if (target.name === 'dienst') syncOptions();
+      if (target.type === 'radio' || target.type === 'checkbox') setError(target.name, null);
+    });
+
+    next.addEventListener('click', () => {
+      const invalid = validate(currentStep());
+      if (invalid) return invalid.focus();
+      show(current + 1);
+    });
+
+    back.addEventListener('click', () => show(current - 1));
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      // Validate every visible step; jump to the first one with an error.
+      const visible = visibleSteps();
+      for (let i = 0; i < visible.length; i++) {
+        const invalid = validate(visible[i].dataset.step as StepId);
+        if (invalid) {
+          show(i, false);
+          return invalid.focus();
+        }
+      }
+      submitError.hidden = true;
+      submit.disabled = true;
+      submit.textContent = messages['form.sending'];
+      try {
+        const body = new URLSearchParams(new FormData(form) as unknown as Record<string, string>);
+        const res = await fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: body.toString(),
+        });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        showSuccess();
+      } catch {
+        submitError.textContent = messages['form.err.submit'];
+        submitError.hidden = false;
+        submit.disabled = false;
+        submit.textContent = messages['form.submit'];
+      }
+    });
+
+    function showSuccess() {
+      const link = success.querySelector<HTMLAnchorElement>('[data-wa-link]');
+      if (link && root.dataset.wa) {
+        const car = [value('merk'), value('model'), value('bouwjaar')].filter(Boolean).join(' ');
+        const lines = [
+          messages['form.wa.intro'],
+          `${messages['form.wa.service']}: ${checkedLabel('dienst')}`,
+          checkedLabel('optie') && `${messages['form.wa.option']}: ${checkedLabel('optie')}`,
+          `${messages['form.wa.car']}: ${[car, checkedLabel('carrosserie')].filter(Boolean).join(', ')}`,
+        ].filter(Boolean);
+        link.href = `https://wa.me/${root.dataset.wa}?text=${encodeURIComponent(lines.join('\n'))}`;
+      }
+      form.hidden = true;
+      success.hidden = false;
+      success.querySelector<HTMLElement>('h2')?.focus();
+    }
+
+    // Preselect from /contact/?service=ppf&optie=full-front (QuoteEntry, PackageCards).
+    const params = new URLSearchParams(location.search);
+    const preService = form.querySelector<HTMLInputElement>(
+      `input[name="dienst"][value="${CSS.escape(params.get('service') ?? '')}"]`,
+    );
+    if (preService) preService.checked = true;
+    syncOptions();
+    const preOption = form.querySelector<HTMLInputElement>(
+      `input[name="optie"]:not(:disabled)[value="${CSS.escape(params.get('optie') ?? '')}"]`,
+    );
+    if (preOption) preOption.checked = true;
+    show(preService ? 1 : 0, false);
+  }
+
+  document.querySelectorAll<HTMLElement>('[data-quote]').forEach(init);
+</script>
+
+<style>
+  .quote {
+    max-width: 36rem;
+  }
+
+  .quote__step {
+    border: 0;
+    margin: 0 0 var(--space-6);
+    padding: 0;
+    min-width: 0;
+  }
+
+  .quote__step > legend {
+    padding: 0;
+  }
+
+  .quote__title {
+    font-size: var(--text-xl);
+    margin: 0 0 var(--space-4);
+  }
+
+  .quote__title:focus {
+    outline: none;
+  }
+
+  .quote__title:focus-visible {
+    outline: 3px solid var(--color-focus);
+  }
+
+  .quote__progress {
+    margin: 0 0 var(--space-2);
+    color: var(--color-text-muted);
+    font-size: var(--text-sm);
+  }
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    margin: 0 0 var(--space-4);
+    border: 0;
+    padding: 0;
+  }
+
+  .field > legend {
+    padding: 0;
+    margin-bottom: var(--space-1);
+  }
+
+  .field > label,
+  .field > legend {
+    font-weight: 600;
+  }
+
+  .field input:not([type='checkbox']),
+  .field textarea {
+    min-height: var(--tap);
+    padding: var(--space-2) var(--space-3);
+    border: 1px solid var(--color-text-muted);
+    border-radius: var(--radius);
+    font: inherit;
+    color: var(--color-text);
+    background: var(--color-bg);
+  }
+
+  .field--check {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .field--check input {
+    width: 24px;
+    height: 24px;
+    margin: 10px;
+  }
+
+  .field--check label {
+    flex: 1;
+    font-weight: 400;
+  }
+
+  .field--check .field__error {
+    flex-basis: 100%;
+  }
+
+  [aria-invalid='true'] {
+    border-color: var(--color-error) !important;
+  }
+
+  .field__error {
+    margin: 0;
+    color: var(--color-error);
+    font-size: var(--text-sm);
+  }
+
+  .choices {
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  .choices--compact {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .choices__service {
+    margin: 0;
+    font-weight: 600;
+  }
+
+  [data-enhanced] .choices__service {
+    display: none;
+  }
+
+  .choice {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    min-height: var(--tap);
+    padding: var(--space-2) var(--space-3);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    cursor: pointer;
+  }
+
+  .choice:has(input:checked) {
+    border-color: var(--color-primary);
+    box-shadow: inset 0 0 0 1px var(--color-primary);
+  }
+
+  .choice input {
+    width: 20px;
+    height: 20px;
+    margin: 0;
+  }
+
+  .quote__nav {
+    display: flex;
+    gap: var(--space-3);
+    justify-content: space-between;
+  }
+
+  .quote__nav [data-next],
+  .quote__nav [data-submit] {
+    margin-left: auto;
+  }
+
+  .quote__success h2 {
+    font-size: var(--text-xl);
+  }
+
+  .quote__success h2:focus {
+    outline: none;
+  }
+</style>
