@@ -4,7 +4,7 @@ Local car studio in Vroomshoop (NL): PPF, ramen blinderen, car wrapping. Small, 
 
 ## Canon
 
-Facts, prices, decisions: `docs/canon/vguard-site-truth-vN.md` (highest N). Structure and blocks: `docs/canon/vguard-site-blueprint-vN.md`. Page blueprints: `docs/blueprints/`. If a prompt conflicts with the canon, stop and report. Never invent a fact, price, warranty, brand or address.
+Facts, prices, decisions: `docs/canon/vguard-site-truth-vN.md` (highest N, currently `vguard-site-truth-v6.md`). Structure and blocks: `docs/canon/vguard-site-blueprint-vN.md`. Page blueprints: `docs/blueprints/`. If a prompt conflicts with the canon, stop and report. Never invent a fact, price, warranty, brand or address.
 
 ## Stack
 
@@ -44,6 +44,7 @@ docs/canon/, docs/blueprints/, docs/prompts/
 9. Tint legality text only from Site Truth F10 and F10b.
 10. Accessibility: one H1, labelled form fields, focus visible, AA contrast, tap targets at least 44 px.
 11. Preview builds are `noindex` until launch; `LIVE_PAGES` controls sitemap and links.
+12. AI-ілюстрації лише з src/assets/illustrations/, ніколи в src/content/projects/ чи ProjectGallery (D18). `npm run check` fails on any such use.
 
 ## Lead flow
 
