@@ -1,0 +1,22 @@
+{
+  "name": "v-guard-studio",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "node scripts/check.ts",
+    "typecheck": "astro check",
+    "test": "node --test netlify/functions/*.test.ts"
+  },
+  "dependencies": {
+    "astro": "^7.3.6"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "@netlify/functions": "^6.0.2",
+    "typescript": "^6.0.3"
+  }
+}
