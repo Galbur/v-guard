@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&amp;family=Cinzel:wght@700&amp;display=swap" rel="stylesheet">
+<style>body{margin:0;background:#1A1B1E} a{color:#C4A24D;text-decoration:none} a:hover{color:#F2EFE9} *{box-sizing:border-box} h1,h2,h3,p,ul,ol{margin:0} ul,ol{padding:0;list-style:none} button{font-family:inherit;cursor:pointer}</style>
+</helmet>
+<section style="display:flex;flex-wrap:wrap;gap:72px;align-items:flex-start;padding:56px;font-family:'Instrument Sans',sans-serif;color:#F2EFE9">
+
+<!-- FRAME 1: Car wrapping NL 375 -->
+<div id="f1" style="display:flex;flex-direction:column;gap:12px;flex:none">
+  <div style="font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#8A8B90">Frame 1 · Car wrapping NL · 375 · volledige pagina</div>
+  <div data-screen-label="Wrap NL 375" style="position:relative;width:375px;background:#0B0B0C;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 0 0 1px #2A2B2F">
+    <div style="display:flex;align-items:center;justify-content:space-between;height:56px;padding:0 8px 0 16px;border-bottom:1px solid #2A2B2F">
+      <div style="display:flex;align-items:center;gap:8px"><svg viewBox="0 0 200 232" width="22" height="26"><path d="M100 8 184 36v82c0 54-42 88-84 106C58 206 16 172 16 118V36Z" fill="none" stroke="#C4A24D" stroke-width="12" stroke-linejoin="round"></path><text x="100" y="168" text-anchor="middle" font-family="Cinzel, serif" font-weight="700" font-size="132" fill="#C4A24D">V</text></svg><div><div style="font-family:Cinzel,serif;font-weight:700;font-size:14px;letter-spacing:.06em;color:#C4A24D;line-height:1">V-GUARD</div><div style="font-size:8px;letter-spacing:.32em;color:#A3A39F;margin-top:3px">STUDIO</div></div></div>
+      <div style="display:flex;align-items:center;gap:4px"><div style="font-size:13px;font-weight:500;padding:0 8px;height:44px;display:flex;align-items:center;gap:6px"><span>NL</span><span style="color:#5C5D62">/</span><span style="color:#A3A39F">UA</span></div><div style="width:44px;height:44px;display:flex;align-items:center;justify-content:center"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#F2EFE9" stroke-width="1.6"><path d="M2 6h18M2 11h18M2 16h18"></path></svg></div></div>
+    </div>
+    <div style="position:relative;height:556px;overflow:hidden;background:#0B0B0C"><img src="assets/wrap/hero-375.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 72%">
+                  <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,11,12,.05) 0%,rgba(11,11,12,.3) 28%,rgba(11,11,12,.92) 56%,#0B0B0C 100%)"></div>
+      <div style="position:absolute;left:16px;right:16px;bottom:16px;display:flex;flex-direction:column;gap:12px">
+        <h1 style="font-size:28px;line-height:1.12;font-weight:600;letter-spacing:-.01em;text-wrap:pretty">Car wrapping in Vroomshoop: nieuwe kleur zonder overspuiten</h1>
+        <p style="font-size:15px;line-height:1.45;color:#D7D4CE">Volledig of alleen dak, spiegels en chroom. Zie direct je prijsindicatie.</p>
+        <div style="display:flex;flex-direction:column;gap:10px;margin-top:2px">
+          <a href="#cfg-375" style="display:flex;align-items:center;justify-content:center;height:48px;background:#C4A24D;color:#0B0B0C;font-weight:600;font-size:15px;border-radius:6px">Stel je wrap samen</a>
+          <a href="#" style="display:flex;align-items:center;justify-content:center;height:48px;border:1px solid #F2EFE9;color:#F2EFE9;font-weight:600;font-size:15px;border-radius:6px">WhatsApp ons</a>
+        </div>
+        <div style="display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:2px -16px 0;padding:0 16px">
+          <span style="display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:500;padding:7px 12px;border:1px solid rgba(242,239,233,.4);border-radius:999px;white-space:nowrap">3 jaar garantie<sc-if value="{{ showPending }}" hint-placeholder-val="{{ true }}"><span style="width:7px;height:7px;border-radius:999px;background:#E2B93B;display:inline-block;flex:none"></span></sc-if></span>
+          <span style="display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:500;padding:7px 12px;border:1px solid rgba(242,239,233,.4);border-radius:999px;white-space:nowrap">Volledige wrap vanaf €1.795<sc-if value="{{ showPending }}" hint-placeholder-val="{{ true }}"><span style="width:7px;height:7px;border-radius:999px;background:#E2B93B;display:inline-block;flex:none"></span></sc-if></span>
+          <span style="display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:500;padding:7px 12px;border:1px solid rgba(242,239,233,.4);border-radius:999px;white-space:nowrap">Ontchromen vanaf €149<sc-if value="{{ showPending }}" hint-placeholder-val="{{ true }}"><span style="width:7px;height:7px;border-radius:999px;background:#E2B93B;display:inline-block;flex:none"></span></sc-if></span>
+        </div>
+      </div>
+    </div>
+    <div style="position:absolute;left:0;right:0;top:599px;border-top:1px dashed #C4A24D;opacity:.7;pointer-events:none"><span style="position:absolute;right:8px;top:4px;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#C4A24D">vouw 375x667 boven StickyMobileBar</span></div>
+
+    <div style="margin-top:40px;border-top:1px solid #2A2B2F;border-bottom:1px solid #2A2B2F;display:flex;gap:24px;overflow-x:auto;scrollbar-width:none;padding:14px 16px">
+      <sc-for list="{{ proof }}" as="t" hint-placeholder-count="4">
+        <div style="display:flex;align-items:center;gap:8px;white-space:nowrap;font-size:13px;font-weight:500"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C4A24D" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="{{ t.icon }}"></path></svg><span>{{ t.txt }}</span><sc-if value="{{ t.pend }}" hint-placeholder-val="{{ false }}"><span style="width:7px;height:7px;border-radius:999px;background:#E2B93B;display:inline-block;flex:none"></span></sc-if></div>
+      </sc-for>
+    </div>
+
+    <div style="margin:40px 16px 0;padding:20px 18px;background:#16171A;border:1px solid #2A2B2F;border-radius:10px">
+      <p style="font-size:16px;line-height:1.55;color:#F2EFE9;text-wrap:pretty">Car wrapping (auto wrappen) is je auto bekleden met gekleurde folie: volledig of alleen dak, spiegelkappen of chroom. De originele lak blijft eronder, zodat je later terug kunt naar de originele kleur. V Guard Studio wrapt auto's in Vroomshoop.</p>
+    </div>
+
+    <!-- Configurator 375 -->
+    <div id="cfg-375" style="padding:64px 16px 0;display:flex;flex-direction:column;gap:20px">
+      <div><h2 style="font-size:26px;line-height:1.15;font-weight:600;letter-spacing:-.01em">Stel je wrap samen</h2><p style="font-size:15px;line-height:1.45;color:#A3A39F;margin-top:8px">Kies je auto, kleur en delen. Je ziet direct hoe het eruitziet en wat het ongeveer kost.</p></div>
+      <div style="background:#1C1D21;border:1px solid #2A2B2F;border-radius:10px;padding:0 0 8px;overflow:hidden;display:flex;flex-direction:column;gap:6px">
+        <dc-import name="VG Wrap Car" body="{{ live.body }}" hex="{{ live.hex }}" finish="{{ live.finish }}" full="{{ live.full }}" dak="{{ live.dak }}" spiegel="{{ live.spiegel }}" chroom="{{ live.chroom }}" pakket="{{ live.pakket }}" hint-size="100%,160px" style="width:100%"></dc-import>
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;padding:0 12px"><span style="font-size:13px;font-weight:600">{{ live.colorLabel }}</span><span style="font-size:11px;color:#8A8B90;text-align:right">Illustratie. De echte kleur zie je op stalen in de studio.</span></div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div style="font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#C4A24D">A · Je auto</div>
+        <div style="display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:0 -16px;padding:0 16px;scroll-snap-type:x mandatory">
+          <sc-for list="{{ live.bodies }}" as="b" hint-placeholder-count="6">
+            <button onClick="{{ b.pick }}" style="display:flex;flex-direction:column;align-items:flex-start;gap:4px;padding:8px 8px 8px;width:132px;flex:none;scroll-snap-align:start;min-height:88px;border-radius:8px;text-align:left;color:#F2EFE9;border:1px solid {{ b.bd }};background:{{ b.bg }}"><div style="width:100%;aspect-ratio:800/275;border-radius:4px;overflow:hidden"><dc-import name="VG Wrap Car" body="{{ b.id }}" hex="{{ b.thex }}" finish="{{ b.tfin }}" full="{{ true }}" mini="{{ true }}" hint-size="100%,100%" style="width:100%;height:100%"></dc-import></div><span style="font-size:13px;font-weight:600;line-height:1.2">{{ b.label }}</span><span style="font-size:11px;color:#A3A39F;line-height:1.2">{{ b.sub }}</span></button>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div style="font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#C4A24D">B · Wat wrappen we?</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid #3A3B3F;border-radius:8px;overflow:hidden">
+          <button onClick="{{ live.setFull }}" style="height:44px;border:0;font-size:14px;font-weight:600;background:{{ live.fullBg }};color:{{ live.fullFg }}">Volledige wrap</button>
+          <button onClick="{{ live.setParts }}" style="height:44px;border:0;font-size:14px;font-weight:600;background:{{ live.partsBg }};color:{{ live.partsFg }}">Losse delen</button>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <sc-for list="{{ live.parts }}" as="p" hint-placeholder-count="3">
+            <button onClick="{{ p.pick }}" style="display:inline-flex;align-items:center;gap:8px;height:44px;padding:0 14px;border-radius:8px;font-size:14px;font-weight:500;color:#F2EFE9;border:1px solid {{ p.bd }};background:{{ p.bg }};opacity:{{ p.op }}"><span>{{ p.label }}</span><span style="font-size:12px;color:#A3A39F">{{ p.sub }}</span></button>
+          </sc-for>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:44px;padding:4px 0">
+          <div><div style="font-size:14px;font-weight:600">Black styling pakket</div><div style="font-size:12px;color:#A3A39F;display:flex;align-items:center;gap:6px;flex-wrap:wrap"><span>Dak, spiegelkappen en chroom in zwart ·</span><span style="display:inline-flex;align-items:center;gap:6px;white-space:nowrap">vanaf €395<sc-if value="{{ showPending }}" hint-placeholder-val="{{ true }}"><span style="width:7px;height:7px;border-radius:999px;background:#E2B93B;display:inline-block;flex:none"></span></sc-if></span></div></div>
+          <button onClick="{{ live.togglePakket }}" aria-label="Black styling pakket" style="width:48px;height:28px;border-radius:999px;border:0;padding:3px;flex:none;display:flex;background:{{ live.pakketBg }};justify-content:{{ live.pakketJ }};opacity:{{ live.pakketOp }}"><span style="width:22px;height:22px;border-radius:999px;background:#0B0B0C;display:block"></span></button>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div style="font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#C4A24D">C · Finish</div>
+        <div style="display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:0 -16px;padding:0 16px">
+          <sc-for list="{{ live.finishes }}" as="f" hint-placeholder-count="5">
+            <button onClick="{{ f.pick }}" style="display:inline-flex;align-items:center;gap:8px;height:44px;padding:0 14px;border-radius:8px;font-size:14px;font-weight:500;white-space:nowrap;color:#F2EFE9;border:1px solid {{ f.bd }};background:{{ f.bg }}"><span>{{ f.label }}</span><span style="font-size:12px;color:#A3A39F">{{ f.sub }}</span></button>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div style="font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#C4A24D">D · Kleur</div>
+        <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:8px 4px">
+          <sc-for list="{{ live.swatches }}" as="s" hint-placeholder-count="12">
+            <button onClick="{{ s.pick }}" title="{{ s.name }}" aria-label="{{ s.name }}" style="width:100%;height:48px;display:flex;align-items:center;justify-content:center;background:transparent;border:0;padding:0"><span style="width:38px;height:38px;border-radius:999px;display:block;border:1px solid rgba(242,239,233,.3);background:{{ s.hex }};box-shadow:{{ s.ring }}"></span></button>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="background:#16171A;border:1px solid #2A2B2F;border-top:2px solid #C4A24D;border-radius:10px;padding:14px 16px 16px;display:flex;flex-direction:column;gap:12px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:12px"><div><div style="font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#A3A39F">Prijsindicatie</div><div style="display:flex;align-items:center;gap:8px;font-size:24px;font-weight:600;line-height:1.1;margin-top:4px">{{ live.priceLabel }}<sc-if value="{{ showPending }}" hint-placeholder-val="{{ true }}"><span style="width:7px;height:7px;border-radius:999px;background:#E2B93B;display:inline-block;flex:none"></span></sc-if></div></div><div style="font-size:12px;color:#A3A39F;text-align:right">Vaste prijs na je aanvraag.</div></div>
+        <div style="display:flex;flex-direction:column;gap:8px"><a href="#" style="height:48px;background:#C4A24D;color:#0B0B0C;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:15px">{{ live.ctaLabel }}</a><a href="#" style="height:48px;border:1px solid #F2EFE9;color:#F2EFE9;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:15px">Verstuur via WhatsApp</a></div>
+      </div>
+    </div>
+
+    <!-- Cards 375 -->
+    <div style="padding:64px 0 0;display:flex;flex-direction:column;gap:16px">
+      <h2 style="font-size:26px;line-height:1.15;font-weight:600;letter-spacing:-.01em;padding:0 16px">Wat wil je laten wrappen?</h2>
+      <div style="display:flex;gap:12px;overflow-x:auto;scrollbar-width:none;padding:0 16px">
+        <sc-for list="{{ cards }}" as="k" hint-placeholder-count="5">
+          <div style="width:264px;flex:none;background:#F2EFE9;color:#0B0B0C;border-radius:10px;overflow:hidden;display:flex;flex-direction:column">
+            <div style="position:relative;aspect-ratio:4/3;background-color:#232428;background-size:cover;background-repeat:no-repeat;background-image:{{ k.bgi }};background-position:{{ k.pos }};overflow:hidden"><sc-if value="{{ k.badge }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;right:8px;bottom:8px;font-size:11px;font-weight:600;letter-spacing:.04em;background:#C4A24D;color:#0B0B0C;border-radius:4px;padding:4px 8px">{{ k.badge }}</span></sc-if></div>
+            <div style="padding:16px 16px 16px;display:flex;flex-direction:column;gap:8px;flex:1">
+              <h3 style="font-size:18px;font-weight:600;line-height:1.2">{{ k.t }}</h3>
+              <p style="font-size:14px;line-height:1.45;color:#5C5C58;flex:1">{{ k.d }}</p>
+              <div style="display:flex;align-items:center;gap:8px;font-size:17px;font-weight:600">{{ k.price }}<sc-if value="{{ showPending }}" hint-placeholder-val="{{ true }}"><span style="width:7px;height:7px;border-radius:999px;background:#E2B93B;display:inline-block;flex:none"></span></sc-if><span style="font-size:13px;font-weight:400;color:#5C5C58">{{ k.dur }}</span></div>
+              <a href="#" style="height:44px;border:1px solid #0B0B0C;color:#0B0B0C;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px;margin-top:4px">Aanvragen</a>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+      <p style="font-size:13px;line-height:1.45;color:#A3A39F;padding:0 16px">Prijzen incl. btw. Eindprijs hangt af van auto, folie en delen.</p>
+    </div>
+
+    <!-- Finishes 375 -->
+    <div style="padding:64px 16px 0;display:flex;flex-direction:column;gap:16px">
+      <h2 style="font-size:26px;line-height:1.15;font-weight:600;letter-spacing:-.01em">Finishes</h2>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <sc-for list="{{ finishTiles }}" as="f" hint-placeholder-count="5">
+          <div style="display:flex;flex-direction:column;gap:8px"><div style="position:relative;aspect-ratio:1/1;border-radius:6px;overflow:hidden;background-color:#232428;background-size:cover;background-position:center;background-image:{{ f.bgi }}"></div><div><div style="font-size:15px;font-weight:600">{{ f.t }}</div><div style="font-size:13px;color:#A3A39F;line-height:1.4">{{ f.d }}</div></div></div>
+        </sc-for>
+      </div>
+    </div>
+
+    <!-- Table 375 -->
+    <div style="padding:64px 16px 0;display:flex;flex-direction:column;gap:16px">
+      <h2 style="font-size:26px;line-height:1.15;font-weight:600;letter-spacing:-.01em">Wrappen of overspuiten?</h2>
+      <div style="position:relative;aspect-ratio:3/2;border-radius:10px;overflow:hidden;background:#232428"><img src="assets/wrap/compare.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></div>
+      <div style="border:1px solid #2A2B2F;border-radius:10px;overflow:hidden;font-size:13px;line-height:1.35">
+        <div style="display:grid;grid-template-columns:1.2fr 1fr 1fr;background:#16171A;font-weight:600;padding:12px 12px"><span></span><span style="color:#C4A24D">Wrappen</span><span style="color:#A3A39F">Overspuiten</span></div>
+        <sc-for list="{{ compare }}" as="r" hint-placeholder-count="4">
+          <div style="display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:8px;padding:12px 12px;border-top:1px solid #2A2B2F"><span style="color:#D7D4CE">{{ r.k }}</span><span style="font-weight:500">{{ r.w }}</span><span style="color:#A3A39F">{{ r.o }}</span></div>
+        </sc-for>
+      </div>
+      <p style="font-size:14px;line-height:1.5;color:#A3A39F">Wil je je lak ook tegen steenslag beschermen? <a href="#">Kijk naar PPF.</a></p>
+    </div>
+
+    <!-- Recent 375 -->
+    <div style="padding:64px 0 0;display:flex;flex-direction:column;gap:16px">
+      <h2 style="font-size:26px;line-height:1.15;font-weight:600;letter-spacing:-.01em;padding:0 16px">Recent opgeleverd</h2>
+      <div style="display:flex;gap:12px;overflow-x:auto;scrollbar-width:none;padding:0 16px">
+        <sc-for list="{{ recent3 }}" as="g" hint-placeholder-count="3">
+          <div style="width:240px;flex:none;display:flex;flex-direction:column;gap:8px"><div style="aspect-ratio:4/3;background-color:#2E2F33;background-size:cover;background-position:center;background-image:{{ g.bgi }};border:{{ g.bd }};border-radius:6px;display:flex;align-items:center;justify-content:center;text-align:center;padding:12px;font-size:12px;line-height:1.4;color:#C9C7C1">{{ g.ph }}</div><div style="font-size:13px;color:#A3A39F;display:flex;align-items:center;gap:8px"><span>{{ g.cap }}</span><sc-if value="{{ showPending }}" hint-placeholder-val="{{ true }}"><span style="width:7px;height:7px;border-radius:999px;background:#E2B93B;display:inline-block;flex:none"></span></sc-if></div></div>
+        </sc-for>
+      </div>
+      <div style="padding:0 16px"><a href="#" style="height:48px;border:1px solid #F2EFE9;color:#F2EFE9;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:15px">Bekijk alle projecten</a></div>
+    </div>
+
+    <!-- Steps 375 -->
+    <div style="padding:64px 16px 0;display:flex;flex-direction:column;gap:12px">
+      <h2 style="font-size:26px;line-height:1.15;font-weight:600;letter-spacing:-.01em">Zo werkt het</h2>
+      <ol style="display:flex;flex-direction:column">
+        <sc-for list="{{ steps }}" as="s" hint-placeholder-count="4">
+          <li style="display:grid;grid-template-columns:36px 1fr;gap:14px;padding:16px 0;border-top:1px solid #2A2B2F;align-items:center"><div style="width:36px;height:36px;border:1px solid #C4A24D;border-radius:999px;display:flex;align-items:center;justify-content:center;color:#C4A24D;font-weight:600;font-size:13px">{{ s.n }}</div><div style="display:flex;align-items:center;gap:10px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C4A24D" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="{{ s.icon }}"></path></svg><div style="font-size:16px;font-weight:600;line-height:1.3">{{ s.t }}</div><sc-if value="{{ s.pend }}" hint-placeholder-val="{{ false }}"><span style="width:7px;height:7px;border-radius:999px;background:#E2B93B;display:inline-block;flex:none"></span></sc-if></div></li>
+        </sc-for>
+      </ol>
+      <div style="border-top:1px solid #2A2B2F"></div>
+    </div>
+
+    <!-- FAQ 375 -->
+    <div style="padding:64px 16px 0;display:flex;flex-direction:column">
+      <h2 style="font-size:26px;line-height:1.15;font-weight:600;letter-spacing:-.01em;margin-bottom:12px">Veelgestelde vragen</h2>
+      <sc-for list="{{ faqA }}" as="f" hint-placeholder-count="8">
+        <div style="border-top:1px solid #2A2B2F;padding:16px 0">
+          <div style="display:flex;justify-content:space-between;gap:16px;align-items:flex-start;min-height:44px"><div style="font-size:16px;font-weight:600;line-height:1.35">{{ f.q }}</div><div style="width:24px;height:24px;flex:none;display:flex;align-items:center;justify-content:center;color:#C4A24D;font-size:18px;line-height:1">{{ f.sym }}</div></div>
+          <sc-if value="{{ f.open }}" hint-placeholder-val="{{ false }}"><div style="display:flex;align-items:flex-start;gap:8px;margin-top:8px;padding-right:40px"><p style="font-size:15px;line-height:1.55;color:#A3A39F">{{ f.a }}</p><sc-if value="{{ f.pend }}" hint-placeholder-val="{{ false }}"><span style="width:7px;height:7px;border-radius:999px;background:#E2B93B;display:inline-block;flex:none;margin-top:7px"></span></sc-if></div></sc-if>
+        </div>
+      </sc-for>
+      <div style="border-top:1px solid #2A2B2F"></div>
+    </div>
+
+    <!-- CTA 375 -->
+    <div style="position:relative;margin:64px 16px 64px;border-radius:10px;overflow:hidden;background:#0B0B0C;border:1px solid #2A2B2F">
+      <img src="assets/wrap/cta-a.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 40%">
+      <div style="position:relative;padding:200px 20px 28px;background:linear-gradient(180deg,rgba(11,11,12,0) 0%,rgba(11,11,12,.15) 25%,rgba(11,11,12,.9) 50%,rgba(11,11,12,.97) 100%);display:flex;flex-direction:column;gap:10px">
+        <h2 style="font-size:24px;line-height:1.15;font-weight:600;letter-spacing:-.01em">Klaar voor een nieuwe kleur?</h2>
+        <p style="font-size:15px;line-height:1.45;color:#D7D4CE;text-wrap:pretty;display:inline">Stuur merk, model en je idee. Je krijgt binnen 1 werkdag<sc-if value="{{ showPending }}" hint-placeholder-val="{{ true }}"><span style="width:7px;height:7px;border-radius:999px;background:#E2B93B;display:inline-block;margin-left:6px;vertical-align:middle"></span></sc-if> een offerte.</p>
+        <div style="display:flex;flex-direction:column;gap:10px;margin-top:10px">
+          <a href="#" style="height:48px;background:#C4A24D;color:#0B0B0C;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:15px">Offerte aanvragen</a>
+          <a href="#" style="height:48px;border:1px solid #F2EFE9;color:#F2EFE9;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:15px">WhatsApp ons</a>
+        </div>
+      </div>
+    </div>
+
+    <div style="background:#060607;border-top:1px solid #2A2B2F;padding:40px 16px 24px;color:#A3A39F;font-size:13px;line-height:1.6;display:flex;flex-direction:column;gap:28px">
+      <div style="display:flex;flex-direction:column;gap:12px"><div style="display:flex;align-items:center;gap:8px"><svg viewBox="0 0 200 232" width="22" height="26"><path d="M100 8 184 36v82c0 54-42 88-84 106C58 206 16 172 16 118V36Z" fill="none" stroke="#C4A24D" stroke-width="12" stroke-linejoin="round"></path><text x="100" y="168" text-anchor="middle" font-family="Cinzel, serif" font-weight="700" font-size="132" fill="#C4A24D">V</text></svg><div style="font-family:Cinzel,serif;font-weight:700;font-size:14px;letter-spacing:.06em;color:#C4A24D">V-GUARD</div></div><div style="color:#F2EFE9;font-weight:500">V Guard Studio</div><div>⟦Adres⟧, Vroomshoop<br>⟦Telefoon⟧<br>⟦Openingstijden⟧</div></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px 16px"><a href="#" style="color:#F2EFE9;display:flex;align-items:center;height:36px">Home</a><a href="#" style="color:#F2EFE9;display:flex;align-items:center;height:36px">PPF</a><a href="#" style="color:#F2EFE9;display:flex;align-items:center;height:36px">Ramen blinderen</a><a href="#" style="color:#F2EFE9;display:flex;align-items:center;height:36px">Car wrapping</a><a href="#" style="color:#F2EFE9;display:flex;align-items:center;height:36px">Projecten</a><a href="#" style="color:#F2EFE9;display:flex;align-items:center;height:36px">Contact</a></div>
+      <div style="display:flex;gap:20px"><a href="#" style="color:#F2EFE9;display:flex;align-items:center;height:36px">TikTok</a><a href="#" style="color:#F2EFE9;display:flex;align-items:center;height:36px">Instagram</a><a href="#" style="color:#F2EFE9;display:flex;align-items:center;height:36px">Facebook</a></div>
+      <div style="border-top:1px solid #2A2B2F;padding-top:16px;display:flex;justify-content:space-between;font-size:12px"><a href="#" style="color:#A3A39F">Privacy</a><span>KvK ⟦nummer⟧</span></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;padding:8px 12px 12px;background:#0B0B0C;border-top:1px solid #2A2B2F">
+      <a href="#" style="display:flex;align-items:center;justify-content:center;height:48px;border-radius:6px;font-size:14px;font-weight:600;background:#16171A;border:1px solid #3A3B3F;color:#F2EFE9">WhatsApp</a>
+      <a href="#" style="display:flex;align-items:center;justify-content:center;height:48px;border-radius:6px;font-size:14px;font-weight:600;background:#16171A;border:1px solid #3A3B3F;color:#F2EFE9">Bellen</a>
+      <a href="#" style="display:flex;align-items:center;justify-content:center;height:48px;border-radius:6px;font-size:14px;font-weight:600;background:#C4A24D;color:#0B0B0C">Offerte</a>
+    </div>
+  </div>
+</div>
+
+<!-- FRAME 2: Car wrapping NL 1280 -->
+<div id="f2" style="display:flex;flex-direction:column;gap:12px;flex:none">
+  <div style="font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#8A8B90">Frame 2 · Car wrapping NL · 1280 · volledige pagina</div>
+  <div data-screen-label="Wrap NL 1280" style="width:1280px;background:#0B0B0C;overflow:hidden;box-shadow:0 0 0 1px #2A2B2F">
+    <div style="display:flex;align-items:center;justify-content:space-between;height:72px;padding:0 40px;border-bottom:1px solid #2A2B2F">
+      <div style="display:flex;align-items:center;gap:10px"><svg viewBox="0 0 200 232" width="26" height="30"><path d="M100 8 184 36v82c0 54-42 88-84 106C58 206 16 172 16 118V36Z" fill="none" stroke="#C4A24D" stroke-width="12" stroke-linejoin="round"></path><text x="100" y="168" text-anchor="middle" font-family="Cinzel, serif" font-weight="700" font-size="132" fill="#C4A24D">V</text></svg><div><div style="font-family:Cinzel,serif;font-weight:700;font-size:16px;letter-spacing:.06em;color:#C4A24D;line-height:1">V-GUARD</div><div style="font-size:9px;letter-spacing:.32em;color:#A3A39F;margin-top:3px">STUDIO</div></div></div>
+      <nav style="display:flex;gap:28px;font-size:15px;font-weight:500"><a href="#" style="color:#F2EFE9">PPF</a><a href="#" style="color:#F2EFE9">Ramen blinderen</a><a href="#" style="color:#C4A24D;border-bottom:1px solid #C4A24D;padding-bottom:2px">Car wrapping</a><a href="#" style="color:#F2EFE9">Projecten</a><a href="#" style="color:#F2EFE9">Contact</a></nav>
+      <div style="display:flex;align-items:center;gap:20px"><div style="font-size:14px;font-weight:500;display:flex;gap:6px"><span>NL</span><span style="color:#5C5D62">/</span><span style="color:#A3A39F">UA</span></div><a href="#" style="height:44px;padding:0 20px;background:#C4A24D;color:#0B0B0C;border-radius:6px;display:flex;align-items:center;font-weight:600;font-size:14px">Offerte aanvragen</a></div>
+    </div>
+    <div style="position:relative;height:680px;overflow:hidden;background:#0B0B0C">
+      <img src="assets/wrap/hero-1280.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 50%">
+      <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(11,11,12,.96) 0%,rgba(11,11,12,.88) 40%,rgba(11,11,12,.35) 68%,rgba(11,11,12,.05) 100%)"></div>
+      <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,11,12,.25) 0%,rgba(11,11,12,0) 30%,rgba(11,11,12,.65) 80%,#0B0B0C 100%)"></div>
+      <div style="position:absolute;left:40px;bottom:72px;width:680px;display:flex;flex-direction:column;gap:20px">
+        <h1 style="font-size:50px;line-height:1.08;font-weight:600;letter-spacing:-.02em;text-wrap:pretty">Car wrapping in Vroomshoop: nieuwe kleur zonder overspuiten</h1>
+        <p style="font-size:19px;line-height:1.45;color:#D7D4CE">Volledig of alleen dak, spiegels en chroom. Zie direct je prijsindicatie.</p>
+        <div style="display:flex;gap:12px;margin-top:4px"><a href="#cfg-1280" style="display:flex;align-items:center;justify-content:center;height:52px;padding:0 28px;background:#C4A24D;color:#0B0B0C;font-weight:600;font-size:16px;border-radius:6px">Stel je wrap samen</a><a href="#" style="display:flex;align-items:center;justify-content:center;height:52px;padding:0 28px;border:1px solid #F2EFE9;color:#F2EFE9;font-weight:600;font-size:16px;border-radius:6px">WhatsApp ons</a></div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">
+          <span style="display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:500;padding:8px 14px;border:1px solid rgba(242,239,233,.4);border-radius:999px">3 jaar garantie<sc-if value="{{ showPending }}" hint-placeholder-val="{{ true }}"><span style="width:7px;height:7px;border-radius:999px;background:#E2B93B;display:inline-block;flex:none"></span></sc-if></span>
+          <span style="display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:500;padding:8px 14px;border:1px solid rgba(242,239,233,.4);border-radius:999px">Volledige wrap vanaf €1.795<sc-if value="{{ showPending }}" hint-placeholder-val="{{ true }}"><span style="width:7px;height:7px;border-radius:999px;background:#E2B93B;display:inline-block;flex:none"></span></sc-if></span>
+          <span style="display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:500;padding:8px 14px;border:1px solid rgba(242,239,233,.4);border-radius:999px">Ontchromen vanaf €149<sc-if value="{{ showPending }}" hint-placeholder-val="{{ true }}"><span style="width:7px;height:7px;border-radius:999px;background:#E2B93B;display:inline-block;flex:none"></span></sc-if></span>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin:0 40px;border-top:1px solid #2A2B2F;border-bottom:1px solid #2A2B2F;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;padding:18px 0">
+      <sc-for list="{{ proof }}" as="t" hint-placeholder-count="4">
+        <div style="display:flex;align-items:center;gap:10px;font-size:14px;font-weight:500"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C4A24D" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="{{ t.icon }}"></path></svg><span>{{ t.txt }}</span><sc-if value="{{ t.pend }}" hint-placeholder-val="{{ false }}"><span style="width:7px;height:7px;border-radius:999px;background:#E2B93B;display:inline-block;flex:none"></span></sc-if></div>
+      </sc-for>
+    </div>
+
+    <div style="margin:72px 40px 0;padding:32px 40px;background:#16171A;border:1px solid #2A2B2F;border-radius:10px;max-width:960px">
+      <p style="font-size:20px;line-height:1.55;color:#F2EFE9;text-wrap:pretty">Car wrapping (auto wrappen) is je auto bekleden met gekleurde folie: volledig of alleen dak, spiegelkappen of chroom. De originele lak blijft eronder, zodat je later terug kunt naar de originele kleur. V Guard Studio wrapt auto's in Vroomshoop.</p>
+    </div>
+
+    <!-- Configurator 1280 -->
+    <div id="cfg-1280" style="padding:112px 40px 0">
+      <div style="max-width:720px"><h2 style="font-size:40px;line-height:1.1;font-weight:600;letter-spacing:-.02em">Stel je wrap samen</h2><p style="font-size:18px;line-height:1.45;color:#A3A39F;margin-top:12px">Kies je auto, kleur en delen. Je ziet direct hoe het eruitziet en wat het ongeveer kost.</p></div>
+      <div style="display:grid;grid-template-columns:520px minmax(0,1fr);gap:48px;margin-top:40px;align-items:start">
+        <div style="display:flex;flex-direction:column;gap:32px">
+          <div style="display:flex;flex-direction:column;gap:14px">
+            <div style="font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#C4A24D">A · Je auto</div>
+            <div style="display:flex;gap:10px;overflow-x:auto;scrollbar-width:none;scroll-snap-type:x mandatory;padding-bottom:4px">
+              <sc-for list="{{ live.bodies }}" as="b" hint-placeholder-count="6">
+                <button onClick="{{ b.pick }}" style="display:flex;flex-direction:column;align-items:flex-start;gap:6px;padding:8px 8px 8px;width:156px;flex:none;scroll-snap-align:start;min-height:96px;border-radius:8px;text-align:left;color:#F2EFE9;border:1px solid {{ b.bd }};background:{{ b.bg }}"><div style="width:100%;aspect-ratio:800/275;border-radius:4px;overflow:hidden"><dc-import name="VG Wrap Car" body="{{ b.id }}" hex="{{ b.thex }}" finish="{{ b.tfin }}" full="{{ true }}" mini="{{ true }}" hint-size="100%,100%" style="width:100%;height:100%"></dc-import></div><span style="font-size:13px;font-weight:600;line-height:1.2">{{ b.label }}</span><span style="font-size:11px;color:#A3A39F;line-height:1.2">{{ b.sub }}</span></button>
+              </sc-for>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:14px">
+            <div style="font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#C4A24D">B · Wat wrappen we?</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;border:1px solid #3A3B3F;border-radius:8px;overflow:hidden">
+              <button onClick="{{ live.setFull }}" style="height:44px;border:0;font-size:14px;font-weight:600;background:{{ live.fullBg }};color:{{ live.fullFg }}">Volledige wrap</button>
+              <button onClick="{{ live.setParts }}" style="height:44px;border:0;font-size:14px;font-weight:600;background:{{ live.partsBg }};color:{{ live.partsFg }}">Losse delen</button>
+            </div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <sc-for list="{{ live.parts }}" as="p" hint-placeholder-count="3">
+                <button onClick="{{ p.pick }}" style="display:inline-flex;align-items:center;gap:8px;height:44px;padding:0 14px;border-radius:8px;font-size:14px;font-weight:500;color:#F2EFE9;border:1px solid {{ p.bd }};background:{{ p.bg }};opacity:{{ p.op }}"><span>{{ p.label }}</span><span style="font-size:12px;color:#A3A39F">{{ p.sub }}</span></button>
+              </sc-for>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:44px">
+              <div><div style="font-size:14px;font-weight:600">Black styling pakket</div><div style="font-size:12px;color:#A3A39F;display:flex;align-items:center;gap:6px;flex-wrap:wrap"><span>Dak, spiegelkappen en chroom in zwart ·</span><span style="display:inline-flex;align-items:center;gap:6px;white-space:nowrap">vanaf €395<sc-if value="{{ showPending }}" hint-placeholder-val="{{ true }}"><span style="width:7px;height:7px;border-radius:999px;background:#E2B93B;display:inline-block;flex:none"></span></sc-if></span></div></div>
+              <button onClick="{{ live.togglePakket }}" aria-label="Black styling pakket" style="width:48px;height:28px;border-radius:999px;border:0;padding:3px;flex:none;display:flex;background:{{ live.pakketBg }};justify-content:{{ live.pakketJ }};opacity:{{ live.pakketOp }}"><span style="width:22px;height:22px;border-radius:999px;background:#0B0B0C;display:block"></span></button>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:14px">
+            <div style="font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#C4A24D">C · Finish</div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <sc-for list="{{ live.finishes }}" as="f" hint-placeholder-count="5">
+                <button onClick="{{ f.pick }}" style="display:inline-flex;align-items:center;gap:8px;height:44px;padding:0 14px;border-radius:8px;font-size:14px;font-weight:500;color:#F2EFE9;border:1px solid {{ f.bd }};background:{{ f.bg }}"><span>{{ f.label }}</span><span style="font-size:12px;color:#A3A39F">{{ f.sub }}</span></button>
+              </sc-for>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:14px">
+            <div style="font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#C4A24D">D · Kleur</div>
+            <div style="display:grid;grid-template-columns:repeat(6,56px);gap:8px">
+              <sc-for list="{{ live.swatches }}" as="s" hint-placeholder-count="12">
+                <button onClick="{{ s.pick }}" title="{{ s.name }}" aria-label="{{ s.name }}" style="width:56px;height:56px;display:flex;align-items:center;justify-content:center;background:transparent;border:0;padding:0"><span style="width:40px;height:40px;border-radius:999px;display:block;border:1px solid rgba(242,239,233,.3);background:{{ s.hex }};box-shadow:{{ s.ring }}"></span></button>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+        <div style="position:sticky;top:24px;display:flex;flex-direction:column;gap:16px">
+          <div style="background:#1C1D21;border:1px solid #2A2B2F;border-radius:10px;padding:0 0 14px;overflow:hidden;display:flex;flex-direction:column;gap:10px">
+            <dc-import name="VG Wrap Car" body="{{ live.body }}" hex="{{ live.hex }}" finish="{{ live.finish }}" full="{{ live.full }}" dak="{{ live.dak }}" spiegel="{{ live.spiegel }}" chroom="{{ live.chroom }}" pakket="{{ live.pakket }}" hint-size="100%,160px" style="width:100%"></dc-import>
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;padding:0 20px"><span style="font-size:15px;font-weight:600">{{ live.colorLabel }}</span><span style="font-size:12px;color:#8A8B90">Illustratie. De echte kleur zie je op stalen in de studio.</span></div>
+          </div>
+          <div style="background:#16171A;border:1px solid #2A2B2F;border-top:2px solid #C4A24D;border-radius:10px;padding:20px 24px 24px;display:flex;flex-direction:column;gap:16px">
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <sc-for list="{{ live.summary }}" as="r" hint-placeholder-count="4"><div style="display:flex;justify-content:space-between;gap:16px;font-size:14px;padding:6px 0;border-bottom:1px solid #2A2B2F"><span style="color:#A3A39F">{{ r.k }}</span><span style="text-align:right;font-weight:500">{{ r.v }}</span></div></sc-for>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:12px"><div><div style="font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#A3A39F">Prijsindicatie</div><div style="display:flex;align-items:center;gap:8px;font-size:30px;font-weight:600;line-height:1.1;margin-top:4px">{{ live.priceLabel }}<sc-if value="{{ showPending }}" hint-placeholder-val="{{ true }}"><span style="width:7px;height:7px;border-radius:999px;background:#E2B93B;display:inline-block;flex:none"></span></sc-if></div></div><div style="font-size:13px;color:#A3A39F;text-align:right">Vaste prijs na je aanvraag.</div></div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px"><a href="#" style="height:50px;background:#C4A24D;color:#0B0B0C;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:15px">{{ live.ctaLabel }}</a><a href="#" style="height:50px;border:1px solid #F2EFE9;color:#F2EFE9;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:15px">Verstuur via WhatsApp</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cards 1280 -->
+    <div style="padding:112px 40px 0">
+      <h2 style="font-size:40px;line-height:1.1;font-weight:600;letter-spacing:-.02em;margin-bottom:32px">Wat wil je laten wrappen?</h2>
+      <div style="display:grid;grid-template-columns:1.15fr 1fr 1fr;grid-template-rows:auto auto;gap:24px">
+        <div style="grid-row:span 2;background:#F2EFE9;color:#0B0B0C;border-radius:10px;overflow:hidden;display:flex;flex-direction:column">
+          <div style="position:relative;aspect-ratio:4/3;background:#232428;overflow:hidden"><img src="assets/wrap/card-volledig.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 55%"></div>
+          <div style="padding:28px 28px 28px;display:flex;flex-direction:column;gap:10px;flex:1;justify-content:flex-end">
+            <h3 style="font-size:28px;font-weight:600;line-height:1.15">{{ big.t }}</h3>
+            <p style="font-size:16px;line-height:1.5;color:#5C5C58">{{ big.d }}</p>
+            <div style="display:flex;align-items:center;gap:10px;font-size:22px;font-weight:600;margin-top:6px">{{ big.price }}<sc-if value="{{ showPending }}" hint-placeholder-val="{{ true }}"><span style="width:7px;height:7px;border-radius:999px;background:#E2B93B;display:inline-block;flex:none"></span></sc-if><span style="font-size:14px;font-weight:400;color:#5C5C58">{{ big.dur }}</span></div>
+            <a href="#" style="height:48px;background:#0B0B0C;color:#F2EFE9;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:15px;margin-top:6px;align-self:flex-start;padding:0 28px">Aanvragen</a>
+          </div>
+        </div>
+        <sc-for list="{{ cardsRest }}" as="k" hint-placeholder-count="4">
+          <div style="background:#F2EFE9;color:#0B0B0C;border-radius:10px;overflow:hidden;display:flex;flex-direction:column">
+            <div style="position:relative;aspect-ratio:4/3;background-color:#232428;background-size:cover;background-repeat:no-repeat;background-image:{{ k.bgi }};background-position:{{ k.pos }};overflow:hidden"><sc-if value="{{ k.badge }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;right:10px;bottom:10px;font-size:11px;font-weight:600;letter-spacing:.04em;background:#C4A24D;color:#0B0B0C;border-radius:4px;padding:4px 8px">{{ k.badge }}</span></sc-if></div>
+            <div style="padding:18px 20px 20px;display:flex;flex-direction:column;gap:8px;flex:1">
+              <h3 style="font-size:19px;font-weight:600;line-height:1.2">{{ k.t }}</h3>
+              <p style="font-size:14px;line-height:1.45;color:#5C5C58;flex:1">{{ k.d }}</p>
+              <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:4px"><div style="display:flex;align-items:center;gap:8px;font-size:18px;font-weight:600">{{ k.price }}<sc-if value="{{ showPending }}" hint-placeholder-val="{{ true }}"><span style="width:7px;height:7px;border-radius:999px;background:#E2B93B;display:inline-block;flex:none"></span></sc-if></div><a href="#" style="height:44px;border:1px solid #0B0B0C;color:#0B0B0C;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px;padding:0 18px">Aanvragen</a></div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+      <p style="font-size:14px;line-height:1.45;color:#A3A39F;margin-top:20px">Prijzen incl. btw. Eindprijs hangt af van auto, folie en delen.</p>
+    </div>
+
+    <!-- Finishes 1280 -->
+    <div style="padding:112px 40px 0">
+      <h2 style="font-size:40px;line-height:1.1;font-weight:600;letter-spacing:-.02em;margin-bottom:32px">Finishes</h2>
+      <div style="display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:24px">
+        <sc-for list="{{ finishTiles }}" as="f" hint-placeholder-count="5">
+          <div style="display:flex;flex-direction:column;gap:12px"><div style="position:relative;aspect-ratio:1/1;border-radius:8px;overflow:hidden;background-color:#232428;background-size:cover;background-position:center;background-image:{{ f.bgi }}"></div><div><div style="font-size:18px;font-weight:600">{{ f.t }}</div><div style="font-size:14px;color:#A3A39F;line-height:1.45;margin-top:4px">{{ f.d }}</div></div></div>
+        </sc-for>
+      </div>
+    </div>
+
+    <!-- Table 1280 -->
+    <div style="padding:112px 40px 0;display:grid;grid-template-columns:1fr 2fr;gap:48px;align-items:start">
+      <div style="display:flex;flex-direction:column;gap:24px"><h2 style="font-size:40px;line-height:1.1;font-weight:600;letter-spacing:-.02em">Wrappen of overspuiten?</h2><div style="position:relative;aspect-ratio:3/2;border-radius:10px;overflow:hidden;background:#232428"><img src="assets/wrap/compare.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></div><p style="font-size:16px;line-height:1.5;color:#A3A39F">Wil je je lak ook tegen steenslag beschermen? <a href="#">Kijk naar PPF.</a></p></div>
+      <div style="border:1px solid #2A2B2F;border-radius:10px;overflow:hidden;font-size:15px;line-height:1.4">
+        <div style="display:grid;grid-template-columns:1.3fr 1fr 1fr;background:#16171A;font-weight:600;padding:16px 24px"><span></span><span style="color:#C4A24D">Wrappen</span><span style="color:#A3A39F">Overspuiten</span></div>
+        <sc-for list="{{ compare }}" as="r" hint-placeholder-count="4">
+          <div style="display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:16px;padding:16px 24px;border-top:1px solid #2A2B2F"><span style="color:#D7D4CE">{{ r.k }}</span><span style="font-weight:500">{{ r.w }}</span><span style="color:#A3A39F">{{ r.o }}</span></div>
+        </sc-for>
+      </div>
+    </div>
+
+    <!-- Recent 1280 -->
+    <div style="padding:112px 40px 0">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:32px"><h2 style="font-size:40px;line-height:1.1;font-weight:600;letter-spacing:-.02em">Recent opgeleverd</h2><a href="#" style="font-size:15px;font-weight:500">Bekijk alle projecten</a></div>
+      <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px">
+        <sc-for list="{{ recent4 }}" as="g" hint-placeholder-count="4">
+          <div style="display:flex;flex-direction:column;gap:8px"><div style="aspect-ratio:4/3;background-color:#2E2F33;background-size:cover;background-position:center;background-image:{{ g.bgi }};border:{{ g.bd }};border-radius:6px;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;font-size:13px;line-height:1.4;color:#C9C7C1">{{ g.ph }}</div><div style="font-size:14px;color:#A3A39F;display:flex;align-items:center;gap:8px"><span>{{ g.cap }}</span><sc-if value="{{ showPending }}" hint-placeholder-val="{{ true }}"><span style="width:7px;height:7px;border-radius:999px;background:#E2B93B;display:inline-block;flex:none"></span></sc-if></div></div>
+        </sc-for>
+      </div>
+    </div>
+
+    <!-- Steps 1280 -->
+    <div style="padding:112px 40px 0">
+      <h2 style="font-size:40px;line-height:1.1;font-weight:600;letter-spacing:-.02em;margin-bottom:40px">Zo werkt het</h2>
+      <ol style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px">
+        <sc-for list="{{ steps }}" as="s" hint-placeholder-count="4">
+          <li style="padding-top:20px;border-top:1px solid #C4A24D"><div style="display:flex;justify-content:space-between;align-items:center"><div style="font-size:13px;color:#C4A24D;font-weight:600;letter-spacing:.08em">{{ s.n }}</div><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C4A24D" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="{{ s.icon }}"></path></svg></div><div style="display:flex;align-items:center;gap:8px;font-size:19px;font-weight:600;line-height:1.3;margin-top:14px">{{ s.t }}<sc-if value="{{ s.pend }}" hint-placeholder-val="{{ false }}"><span style="width:7px;height:7px;border-radius:999px;background:#E2B93B;display:inline-block;flex:none"></span></sc-if></div></li>
+        </sc-for>
+      </ol>
+    </div>
+
+    <!-- FAQ 1280 -->
+    <div style="padding:112px 40px 0;display:grid;grid-template-columns:1fr 2fr;gap:48px"><h2 style="font-size:40px;line-height:1.1;font-weight:600;letter-spacing:-.02em">Veelgestelde vragen</h2>
+      <div style="display:flex;flex-direction:column">
+        <sc-for list="{{ faqA }}" as="f" hint-placeholder-count="8">
+          <div style="border-top:1px solid #2A2B2F;padding:20px 0">
+            <div style="display:flex;justify-content:space-between;gap:24px;align-items:flex-start;min-height:44px"><div style="font-size:19px;font-weight:600;line-height:1.35">{{ f.q }}</div><div style="width:24px;height:24px;flex:none;display:flex;align-items:center;justify-content:center;color:#C4A24D;font-size:20px;line-height:1">{{ f.sym }}</div></div>
+            <sc-if value="{{ f.open }}" hint-placeholder-val="{{ false }}"><div style="display:flex;align-items:flex-start;gap:8px;margin-top:10px;max-width:680px"><p style="font-size:16px;line-height:1.6;color:#A3A39F">{{ f.a }}</p><sc-if value="{{ f.pend }}" hint-placeholder-val="{{ false }}"><span style="width:7px;height:7px;border-radius:999px;background:#E2B93B;display:inline-block;flex:none;margin-top:8px"></span></sc-if></div></sc-if>
+          </div>
+        </sc-for>
+        <div style="border-top:1px solid #2A2B2F"></div>
+      </div>
+    </div>
+
+    <!-- CTA 1280 -->
+    <div style="position:relative;margin:112px 40px 112px;border-radius:10px;overflow:hidden;border:1px solid #2A2B2F;background:#0B0B0C;min-height:420px;display:flex;align-items:flex-end">
+      <img src="assets/wrap/cta-b.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 55%">
+      <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(11,11,12,.94) 0%,rgba(11,11,12,.8) 45%,rgba(11,11,12,.25) 75%,rgba(11,11,12,.05) 100%)"></div>
+      <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,11,12,0) 50%,rgba(11,11,12,.6) 100%)"></div>
+      <div style="position:relative;padding:48px;display:flex;justify-content:space-between;align-items:flex-end;gap:48px;width:100%">
+        <div style="max-width:560px"><h2 style="font-size:36px;line-height:1.1;font-weight:600;letter-spacing:-.02em">Klaar voor een nieuwe kleur?</h2><p style="font-size:17px;line-height:1.5;color:#D7D4CE;margin-top:12px">Stuur merk, model en je idee. Je krijgt binnen 1 werkdag<sc-if value="{{ showPending }}" hint-placeholder-val="{{ true }}"><span style="width:7px;height:7px;border-radius:999px;background:#E2B93B;display:inline-block;margin-left:6px;vertical-align:middle"></span></sc-if> een offerte.</p></div>
+        <div style="display:flex;gap:12px;flex:none"><a href="#" style="height:52px;padding:0 28px;background:#C4A24D;color:#0B0B0C;border-radius:6px;display:flex;align-items:center;font-weight:600;font-size:16px">Offerte aanvragen</a><a href="#" style="height:52px;padding:0 28px;border:1px solid #F2EFE9;color:#F2EFE9;border-radius:6px;display:flex;align-items:center;font-weight:600;font-size:16px">WhatsApp ons</a></div>
+      </div>
+    </div>
+
+    <div style="background:#060607;border-top:1px solid #2A2B2F;padding:56px 40px 28px;color:#A3A39F;font-size:14px;line-height:1.6">
+      <div style="display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:48px">
+        <div style="display:flex;flex-direction:column;gap:14px"><div style="display:flex;align-items:center;gap:8px"><svg viewBox="0 0 200 232" width="24" height="28"><path d="M100 8 184 36v82c0 54-42 88-84 106C58 206 16 172 16 118V36Z" fill="none" stroke="#C4A24D" stroke-width="12" stroke-linejoin="round"></path><text x="100" y="168" text-anchor="middle" font-family="Cinzel, serif" font-weight="700" font-size="132" fill="#C4A24D">V</text></svg><div style="font-family:Cinzel,serif;font-weight:700;font-size:15px;letter-spacing:.06em;color:#C4A24D">V-GUARD</div></div><div style="color:#F2EFE9;font-weight:500">V Guard Studio</div><div>⟦Adres⟧, Vroomshoop<br>⟦Telefoon⟧<br>⟦Openingstijden⟧</div></div>
+        <div style="display:flex;flex-direction:column;gap:10px"><div style="color:#F2EFE9;font-weight:600;font-size:13px;letter-spacing:.08em;text-transform:uppercase">Diensten</div><a href="#" style="color:#D7D4CE">PPF</a><a href="#" style="color:#D7D4CE">Ramen blinderen</a><a href="#" style="color:#D7D4CE">Car wrapping</a></div>
+        <div style="display:flex;flex-direction:column;gap:10px"><div style="color:#F2EFE9;font-weight:600;font-size:13px;letter-spacing:.08em;text-transform:uppercase">Studio</div><a href="#" style="color:#D7D4CE">Home</a><a href="#" style="color:#D7D4CE">Projecten</a><a href="#" style="color:#D7D4CE">Contact</a></div>
+        <div style="display:flex;flex-direction:column;gap:10px"><div style="color:#F2EFE9;font-weight:600;font-size:13px;letter-spacing:.08em;text-transform:uppercase">Volg ons</div><a href="#" style="color:#D7D4CE">TikTok</a><a href="#" style="color:#D7D4CE">Instagram</a><a href="#" style="color:#D7D4CE">Facebook</a></div>
+      </div>
+      <div style="border-top:1px solid #2A2B2F;margin-top:48px;padding-top:20px;display:flex;justify-content:space-between;font-size:13px"><a href="#" style="color:#A3A39F">Privacy</a><span>KvK ⟦nummer⟧</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- FRAME 3: Configurator 375, 3 states -->
+<div id="f3" style="display:flex;flex-direction:column;gap:12px;flex:none">
+  <div style="font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#8A8B90">Frame 3 · Configurator 375 · auto kiezen / kleur en finish / overzicht met prijs</div>
+  <div style="display:flex;gap:40px;align-items:flex-start">
+
+    <div data-screen-label="Configurator 375 stap A" style="position:relative;width:375px;height:667px;background:#0B0B0C;overflow:hidden;box-shadow:0 0 0 1px #2A2B2F;display:flex;flex-direction:column">
+      <div style="display:flex;align-items:center;justify-content:space-between;height:56px;padding:0 8px 0 16px;border-bottom:1px solid #2A2B2F;flex:none">
+        <div style="display:flex;align-items:center;gap:8px"><svg viewBox="0 0 200 232" width="22" height="26"><path d="M100 8 184 36v82c0 54-42 88-84 106C58 206 16 172 16 118V36Z" fill="none" stroke="#C4A24D" stroke-width="12" stroke-linejoin="round"></path><text x="100" y="168" text-anchor="middle" font-family="Cinzel, serif" font-weight="700" font-size="132" fill="#C4A24D">V</text></svg><div><div style="font-family:Cinzel,serif;font-weight:700;font-size:14px;letter-spacing:.06em;color:#C4A24D;line-height:1">V-GUARD</div><div style="font-size:8px;letter-spacing:.32em;color:#A3A39F;margin-top:3px">STUDIO</div></div></div>
+        <div style="display:flex;align-items:center;gap:4px"><div style="font-size:13px;font-weight:500;padding:0 8px;height:44px;display:flex;align-items:center;gap:6px"><span>NL</span><span style="color:#5C5D62">/</span><span style="color:#A3A39F">UA</span></div><div style="width:44px;height:44px;display:flex;align-items:center;justify-content:center"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#F2EFE9" stroke-width="1.6"><path d="M2 6h18M2 11h18M2 16h18"></path></svg></div></div>
+      </div>
+      <div style="background:#1C1D21;border-bottom:1px solid #2A2B2F;padding:0 0 6px;flex:none">
+        <dc-import name="VG Wrap Car" body="{{ s1.body }}" hex="{{ s1.hex }}" finish="{{ s1.finish }}" full="{{ s1.full }}" dak="{{ s1.dak }}" spiegel="{{ s1.spiegel }}" chroom="{{ s1.chroom }}" pakket="{{ s1.pakket }}" hint-size="100%,140px" style="width:100%"></dc-import>
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:2px;padding:0 16px"><span style="font-size:13px;font-weight:600">{{ s1.colorLabel }}</span><span style="font-size:11px;color:#8A8B90">Illustratie</span></div>
+      </div>
+      <div style="padding:20px 16px 0;display:flex;flex-direction:column;gap:12px;flex:1;overflow:hidden">
+        <div style="display:flex;justify-content:space-between;align-items:center"><div style="font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#C4A24D">A · Je auto</div><div style="font-size:12px;color:#8A8B90">Stap 1 van 4</div></div>
+        <div style="display:flex;gap:8px;overflow:hidden;margin:0 -16px;padding:0 16px">
+          <sc-for list="{{ s1.bodies }}" as="b" hint-placeholder-count="6">
+            <div style="display:flex;flex-direction:column;align-items:flex-start;gap:4px;padding:8px 8px 8px;width:132px;flex:none;min-height:88px;border-radius:8px;border:1px solid {{ b.bd }};background:{{ b.bg }}"><div style="width:100%;aspect-ratio:800/275;border-radius:4px;overflow:hidden"><dc-import name="VG Wrap Car" body="{{ b.id }}" hex="{{ b.thex }}" finish="{{ b.tfin }}" full="{{ true }}" mini="{{ true }}" hint-size="100%,100%" style="width:100%;height:100%"></dc-import></div><span style="font-size:13px;font-weight:600;line-height:1.2">{{ b.label }}</span><span style="font-size:11px;color:#A3A39F;line-height:1.2">{{ b.sub }}</span></div>
+          </sc-for>
+        </div>
+        <div style="font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#C4A24D;margin-top:8px">B · Wat wrappen we?</div>
+      </div>
+      <div style="position:absolute;left:0;right:0;bottom:0;background:rgba(11,11,12,.96);border-top:1px solid #2A2B2F;padding:10px 16px 12px;display:flex;flex-direction:column;gap:10px;backdrop-filter:blur(8px)">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px"><div style="display:flex;align-items:baseline;gap:8px;flex:none"><span style="font-size:12px;color:#A3A39F">Prijsindicatie</span><span style="display:inline-flex;align-items:center;gap:8px;font-size:20px;font-weight:600;white-space:nowrap">{{ s1.priceLabel }}<sc-if value="{{ showPending }}" hint-placeholder-val="{{ true }}"><span style="width:7px;height:7px;border-radius:999px;background:#E2B93B;display:inline-block;flex:none"></span></sc-if></span></div><span style="font-size:11px;color:#8A8B90;flex:1;min-width:0;text-align:right;line-height:1.3">Vaste prijs na je aanvraag</span></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><a href="#" style="height:48px;background:#C4A24D;color:#0B0B0C;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px">Deze wrap aanvragen</a><a href="#" style="height:48px;border:1px solid #F2EFE9;color:#F2EFE9;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px">Verstuur via WhatsApp</a></div>
+      </div>
+    </div>
+
+    <div data-screen-label="Configurator 375 stap C en D" style="position:relative;width:375px;height:667px;background:#0B0B0C;overflow:hidden;box-shadow:0 0 0 1px #2A2B2F;display:flex;flex-direction:column">
+      <div style="display:flex;align-items:center;justify-content:space-between;height:56px;padding:0 8px 0 16px;border-bottom:1px solid #2A2B2F;flex:none">
+        <div style="display:flex;align-items:center;gap:8px"><svg viewBox="0 0 200 232" width="22" height="26"><path d="M100 8 184 36v82c0 54-42 88-84 106C58 206 16 172 16 118V36Z" fill="none" stroke="#C4A24D" stroke-width="12" stroke-linejoin="round"></path><text x="100" y="168" text-anchor="middle" font-family="Cinzel, serif" font-weight="700" font-size="132" fill="#C4A24D">V</text></svg><div><div style="font-family:Cinzel,serif;font-weight:700;font-size:14px;letter-spacing:.06em;color:#C4A24D;line-height:1">V-GUARD</div><div style="font-size:8px;letter-spacing:.32em;color:#A3A39F;margin-top:3px">STUDIO</div></div></div>
+        <div style="display:flex;align-items:center;gap:4px"><div style="font-size:13px;font-weight:500;padding:0 8px;height:44px;display:flex;align-items:center;gap:6px"><span>NL</span><span style="color:#5C5D62">/</span><span style="color:#A3A39F">UA</span></div><div style="width:44px;height:44px;display:flex;align-items:center;justify-content:center"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#F2EFE9" stroke-width="1.6"><path d="M2 6h18M2 11h18M2 16h18"></path></svg></div></div>
+      </div>
+      <div style="background:#1C1D21;border-bottom:1px solid #2A2B2F;padding:0 0 6px;flex:none">
+        <dc-import name="VG Wrap Car" body="{{ s2.body }}" hex="{{ s2.hex }}" finish="{{ s2.finish }}" full="{{ s2.full }}" dak="{{ s2.dak }}" spiegel="{{ s2.spiegel }}" chroom="{{ s2.chroom }}" pakket="{{ s2.pakket }}" hint-size="100%,140px" style="width:100%"></dc-import>
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:2px;padding:0 16px"><span style="font-size:13px;font-weight:600">{{ s2.colorLabel }}</span><span style="font-size:11px;color:#8A8B90">Illustratie</span></div>
+      </div>
+      <div style="padding:20px 16px 0;display:flex;flex-direction:column;gap:12px;flex:1;overflow:hidden">
+        <div style="display:flex;justify-content:space-between;align-items:center"><div style="font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#C4A24D">C · Finish</div><div style="font-size:12px;color:#8A8B90">Stap 3 van 4</div></div>
+        <div style="display:flex;gap:8px;overflow:hidden;margin:0 -16px;padding:0 16px">
+          <sc-for list="{{ s2.finishes }}" as="f" hint-placeholder-count="5">
+            <div style="display:inline-flex;align-items:center;gap:8px;height:44px;padding:0 14px;border-radius:8px;font-size:14px;font-weight:500;white-space:nowrap;border:1px solid {{ f.bd }};background:{{ f.bg }}"><span>{{ f.label }}</span><span style="font-size:12px;color:#A3A39F">{{ f.sub }}</span></div>
+          </sc-for>
+        </div>
+        <div style="font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#C4A24D;margin-top:8px">D · Kleur</div>
+        <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:8px 4px">
+          <sc-for list="{{ s2.swatches }}" as="s" hint-placeholder-count="12">
+            <div style="width:100%;height:48px;display:flex;align-items:center;justify-content:center"><span style="width:38px;height:38px;border-radius:999px;display:block;border:1px solid rgba(242,239,233,.3);background:{{ s.hex }};box-shadow:{{ s.ring }}"></span></div>
+          </sc-for>
+        </div>
+        <div style="font-size:13px;color:#A3A39F">Gekozen: <span style="color:#F2EFE9;font-weight:600">{{ s2.colorLabel }}</span></div>
+      </div>
+      <div style="position:absolute;left:0;right:0;bottom:0;background:rgba(11,11,12,.96);border-top:1px solid #2A2B2F;padding:10px 16px 12px;display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px"><div style="display:flex;align-items:baseline;gap:8px;flex:none"><span style="font-size:12px;color:#A3A39F">Prijsindicatie</span><span style="display:inline-flex;align-items:center;gap:8px;font-size:20px;font-weight:600;white-space:nowrap">{{ s2.priceLabel }}<sc-if value="{{ showPending }}" hint-placeholder-val="{{ true }}"><span style="width:7px;height:7px;border-radius:999px;background:#E2B93B;display:inline-block;flex:none"></span></sc-if></span></div><span style="font-size:11px;color:#8A8B90;flex:1;min-width:0;text-align:right;line-height:1.3">Vaste prijs na je aanvraag</span></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><a href="#" style="height:48px;background:#C4A24D;color:#0B0B0C;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px">Deze wrap aanvragen</a><a href="#" style="height:48px;border:1px solid #F2EFE9;color:#F2EFE9;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px">Verstuur via WhatsApp</a></div>
+      </div>
+    </div>
+
+    <div data-screen-label="Configurator 375 overzicht" style="position:relative;width:375px;height:667px;background:#0B0B0C;overflow:hidden;box-shadow:0 0 0 1px #2A2B2F;display:flex;flex-direction:column">
+      <div style="display:flex;align-items:center;justify-content:space-between;height:56px;padding:0 8px 0 16px;border-bottom:1px solid #2A2B2F;flex:none">
+        <div style="display:flex;align-items:center;gap:8px"><svg viewBox="0 0 200 232" width="22" height="26"><path d="M100 8 184 36v82c0 54-42 88-84 106C58 206 16 172 16 118V36Z" fill="none" stroke="#C4A24D" stroke-width="12" stroke-linejoin="round"></path><text x="100" y="168" text-anchor="middle" font-family="Cinzel, serif" font-weight="700" font-size="132" fill="#C4A24D">V</text></svg><div><div style="font-family:Cinzel,serif;font-weight:700;font-size:14px;letter-spacing:.06em;color:#C4A24D;line-height:1">V-GUARD</div><div style="font-size:8px;letter-spacing:.32em;color:#A3A39F;margin-top:3px">STUDIO</div></div></div>
+        <div style="display:flex;align-items:center;gap:4px"><div style="font-size:13px;font-weight:500;padding:0 8px;height:44px;display:flex;align-items:center;gap:6px"><span>NL</span><span style="color:#5C5D62">/</span><span style="color:#A3A39F">UA</span></div><div style="width:44px;height:44px;display:flex;align-items:center;justify-content:center"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#F2EFE9" stroke-width="1.6"><path d="M2 6h18M2 11h18M2 16h18"></path></svg></div></div>
+      </div>
+      <div style="background:#1C1D21;border-bottom:1px solid #2A2B2F;padding:0 0 6px;flex:none">
+        <dc-import name="VG Wrap Car" body="{{ s3.body }}" hex="{{ s3.hex }}" finish="{{ s3.finish }}" full="{{ s3.full }}" dak="{{ s3.dak }}" spiegel="{{ s3.spiegel }}" chroom="{{ s3.chroom }}" pakket="{{ s3.pakket }}" hint-size="100%,140px" style="width:100%"></dc-import>
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:2px;padding:0 16px"><span style="font-size:13px;font-weight:600">{{ s3.colorLabel }}</span><span style="font-size:11px;color:#8A8B90">Illustratie</span></div>
+      </div>
+      <div style="position:absolute;left:0;right:0;bottom:0;top:262px;background:rgba(11,11,12,.6)"></div>
+      <div style="position:absolute;left:0;right:0;bottom:0;background:#16171A;border-top:2px solid #C4A24D;border-radius:14px 14px 0 0;padding:10px 16px 16px;display:flex;flex-direction:column;gap:14px">
+        <div style="width:36px;height:4px;border-radius:999px;background:#3A3B3F;align-self:center"></div>
+        <div style="display:flex;justify-content:space-between;align-items:center"><h3 style="font-size:20px;font-weight:600;line-height:1.2">Jouw wrap</h3><div style="font-size:12px;color:#8A8B90">Stap 4 van 4</div></div>
+        <div style="display:flex;flex-direction:column">
+          <sc-for list="{{ s3.summary }}" as="r" hint-placeholder-count="4"><div style="display:grid;grid-template-columns:72px 1fr auto;gap:12px;align-items:center;min-height:44px;font-size:14px;border-top:1px solid #2A2B2F"><span style="color:#A3A39F">{{ r.k }}</span><span style="font-weight:500;line-height:1.3">{{ r.v }}</span><a href="#" style="font-size:13px;display:flex;align-items:center;height:44px">Wijzig</a></div></sc-for>
+          <div style="border-top:1px solid #2A2B2F"></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:12px"><div><div style="font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#A3A39F">Prijsindicatie</div><div style="display:flex;align-items:center;gap:8px;font-size:26px;font-weight:600;line-height:1.1;margin-top:4px">{{ s3.priceLabel }}<sc-if value="{{ showPending }}" hint-placeholder-val="{{ true }}"><span style="width:7px;height:7px;border-radius:999px;background:#E2B93B;display:inline-block;flex:none"></span></sc-if></div></div><div style="font-size:12px;color:#A3A39F;text-align:right;line-height:1.4">Vaste prijs na je aanvraag.<br>Prijzen incl. btw.</div></div>
+        <div style="display:flex;flex-direction:column;gap:8px"><a href="#" style="height:48px;background:#C4A24D;color:#0B0B0C;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:15px">Deze wrap aanvragen</a><a href="#" style="height:48px;border:1px solid #F2EFE9;color:#F2EFE9;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:15px">Verstuur via WhatsApp</a></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FRAME 4: Hero UA 375 -->
+<div id="f4" style="display:flex;flex-direction:column;gap:12px;flex:none">
+  <div style="font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#8A8B90">Frame 4 · Hero UA · 375 · lengtecheck</div>
+  <div data-screen-label="Wrap UA 375 hero" style="position:relative;width:375px;background:#0B0B0C;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 0 0 1px #2A2B2F;padding-bottom:48px">
+    <div style="display:flex;align-items:center;justify-content:space-between;height:56px;padding:0 8px 0 16px;border-bottom:1px solid #2A2B2F">
+      <div style="display:flex;align-items:center;gap:8px"><svg viewBox="0 0 200 232" width="22" height="26"><path d="M100 8 184 36v82c0 54-42 88-84 106C58 206 16 172 16 118V36Z" fill="none" stroke="#C4A24D" stroke-width="12" stroke-linejoin="round"></path><text x="100" y="168" text-anchor="middle" font-family="Cinzel, serif" font-weight="700" font-size="132" fill="#C4A24D">V</text></svg><div><div style="font-family:Cinzel,serif;font-weight:700;font-size:14px;letter-spacing:.06em;color:#C4A24D;line-height:1">V-GUARD</div><div style="font-size:8px;letter-spacing:.32em;color:#A3A39F;margin-top:3px">STUDIO</div></div></div>
+      <div style="display:flex;align-items:center;gap:4px"><div style="font-size:13px;font-weight:500;padding:0 8px;height:44px;display:flex;align-items:center;gap:6px"><span style="color:#A3A39F">NL</span><span style="color:#5C5D62">/</span><span>UA</span></div><div style="width:44px;height:44px;display:flex;align-items:center;justify-content:center"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#F2EFE9" stroke-width="1.6"><path d="M2 6h18M2 11h18M2 16h18"></path></svg></div></div>
+    </div>
+    <div style="position:relative;height:556px;overflow:hidden;background:#0B0B0C"><img src="assets/wrap/hero-375.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 72%">
+                  <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,11,12,.05) 0%,rgba(11,11,12,.3) 28%,rgba(11,11,12,.92) 56%,#0B0B0C 100%)"></div>
+      <div style="position:absolute;left:16px;right:16px;bottom:16px;display:flex;flex-direction:column;gap:12px">
+        <h1 style="font-size:26px;line-height:1.12;font-weight:600;letter-spacing:-.01em;text-wrap:pretty">Обклеювання авто плівкою у Vroomshoop: новий колір без перефарбування</h1>
+        <p style="font-size:15px;line-height:1.45;color:#D7D4CE">Повністю або лише дах, дзеркала і хром. Одразу побачите орієнтовну ціну.</p>
+        <div style="display:flex;flex-direction:column;gap:10px;margin-top:2px">
+          <a href="#" style="display:flex;align-items:center;justify-content:center;height:48px;background:#C4A24D;color:#0B0B0C;font-weight:600;font-size:15px;border-radius:6px">Зібрати свій варіант</a>
+          <a href="#" style="display:flex;align-items:center;justify-content:center;height:48px;border:1px solid #F2EFE9;color:#F2EFE9;font-weight:600;font-size:15px;border-radius:6px">Написати у WhatsApp</a>
+        </div>
+        <div style="display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:2px -16px 0;padding:0 16px">
+          <span style="display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:500;padding:7px 12px;border:1px solid rgba(242,239,233,.4);border-radius:999px;white-space:nowrap">3 роки гарантії<sc-if value="{{ showPending }}" hint-placeholder-val="{{ true }}"><span style="width:7px;height:7px;border-radius:999px;background:#E2B93B;display:inline-block;flex:none"></span></sc-if></span>
+          <span style="display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:500;padding:7px 12px;border:1px solid rgba(242,239,233,.4);border-radius:999px;white-space:nowrap">Повне обклеювання від €1.795<sc-if value="{{ showPending }}" hint-placeholder-val="{{ true }}"><span style="width:7px;height:7px;border-radius:999px;background:#E2B93B;display:inline-block;flex:none"></span></sc-if></span>
+          <span style="display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:500;padding:7px 12px;border:1px solid rgba(242,239,233,.4);border-radius:999px;white-space:nowrap">Антихром від €149<sc-if value="{{ showPending }}" hint-placeholder-val="{{ true }}"><span style="width:7px;height:7px;border-radius:999px;background:#E2B93B;display:inline-block;flex:none"></span></sc-if></span>
+        </div>
+      </div>
+    </div>
+    <div style="position:absolute;left:0;right:0;top:599px;border-top:1px dashed #C4A24D;opacity:.7;pointer-events:none"><span style="position:absolute;right:8px;top:4px;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#C4A24D">згин 375x667 над StickyMobileBar</span></div>
+  </div>
+</div>
+
+<!-- FRAME 5: Tokens nieuwe elementen -->
+<div id="f5" style="display:flex;flex-direction:column;gap:12px;flex:none">
+  <div style="font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#8A8B90">Frame 5 · Tokens nieuwe elementen · swatches, schakelaars, keuzechips</div>
+  <div data-screen-label="Tokens configurator" style="width:1280px;background:#0B0B0C;box-shadow:0 0 0 1px #2A2B2F;padding:48px 40px;display:flex;flex-direction:column;gap:48px">
+    <div style="display:grid;grid-template-columns:220px 1fr;gap:40px;align-items:start">
+      <div><div style="font-size:16px;font-weight:600">Kleurswatches</div><div style="font-size:13px;color:#A3A39F;line-height:1.5;margin-top:6px">Rond 40 px, taptarget 56 px. Rand 1 px rgba(242,239,233,.3). Geselecteerd: ring 2 px #0B0B0C + 2 px #C4A24D. Namen en hexcodes zijn placeholders voor de kleuren van V Guard.</div></div>
+      <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:16px">
+        <sc-for list="{{ tokenSwatches }}" as="s" hint-placeholder-count="12">
+          <div style="display:flex;align-items:center;gap:12px"><span style="width:40px;height:40px;border-radius:999px;display:block;flex:none;border:1px solid rgba(242,239,233,.3);background:{{ s.hex }};box-shadow:{{ s.ring }}"></span><div><div style="font-size:13px;font-weight:600;display:flex;align-items:center;gap:6px">{{ s.name }}<sc-if value="{{ showPending }}" hint-placeholder-val="{{ true }}"><span style="width:7px;height:7px;border-radius:999px;background:#E2B93B;display:inline-block;flex:none"></span></sc-if></div><div style="font-size:12px;color:#8A8B90;font-family:ui-monospace,monospace">{{ s.hex }}</div></div></div>
+        </sc-for>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:220px 1fr;gap:40px;align-items:start;border-top:1px solid #2A2B2F;padding-top:40px">
+      <div><div style="font-size:16px;font-weight:600">Keuzechips</div><div style="font-size:13px;color:#A3A39F;line-height:1.5;margin-top:6px">Hoogte 44 px, radius 8 px, 14 px 500. Subtekst 12 px #A3A39F. Standaard #16171A met rand #3A3B3F; geselecteerd rand #C4A24D en vulling rgba(196,162,77,.14); uitgeschakeld opacity .45.</div></div>
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+          <span style="display:inline-flex;align-items:center;gap:8px;height:44px;padding:0 14px;border-radius:8px;font-size:14px;font-weight:500;border:1px solid #3A3B3F;background:#16171A"><span>Dak</span><span style="font-size:12px;color:#A3A39F">€249</span></span>
+          <span style="display:inline-flex;align-items:center;gap:8px;height:44px;padding:0 14px;border-radius:8px;font-size:14px;font-weight:500;border:1px solid #C4A24D;background:rgba(196,162,77,.14)"><span>Spiegelkappen</span><span style="font-size:12px;color:#A3A39F">€69</span></span>
+          <span style="display:inline-flex;align-items:center;gap:8px;height:44px;padding:0 14px;border-radius:8px;font-size:14px;font-weight:500;border:1px solid #3A3B3F;background:#16171A;opacity:.45"><span>Chroom (ontchromen)</span><span style="font-size:12px;color:#A3A39F">inbegrepen</span></span>
+          <span style="font-size:12px;color:#8A8B90;margin-left:8px">standaard · geselecteerd · uitgeschakeld</span>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+          <span style="display:inline-flex;align-items:center;gap:8px;height:44px;padding:0 14px;border-radius:8px;font-size:14px;font-weight:500;border:1px solid #3A3B3F;background:#16171A">Glans</span>
+          <span style="display:inline-flex;align-items:center;gap:8px;height:44px;padding:0 14px;border-radius:8px;font-size:14px;font-weight:500;border:1px solid #C4A24D;background:rgba(196,162,77,.14)">Satijn</span>
+          <span style="display:inline-flex;align-items:center;gap:8px;height:44px;padding:0 14px;border-radius:8px;font-size:14px;font-weight:500;border:1px solid #3A3B3F;background:#16171A"><span>Carbon look</span><span style="font-size:12px;color:#A3A39F">+10%</span></span>
+          <span style="font-size:12px;color:#8A8B90;margin-left:8px">finishchips, één keuze</span>
+        </div>
+        <div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap">
+          <div style="display:grid;grid-template-columns:150px 150px;border:1px solid #3A3B3F;border-radius:8px;overflow:hidden"><span style="height:44px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600;background:#C4A24D;color:#0B0B0C">Volledige wrap</span><span style="height:44px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600">Losse delen</span></div>
+          <span style="font-size:12px;color:#8A8B90">segment, actief #C4A24D op #0B0B0C</span>
+        </div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:220px 1fr;gap:40px;align-items:start;border-top:1px solid #2A2B2F;padding-top:40px">
+      <div><div style="font-size:16px;font-weight:600">Carrosserieknoppen</div><div style="font-size:13px;color:#A3A39F;line-height:1.5;margin-top:6px">Minimaal 88 px hoog, silhouet 72x31, label 14 px 600, subtekst met vanaf-prijs bij volledige wrap. Zelfde randlogica als chips.</div></div>
+      <div style="display:grid;grid-template-columns:repeat(6,150px);gap:10px">
+        <sc-for list="{{ tokenBodies }}" as="b" hint-placeholder-count="6">
+          <div style="display:flex;flex-direction:column;align-items:flex-start;gap:4px;padding:8px 8px 8px;width:132px;flex:none;min-height:88px;border-radius:8px;border:1px solid {{ b.bd }};background:{{ b.bg }}"><div style="width:100%;aspect-ratio:800/275;border-radius:4px;overflow:hidden"><dc-import name="VG Wrap Car" body="{{ b.id }}" hex="{{ b.thex }}" finish="{{ b.tfin }}" full="{{ true }}" mini="{{ true }}" hint-size="100%,100%" style="width:100%;height:100%"></dc-import></div><span style="font-size:13px;font-weight:600;line-height:1.2">{{ b.label }}</span><span style="font-size:11px;color:#A3A39F;line-height:1.2">{{ b.sub }}</span></div>
+        </sc-for>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:220px 1fr;gap:40px;align-items:start;border-top:1px solid #2A2B2F;padding-top:40px">
+      <div><div style="font-size:16px;font-weight:600">Formulierveld Carrosserie</div><div style="font-size:13px;color:#A3A39F;line-height:1.5;margin-top:6px">Selectie in het aanvraagformulier, vooraf ingevuld met de keuze uit de configurator. UA: {{ uaNames }}.</div></div>
+      <div style="display:flex;flex-direction:column;gap:8px;max-width:360px"><label style="font-size:13px;font-weight:600">Carrosserie</label><div style="height:48px;border:1px solid #3A3B3F;border-radius:8px;background:#16171A;display:flex;align-items:center;justify-content:space-between;padding:0 14px;font-size:14px"><span>{{ live.summaryBody }}</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#A3A39F" stroke-width="1.6"><path d="M3 6l5 5 5-5"></path></svg></div><div style="border:1px solid #3A3B3F;border-radius:8px;background:#16171A;overflow:hidden"><sc-for list="{{ tokenBodies }}" as="b" hint-placeholder-count="6"><div style="height:44px;display:flex;align-items:center;padding:0 14px;font-size:14px;border-top:1px solid #2A2B2F">{{ b.label }}</div></sc-for></div></div>
+    </div>
+    <div style="display:grid;grid-template-columns:220px 1fr;gap:40px;align-items:start;border-top:1px solid #2A2B2F;padding-top:40px">
+      <div><div style="font-size:16px;font-weight:600">Schakelaar</div><div style="font-size:13px;color:#A3A39F;line-height:1.5;margin-top:6px">48x28 px, knop 22 px #0B0B0C. Uit: #3A3B3F. Aan: #C4A24D. Rij minimaal 44 px hoog.</div></div>
+      <div style="display:flex;gap:40px;align-items:center">
+        <div style="display:flex;align-items:center;gap:12px"><span style="width:48px;height:28px;border-radius:999px;padding:3px;display:flex;background:#3A3B3F;justify-content:flex-start"><span style="width:22px;height:22px;border-radius:999px;background:#0B0B0C;display:block"></span></span><span style="font-size:13px;color:#8A8B90">uit</span></div>
+        <div style="display:flex;align-items:center;gap:12px"><span style="width:48px;height:28px;border-radius:999px;padding:3px;display:flex;background:#C4A24D;justify-content:flex-end"><span style="width:22px;height:22px;border-radius:999px;background:#0B0B0C;display:block"></span></span><span style="font-size:13px;color:#8A8B90">aan</span></div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:220px 1fr;gap:40px;align-items:start;border-top:1px solid #2A2B2F;padding-top:40px">
+      <div><div style="font-size:16px;font-weight:600">Prijsbalk 375</div><div style="font-size:13px;color:#A3A39F;line-height:1.5;margin-top:6px">Sticky onderaan zolang de configurator in beeld is; vervangt daar de StickyMobileBar. Achtergrond rgba(11,11,12,.96), rand boven #2A2B2F.</div></div>
+      <div style="width:375px;background:rgba(11,11,12,.96);border:1px solid #2A2B2F;padding:10px 16px 12px;display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px"><div style="display:flex;align-items:baseline;gap:8px"><span style="font-size:12px;color:#A3A39F">Prijsindicatie</span><span style="font-size:20px;font-weight:600">vanaf €1.795</span></div><span style="font-size:11px;color:#8A8B90;flex:1;min-width:0;text-align:right;line-height:1.3">Vaste prijs na je aanvraag</span></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><span style="height:48px;background:#C4A24D;color:#0B0B0C;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px">Deze wrap aanvragen</span><span style="height:48px;border:1px solid #F2EFE9;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px">Verstuur via WhatsApp</span></div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:220px 1fr;gap:40px;align-items:start;border-top:1px solid #2A2B2F;padding-top:40px">
+      <div><div style="font-size:16px;font-weight:600">Mockup-markers</div><div style="font-size:13px;color:#A3A39F;line-height:1.5;margin-top:6px">Niet in de site. Uit te zetten via Tweaks.</div></div>
+      <div style="display:flex;gap:32px;align-items:center;flex-wrap:wrap">
+        <div style="display:flex;align-items:center;gap:10px"><span style="width:7px;height:7px;border-radius:999px;background:#E2B93B;display:inline-block"></span><span style="font-size:13px;color:#8A8B90">waarde nog te bevestigen door V Guard</span></div>
+        <div style="display:flex;align-items:center;gap:10px"><span style="font-size:10px;line-height:1.3;letter-spacing:.04em;color:#C9C7C1;background:rgba(11,11,12,.7);border:1px dashed rgba(242,239,233,.45);border-radius:3px;padding:3px 6px">AI · omschrijving van het beeld · 4:3</span><span style="font-size:13px;color:#8A8B90">te genereren beeld</span></div>
+        <div style="display:flex;align-items:center;gap:10px"><span style="width:96px;height:72px;background:#2E2F33;border:1px dashed #5C5D62;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:10px;color:#C9C7C1;text-align:center;padding:6px">Echte foto: dak</span><span style="font-size:13px;color:#8A8B90">alleen echte foto van V Guard</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FRAME 6: Controle-raster auto -->
+<div id="f6" style="display:flex;flex-direction:column;gap:12px;flex:none">
+  <div style="font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#8A8B90">Frame 6 · Controle · 6 carrosserieën × 3 kleuren × 2 finishes</div>
+  <div data-screen-label="Auto raster" style="width:1280px;background:#0B0B0C;box-shadow:0 0 0 1px #2A2B2F;padding:40px;display:flex;flex-direction:column;gap:20px">
+    <sc-for list="{{ gridRows }}" as="r" hint-placeholder-count="6">
+      <div style="display:grid;grid-template-columns:120px repeat(6,minmax(0,1fr));gap:10px;align-items:center">
+        <div style="font-size:13px;font-weight:600;line-height:1.35">{{ r.label }}</div>
+        <sc-for list="{{ r.cells }}" as="c" hint-placeholder-count="6">
+          <div style="background:#1C1D21;border:1px solid #2A2B2F;border-radius:8px;overflow:hidden;padding:0 0 4px;display:flex;flex-direction:column;gap:4px"><dc-import name="VG Wrap Car" body="{{ c.id }}" hex="{{ r.hex }}" finish="{{ r.fin }}" full="{{ true }}" hint-size="100%,60px" style="width:100%"></dc-import><div style="font-size:11px;color:#8A8B90;text-align:center">{{ c.label }}</div></div>
+        </sc-for>
+      </div>
+    </sc-for>
+  </div>
+</div>
+
+<!-- FRAME 7: Personenbus en Touringcar 375 -->
+<div id="f7" style="display:flex;flex-direction:column;gap:12px;flex:none">
+  <div style="font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#8A8B90">Frame 7 · Configurator 375 · Personenbus en Touringcar</div>
+  <div style="display:flex;gap:40px;align-items:flex-start">
+    <div data-screen-label="Configurator 375 Personenbus" style="position:relative;width:375px;height:667px;background:#0B0B0C;overflow:hidden;box-shadow:0 0 0 1px #2A2B2F;display:flex;flex-direction:column">
+      <div style="display:flex;align-items:center;justify-content:space-between;height:56px;padding:0 8px 0 16px;border-bottom:1px solid #2A2B2F;flex:none">
+        <div style="display:flex;align-items:center;gap:8px"><svg viewBox="0 0 200 232" width="22" height="26"><path d="M100 8 184 36v82c0 54-42 88-84 106C58 206 16 172 16 118V36Z" fill="none" stroke="#C4A24D" stroke-width="12" stroke-linejoin="round"></path><text x="100" y="168" text-anchor="middle" font-family="Cinzel, serif" font-weight="700" font-size="132" fill="#C4A24D">V</text></svg><div><div style="font-family:Cinzel,serif;font-weight:700;font-size:14px;letter-spacing:.06em;color:#C4A24D;line-height:1">V-GUARD</div><div style="font-size:8px;letter-spacing:.32em;color:#A3A39F;margin-top:3px">STUDIO</div></div></div>
+        <div style="display:flex;align-items:center;gap:4px"><div style="font-size:13px;font-weight:500;padding:0 8px;height:44px;display:flex;align-items:center;gap:6px"><span>NL</span><span style="color:#5C5D62">/</span><span style="color:#A3A39F">UA</span></div><div style="width:44px;height:44px;display:flex;align-items:center;justify-content:center"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#F2EFE9" stroke-width="1.6"><path d="M2 6h18M2 11h18M2 16h18"></path></svg></div></div>
+      </div>
+      <div style="background:#1C1D21;border-bottom:1px solid #2A2B2F;padding:0 0 6px;flex:none">
+        <dc-import name="VG Wrap Car" body="{{ s4.body }}" hex="{{ s4.hex }}" finish="{{ s4.finish }}" full="{{ s4.full }}" dak="{{ s4.dak }}" spiegel="{{ s4.spiegel }}" chroom="{{ s4.chroom }}" pakket="{{ s4.pakket }}" hint-size="100%,129px" style="width:100%"></dc-import>
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:2px;padding:0 16px"><span style="font-size:13px;font-weight:600">{{ s4.colorLabel }}</span><span style="font-size:11px;color:#8A8B90">Illustratie</span></div>
+      </div>
+      <div style="padding:20px 16px 0;display:flex;flex-direction:column;gap:12px;flex:1;overflow:hidden">
+        <div style="display:flex;justify-content:space-between;align-items:center"><div style="font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#C4A24D">A · Je auto</div><div style="font-size:12px;color:#8A8B90">Stap 1 van 4</div></div>
+        <div style="display:flex;gap:8px;overflow:hidden;margin:0 -16px;padding:0 16px">
+          <sc-for list="{{ s4.bodies }}" as="b" hint-placeholder-count="6">
+            <div style="display:flex;flex-direction:column;align-items:flex-start;gap:4px;padding:8px 8px 8px;width:132px;flex:none;min-height:88px;border-radius:8px;border:1px solid {{ b.bd }};background:{{ b.bg }}"><div style="width:100%;aspect-ratio:800/275;border-radius:4px;overflow:hidden"><dc-import name="VG Wrap Car" body="{{ b.id }}" hex="{{ b.thex }}" finish="{{ b.tfin }}" full="{{ true }}" mini="{{ true }}" hint-size="100%,100%" style="width:100%;height:100%"></dc-import></div><span style="font-size:13px;font-weight:600;line-height:1.2">{{ b.label }}</span><span style="font-size:11px;color:#A3A39F;line-height:1.2">{{ b.sub }}</span></div>
+          </sc-for>
+        </div>
+      </div>
+      <div style="position:absolute;left:0;right:0;bottom:0;background:rgba(11,11,12,.96);border-top:1px solid #2A2B2F;padding:10px 16px 12px;display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px"><div style="display:flex;align-items:baseline;gap:8px;flex:none"><span style="font-size:12px;color:#A3A39F">Prijsindicatie</span><span style="display:inline-flex;align-items:center;gap:8px;font-size:20px;font-weight:600;white-space:nowrap">{{ s4.priceLabel }}<sc-if value="{{ showPending }}" hint-placeholder-val="{{ true }}"><span style="width:7px;height:7px;border-radius:999px;background:#E2B93B;display:inline-block;flex:none"></span></sc-if></span></div><span style="font-size:11px;color:#8A8B90;flex:1;min-width:0;text-align:right;line-height:1.3">Vaste prijs na je aanvraag</span></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><a href="#" style="height:48px;background:#C4A24D;color:#0B0B0C;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px">{{ s4.ctaLabel }}</a><a href="#" style="height:48px;border:1px solid #F2EFE9;color:#F2EFE9;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px">Verstuur via WhatsApp</a></div>
+      </div>
+    </div>
+    <div data-screen-label="Configurator 375 Touringcar" style="position:relative;width:375px;height:667px;background:#0B0B0C;overflow:hidden;box-shadow:0 0 0 1px #2A2B2F;display:flex;flex-direction:column">
+      <div style="display:flex;align-items:center;justify-content:space-between;height:56px;padding:0 8px 0 16px;border-bottom:1px solid #2A2B2F;flex:none">
+        <div style="display:flex;align-items:center;gap:8px"><svg viewBox="0 0 200 232" width="22" height="26"><path d="M100 8 184 36v82c0 54-42 88-84 106C58 206 16 172 16 118V36Z" fill="none" stroke="#C4A24D" stroke-width="12" stroke-linejoin="round"></path><text x="100" y="168" text-anchor="middle" font-family="Cinzel, serif" font-weight="700" font-size="132" fill="#C4A24D">V</text></svg><div><div style="font-family:Cinzel,serif;font-weight:700;font-size:14px;letter-spacing:.06em;color:#C4A24D;line-height:1">V-GUARD</div><div style="font-size:8px;letter-spacing:.32em;color:#A3A39F;margin-top:3px">STUDIO</div></div></div>
+        <div style="display:flex;align-items:center;gap:4px"><div style="font-size:13px;font-weight:500;padding:0 8px;height:44px;display:flex;align-items:center;gap:6px"><span>NL</span><span style="color:#5C5D62">/</span><span style="color:#A3A39F">UA</span></div><div style="width:44px;height:44px;display:flex;align-items:center;justify-content:center"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#F2EFE9" stroke-width="1.6"><path d="M2 6h18M2 11h18M2 16h18"></path></svg></div></div>
+      </div>
+      <div style="background:#1C1D21;border-bottom:1px solid #2A2B2F;padding:0 0 6px;flex:none">
+        <dc-import name="VG Wrap Car" body="{{ s5.body }}" hex="{{ s5.hex }}" finish="{{ s5.finish }}" full="{{ s5.full }}" dak="{{ s5.dak }}" spiegel="{{ s5.spiegel }}" chroom="{{ s5.chroom }}" pakket="{{ s5.pakket }}" hint-size="100%,129px" style="width:100%"></dc-import>
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:2px;padding:0 16px"><span style="font-size:13px;font-weight:600">{{ s5.colorLabel }}</span><span style="font-size:11px;color:#8A8B90">Illustratie</span></div>
+      </div>
+      <div style="padding:20px 16px 0;display:flex;flex-direction:column;gap:12px;flex:1;overflow:hidden">
+        <div style="display:flex;justify-content:space-between;align-items:center"><div style="font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#C4A24D">A · Je auto</div><div style="font-size:12px;color:#8A8B90">Stap 1 van 4</div></div>
+        <div style="display:flex;gap:8px;overflow:hidden;margin:0 -16px;padding:0 16px">
+          <sc-for list="{{ s5.bodies }}" as="b" hint-placeholder-count="6">
+            <div style="display:flex;flex-direction:column;align-items:flex-start;gap:4px;padding:8px 8px 8px;width:132px;flex:none;min-height:88px;border-radius:8px;border:1px solid {{ b.bd }};background:{{ b.bg }}"><div style="width:100%;aspect-ratio:800/275;border-radius:4px;overflow:hidden"><dc-import name="VG Wrap Car" body="{{ b.id }}" hex="{{ b.thex }}" finish="{{ b.tfin }}" full="{{ true }}" mini="{{ true }}" hint-size="100%,100%" style="width:100%;height:100%"></dc-import></div><span style="font-size:13px;font-weight:600;line-height:1.2">{{ b.label }}</span><span style="font-size:11px;color:#A3A39F;line-height:1.2">{{ b.sub }}</span></div>
+          </sc-for>
+        </div>
+      </div>
+      <div style="position:absolute;left:0;right:0;bottom:0;background:rgba(11,11,12,.96);border-top:1px solid #2A2B2F;padding:10px 16px 12px;display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px"><div style="display:flex;align-items:baseline;gap:8px;flex:none"><span style="font-size:12px;color:#A3A39F">Prijsindicatie</span><span style="display:inline-flex;align-items:center;gap:8px;font-size:20px;font-weight:600;white-space:nowrap">{{ s5.priceLabel }}<sc-if value="{{ showPending }}" hint-placeholder-val="{{ true }}"><span style="width:7px;height:7px;border-radius:999px;background:#E2B93B;display:inline-block;flex:none"></span></sc-if></span></div><span style="font-size:11px;color:#8A8B90;flex:1;min-width:0;text-align:right;line-height:1.3">Vaste prijs na je aanvraag</span></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><a href="#" style="height:48px;background:#C4A24D;color:#0B0B0C;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px">{{ s5.ctaLabel }}</a><a href="#" style="height:48px;border:1px solid #F2EFE9;color:#F2EFE9;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px">Verstuur via WhatsApp</a></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;showPending&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Mockup&quot;},&quot;showNotes&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Mockup&quot;}}">
+class Component extends DCLogic {
+  state = { live: { body:"hatch", full:true, parts:{dak:false,spiegel:false,chroom:false}, finish:"satijn", color:8 } };
+  renderVals() {
+    const showPending = this.props.showPending ?? true;
+    const showNotes = this.props.showNotes ?? true;
+    const ACC="#C4A24D", LAK="#A9ABAF", SEL_BG="rgba(196,162,77,.14)", DEF_BD="#3A3B3F", DEF_BG="#16171A";
+    const rgb=h=>[1,3,5].map(i=>parseInt(h.slice(i,i+2),16));
+    const mix=(h,t,a)=>{const x=rgb(h),y=rgb(t);return "#"+x.map((v,i)=>Math.round(v+(y[i]-v)*a).toString(16).padStart(2,"0")).join("");};
+    const fmt=n=>"€"+Math.round(n).toLocaleString("nl-NL");
+    const BASE=1795, PAKKET=395;
+    const BODIES=[{id:"hatch",label:"Hatchback",ua:"Хетчбек",f:1},{id:"sedan",label:"Sedan",ua:"Седан",f:1.1},{id:"station",label:"Stationwagon",ua:"Універсал",f:1.15},{id:"suv",label:"SUV",ua:"Позашляховик (SUV)",f:1.3},{id:"bus",label:"Personenbus",ua:"Мікроавтобус",f:1.5,van:true},{id:"coach",label:"Touringcar",ua:"Автобус",f:null,van:true,coach:true}];
+    const fullPrice=b=>b.f===null?null:Math.round(BASE*b.f/5)*5;
+    const partPrice=(p,b)=>p.id==="dak"?(b.van?349:249):p.id==="spiegel"?(b.van?89:69):149;
+    const PARTS=[{id:"dak",label:"Dak",price:249},{id:"spiegel",label:"Spiegelkappen",price:69},{id:"chroom",label:"Chroom (ontchromen)",price:149}];
+    const FINISHES=[{id:"glans",label:"Glans",sub:""},{id:"satijn",label:"Satijn",sub:""},{id:"mat",label:"Mat",sub:""},{id:"metallic",label:"Metallic",sub:""},{id:"carbon",label:"Carbon look",sub:"+10%"}];
+    const COLORS=[["Gloss Black","#0A0A0B"],["Satin Black","#1C1C1E"],["Matte Grey","#6B6C70"],["Nardo Grey","#8E9094"],["Satin Dark Grey","#45474B"],["Gloss White","#F4F4F2"],["Pearl White","#ECE9E1"],["Racing Green","#0F3D2E"],["Midnight Blue","#15213D"],["Satin Khaki","#6F6B4F"],["Metallic Silver","#B9BCC0"],["Candy Red","#B3122E"]];
+    const upd = fn => this.setState(s => { const n = {...s.live, parts:{...s.live.parts}}; fn(n); return {live:n}; });
+    const build=(st,id,interactive)=>{
+      const act = interactive ? fn=>()=>upd(fn) : ()=>()=>{};
+      const body=BODIES.find(b=>b.id===st.body);
+      const [cname,hex]=COLORS[st.color];
+      const fin=FINISHES.find(f=>f.id===st.finish);
+      const paint=`url(#${id}-${st.finish})`;
+      const sel=PARTS.filter(p=>st.parts[p.id]);
+      const all=sel.length===3;
+      const noPakket = !!body.coach;
+      let price = st.full ? fullPrice(body) : ((all&&!noPakket) ? PAKKET : sel.reduce((a,p)=>a+partPrice(p,body),0));
+      if(price!==null && st.finish==="carbon") price*=1.1;
+      const onRequest = price===null;
+      const on = st.full || all;
+      const delen = st.full ? "Volledige wrap" : (all&&!noPakket) ? "Black styling pakket: dak, spiegelkappen, chroom" : sel.length ? sel.map(p=>p.label).join(", ") : "Nog geen delen gekozen";
+      return {
+        id, hex, body: st.body, finish: st.finish, full: st.full, dak: st.parts.dak, spiegel: st.parts.spiegel, chroom: st.parts.chroom, pakket: !st.full && all && !noPakket, ctaLabel: onRequest ? "Offerte aanvragen" : "Deze wrap aanvragen",
+        fillBody: st.full ? paint : LAK,
+        fillRoof: (st.full||st.parts.dak) ? paint : LAK,
+        fillMirror: (st.full||st.parts.spiegel) ? paint : LAK,
+        fillChrome: (st.full||st.parts.chroom) ? "#111214" : "#D9DADC",
+        colorLabel: `${cname} · ${fin.label}`,
+        bodies: BODIES.map(b=>({...b, thex: hex, tfin: st.finish, bd: b.id===st.body?ACC:DEF_BD, bg: b.id===st.body?SEL_BG:DEF_BG, sub: st.full?(fullPrice(b)===null?"Prijs op aanvraag":"vanaf "+fmt(fullPrice(b))):"", pick: act(n=>{n.body=b.id;})})),
+        setFull: act(n=>{n.full=true;}), setParts: act(n=>{n.full=false;}),
+        fullBg: st.full?ACC:"transparent", fullFg: st.full?"#0B0B0C":"#F2EFE9", partsBg: st.full?"transparent":ACC, partsFg: st.full?"#F2EFE9":"#0B0B0C",
+        parts: PARTS.map(p=>({...p, bd: (!st.full&&st.parts[p.id])?ACC:DEF_BD, bg: (!st.full&&st.parts[p.id])?SEL_BG:DEF_BG, op: st.full?.45:1, sub: st.full?"inbegrepen":fmt(partPrice(p,body)), pick: act(n=>{n.full=false;n.parts[p.id]=!n.parts[p.id];})})),
+        togglePakket: act(n=>{if(noPakket)return;const to=!(n.parts.dak&&n.parts.spiegel&&n.parts.chroom)||n.full; n.full=false; n.parts={dak:to,spiegel:to,chroom:to};}),
+        pakketBg: (!st.full&&all&&!noPakket)?ACC:DEF_BD, pakketJ: (!st.full&&all&&!noPakket)?"flex-end":"flex-start", pakketOp: noPakket?.4:1,
+        finishes: FINISHES.map(f=>({...f, bd: f.id===st.finish?ACC:DEF_BD, bg: f.id===st.finish?SEL_BG:DEF_BG, pick: act(n=>{n.finish=f.id;})})),
+        swatches: COLORS.map(([name,h],i)=>({name, hex:h, ring: i===st.color?"0 0 0 2px #0B0B0C, 0 0 0 4px #C4A24D":"none", pick: act(n=>{n.color=i;})})),
+        priceLabel: onRequest ? "Prijs op aanvraag" : price>0 ? "vanaf "+fmt(price) : "Kies minimaal één deel",
+        summaryBody: body.label, summary: [{k:"Auto",v:body.label},{k:"Delen",v:delen},{k:"Finish",v:fin.label},{k:"Kleur",v:cname}]
+      };
+    };
+    const live = build(this.state.live,"live",true);
+    const s1 = build({body:"suv",full:true,parts:{dak:false,spiegel:false,chroom:false},finish:"satijn",color:8},"s1",false);
+    const s2 = build({body:"suv",full:true,parts:{dak:false,spiegel:false,chroom:false},finish:"satijn",color:9},"s2",false);
+    const s3 = build({body:"suv",full:false,parts:{dak:true,spiegel:true,chroom:true},finish:"glans",color:0},"s3",false);
+    const s4 = build({body:"bus",full:true,parts:{dak:false,spiegel:false,chroom:false},finish:"satijn",color:8},"s4",false);
+    const s5 = build({body:"coach",full:true,parts:{dak:false,spiegel:false,chroom:false},finish:"glans",color:0},"s5",false);
+    const icons={
+      shield:"M12 3l8 3v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6zM8.5 12l2.5 2.5 4.5-5",
+      layers:"M3 8l9-4 9 4-9 4-9-4zM3 12l9 4 9-4M3 16l9 4 9-4",
+      eye:"M12 5c5 0 9 7 9 7s-4 7-9 7-9-7-9-7 4-7 9-7zM12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6z",
+      pin:"M12 21s7-6 7-11a7 7 0 0 0-14 0c0 5 7 11 7 11zM12 7a3 3 0 1 0 0 6 3 3 0 0 0 0-6z",
+      sliders:"M4 7h16M4 12h16M4 17h16M9 5v4M15 10v4M7 15v4",
+      chat:"M4 5h16v11H9l-5 4z",
+      flag:"M5 21V4h12l-2 4 2 4H5"
+    };
+    const proof=[{txt:"3 jaar garantie op het werk",icon:icons.shield,pend:true},{txt:"Folie van 3M en Avery Dennison",icon:icons.layers,pend:true},{txt:"Lak vooraf gecontroleerd",icon:icons.eye,pend:false},{txt:"Studio in Vroomshoop, Twente",icon:icons.pin,pend:false}].map(p=>({...p,pend:p.pend&&showPending}));
+    const cards=[
+      {t:"Volledige wrap",d:"De hele auto in een nieuwe kleur of finish.",price:"vanaf €1.795",dur:"3-5 dagen",badge:false,src:"assets/wrap/card-volledig.png",pos:"center 55%"},
+      {t:"Black styling pakket",d:"Ontchromen, zwart dak en spiegelkappen in één keer.",price:"vanaf €395",dur:"",badge:"Pakketvoordeel",src:"assets/wrap/card-pakket.png",pos:"center 55%"},
+      {t:"Ontchromen (chrome delete)",d:"Chroomdelen in zwart of kleur.",price:"vanaf €149",dur:"",badge:false,src:"assets/wrap/card-ontchromen.png",pos:"center 45%"},
+      {t:"Dak",d:"Zwart dak voor een sportieve two-tone look.",price:"vanaf €249",dur:"",badge:false,src:"assets/wrap/card-dak.png",pos:"center 50%"},
+      {t:"Spiegelkappen",d:"Spiegelkappen in zwart, carbon look of kleur.",price:"vanaf €69",dur:"",badge:false,src:"assets/wrap/card-spiegel.png",pos:"center 50%"}
+    ];
+    const finishTiles=[
+      {t:"Glans",d:"diep en spiegelend",src:"assets/wrap/fin-glans.png"},
+      {t:"Satijn",d:"zachte glans, strak en modern",src:"assets/wrap/fin-satijn.png"},
+      {t:"Mat",d:"geen reflectie, stoer",src:"assets/wrap/fin-mat.png"},
+      {t:"Metallic",d:"fijne schittering in het licht",src:"assets/wrap/fin-metallic.png"},
+      {t:"Carbon look",d:"structuur van koolstofvezel",src:"assets/wrap/fin-carbon.png"}
+    ];
+    const compare=[
+      {k:"Terug naar de originele kleur",w:"Ja, folie eraf",o:"Alleen door opnieuw te spuiten"},
+      {k:"Originele lak blijft behouden",w:"Ja",o:"Nee"},
+      {k:"Auto weg",w:"Een paar dagen",o:"Vaak langer"},
+      {k:"Alleen dak of chroom",w:"Ja, los te kiezen",o:"Lastig"}
+    ];
+    const recent4=[
+      {src:"assets/photos/real/bmw-3-front.png",cap:"BMW 3 Serie · spiegelkappen zwart · okt 2026"},
+      {src:"assets/photos/real/volvo-v60.png",cap:"Volvo V60 · ramen blinderen · okt 2026"},
+      {src:"assets/photos/real/audi-a7-zij.png",cap:"Audi A7 · voorruit chameleon · okt 2026"},
+      {src:"assets/photos/real/bmw-3-voorruit.png",cap:"BMW 3 Serie · voorruit chameleon · okt 2026"}
+    ].map(g=>({...g, ph: g.src?"":g.ph, bgi: g.src?`url("${g.src}")`:"none", bd: g.src?"1px solid #2A2B2F":"1px dashed #5C5D62"}));
+    const steps=[["Stel samen of stuur foto's","sliders",false],["Offerte op maat via WhatsApp","chat",false],["Lak checken en voorbereiden","shield",true],["Ophalen in je nieuwe kleur","flag",false]].map((s,i)=>({n:String(i+1).padStart(2,"0"),t:s[0],icon:icons[s[1]],pend:s[2]&&showPending}));
+    const faqBase=[
+      {q:"Hoe lang staat mijn auto bij jullie?",a:"Een volledige wrap duurt 3-5 dagen, een dak of spiegelkappen meestal 1 dag.",pend:true},
+      {q:"Hoe lang gaat een wrap mee?",a:"Bij goed onderhoud 5-7 jaar, afhankelijk van folie en gebruik.",pend:true},
+      {q:"Beschadigt een wrap de lak?",a:"Op originele lak in goede staat laat folie bij vakkundig verwijderen meestal los zonder schade. Bij overgespoten of beschadigde lak is er meer risico; daarom bekijken we de lak vooraf.",pend:false},
+      {q:"Moet ik een nieuwe kleur doorgeven aan de RDW?",a:"Ja. Verandert de kleur van je auto door een wrap, ook tijdelijk, dan geef je de nieuwe kleur door aan de RDW. Dat is gratis en kan online met DigiD.",pend:false},
+      {q:"Beschermt een wrap tegen steenslag?",a:"Een wrap verandert vooral de look en beschermt weinig tegen steenslag. Daarvoor is PPF bedoeld.",pend:false},
+      {q:"Kan ik de kleur eerst zien?",a:"Ja, in de studio liggen stalen. Je kunt ook een proefstuk op je auto laten zetten.",pend:true},
+      {q:"Kan ik een leaseauto laten wrappen?",a:"Vaak wel, met toestemming van je leasemaatschappij. Vraag het vooraf na en laat de wrap verwijderen voordat je de auto inlevert.",pend:false},
+      {q:"Wat kost een wrap?",a:"Een volledige wrap begint bij €1.795, ontchromen bij €149. Je krijgt een vaste prijs na je aanvraag.",pend:true}
+    ];
+    const faqA=faqBase.map((f,i)=>({...f,open:i===0,sym:i===0?"−":"+",pend:f.pend&&showPending}));
+    const tokenSwatches=COLORS.map(([name,hex],i)=>({name,hex,ring:i===8?"0 0 0 2px #0B0B0C, 0 0 0 4px #C4A24D":"none"}));
+    const tokenBodies=BODIES.map((b,i)=>({...b,thex:"#15213D",tfin:"satijn",bd:i===1?ACC:DEF_BD,bg:i===1?SEL_BG:DEF_BG,sub:fullPrice(b)===null?"Prijs op aanvraag":"vanaf "+fmt(fullPrice(b))}));
+    const uaNames=BODIES.map(b=>b.ua).join(" · ");
+    const gridRows=[["Gloss Black","#0A0A0B"],["Pearl White","#ECE9E1"],["Midnight Blue","#15213D"]].flatMap(([n,hx])=>[["glans","Glans"],["mat","Mat"]].map(([fid,fl])=>({label:n+" · "+fl,hex:hx,fin:fid,cells:BODIES.map(b=>({id:b.id,label:b.label}))})));
+    const cardsB = cards.map(k=>({...k, bgi:`url("${k.src}")`}));
+    const finB = finishTiles.map(f=>({...f, bgi:`url("${f.src}")`}));
+    return { showPending, showNotes, live, s1, s2, s3, s4, s5, uaNames, gridRows, proof, cards:cardsB, big:cardsB[0], cardsRest:cardsB.slice(1), finishTiles:finB, compare, recent3:recent4.slice(0,3), recent4, steps, faqA, tokenSwatches, tokenBodies };
+  }
+}
+</script>
+</body>
+</html>
