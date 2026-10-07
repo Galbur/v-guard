@@ -1,0 +1,222 @@
+---
+// Wrap hero (mockup «VG Site 04 Car wrapping v2», frames 1, 2, 4). AI illustration (D18),
+// decorative: empty alt. Separate crops for 375 and 1280; never lazy. Primary button jumps to
+// the configurator, secondary is WhatsApp (hidden without TEST_PHONE, D16).
+import { getImage } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import { whatsappUrl } from '../../config/site.ts';
+import { wrap } from '../../data/services.ts';
+import { t } from '../../i18n/index.ts';
+import type { Locale } from '../../i18n/routes.ts';
+import { illustration } from '../../lib/wrap-images.ts';
+
+interface Props {
+  locale: Locale;
+  h1: string;
+  sub: string;
+  cta: string;
+  chips: string[];
+}
+
+const { locale, h1, sub, cta, chips } = Astro.props;
+const mobile = illustration(wrap.images.hero375.value);
+const desktop = illustration(wrap.images.hero1280.value);
+
+async function srcset(src: ImageMetadata, widths: number[], format: 'avif' | 'webp') {
+  const usable = widths.filter((w) => w <= src.width);
+  const images = await Promise.all(usable.map((width) => getImage({ src, width, format, quality: 60 })));
+  return images.map((img) => `${img.src} ${img.attributes.width}w`).join(', ');
+}
+
+const mq = '(min-width: 64rem)';
+const sources = {
+  mobileAvif: await srcset(mobile, [375, 640, 900], 'avif'),
+  mobileWebp: await srcset(mobile, [375, 640, 900], 'webp'),
+  desktopAvif: await srcset(desktop, [1024, 1280, 1600], 'avif'),
+  desktopWebp: await srcset(desktop, [1024, 1280, 1600], 'webp'),
+};
+const fallback = await getImage({ src: mobile, width: 640, format: 'webp', quality: 60 });
+const wa = whatsappUrl();
+---
+
+<section class="whero">
+  <picture class="whero__media">
+    <source media={mq} type="image/avif" srcset={sources.desktopAvif} sizes="100vw" />
+    <source media={mq} type="image/webp" srcset={sources.desktopWebp} sizes="100vw" />
+    <source type="image/avif" srcset={sources.mobileAvif} sizes="100vw" />
+    <source type="image/webp" srcset={sources.mobileWebp} sizes="100vw" />
+    <img
+      src={fallback.src}
+      width={fallback.attributes.width}
+      height={fallback.attributes.height}
+      alt=""
+      fetchpriority="high"
+      loading="eager"
+      decoding="async"
+    />
+  </picture>
+  <div class="whero__shade" aria-hidden="true"></div>
+  <div class="whero__content">
+    <h1 class="whero__h1">{h1}</h1>
+    <p class="whero__sub">{sub}</p>
+    <div class="whero__actions">
+      <a class="btn btn--primary btn--hero" href="#configurator">{cta}</a>
+      {
+        wa && (
+          <a class="btn btn--ghost btn--hero" href={wa} target="_blank" rel="noopener">
+            {t('cta.whatsapp', locale)}
+          </a>
+        )
+      }
+    </div>
+    <ul class="whero__chips" role="list">
+      {chips.map((c) => <li class="chip">{c}</li>)}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .whero {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    min-height: 556px;
+    overflow: hidden;
+    isolation: isolate;
+    background: var(--c-black);
+  }
+
+  .whero__media,
+  .whero__media img,
+  .whero__shade {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .whero__media {
+    z-index: -2;
+  }
+
+  .whero__media img {
+    object-fit: cover;
+    object-position: center 72%;
+  }
+
+  .whero__shade {
+    z-index: -1;
+    background: linear-gradient(
+      180deg,
+      rgb(var(--c-overlay) / 0.05) 0%,
+      rgb(var(--c-overlay) / 0.3) 28%,
+      rgb(var(--c-overlay) / 0.92) 56%,
+      var(--c-black) 100%
+    );
+  }
+
+  .whero__content {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    padding: 0 var(--gutter) 16px;
+  }
+
+  .whero__h1 {
+    font-size: 28px;
+    line-height: 1.12;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    text-wrap: pretty;
+  }
+
+  .whero__sub {
+    font-size: 15px;
+    line-height: 1.45;
+    color: var(--c-text-soft);
+  }
+
+  .whero__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 2px;
+  }
+
+  .whero__chips {
+    display: flex;
+    gap: 8px;
+    margin: 2px calc(-1 * var(--gutter)) 0;
+    padding: 0 var(--gutter);
+    list-style: none;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .whero__chips::-webkit-scrollbar {
+    display: none;
+  }
+
+  @media (min-width: 64rem) {
+    .whero {
+      min-height: 680px;
+    }
+
+    .whero__media img {
+      object-position: center 50%;
+    }
+
+    .whero__shade {
+      background:
+        linear-gradient(
+          180deg,
+          rgb(var(--c-overlay) / 0.25) 0%,
+          rgb(var(--c-overlay) / 0) 30%,
+          rgb(var(--c-overlay) / 0.65) 80%,
+          var(--c-black) 100%
+        ),
+        linear-gradient(
+          90deg,
+          rgb(var(--c-overlay) / 0.96) 0%,
+          rgb(var(--c-overlay) / 0.88) 40%,
+          rgb(var(--c-overlay) / 0.35) 68%,
+          rgb(var(--c-overlay) / 0.05) 100%
+        );
+    }
+
+    .whero__content {
+      max-width: var(--container);
+      margin-inline: auto;
+      gap: 20px;
+      padding: 0 var(--gutter) 72px;
+    }
+
+    .whero__content > * {
+      max-width: 680px;
+    }
+
+    .whero__h1 {
+      font-size: 50px;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+    }
+
+    .whero__sub {
+      font-size: 19px;
+    }
+
+    .whero__actions {
+      flex-direction: row;
+      gap: 12px;
+      margin-top: 4px;
+    }
+
+    .whero__chips {
+      flex-wrap: wrap;
+      margin: 8px 0 0;
+      padding: 0;
+      overflow: visible;
+    }
+  }
+</style>

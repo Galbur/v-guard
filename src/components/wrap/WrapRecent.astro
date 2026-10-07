@@ -1,0 +1,148 @@
+---
+// «Recent opgeleverd»: real V Guard photos only, never AI illustrations (D18).
+// Three at 375 (scroll), four at 1280, as in the mockup. Picture directly: Photo.astro on main
+// still writes an inline style (CSP).
+import { Picture } from 'astro:assets';
+import type { WrapRecent } from '../../data/services.ts';
+import { localizedPath, type Locale } from '../../i18n/routes.ts';
+import { photo } from '../../lib/photos.ts';
+
+interface Props {
+  locale: Locale;
+  title: string;
+  more: string;
+  items: WrapRecent[];
+}
+
+const { locale, title, more, items } = Astro.props;
+const projects = localizedPath('projects', locale);
+---
+
+<section class="section wrecent">
+  <div class="container wrecent__head">
+    <h2 class="h2">{title}</h2>
+    <a class="wrecent__more wrecent__more--top" href={projects}>{more}</a>
+  </div>
+  <ul class="wrecent__list" role="list">
+    {
+      items.map((item, i) => (
+        <li class:list={['wrecent__item', { 'wrecent__item--wide': i > 2 }]}>
+          <Picture
+            src={photo(item.file)}
+            alt={`${item.car[locale]}, ${item.detail[locale]}`}
+            formats={['avif', 'webp']}
+            fallbackFormat="webp"
+            widths={[240, 480, 720]}
+            sizes="(min-width: 64rem) 282px, 240px"
+            quality={60}
+            loading="lazy"
+            class="wrecent__img"
+          />
+          <p class="wrecent__cap">{[item.car[locale], item.detail[locale], item.date.value[locale]].join(' · ')}</p>
+        </li>
+      ))
+    }
+  </ul>
+  <div class="container">
+    <a class="btn btn--ghost btn--block wrecent__more--bottom" href={projects}>{more}</a>
+  </div>
+</section>
+
+<style>
+  .wrecent__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 16px;
+  }
+
+  .wrecent__more--top {
+    display: none;
+  }
+
+  .wrecent__list {
+    display: flex;
+    gap: 12px;
+    margin: 0;
+    padding: 0 var(--gutter);
+    list-style: none;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .wrecent__list::-webkit-scrollbar {
+    display: none;
+  }
+
+  .wrecent__item {
+    display: flex;
+    flex: none;
+    flex-direction: column;
+    gap: 8px;
+    width: 240px;
+    scroll-snap-align: start;
+  }
+
+  .wrecent__item--wide {
+    display: none;
+  }
+
+  :global(.wrecent__img) {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    border: 1px solid var(--c-line-dark);
+    border-radius: var(--r-btn);
+    object-fit: cover;
+  }
+
+  .wrecent__cap {
+    font-size: 13px;
+    color: var(--c-muted);
+  }
+
+  .wrecent__more--bottom {
+    margin-top: 16px;
+  }
+
+  @media (min-width: 64rem) {
+    .wrecent__head {
+      margin-bottom: 32px;
+    }
+
+    .wrecent__more--top {
+      display: inline-flex;
+      align-items: center;
+      min-height: var(--tap);
+      color: var(--c-gold);
+      font-size: 15px;
+      font-weight: 500;
+    }
+
+    .wrecent__list {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 24px;
+      max-width: var(--container);
+      margin-inline: auto;
+      padding: 0 var(--gutter);
+      overflow: visible;
+    }
+
+    .wrecent__item,
+    .wrecent__item--wide {
+      display: flex;
+      width: auto;
+    }
+
+    .wrecent__cap {
+      font-size: 14px;
+    }
+
+    .wrecent__more--bottom {
+      display: none;
+    }
+  }
+</style>

@@ -1,0 +1,60 @@
+---
+// «Wat is car wrapping»: plain HTML answer inside the first 100 words (design prompt 13),
+// in the panel of the v2 mockup. The heading is small so the panel reads as in the mockup.
+interface Props {
+  title: string;
+  text: string;
+}
+
+const { title, text } = Astro.props;
+---
+
+<section class="wanswer container">
+  <div class="wanswer__panel panel">
+    <h2 class="wanswer__title">{title}</h2>
+    <p class="wanswer__text">{text}</p>
+  </div>
+</section>
+
+<style>
+  .wanswer {
+    margin-top: 40px;
+  }
+
+  .wanswer__panel {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 20px 18px;
+  }
+
+  .wanswer__title {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--c-gold);
+  }
+
+  .wanswer__text {
+    font-size: 16px;
+    line-height: 1.55;
+    text-wrap: pretty;
+  }
+
+  @media (min-width: 64rem) {
+    .wanswer {
+      margin-top: 72px;
+    }
+
+    .wanswer__panel {
+      max-width: 960px;
+      gap: 12px;
+      padding: 32px 40px;
+    }
+
+    .wanswer__text {
+      font-size: 20px;
+    }
+  }
+</style>
