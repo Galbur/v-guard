@@ -9,6 +9,19 @@
   directory = "netlify/functions"
   node_bundler = "esbuild"
 
+# UA wrap page moved to a native slug (step W3). Must stay above the /uk/* 404 rule.
+[[redirects]]
+  from = "/uk/car-wrapping"
+  to = "/uk/obkleiuvannia/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/uk/car-wrapping/"
+  to = "/uk/obkleiuvannia/"
+  status = 301
+  force = true
+
 # Ukrainian 404 for unknown /uk/ paths; root 404.html covers the rest.
 # Not forced, so existing files are never shadowed.
 [[redirects]]
