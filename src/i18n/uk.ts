@@ -9,7 +9,7 @@ export const uk: Record<UiKey, string> = {
   'nav.home': 'Головна',
   'nav.ppf': 'PPF',
   'nav.tint': 'Тонування',
-  'nav.wrap': 'Car wrapping',
+  'nav.wrap': 'Обклеювання плівкою',
   'nav.projects': 'Проєкти',
   'nav.contact': 'Контакти',
   'nav.privacy': 'Конфіденційність',
