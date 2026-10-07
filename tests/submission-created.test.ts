@@ -43,6 +43,25 @@ test('formats the message in the block specs order with NL labels', () => {
   );
 });
 
+test('wrap request carries the colour or finish line after the option', () => {
+  const message = formatMessage({
+    ...data,
+    dienst: 'car-wrapping',
+    optie: 'pakket',
+    carrosserie: 'personenbus',
+    kleur: 'Midnight Blue, Satijn',
+    opmerking: '',
+  });
+  assert.match(
+    message,
+    /^Dienst: Car wrapping\nOptie: Black styling pakket\nKleur\/finish: Midnight Blue, Satijn\nAuto: BMW X5 2021 Personenbus$/m,
+  );
+});
+
+test('no colour line when the field is empty', () => {
+  assert.doesNotMatch(formatMessage({ ...data, kleur: '  ' }), /Kleur/);
+});
+
 test('advice request without option and with missing fields', () => {
   const message = formatMessage({ dienst: 'advies', naam: 'A', telefoon: '0600000000', taal: 'uk' });
   assert.match(message, /^Dienst: Ik wil advies$/m);

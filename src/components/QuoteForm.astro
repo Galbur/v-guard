@@ -2,10 +2,11 @@
 // Base quote form (Blueprint v1.3 section 6, design prompt section 11, mockups 7a-7f).
 // Without JS all steps are visible and the form posts natively to Netlify; with JS it is a
 // 4-step flow with validation, «Terug» that keeps values, ?service= / &option= preselect,
-// and a success state with the WhatsApp continuation.
+// and a success state with the WhatsApp continuation. The wrap configurator also passes
+// &body= (carrosserie), &finish=, &kleur= and &delen= (step W3).
 import Icon from './Icon.astro';
 import { linkPhone, waDigits } from '../config/site.ts';
-import { adviceOption, bodyTypes, optionDetail, services } from '../data/services.ts';
+import { adviceOption, bodyTypes, optionDetail, services, wrapFinishes, wrapParts } from '../data/services.ts';
 import { t, type UiKey } from '../i18n/index.ts';
 import { localizedPath, type Locale } from '../i18n/routes.ts';
 
@@ -33,14 +34,26 @@ const messageKeys: UiKey[] = [
   'form.wa.service',
   'form.wa.option',
   'form.wa.car',
+  'form.wa.kleur',
 ];
 const messages = Object.fromEntries(messageKeys.map((k) => [k, t(k, locale)]));
 // Empty without TEST_PHONE: the WhatsApp continuation button is then not rendered.
 const wa = linkPhone ? waDigits(linkPhone) : '';
 const pagePath = localizedPath('contact', locale);
+// Labels for the wrap configurator prefill (finish id and part ids in the URL).
+const wrapLabels = {
+  finishes: Object.fromEntries(wrapFinishes.map((f) => [f.id, f.label[locale]])),
+  parts: Object.fromEntries(wrapParts.map((p) => [p.id, p.label[locale]])),
+};
 ---
 
-<div class="quote" data-quote data-wa={wa} data-messages={JSON.stringify(messages)}>
+<div
+  class="quote"
+  data-quote
+  data-wa={wa}
+  data-messages={JSON.stringify(messages)}
+  data-wrap-labels={JSON.stringify(wrapLabels)}
+>
   <form
     class="quote__card surface-light"
     name="offerte"
@@ -164,6 +177,18 @@ const pagePath = localizedPath('contact', locale);
                 </label>
               );
             })}
+            {s.slug === 'car-wrapping' && (
+              <div class="field options__extra">
+                <label for="f-kleur">{t('form.kleur', locale)}</label>
+                <input
+                  id="f-kleur"
+                  name="kleur"
+                  type="text"
+                  autocomplete="off"
+                  placeholder={t('form.kleur.placeholder', locale)}
+                />
+              </div>
+            )}
           </div>
         ))
       }
@@ -405,6 +430,7 @@ const pagePath = localizedPath('contact', locale);
           messages['form.wa.intro'],
           `${messages['form.wa.service']}: ${checkedLabel('dienst')}`,
           checkedLabel('optie') && `${messages['form.wa.option']}: ${checkedLabel('optie')}`,
+          value('kleur') && `${messages['form.wa.kleur']}: ${value('kleur')}`,
           `${messages['form.wa.car']}: ${[car, checkedLabel('carrosserie')].filter(Boolean).join(', ')}`,
         ].filter(Boolean);
         link.href = `https://wa.me/${root.dataset.wa}?text=${encodeURIComponent(lines.join('\n'))}`;
@@ -425,6 +451,23 @@ const pagePath = localizedPath('contact', locale);
       `input[name="optie"]:not(:disabled)[value="${CSS.escape(params.get('option') ?? params.get('optie') ?? '')}"]`,
     );
     if (preOption) preOption.checked = true;
+    // Wrap configurator: carrosserie, colour with finish, and the chosen parts.
+    const preBody = form.querySelector<HTMLInputElement>(
+      `input[name="carrosserie"][value="${CSS.escape(params.get('body') ?? '')}"]`,
+    );
+    if (preBody) preBody.checked = true;
+    const wrapLabels: { finishes: Record<string, string>; parts: Record<string, string> } = JSON.parse(
+      root.dataset.wrapLabels ?? '{"finishes":{},"parts":{}}',
+    );
+    const kleur = form.querySelector<HTMLInputElement>('[name="kleur"]');
+    const preKleur = [params.get('kleur'), wrapLabels.finishes[params.get('finish') ?? '']].filter(Boolean).join(', ');
+    if (kleur && preKleur && !kleur.disabled) kleur.value = preKleur.slice(0, 120);
+    const opmerking = form.querySelector<HTMLTextAreaElement>('[name="opmerking"]');
+    const delen = (params.get('delen') ?? '')
+      .split(',')
+      .map((id) => wrapLabels.parts[id])
+      .filter(Boolean);
+    if (opmerking && delen.length && preService?.value === 'car-wrapping' && !opmerking.value) opmerking.value = delen.join(', ');
     show(preService ? 1 : 0, false);
   }
 
@@ -618,6 +661,10 @@ const pagePath = localizedPath('contact', locale);
 
   [data-enhanced] .options__service {
     display: none;
+  }
+
+  .options__extra {
+    margin-top: 6px;
   }
 
   .option {
