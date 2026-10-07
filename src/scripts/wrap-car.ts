@@ -59,7 +59,10 @@ function loadImage(url: string): Promise<HTMLImageElement> {
   });
 }
 
-function segment(body: string, img: HTMLImageElement): Segmented {
+/** Lets the browser handle input between the heavy phases (no long task over ~150 ms). */
+const yieldToMain = () => new Promise<void>((resolve) => setTimeout(resolve, 0));
+
+async function segment(body: string, img: HTMLImageElement): Promise<Segmented> {
   const c = document.createElement('canvas');
   c.width = W;
   c.height = H;
@@ -105,6 +108,7 @@ function segment(body: string, img: HTMLImageElement): Segmented {
   const darkMirror = body === 'bus' || body === 'coach';
   const belt = carTop + h * 0.55;
 
+  await yieldToMain();
   // Glass: dark runs above the belt line with paint below them.
   const glass = new Uint8Array(N);
   for (let xx = left; xx <= right; xx++) {
@@ -128,6 +132,7 @@ function segment(body: string, img: HTMLImageElement): Segmented {
     }
   }
 
+  await yieldToMain();
   // Zones: 1 body, 2 roof, 3 mirror, 4 window trim (chrome).
   const mask = new Uint8Array(N);
   const lum: number[] = [];
@@ -189,6 +194,7 @@ function segment(body: string, img: HTMLImageElement): Segmented {
   lum3.sort((a, b) => a - b);
   const ref3 = lum3.length ? lum3[Math.floor(lum3.length * 0.85)] : ref;
 
+  await yieldToMain();
   // Soft edges: dilate zones by 1 px, blur a coverage weight, smooth luminance.
   const zone = new Uint8Array(N);
   for (let y = 0; y < H; y++) {
@@ -234,6 +240,7 @@ function segment(body: string, img: HTMLImageElement): Segmented {
   let w = new Float32Array(N);
   for (let i = 0; i < N; i++) w[i] = mask[i] ? 1 : 0;
   w = blur(blur(w));
+  await yieldToMain();
   return { data: d, mask: zone, w, Ls: blur(L), ref, ref3, gamma: GAMMA[body] ?? 1 };
 }
 
