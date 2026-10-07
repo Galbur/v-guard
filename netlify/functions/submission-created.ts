@@ -37,6 +37,8 @@ export function formatMessage(data: FormData): string {
     'Nieuwe aanvraag',
     `Dienst: ${serviceLabel(data.dienst)}`,
     `Optie: ${optionLabel(data.dienst, data.optie)}`,
+    // Wrap only: colour or finish from the quote form (step W3).
+    ...(data.kleur?.trim() ? [`Kleur/finish: ${data.kleur.trim()}`] : []),
     `Auto: ${car || EMPTY}`,
     `Naam: ${text(data.naam)}`,
     `Telefoon: ${text(data.telefoon)}`,

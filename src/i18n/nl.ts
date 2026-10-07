@@ -57,6 +57,8 @@ export const nl = {
   'form.email': 'E-mail (optioneel)',
   'form.opmerking': 'Opmerking (optioneel)',
   'form.opmerking.placeholder': 'Bijvoorbeeld de gewenste datum',
+  'form.kleur': 'Gewenste kleur of finish (optioneel)',
+  'form.kleur.placeholder': 'Bijvoorbeeld satijn zwart',
   'form.privacy.before': 'Ik ga akkoord met de',
   'form.privacy.link': 'privacyverklaring',
   'form.privacy.after': '.',
@@ -80,6 +82,7 @@ export const nl = {
   'form.wa.service': 'Dienst',
   'form.wa.option': 'Optie',
   'form.wa.car': 'Auto',
+  'form.wa.kleur': 'Kleur of finish',
 } as const;
 
 export type UiKey = keyof typeof nl;

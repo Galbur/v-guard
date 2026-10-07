@@ -59,6 +59,8 @@ export const uk: Record<UiKey, string> = {
   'form.email': "Email (необов'язково)",
   'form.opmerking': 'Коментар',
   'form.opmerking.placeholder': 'Наприклад, бажана дата',
+  'form.kleur': 'Бажаний колір або фініш (необовʼязково)',
+  'form.kleur.placeholder': 'Наприклад, сатиновий чорний',
   'form.privacy.before': 'Я погоджуюся з',
   'form.privacy.link': 'політикою конфіденційності',
   'form.privacy.after': '.',
@@ -82,4 +84,5 @@ export const uk: Record<UiKey, string> = {
   'form.wa.service': 'Послуга',
   'form.wa.option': 'Варіант',
   'form.wa.car': 'Авто',
+  'form.wa.kleur': 'Колір або фініш',
 };
