@@ -1,0 +1,83 @@
+---
+// Proof strip under the wrap hero: four short facts with icons, scrolls sideways at 375.
+import WrapIcon, { type WrapIconName } from './WrapIcon.astro';
+
+interface Props {
+  items: { icon: WrapIconName; text: string }[];
+}
+
+const { items } = Astro.props;
+---
+
+<div class="proof container">
+  <ul class="proof__list" role="list">
+    {
+      items.map((item) => (
+        <li class="proof__item">
+          <WrapIcon name={item.icon} size={18} class="proof__icon" />
+          <span>{item.text}</span>
+        </li>
+      ))
+    }
+  </ul>
+</div>
+
+<style>
+  .proof {
+    margin-top: 40px;
+    padding-inline: 0;
+  }
+
+  .proof__list {
+    display: flex;
+    gap: 24px;
+    padding: 14px var(--gutter);
+    border-block: 1px solid var(--c-line-dark);
+    list-style: none;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .proof__list::-webkit-scrollbar {
+    display: none;
+  }
+
+  .proof__item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  :global(.proof__icon) {
+    flex: none;
+    color: var(--c-gold);
+  }
+
+  @media (min-width: 64rem) {
+    .proof {
+      margin-top: 0;
+      padding-inline: var(--gutter);
+    }
+
+    .proof__list {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      padding: 18px 0;
+      overflow: visible;
+    }
+
+    .proof__item {
+      gap: 10px;
+      font-size: 14px;
+      white-space: normal;
+    }
+
+    :global(.proof__icon) {
+      width: 20px;
+      height: 20px;
+    }
+  }
+</style>

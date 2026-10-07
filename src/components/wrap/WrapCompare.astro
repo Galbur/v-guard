@@ -1,0 +1,169 @@
+---
+// «Wrappen of overspuiten?»: illustration (D18, decorative) and a three-column table.
+import { Picture } from 'astro:assets';
+import { wrap } from '../../data/services.ts';
+import { localizedPath, type Locale } from '../../i18n/routes.ts';
+import { illustration } from '../../lib/wrap-images.ts';
+
+interface Props {
+  locale: Locale;
+  title: string;
+  cols: [string, string];
+  rows: { k: string; w: string; o: string }[];
+  ppf: [string, string];
+}
+
+const { locale, title, cols, rows, ppf } = Astro.props;
+---
+
+<section class="section container wcmp">
+  <div class="wcmp__intro">
+    <h2 class="h2">{title}</h2>
+    <Picture
+      src={illustration(wrap.images.compare.value)}
+      alt=""
+      formats={['avif', 'webp']}
+      fallbackFormat="webp"
+      widths={[400, 700, 1000]}
+      sizes="(min-width: 64rem) 390px, calc(100vw - 32px)"
+      quality={60}
+      loading="lazy"
+      class="wcmp__img"
+    />
+    <p class="wcmp__ppf">{ppf[0]} <a href={localizedPath('ppf', locale)}>{ppf[1]}</a></p>
+  </div>
+  <table class="wcmp__table">
+    <thead>
+      <tr>
+        <td></td>
+        <th scope="col" class="wcmp__wrap">{cols[0]}</th>
+        <th scope="col">{cols[1]}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {
+        rows.map((r) => (
+          <tr>
+            <th scope="row">{r.k}</th>
+            <td class="wcmp__wrap">{r.w}</td>
+            <td>{r.o}</td>
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
+</section>
+
+<style>
+  .wcmp {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .wcmp__intro {
+    display: contents;
+  }
+
+  :global(.wcmp__img) {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 2;
+    border-radius: var(--r-card);
+    object-fit: cover;
+    background: var(--c-graphite-2);
+  }
+
+  .wcmp__ppf {
+    order: 1;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--c-muted);
+  }
+
+  .wcmp__ppf a {
+    color: var(--c-gold);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .wcmp__table {
+    width: 100%;
+    border: 1px solid var(--c-line-dark);
+    border-radius: var(--r-card);
+    border-collapse: separate;
+    border-spacing: 0;
+    overflow: hidden;
+    font-size: 13px;
+    line-height: 1.35;
+    table-layout: fixed;
+  }
+
+  .wcmp__table thead {
+    background: var(--c-graphite);
+  }
+
+  .wcmp__table th,
+  .wcmp__table td {
+    padding: 12px;
+    text-align: left;
+    vertical-align: top;
+  }
+
+  .wcmp__table thead th {
+    font-weight: 600;
+    color: var(--c-muted);
+  }
+
+  .wcmp__table thead th.wcmp__wrap {
+    color: var(--c-gold);
+  }
+
+  .wcmp__table tbody th {
+    width: 37%;
+    font-weight: 400;
+    color: var(--c-text-soft);
+  }
+
+  .wcmp__table tbody td {
+    color: var(--c-muted);
+  }
+
+  .wcmp__table tbody td.wcmp__wrap {
+    color: var(--c-off-white);
+    font-weight: 500;
+  }
+
+  .wcmp__table tbody tr > * {
+    border-top: 1px solid var(--c-line-dark);
+  }
+
+  @media (min-width: 64rem) {
+    .wcmp {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    .wcmp__intro {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .wcmp__ppf {
+      font-size: 16px;
+    }
+
+    .wcmp__table {
+      font-size: 15px;
+      line-height: 1.4;
+    }
+
+    .wcmp__table th,
+    .wcmp__table td {
+      padding: 16px 24px;
+    }
+  }
+</style>
