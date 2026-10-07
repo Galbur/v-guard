@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<svg viewBox="0 0 600 220" style="width:100%;height:auto;display:block" aria-hidden="true">
+  <defs>
+    <linearGradient id="{{ uid }}-body" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="{{ bp.s0 }}"></stop><stop offset=".3" stop-color="{{ bp.s1 }}"></stop><stop offset=".62" stop-color="{{ bp.s2 }}"></stop><stop offset="1" stop-color="{{ bp.s3 }}"></stop></linearGradient>
+    <linearGradient id="{{ uid }}-zone" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="{{ zp.s0 }}"></stop><stop offset=".3" stop-color="{{ zp.s1 }}"></stop><stop offset=".62" stop-color="{{ zp.s2 }}"></stop><stop offset="1" stop-color="{{ zp.s3 }}"></stop></linearGradient>
+    <pattern id="{{ uid }}-carbonB" width="8" height="8" patternUnits="userSpaceOnUse"><rect width="8" height="8" fill="{{ bp.c0 }}"></rect><rect width="4" height="4" fill="{{ bp.c1 }}"></rect><rect x="4" y="4" width="4" height="4" fill="{{ bp.c1 }}"></rect><rect width="4" height="1" fill="{{ bp.c2 }}" opacity=".7"></rect><rect x="4" y="4" width="4" height="1" fill="{{ bp.c2 }}" opacity=".7"></rect></pattern>
+    <pattern id="{{ uid }}-carbonZ" width="8" height="8" patternUnits="userSpaceOnUse"><rect width="8" height="8" fill="{{ zp.c0 }}"></rect><rect width="4" height="4" fill="{{ zp.c1 }}"></rect><rect x="4" y="4" width="4" height="4" fill="{{ zp.c1 }}"></rect><rect width="4" height="1" fill="{{ zp.c2 }}" opacity=".7"></rect><rect x="4" y="4" width="4" height="1" fill="{{ zp.c2 }}" opacity=".7"></rect></pattern>
+    <linearGradient id="{{ uid }}-hl" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="220">
+      <stop offset="{{ hl.r0 }}" stop-color="#FFFFFF" stop-opacity="0"></stop>
+      <stop offset="{{ hl.r1 }}" stop-color="#FFFFFF" stop-opacity="{{ hl.ra }}"></stop>
+      <stop offset="{{ hl.r2 }}" stop-color="#FFFFFF" stop-opacity="0"></stop>
+      <stop offset="{{ hl.b0 }}" stop-color="#FFFFFF" stop-opacity="0"></stop>
+      <stop offset="{{ hl.b1 }}" stop-color="#FFFFFF" stop-opacity="{{ hl.ba }}"></stop>
+      <stop offset="{{ hl.b2 }}" stop-color="#FFFFFF" stop-opacity="{{ hl.ba }}"></stop>
+      <stop offset="{{ hl.b3 }}" stop-color="#FFFFFF" stop-opacity="0"></stop>
+    </linearGradient>
+    <pattern id="{{ uid }}-sparkle" width="4" height="4" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r=".55" fill="#FFFFFF" opacity=".7"></circle><circle cx="3" cy="3" r=".45" fill="#FFFFFF" opacity=".5"></circle></pattern>
+    <linearGradient id="{{ uid }}-glass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5A6880"></stop><stop offset=".35" stop-color="#2A3342"></stop><stop offset=".5" stop-color="#3C4A5E"></stop><stop offset=".56" stop-color="#1A2029"></stop><stop offset="1" stop-color="#121820"></stop></linearGradient>
+    <radialGradient id="{{ uid }}-tire" cx=".4" cy=".35" r=".75"><stop offset="0" stop-color="#34363B"></stop><stop offset=".6" stop-color="#1A1B1E"></stop><stop offset="1" stop-color="#0A0B0D"></stop></radialGradient>
+    <linearGradient id="{{ uid }}-rim" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E6E8EC"></stop><stop offset=".5" stop-color="#9DA1A8"></stop><stop offset="1" stop-color="#5C5F66"></stop></linearGradient>
+    <linearGradient id="{{ uid }}-light" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#F4F8FC"></stop><stop offset="1" stop-color="#8E9AA8"></stop></linearGradient>
+    <linearGradient id="{{ uid }}-tail" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E24A4A"></stop><stop offset="1" stop-color="#7E0E14"></stop></linearGradient>
+    <radialGradient id="{{ uid }}-shadow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#000000" stop-opacity=".55"></stop><stop offset="1" stop-color="#000000" stop-opacity="0"></stop></radialGradient>
+    <linearGradient id="{{ uid }}-chrome" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F2F3F5"></stop><stop offset=".5" stop-color="#9FA3AA"></stop><stop offset="1" stop-color="#D7D9DD"></stop></linearGradient>
+    <clipPath id="{{ uid }}-clip"><path d="{{ g.body }}"></path></clipPath>
+  </defs>
+  <ellipse cx="305" cy="201" rx="255" ry="9" fill="url(#{{ uid }}-shadow)"></ellipse>
+  <circle cx="160" cy="165" r="{{ g.arch }}" fill="#0A0B0D"></circle>
+  <circle cx="455" cy="165" r="{{ g.arch }}" fill="#0A0B0D"></circle>
+  <path d="{{ g.body }}" fill="{{ fillBody }}"></path>
+  <path d="{{ g.roof }}" fill="{{ fillRoof }}"></path>
+  <rect x="0" y="0" width="600" height="220" fill="url(#{{ uid }}-hl)" clip-path="url(#{{ uid }}-clip)"></rect>
+  <rect x="0" y="0" width="600" height="220" fill="url(#{{ uid }}-sparkle)" opacity="{{ sparkle }}" clip-path="url(#{{ uid }}-clip)"></rect>
+  <rect x="0" y="{{ g.lowY }}" width="600" height="60" fill="#000000" opacity=".16" clip-path="url(#{{ uid }}-clip)"></rect>
+  <path d="{{ g.intake }}" fill="#0E0F11" opacity=".9"></path>
+  <sc-if value="{{ g.suv }}" hint-placeholder-val="{{ false }}"><g><path d="{{ g.clad }}" fill="#15161A"></path><circle cx="160" cy="165" r="50" fill="none" stroke="#15161A" stroke-width="6"></circle><circle cx="455" cy="165" r="50" fill="none" stroke="#15161A" stroke-width="6"></circle></g></sc-if>
+  <sc-for list="{{ g.glass }}" as="w" hint-placeholder-count="4"><path d="{{ w }}" fill="url(#{{ uid }}-glass)"></path></sc-for>
+  <path d="{{ g.seats }}" fill="#0A0C10" opacity=".55"></path>
+  <path d="{{ g.bpillar }}" fill="#111214"></path>
+  <path d="{{ g.chrome }}" fill="none" stroke="{{ fillChrome }}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
+  <sc-if value="{{ detail }}" hint-placeholder-val="{{ true }}">
+    <g>
+      <path d="{{ g.crease }}" fill="none" stroke="#FFFFFF" stroke-opacity="{{ creaseA }}" stroke-width="1.5"></path>
+      <path d="{{ g.creaseS }}" fill="none" stroke="#000000" stroke-opacity=".25" stroke-width="1"></path>
+      <path d="{{ g.seams }}" fill="none" stroke="#000000" stroke-opacity=".38" stroke-width="1"></path>
+      <rect x="276" y="{{ g.hy }}" width="26" height="7" rx="3" fill="#000000" opacity=".45"></rect>
+      <rect x="378" y="{{ g.hy }}" width="26" height="7" rx="3" fill="#000000" opacity=".45"></rect>
+      <rect x="277" y="{{ g.hy }}" width="24" height="2" rx="1" fill="#FFFFFF" opacity=".35"></rect>
+      <rect x="379" y="{{ g.hy }}" width="24" height="2" rx="1" fill="#FFFFFF" opacity=".35"></rect>
+    </g>
+  </sc-if>
+  <path d="{{ g.light }}" fill="url(#{{ uid }}-light)"></path>
+  <path d="{{ g.led }}" fill="none" stroke="#DFF1FF" stroke-width="1.5" stroke-linecap="round"></path>
+  <path d="{{ g.tail }}" fill="url(#{{ uid }}-tail)"></path>
+  <g transform="{{ g.mtf }}"><path d="M236 104 L264 104 L261 110 L240 110 Z" fill="#141518"></path><path d="M230 94 Q230 86 240 86 L262 87 Q270 88 270 96 L269 102 Q268 106 260 106 L238 106 Q230 105 230 100 Z" fill="{{ fillMirror }}"></path><path d="M234 90 Q240 88 262 89" fill="none" stroke="#FFFFFF" stroke-opacity=".35" stroke-width="1.2"></path></g>
+  <g transform="translate(160 165)">
+    <circle r="{{ g.tr }}" fill="url(#{{ uid }}-tire)"></circle>
+    <sc-if value="{{ detail }}" hint-placeholder-val="{{ true }}"><g><circle r="{{ g.tr1 }}" fill="none" stroke="#050506" stroke-width="2" stroke-dasharray="3 3"></circle><circle r="{{ g.rr2 }}" fill="none" stroke="#2E2F33" stroke-width="1"></circle></g></sc-if>
+    <circle r="{{ g.rr }}" fill="url(#{{ uid }}-rim)"></circle>
+    <circle r="{{ g.rr1 }}" fill="#1C1D20"></circle>
+    <path d="{{ rimPath }}" fill="url(#{{ uid }}-rim)"></path>
+    <circle r="5.5" fill="#A6A9AF"></circle><circle r="2" fill="#2A2B2F"></circle>
+  </g>
+  <g transform="translate(455 165)">
+    <circle r="{{ g.tr }}" fill="url(#{{ uid }}-tire)"></circle>
+    <sc-if value="{{ detail }}" hint-placeholder-val="{{ true }}"><g><circle r="{{ g.tr1 }}" fill="none" stroke="#050506" stroke-width="2" stroke-dasharray="3 3"></circle><circle r="{{ g.rr2 }}" fill="none" stroke="#2E2F33" stroke-width="1"></circle></g></sc-if>
+    <circle r="{{ g.rr }}" fill="url(#{{ uid }}-rim)"></circle>
+    <circle r="{{ g.rr1 }}" fill="#1C1D20"></circle>
+    <path d="{{ rimPath }}" fill="url(#{{ uid }}-rim)"></path>
+    <circle r="5.5" fill="#A6A9AF"></circle><circle r="2" fill="#2A2B2F"></circle>
+  </g>
+</svg>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:600,&quot;height&quot;:220},&quot;body&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;sedan&quot;,&quot;options&quot;:[&quot;hatch&quot;,&quot;sedan&quot;,&quot;station&quot;,&quot;suv&quot;,&quot;bus&quot;,&quot;coach&quot;],&quot;tsType&quot;:&quot;string&quot;},&quot;hex&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#15213D&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;options&quot;:[&quot;#0A0A0B&quot;,&quot;#ECE9E1&quot;,&quot;#15213D&quot;,&quot;#B3122E&quot;]},&quot;finish&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;satijn&quot;,&quot;options&quot;:[&quot;glans&quot;,&quot;satijn&quot;,&quot;mat&quot;,&quot;metallic&quot;,&quot;carbon&quot;],&quot;tsType&quot;:&quot;string&quot;},&quot;full&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;},&quot;dak&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;},&quot;spiegel&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;},&quot;chroom&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;},&quot;pakket&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;},&quot;mini&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  constructor(p){ super(p); this.uid = "vcar" + Math.random().toString(36).slice(2,8); }
+  renderVals() {
+    const P = this.props;
+    const bodyId = P.body ?? "sedan", hex = P.hex ?? "#15213D", finish = P.finish ?? "satijn";
+    const full = P.full ?? true, dak = !!P.dak, spiegel = !!P.spiegel, chroom = !!P.chroom, pakket = !!P.pakket;
+    const mini = !!P.mini;
+    const LAK = "#A9ABAF";
+    const rgb=h=>[1,3,5].map(i=>parseInt(h.slice(i,i+2),16));
+    const mix=(h,t,a)=>{const x=rgb(h),y=rgb(t);return "#"+x.map((v,i)=>Math.round(v+(y[i]-v)*a).toString(16).padStart(2,"0")).join("");};
+    const paint=(h,f)=>{const m=f==="mat";return {s0:mix(h,"#FFFFFF",m?.14:.32),s1:mix(h,"#FFFFFF",m?.05:.1),s2:h,s3:mix(h,"#000000",m?.18:.3),c0:mix(h,"#000000",.5),c1:h,c2:mix(h,"#FFFFFF",.25)};};
+    const WS="M208 106 L266 64 Q276 56 292 56 L300 56 L300 60 Q284 60 276 66 L236 106 Z", FD="M242 106 L282 66 Q288 60 300 60 L332 59 L334 106 Z";
+    const SEATS="M296 104 L296 92 Q296 86 302 86 L312 86 Q318 86 318 92 L318 104 Z M368 104 L368 92 Q368 86 374 86 L384 86 Q390 86 390 92 L390 104 Z";
+    const FRONT="M66 186 L58 172 Q54 152 60 138 Q64 128 78 126 L204 106 L266 62 Q282 52 316 50 L";
+    const ROOF0="M262 66 L266 62 Q282 52 316 50 L";
+    const low={belt:106,roofY:52,hy:124,lowY:158,arch:45,tr:36,tr1:34,rr:24,rr1:21,rr2:30,suv:false,clad:"",mtf:"translate(0 0)",bpillar:"M334 59 L342 59 L344 106 L336 106 Z",seats:SEATS,light:"M66 134 L114 122 L116 130 L72 142 Z",led:"M69 137 L112 125",intake:"M60 160 L88 158 L89 170 L63 172 Z",crease:"M80 128 Q300 114 544 112",creaseS:"M80 131 Q300 117 544 115"};
+    const G={
+      hatch:{...low,body:FRONT+"396 52 Q414 52 424 60 L486 108 Q500 116 503 128 L505 170 Q504 186 494 186 A44 44 0 0 0 416 186 L199 186 A44 44 0 0 0 121 186 Z",roof:ROOF0+"396 52 Q414 52 424 60 L420 66 Q412 59 396 59 L316 57 Q286 59 272 68 Z",glass:[WS,FD,"M344 106 L342 59 L392 58 Q400 58 406 64 L436 100 Q437 104 432 104 Z","M428 62 L490 112 Q486 116 480 115 L422 68 Q424 64 428 62 Z"],chrome:"M208 106 L266 64 Q276 56 300 56 L396 56 Q412 56 422 64 L488 110 M236 106 L438 103",crease:"M80 128 Q300 114 500 114",creaseS:"M80 131 Q300 117 500 117",seams:"M236 108 L240 184 M342 108 L346 184 M436 104 L440 148",tail:"M486 110 L503 128 L503 138 L482 120 Z"},
+      sedan:{...low,body:FRONT+"380 52 Q398 52 410 60 L470 92 Q476 95 486 96 L536 98 Q548 100 549 112 L548 170 Q547 186 536 186 L494 186 A44 44 0 0 0 416 186 L199 186 A44 44 0 0 0 121 186 Z",roof:ROOF0+"380 52 Q398 52 410 60 L406 66 Q396 59 380 59 L316 57 Q286 59 272 68 Z",glass:[WS,FD,"M344 106 L342 59 L396 58 Q404 58 410 64 L428 100 Z","M412 60 L474 93 Q470 96 462 97 L406 66 Z"],chrome:"M208 106 L266 64 Q276 56 300 56 L380 56 Q398 56 410 64 L472 93 M236 106 L430 100",seams:"M236 108 L240 184 M342 108 L346 184 M428 102 L434 148",tail:"M518 100 L548 104 L548 114 L516 110 Z"},
+      station:{...low,body:FRONT+"462 52 Q480 52 488 60 L522 100 Q540 104 546 112 L548 170 Q547 186 536 186 L494 186 A44 44 0 0 0 416 186 L199 186 A44 44 0 0 0 121 186 Z",roof:ROOF0+"462 52 Q480 52 488 60 L484 66 Q476 59 462 59 L316 57 Q286 59 272 68 Z",glass:[WS,FD,"M344 106 L342 59 L408 58 L410 104 Z","M418 104 L416 58 L458 58 Q472 58 478 66 L500 98 Q500 103 494 103 Z","M486 62 L524 102 Q520 106 514 105 L480 68 Q482 64 486 62 Z"],chrome:"M208 106 L266 64 Q276 56 300 56 L462 56 Q478 56 486 64 L524 102 M236 106 L500 102",seams:"M236 108 L240 184 M342 108 L346 184 M412 106 L416 150",tail:"M522 104 L547 112 L547 122 L520 114 Z"},
+      suv:{belt:90,roofY:32,hy:108,lowY:150,arch:49,tr:38,tr1:36,rr:25,rr1:22,rr2:32,suv:true,mtf:"translate(0 -16)",body:"M66 178 L58 162 Q54 142 60 126 Q64 114 78 110 L204 90 L258 42 Q268 34 290 33 L448 32 Q468 32 476 40 L512 86 Q536 90 544 98 L548 160 Q547 178 536 178 L496 178 A48 48 0 0 0 414 178 L206 178 A48 48 0 0 0 114 178 Z",roof:"M254 46 L258 42 Q268 34 290 33 L448 32 Q468 32 476 40 L472 46 Q464 39 448 39 L290 40 Q272 41 264 48 Z",glass:["M208 90 L258 44 Q268 36 284 36 L292 36 L292 40 Q276 40 268 46 L234 90 Z","M240 90 L274 48 Q280 40 292 40 L330 39 L332 90 Z","M342 90 L340 39 L400 38 L402 90 Z","M410 90 L408 38 L446 37 Q460 37 466 45 L490 84 Q490 89 484 89 Z","M474 42 L514 88 Q510 92 504 91 L468 48 Q470 44 474 42 Z"],bpillar:"M332 39 L340 39 L342 90 L334 90 Z",seats:"M296 88 L296 76 Q296 70 302 70 L312 70 Q318 70 318 76 L318 88 Z M368 88 L368 76 Q368 70 374 70 L384 70 Q390 70 390 76 L390 88 Z",chrome:"M208 90 L258 46 Q268 38 290 37 L448 36 Q466 36 474 44 L514 88 M236 90 L492 88",crease:"M80 112 Q300 98 544 98",creaseS:"M80 115 Q300 101 544 101",seams:"M236 92 L240 176 M342 92 L346 176 M404 90 L408 140",light:"M66 118 L114 106 L116 114 L72 126 Z",led:"M69 121 L112 109",intake:"M60 152 L88 150 L89 162 L63 164 Z",tail:"M512 90 L546 98 L547 110 L510 102 Z",clad:"M62 176 L540 176 L542 190 L60 190 Z"},
+      bus:{belt:96,roofY:36,hy:112,lowY:156,arch:40,tr:31,tr1:29,rr:20,rr1:17,rr2:25,suv:false,clad:"",mtf:"translate(-12 -6)",body:"M70 186 L62 170 Q58 150 62 134 L68 112 Q72 104 82 102 L150 96 L178 52 Q184 40 200 38 L520 36 Q540 36 544 50 L548 170 Q547 186 536 186 L494 186 A40 40 0 0 0 416 186 L199 186 A40 40 0 0 0 121 186 Z",roof:"M178 52 Q184 40 200 38 L520 36 Q540 36 544 50 L538 54 Q534 44 520 44 L200 44 Q190 44 186 52 Z",glass:["M158 96 L184 52 Q188 44 200 44 L236 44 L236 96 Z","M246 44 L330 44 L330 96 L246 96 Z","M340 44 L420 44 L420 96 L340 96 Z","M430 44 L520 44 Q532 44 534 56 L536 96 L430 96 Z"],bpillar:"M236 44 L246 44 L246 96 L236 96 Z",seats:"M262 94 L262 78 Q262 72 268 72 L280 72 Q286 72 286 78 L286 94 Z M356 94 L356 78 Q356 72 362 72 L374 72 Q380 72 380 78 L380 94 Z M446 94 L446 78 Q446 72 452 72 L464 72 Q470 72 470 78 L470 94 Z",chrome:"M158 96 L184 52 Q188 44 200 44 L520 44 Q532 44 534 56 L536 96 M158 98 L536 98",crease:"M80 118 Q300 110 544 108",creaseS:"M80 121 Q300 113 544 111",seams:"M240 100 L242 184 M336 100 L338 184 M426 100 L428 184",light:"M66 118 L112 108 L114 116 L72 126 Z",led:"M69 121 L110 111",intake:"M62 160 L92 158 L93 170 L65 172 Z",tail:"M538 56 L548 60 L548 100 L538 98 Z"},
+      coach:{belt:96,roofY:22,hy:400,lowY:150,arch:40,tr:32,tr1:30,rr:21,rr1:18,rr2:26,suv:false,clad:"",mtf:"translate(-170 -40)",body:"M64 186 L60 170 Q56 150 60 100 L62 40 Q64 26 80 24 L520 22 Q540 22 544 36 L548 170 Q547 186 536 186 L494 186 A40 40 0 0 0 416 186 L199 186 A40 40 0 0 0 121 186 Z",roof:"M62 40 Q64 26 80 24 L520 22 Q540 22 544 36 L536 38 Q532 30 520 30 L82 32 Q72 32 70 40 Z M200 24 L420 22 L420 14 Q420 10 416 10 L204 12 Q200 12 200 16 Z",glass:["M66 100 L68 40 Q70 32 82 32 L110 32 L110 100 Z","M120 40 L200 40 L200 96 L120 96 Z","M210 40 L300 40 L300 96 L210 96 Z","M310 40 L400 40 L400 96 L310 96 Z","M410 40 L500 40 L500 96 L410 96 Z","M510 40 L528 40 L530 96 L510 96 Z"],bpillar:"",seats:"M136 94 L136 74 Q136 68 142 68 L154 68 Q160 68 160 74 L160 94 Z M236 94 L236 74 Q236 68 242 68 L254 68 Q260 68 260 74 L260 94 Z M336 94 L336 74 Q336 68 342 68 L354 68 Q360 68 360 74 L360 94 Z M436 94 L436 74 Q436 68 442 68 L454 68 Q460 68 460 74 L460 94 Z",chrome:"M110 32 L110 100 M120 40 L528 40 L530 96 L120 96 Z",crease:"M70 118 Q300 112 544 110",creaseS:"M70 121 Q300 115 544 113",seams:"M250 100 L250 184 M400 100 L400 184",light:"M62 130 L96 124 L97 134 L64 140 Z",led:"M65 133 L94 127",intake:"M62 160 L96 158 L97 170 L65 172 Z",tail:"M538 40 L548 44 L548 110 L538 108 Z"}
+    };
+    const g = G[bodyId] || G.sedan;
+    const bodyHex = full ? hex : LAK, bodyFin = full ? finish : "glans";
+    const zoneHex = pakket ? "#0A0A0B" : hex, zoneFin = pakket ? "glans" : finish;
+    const bp = paint(bodyHex, bodyFin), zp = paint(zoneHex, zoneFin);
+    const u = this.uid;
+    const bodyFill = (full && finish==="carbon") ? `url(#${u}-carbonB)` : `url(#${u}-body)`;
+    const zoneFill = zoneFin==="carbon" ? `url(#${u}-carbonZ)` : `url(#${u}-zone)`;
+    const HL = {glans:{ra:.45,rw:14,ba:.55,b:[2,8,14,22]},satijn:{ra:.25,rw:24,ba:.3,b:[-6,8,16,44]},mat:{ra:.08,rw:30,ba:.07,b:[-10,10,20,50]},metallic:{ra:.4,rw:14,ba:.5,b:[2,8,14,26]},carbon:{ra:.3,rw:20,ba:.3,b:[-4,8,16,40]}}[bodyFin];
+    const f = y => (Math.max(0, Math.min(220, y)) / 220).toFixed(3);
+    const hl = {r0:f(g.roofY-2),r1:f(g.roofY+4),r2:f(g.roofY+HL.rw),ra:HL.ra,b0:f(g.belt+HL.b[0]),b1:f(g.belt+HL.b[1]),b2:f(g.belt+HL.b[2]),b3:f(g.belt+HL.b[3]),ba:HL.ba};
+    const creaseA = {glans:.5,satijn:.35,mat:.15,metallic:.45,carbon:.3}[bodyFin];
+    let rim = "";
+    for (let i=0;i<5;i++){ for (const d of [-7,7]) { const t=(-90+i*72+d)*Math.PI/180, n=t+Math.PI/2; const r0=6,r1=g.rr-2.5,w0=1.6,w1=2.4; const px=(r,w,s)=>(r*Math.cos(t)+s*w*Math.cos(n)).toFixed(1), py=(r,w,s)=>(r*Math.sin(t)+s*w*Math.sin(n)).toFixed(1); rim += `M${px(r0,w0,-1)} ${py(r0,w0,-1)} L${px(r1,w1,-1)} ${py(r1,w1,-1)} L${px(r1,w1,1)} ${py(r1,w1,1)} L${px(r0,w0,1)} ${py(r0,w0,1)} Z `; } }
+    return {
+      uid:u, g, bp, zp, hl, creaseA, rimPath: rim, detail: !mini,
+      sparkle: (full && finish==="metallic") ? .45 : 0,
+      fillBody: bodyFill,
+      fillRoof: full ? bodyFill : (dak ? zoneFill : bodyFill),
+      fillMirror: full ? bodyFill : (spiegel ? zoneFill : bodyFill),
+      fillChrome: (full || chroom) ? "#0E0F11" : `url(#${u}-chrome)`
+    };
+  }
+}
+</script>
+</body>
+</html>

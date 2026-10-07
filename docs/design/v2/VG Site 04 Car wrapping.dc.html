@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&amp;family=Cinzel:wght@700&amp;display=swap" rel="stylesheet">
+<style>body{margin:0;background:#1A1B1E} a{color:#C4A24D;text-decoration:none} a:hover{color:#F2EFE9} *{box-sizing:border-box} h1,h2,h3,p,ul{margin:0}</style>
+</helmet>
+<section style="display:flex;gap:72px;align-items:flex-start;padding:56px;font-family:'Instrument Sans',sans-serif;color:#F2EFE9">
+
+<!-- FRAME 5a: 375 -->
+<div id="5a" style="display:flex;flex-direction:column;gap:12px;flex:none">
+  <div style="font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#8A8B90">5a · Car wrapping · 375</div>
+  <div data-screen-label="Car wrapping 375" style="width:375px;background:#0B0B0C;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 0 0 1px #2A2B2F">
+    <div style="display:flex;align-items:center;justify-content:space-between;height:56px;padding:0 8px 0 16px;border-bottom:1px solid #2A2B2F">
+      <div style="display:flex;align-items:center;gap:8px"><svg viewBox="0 0 200 232" width="22" height="26"><path d="M100 8 184 36v82c0 54-42 88-84 106C58 206 16 172 16 118V36Z" fill="none" stroke="#C4A24D" stroke-width="12" stroke-linejoin="round"></path><text x="100" y="168" text-anchor="middle" font-family="Cinzel, serif" font-weight="700" font-size="132" fill="#C4A24D">V</text></svg><div><div style="font-family:Cinzel,serif;font-weight:700;font-size:14px;letter-spacing:.06em;color:#C4A24D;line-height:1">V-GUARD</div><div style="font-size:8px;letter-spacing:.32em;color:#A3A39F;margin-top:3px">STUDIO</div></div></div>
+      <div style="display:flex;align-items:center;gap:4px"><div style="font-size:13px;font-weight:500;padding:0 8px;height:44px;display:flex;align-items:center;gap:6px"><span>NL</span><span style="color:#5C5D62">/</span><span style="color:#A3A39F">UA</span></div><div style="width:44px;height:44px;display:flex;align-items:center;justify-content:center"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#F2EFE9" stroke-width="1.6"><path d="M2 6h18M2 11h18M2 16h18"></path></svg></div></div>
+    </div>
+    <div style="position:relative;height:692px;overflow:hidden">
+      <img src="assets/photos/bmw-34-p.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 55%">
+      <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,11,12,.1) 0%,rgba(11,11,12,.25) 35%,rgba(11,11,12,.9) 62%,#0B0B0C 100%)"></div>
+      <div style="position:absolute;left:16px;right:16px;bottom:16px;display:flex;flex-direction:column;gap:12px">
+        <h1 style="font-size:28px;line-height:1.12;font-weight:600;letter-spacing:-.01em;text-wrap:pretty">Car wrapping in Vroomshoop, volledig of gedeeltelijk</h1>
+        <p style="font-size:15px;line-height:1.45;color:#D7D4CE">Een nieuwe kleur of finish met folie, aangebracht in onze studio.</p>
+        <div style="display:flex;flex-direction:column;gap:10px;margin-top:4px"><a href="#" style="display:flex;align-items:center;justify-content:center;height:48px;background:#C4A24D;color:#0B0B0C;font-weight:600;font-size:15px;border-radius:6px">Offerte aanvragen</a><a href="#" style="display:flex;align-items:center;justify-content:center;height:48px;border:1px solid #F2EFE9;color:#F2EFE9;font-weight:600;font-size:15px;border-radius:6px">WhatsApp ons</a></div>
+        <div style="display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:4px -16px 0;padding:0 16px"><span style="font-size:12px;font-weight:500;padding:7px 12px;border:1px solid rgba(242,239,233,.4);border-radius:999px;white-space:nowrap">3 jaar garantie</span><span style="font-size:12px;font-weight:500;padding:7px 12px;border:1px solid rgba(242,239,233,.4);border-radius:999px;white-space:nowrap">Volledige wrap vanaf €1.795</span><span style="font-size:12px;font-weight:500;padding:7px 12px;border:1px solid rgba(242,239,233,.4);border-radius:999px;white-space:nowrap">5-staps voorbereiding</span></div>
+      </div>
+    </div>
+
+    <div style="padding:48px 16px 0;display:flex;flex-direction:column;gap:12px">
+      <h2 style="font-size:26px;line-height:1.15;font-weight:600;letter-spacing:-.01em">Wat is car wrapping</h2>
+      <p style="font-size:16px;line-height:1.55;color:#D7D4CE;text-wrap:pretty">Car wrapping is het bekleden van de lak met gekleurde folie. Je kiest een volledige wrap of alleen delen van de auto, zoals dak, spiegelkappen of chroom. V Guard Studio wrapt auto's in Vroomshoop, Twente.</p>
+    </div>
+
+    <div style="padding:64px 16px 0;display:flex;flex-direction:column;gap:16px">
+      <h2 style="font-size:26px;line-height:1.15;font-weight:600;letter-spacing:-.01em">Volledig of gedeeltelijk</h2>
+      <sc-for list="{{ cards }}" as="c" hint-placeholder-count="4">
+        <div style="background:#F2EFE9;color:#0B0B0C;border-radius:10px;overflow:hidden;display:grid;grid-template-columns:120px 1fr">
+          <sc-if value="{{ c.ph }}" hint-placeholder-val="{{ true }}"><div style="background:#D9D6CF;border-right:1px dashed #A3A39F;display:flex;align-items:center;justify-content:center;text-align:center;padding:10px;font-size:11px;line-height:1.4;color:#5C5C58">{{ c.phText }}</div></sc-if>
+          <sc-if value="{{ c.img }}" hint-placeholder-val="{{ false }}"><img src="{{ c.src }}" alt="" style="display:block;width:100%;height:100%;object-fit:cover;object-position:{{ c.pos }}"></sc-if>
+          <div style="padding:16px;display:flex;flex-direction:column;gap:6px"><h3 style="font-size:18px;font-weight:600">{{ c.t }}</h3><p style="font-size:13px;line-height:1.45;color:#5C5C58">{{ c.d }}</p><div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-top:2px"><span style="font-size:16px;font-weight:600">{{ c.price }}</span><span style="font-size:12px;color:#5C5C58">{{ c.dur }}</span></div><a href="#" style="margin-top:6px;height:44px;border:1px solid #0B0B0C;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px;color:#0B0B0C">Offerte aanvragen</a></div>
+        </div>
+      </sc-for>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:4px"><span style="font-size:12px;font-weight:500;padding:7px 12px;border:1px solid #3A3B3F;border-radius:999px">Glans</span><span style="font-size:12px;font-weight:500;padding:7px 12px;border:1px solid #3A3B3F;border-radius:999px">Mat</span><span style="font-size:12px;font-weight:500;padding:7px 12px;border:1px solid #3A3B3F;border-radius:999px">Satijn</span><span style="font-size:12px;font-weight:500;padding:7px 12px;border:1px solid #3A3B3F;border-radius:999px">Metallic</span><span style="font-size:12px;font-weight:500;padding:7px 12px;border:1px solid #3A3B3F;border-radius:999px">Carbon look</span></div>
+      <p style="font-size:13px;line-height:1.45;color:#A3A39F">Prijzen incl. btw. Eindprijs hangt af van auto, folie en delen.</p>
+    </div>
+
+    <div style="padding:64px 16px 0;display:flex;flex-direction:column;gap:16px">
+      <h2 style="font-size:26px;line-height:1.15;font-weight:600;letter-spacing:-.01em">Recent wrap-werk</h2>
+      <sc-for list="{{ recent }}" as="r" hint-placeholder-count="3"><div style="aspect-ratio:4/3;background:#2E2F33;border:1px dashed #5C5D62;border-radius:6px;display:flex;align-items:center;justify-content:center;text-align:center;padding:16px;font-size:12px;line-height:1.4;color:#C9C7C1">{{ r }}</div></sc-for>
+      <a href="#" style="height:48px;border:1px solid #F2EFE9;color:#F2EFE9;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:15px">Bekijk alle projecten</a>
+    </div>
+
+    <div style="padding:64px 16px 0;display:flex;flex-direction:column">
+      <h2 style="font-size:26px;line-height:1.15;font-weight:600;letter-spacing:-.01em;margin-bottom:8px">Zo werken we</h2>
+      <sc-for list="{{ steps }}" as="s" hint-placeholder-count="5"><div style="display:grid;grid-template-columns:36px 1fr;gap:14px;padding:16px 0;border-top:1px solid #2A2B2F"><div style="width:36px;height:36px;border:1px solid #C4A24D;border-radius:999px;display:flex;align-items:center;justify-content:center;color:#C4A24D;font-weight:600;font-size:13px">{{ s.n }}</div><div><div style="font-size:16px;font-weight:600;line-height:1.3">{{ s.t }}</div><div style="font-size:14px;line-height:1.45;color:#A3A39F;margin-top:4px">{{ s.d }}</div></div></div></sc-for>
+    </div>
+
+    <div style="padding:64px 16px 0;display:flex;flex-direction:column">
+      <h2 style="font-size:26px;line-height:1.15;font-weight:600;letter-spacing:-.01em;margin-bottom:12px">Veelgestelde vragen</h2>
+      <sc-for list="{{ faq }}" as="f" hint-placeholder-count="5"><div style="border-top:1px solid #2A2B2F;padding:16px 0"><div style="display:flex;justify-content:space-between;gap:16px;align-items:flex-start;min-height:44px"><div style="font-size:16px;font-weight:600;line-height:1.35">{{ f.q }}</div><div style="width:24px;height:24px;flex:none;display:flex;align-items:center;justify-content:center;color:#C4A24D;font-size:18px;line-height:1">{{ f.sym }}</div></div><sc-if value="{{ f.open }}" hint-placeholder-val="{{ false }}"><p style="font-size:15px;line-height:1.55;color:#A3A39F;margin-top:8px;padding-right:40px">{{ f.a }}</p></sc-if></div></sc-for>
+      <div style="border-top:1px solid #2A2B2F"></div>
+    </div>
+
+    <div style="margin:64px 16px 64px;padding:28px 20px;background:#16171A;border:1px solid #2A2B2F;border-top:2px solid #C4A24D;border-radius:10px;display:flex;flex-direction:column;gap:10px">
+      <h2 style="font-size:24px;line-height:1.15;font-weight:600;letter-spacing:-.01em">Je auto in een nieuwe kleur?</h2>
+      <p style="font-size:15px;line-height:1.45;color:#A3A39F">Stuur merk, model en de kleur die je zoekt.</p>
+      <div style="display:flex;flex-direction:column;gap:10px;margin-top:10px"><a href="#" style="height:48px;background:#C4A24D;color:#0B0B0C;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:15px">Offerte aanvragen</a><a href="#" style="height:48px;border:1px solid #F2EFE9;color:#F2EFE9;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:15px">WhatsApp ons</a></div>
+    </div>
+
+    <div style="background:#060607;border-top:1px solid #2A2B2F;padding:40px 16px 24px;color:#A3A39F;font-size:13px;line-height:1.6;display:flex;flex-direction:column;gap:28px">
+      <div style="display:flex;flex-direction:column;gap:12px"><div style="display:flex;align-items:center;gap:8px"><svg viewBox="0 0 200 232" width="22" height="26"><path d="M100 8 184 36v82c0 54-42 88-84 106C58 206 16 172 16 118V36Z" fill="none" stroke="#C4A24D" stroke-width="12" stroke-linejoin="round"></path><text x="100" y="168" text-anchor="middle" font-family="Cinzel, serif" font-weight="700" font-size="132" fill="#C4A24D">V</text></svg><div style="font-family:Cinzel,serif;font-weight:700;font-size:14px;letter-spacing:.06em;color:#C4A24D">V-GUARD</div></div><div style="color:#F2EFE9;font-weight:500">V Guard Studio</div><div>Twentelaan 14 D, 7681 NE Vroomshoop<br>06 12 34 56 78<br>ma-vr 9:00-18:00, za 10:00-16:00</div></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px 16px"><a href="#" style="color:#F2EFE9;display:flex;align-items:center;height:36px">Home</a><a href="#" style="color:#F2EFE9;display:flex;align-items:center;height:36px">PPF</a><a href="#" style="color:#F2EFE9;display:flex;align-items:center;height:36px">Ramen blinderen</a><a href="#" style="color:#F2EFE9;display:flex;align-items:center;height:36px">Car wrapping</a><a href="#" style="color:#F2EFE9;display:flex;align-items:center;height:36px">Projecten</a><a href="#" style="color:#F2EFE9;display:flex;align-items:center;height:36px">Contact</a></div>
+      <div style="display:flex;gap:20px"><a href="#" style="color:#F2EFE9;display:flex;align-items:center;height:36px">TikTok</a><a href="#" style="color:#F2EFE9;display:flex;align-items:center;height:36px">Instagram</a><a href="#" style="color:#F2EFE9;display:flex;align-items:center;height:36px">Facebook</a></div>
+      <div style="border-top:1px solid #2A2B2F;padding-top:16px;display:flex;justify-content:space-between;font-size:12px"><a href="#" style="color:#A3A39F">Privacy</a><span>KvK 12345678</span></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;padding:8px 12px 12px;background:#0B0B0C;border-top:1px solid #2A2B2F">
+      <a href="#" style="display:flex;align-items:center;justify-content:center;height:48px;border-radius:6px;font-size:14px;font-weight:600;background:#16171A;border:1px solid #3A3B3F;color:#F2EFE9">WhatsApp</a>
+      <a href="#" style="display:flex;align-items:center;justify-content:center;height:48px;border-radius:6px;font-size:14px;font-weight:600;background:#16171A;border:1px solid #3A3B3F;color:#F2EFE9">Bellen</a>
+      <a href="#" style="display:flex;align-items:center;justify-content:center;height:48px;border-radius:6px;font-size:14px;font-weight:600;background:#C4A24D;color:#0B0B0C">Offerte</a>
+    </div>
+  </div>
+</div>
+
+<!-- FRAME 5b: 1280 -->
+<div id="5b" style="display:flex;flex-direction:column;gap:12px;flex:none">
+  <div style="font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#8A8B90">5b · Car wrapping · 1280</div>
+  <div data-screen-label="Car wrapping 1280" style="width:1280px;background:#0B0B0C;overflow:hidden;box-shadow:0 0 0 1px #2A2B2F">
+    <div style="display:flex;align-items:center;justify-content:space-between;height:72px;padding:0 40px;border-bottom:1px solid #2A2B2F">
+      <div style="display:flex;align-items:center;gap:10px"><svg viewBox="0 0 200 232" width="26" height="30"><path d="M100 8 184 36v82c0 54-42 88-84 106C58 206 16 172 16 118V36Z" fill="none" stroke="#C4A24D" stroke-width="12" stroke-linejoin="round"></path><text x="100" y="168" text-anchor="middle" font-family="Cinzel, serif" font-weight="700" font-size="132" fill="#C4A24D">V</text></svg><div><div style="font-family:Cinzel,serif;font-weight:700;font-size:16px;letter-spacing:.06em;color:#C4A24D;line-height:1">V-GUARD</div><div style="font-size:9px;letter-spacing:.32em;color:#A3A39F;margin-top:3px">STUDIO</div></div></div>
+      <nav style="display:flex;gap:28px;font-size:15px;font-weight:500"><a href="#" style="color:#F2EFE9">PPF</a><a href="#" style="color:#F2EFE9">Ramen blinderen</a><a href="#" style="color:#C4A24D;border-bottom:1px solid #C4A24D;padding-bottom:2px">Car wrapping</a><a href="#" style="color:#F2EFE9">Projecten</a><a href="#" style="color:#F2EFE9">Contact</a></nav>
+      <div style="display:flex;align-items:center;gap:20px"><div style="font-size:14px;font-weight:500;display:flex;gap:6px"><span>NL</span><span style="color:#5C5D62">/</span><span style="color:#A3A39F">UA</span></div><a href="#" style="height:44px;padding:0 20px;background:#C4A24D;color:#0B0B0C;border-radius:6px;display:flex;align-items:center;font-weight:600;font-size:14px">Offerte aanvragen</a></div>
+    </div>
+    <div style="position:relative;height:720px;overflow:hidden">
+      <img src="assets/photos/bmw-34-p.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 62%">
+      <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(11,11,12,.94) 0%,rgba(11,11,12,.8) 36%,rgba(11,11,12,.2) 68%,rgba(11,11,12,0) 100%)"></div>
+      <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,11,12,.25) 0%,rgba(11,11,12,0) 30%,rgba(11,11,12,.6) 80%,#0B0B0C 100%)"></div>
+      <div style="position:absolute;left:40px;bottom:80px;width:640px;display:flex;flex-direction:column;gap:20px">
+        <h1 style="font-size:50px;line-height:1.08;font-weight:600;letter-spacing:-.02em;text-wrap:pretty">Car wrapping in Vroomshoop, volledig of gedeeltelijk</h1>
+        <p style="font-size:19px;line-height:1.45;color:#D7D4CE">Een nieuwe kleur of finish met folie, aangebracht in onze studio.</p>
+        <div style="display:flex;gap:12px;margin-top:4px"><a href="#" style="display:flex;align-items:center;justify-content:center;height:52px;padding:0 28px;background:#C4A24D;color:#0B0B0C;font-weight:600;font-size:16px;border-radius:6px">Offerte aanvragen</a><a href="#" style="display:flex;align-items:center;justify-content:center;height:52px;padding:0 28px;border:1px solid #F2EFE9;color:#F2EFE9;font-weight:600;font-size:16px;border-radius:6px">WhatsApp ons</a></div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px"><span style="font-size:13px;font-weight:500;padding:8px 14px;border:1px solid rgba(242,239,233,.4);border-radius:999px">3 jaar garantie</span><span style="font-size:13px;font-weight:500;padding:8px 14px;border:1px solid rgba(242,239,233,.4);border-radius:999px">Volledige wrap vanaf €1.795</span><span style="font-size:13px;font-weight:500;padding:8px 14px;border:1px solid rgba(242,239,233,.4);border-radius:999px">5-staps voorbereiding</span></div>
+      </div>
+    </div>
+
+    <div style="padding:88px 40px 0;display:grid;grid-template-columns:1fr 2fr;gap:48px"><h2 style="font-size:40px;line-height:1.1;font-weight:600;letter-spacing:-.02em">Wat is car wrapping</h2><p style="font-size:20px;line-height:1.55;color:#D7D4CE;text-wrap:pretty;max-width:720px">Car wrapping is het bekleden van de lak met gekleurde folie. Je kiest een volledige wrap of alleen delen van de auto, zoals dak, spiegelkappen of chroom. V Guard Studio wrapt auto's in Vroomshoop, Twente.</p></div>
+
+    <div style="padding:112px 40px 0"><h2 style="font-size:40px;line-height:1.1;font-weight:600;letter-spacing:-.02em;margin-bottom:32px">Volledig of gedeeltelijk</h2>
+      <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px">
+        <sc-for list="{{ cards }}" as="c" hint-placeholder-count="4">
+          <div style="background:#F2EFE9;color:#0B0B0C;border-radius:10px;overflow:hidden;display:flex;flex-direction:column">
+            <sc-if value="{{ c.ph }}" hint-placeholder-val="{{ true }}"><div style="aspect-ratio:4/3;background:#D9D6CF;border-bottom:1px dashed #A3A39F;display:flex;align-items:center;justify-content:center;text-align:center;padding:16px;font-size:12px;line-height:1.4;color:#5C5C58">{{ c.phText }}</div></sc-if>
+            <sc-if value="{{ c.img }}" hint-placeholder-val="{{ false }}"><img src="{{ c.src }}" alt="" style="display:block;width:100%;aspect-ratio:4/3;object-fit:cover;object-position:{{ c.pos }}"></sc-if>
+            <div style="padding:20px;display:flex;flex-direction:column;gap:8px;flex:1"><h3 style="font-size:20px;font-weight:600">{{ c.t }}</h3><p style="font-size:14px;line-height:1.45;color:#5C5C58;flex:1">{{ c.d }}</p><div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px"><span style="font-size:18px;font-weight:600">{{ c.price }}</span><span style="font-size:12px;color:#5C5C58">{{ c.dur }}</span></div><a href="#" style="margin-top:6px;height:44px;border:1px solid #0B0B0C;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px;color:#0B0B0C">Offerte aanvragen</a></div>
+          </div>
+        </sc-for>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:24px;align-items:center"><span style="font-size:13px;color:#A3A39F;margin-right:4px">Finishes:</span><span style="font-size:13px;font-weight:500;padding:8px 14px;border:1px solid #3A3B3F;border-radius:999px">Glans</span><span style="font-size:13px;font-weight:500;padding:8px 14px;border:1px solid #3A3B3F;border-radius:999px">Mat</span><span style="font-size:13px;font-weight:500;padding:8px 14px;border:1px solid #3A3B3F;border-radius:999px">Satijn</span><span style="font-size:13px;font-weight:500;padding:8px 14px;border:1px solid #3A3B3F;border-radius:999px">Metallic</span><span style="font-size:13px;font-weight:500;padding:8px 14px;border:1px solid #3A3B3F;border-radius:999px">Carbon look</span></div>
+      <p style="font-size:14px;line-height:1.45;color:#A3A39F;margin-top:16px">Prijzen incl. btw. Eindprijs hangt af van auto, folie en delen.</p>
+    </div>
+
+    <div style="padding:112px 40px 0"><div style="display:flex;justify-content:space-between;align-items:end;margin-bottom:32px"><h2 style="font-size:40px;line-height:1.1;font-weight:600;letter-spacing:-.02em">Recent wrap-werk</h2><a href="#" style="height:46px;padding:0 22px;border:1px solid #F2EFE9;color:#F2EFE9;border-radius:6px;display:flex;align-items:center;font-weight:600;font-size:15px">Bekijk alle projecten</a></div>
+      <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px">
+        <sc-for list="{{ recent }}" as="r" hint-placeholder-count="3"><div style="aspect-ratio:4/3;background:#2E2F33;border:1px dashed #5C5D62;border-radius:6px;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;font-size:13px;line-height:1.4;color:#C9C7C1">{{ r }}</div></sc-for>
+      </div>
+    </div>
+
+    <div style="padding:112px 40px 0"><h2 style="font-size:40px;line-height:1.1;font-weight:600;letter-spacing:-.02em;margin-bottom:40px">Zo werken we</h2>
+      <div style="display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:24px">
+        <sc-for list="{{ steps }}" as="s" hint-placeholder-count="5"><div style="padding-top:20px;border-top:1px solid #C4A24D"><div style="font-size:13px;color:#C4A24D;font-weight:600;letter-spacing:.08em">{{ s.n }}</div><div style="font-size:19px;font-weight:600;line-height:1.3;margin-top:12px">{{ s.t }}</div><div style="font-size:14px;line-height:1.5;color:#A3A39F;margin-top:8px">{{ s.d }}</div></div></sc-for>
+      </div>
+    </div>
+
+    <div style="padding:112px 40px 0;display:grid;grid-template-columns:1fr 2fr;gap:48px"><h2 style="font-size:40px;line-height:1.1;font-weight:600;letter-spacing:-.02em">Veelgestelde vragen</h2>
+      <div style="display:flex;flex-direction:column">
+        <sc-for list="{{ faq }}" as="f" hint-placeholder-count="5"><div style="border-top:1px solid #2A2B2F;padding:20px 0"><div style="display:flex;justify-content:space-between;gap:24px;align-items:flex-start;min-height:44px"><div style="font-size:19px;font-weight:600;line-height:1.35">{{ f.q }}</div><div style="width:24px;height:24px;flex:none;display:flex;align-items:center;justify-content:center;color:#C4A24D;font-size:20px;line-height:1">{{ f.sym }}</div></div><sc-if value="{{ f.open }}" hint-placeholder-val="{{ false }}"><p style="font-size:16px;line-height:1.6;color:#A3A39F;margin-top:10px;max-width:680px">{{ f.a }}</p></sc-if></div></sc-for>
+        <div style="border-top:1px solid #2A2B2F"></div>
+      </div>
+    </div>
+
+    <div style="margin:112px 40px 112px;padding:48px;background:#16171A;border:1px solid #2A2B2F;border-top:2px solid #C4A24D;border-radius:10px;display:flex;justify-content:space-between;align-items:center;gap:48px">
+      <div><h2 style="font-size:32px;line-height:1.15;font-weight:600;letter-spacing:-.02em">Je auto in een nieuwe kleur?</h2><p style="font-size:16px;line-height:1.45;color:#A3A39F;margin-top:10px">Stuur merk, model en de kleur die je zoekt.</p></div>
+      <div style="display:flex;gap:12px;flex:none"><a href="#" style="height:52px;padding:0 28px;background:#C4A24D;color:#0B0B0C;border-radius:6px;display:flex;align-items:center;font-weight:600;font-size:16px">Offerte aanvragen</a><a href="#" style="height:52px;padding:0 28px;border:1px solid #F2EFE9;color:#F2EFE9;border-radius:6px;display:flex;align-items:center;font-weight:600;font-size:16px">WhatsApp ons</a></div>
+    </div>
+
+    <div style="background:#060607;border-top:1px solid #2A2B2F;padding:56px 40px 28px;color:#A3A39F;font-size:14px;line-height:1.6">
+      <div style="display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:48px">
+        <div style="display:flex;flex-direction:column;gap:14px"><div style="display:flex;align-items:center;gap:8px"><svg viewBox="0 0 200 232" width="24" height="28"><path d="M100 8 184 36v82c0 54-42 88-84 106C58 206 16 172 16 118V36Z" fill="none" stroke="#C4A24D" stroke-width="12" stroke-linejoin="round"></path><text x="100" y="168" text-anchor="middle" font-family="Cinzel, serif" font-weight="700" font-size="132" fill="#C4A24D">V</text></svg><div style="font-family:Cinzel,serif;font-weight:700;font-size:15px;letter-spacing:.06em;color:#C4A24D">V-GUARD</div></div><div style="color:#F2EFE9;font-weight:500">V Guard Studio</div><div>Twentelaan 14 D, 7681 NE Vroomshoop<br>06 12 34 56 78<br>ma-vr 9:00-18:00, za 10:00-16:00</div></div>
+        <div style="display:flex;flex-direction:column;gap:10px"><div style="color:#F2EFE9;font-weight:600;font-size:13px;letter-spacing:.08em;text-transform:uppercase">Diensten</div><a href="#" style="color:#D7D4CE">PPF</a><a href="#" style="color:#D7D4CE">Ramen blinderen</a><a href="#" style="color:#D7D4CE">Car wrapping</a></div>
+        <div style="display:flex;flex-direction:column;gap:10px"><div style="color:#F2EFE9;font-weight:600;font-size:13px;letter-spacing:.08em;text-transform:uppercase">Studio</div><a href="#" style="color:#D7D4CE">Home</a><a href="#" style="color:#D7D4CE">Projecten</a><a href="#" style="color:#D7D4CE">Contact</a></div>
+        <div style="display:flex;flex-direction:column;gap:10px"><div style="color:#F2EFE9;font-weight:600;font-size:13px;letter-spacing:.08em;text-transform:uppercase">Volg ons</div><a href="#" style="color:#D7D4CE">TikTok</a><a href="#" style="color:#D7D4CE">Instagram</a><a href="#" style="color:#D7D4CE">Facebook</a></div>
+      </div>
+      <div style="border-top:1px solid #2A2B2F;margin-top:48px;padding-top:20px;display:flex;justify-content:space-between;font-size:13px"><a href="#" style="color:#A3A39F">Privacy</a><span>KvK 12345678</span></div>
+    </div>
+  </div>
+</div>
+
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() {
+    const steps = [["Wassen","Grondige reiniging van de auto in meerdere fasen."],["Kleibehandeling","Clay haalt vastzittend vuil uit de lak."],["Ontvetten","Alcoholreiniging zodat de folie goed hecht."],["Aanbrengen","De folie gaat op de schone, voorbereide lak."],["Controle","Eindcontrole van randen en oppervlak voor oplevering."]].map((s,i)=>({n:String(i+1).padStart(2,"0"),t:s[0],d:s[1]}));
+    const cards = [
+      {t:"Volledige wrap",d:"De hele auto in een nieuwe kleur of finish.",price:"vanaf €1.795",dur:"3-5 dagen",ph:true,img:false,phText:"Foto nodig: volledig gewrapte auto, 3/4"},
+      {t:"Dak",d:"Zwart of in kleur, voor een sportieve look.",price:"vanaf €249",dur:"1 dag",ph:true,img:false,phText:"Foto nodig: zwart gewrapt dak"},
+      {t:"Spiegelkappen",d:"Kleine upgrade, groot verschil.",price:"vanaf €69",dur:"1 dag",ph:false,img:true,src:"assets/photos/bmw-34-p.png",pos:"22% 48%"},
+      {t:"Chrome delete",d:"Chroomdelen in zwart of kleur.",price:"vanaf €149",dur:"1 dag",ph:false,img:true,src:"assets/photos/bmw-front-p.png",pos:"center 70%"}
+    ];
+    const recent = ["Foto nodig: volledige wrap, mat of satijn, 3/4 in de studio","Foto nodig: dak in zwart glans, van opzij","Foto nodig: chrome delete, close-up raamlijst"];
+    const faq = [
+      {q:"Hoe lang staat mijn auto bij jullie?",a:"Een volledige wrap duurt 3-5 dagen, een dak of spiegelkappen meestal 1 dag.",open:true},
+      {q:"Hoe lang gaat een wrap mee?",a:"Bij goed onderhoud 5-7 jaar, afhankelijk van folie en gebruik.",open:false},
+      {q:"Beschadigt een wrap de lak?",a:"Op originele lak in goede staat laat folie bij vakkundig verwijderen meestal los zonder schade. Bij overgespoten of beschadigde lak is er meer risico; daarom bekijken we de lak vooraf.",open:false},
+      {q:"Welke kleuren en finishes zijn er?",a:"Glans, mat, satijn, metallic en carbon look, in tientallen kleuren. Bekijk de stalen in de studio.",open:false},
+      {q:"Wat kost een wrap?",a:"Een volledige wrap begint bij €1.795. Je krijgt een vaste prijs na je aanvraag.",open:false}
+    ].map(f=>({...f,sym:f.open?"−":"+"}));
+    return { steps, cards, recent, faq };
+  }
+}
+</script>
+</body>
+</html>

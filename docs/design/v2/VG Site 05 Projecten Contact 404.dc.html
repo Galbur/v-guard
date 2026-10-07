@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&amp;family=Cinzel:wght@700&amp;display=swap" rel="stylesheet">
+<style>body{margin:0;background:#1A1B1E} a{color:#C4A24D;text-decoration:none} a:hover{color:#F2EFE9} *{box-sizing:border-box} h1,h2,h3,p,ul{margin:0}</style>
+</helmet>
+<section style="display:flex;gap:56px;align-items:flex-start;padding:56px;font-family:'Instrument Sans',sans-serif;color:#F2EFE9;flex-wrap:wrap;max-width:3000px">
+
+<!-- FRAME 6: Projecten 375 -->
+<div id="6" style="display:flex;flex-direction:column;gap:12px;flex:none">
+  <div style="font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#8A8B90">6 · Projecten · 375</div>
+  <div data-screen-label="Projecten 375" style="width:375px;background:#0B0B0C;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 0 0 1px #2A2B2F">
+    <div style="display:flex;align-items:center;justify-content:space-between;height:56px;padding:0 8px 0 16px;border-bottom:1px solid #2A2B2F">
+      <div style="display:flex;align-items:center;gap:8px"><svg viewBox="0 0 200 232" width="22" height="26"><path d="M100 8 184 36v82c0 54-42 88-84 106C58 206 16 172 16 118V36Z" fill="none" stroke="#C4A24D" stroke-width="12" stroke-linejoin="round"></path><text x="100" y="168" text-anchor="middle" font-family="Cinzel, serif" font-weight="700" font-size="132" fill="#C4A24D">V</text></svg><div><div style="font-family:Cinzel,serif;font-weight:700;font-size:14px;letter-spacing:.06em;color:#C4A24D;line-height:1">V-GUARD</div><div style="font-size:8px;letter-spacing:.32em;color:#A3A39F;margin-top:3px">STUDIO</div></div></div>
+      <div style="display:flex;align-items:center;gap:4px"><div style="font-size:13px;font-weight:500;padding:0 8px;height:44px;display:flex;align-items:center;gap:6px"><span>NL</span><span style="color:#5C5D62">/</span><span style="color:#A3A39F">UA</span></div><div style="width:44px;height:44px;display:flex;align-items:center;justify-content:center"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#F2EFE9" stroke-width="1.6"><path d="M2 6h18M2 11h18M2 16h18"></path></svg></div></div>
+    </div>
+    <div style="padding:40px 16px 0;display:flex;flex-direction:column;gap:12px">
+      <h1 style="font-size:30px;line-height:1.12;font-weight:600;letter-spacing:-.01em">Projecten van V Guard Studio</h1>
+      <p style="font-size:15px;line-height:1.45;color:#D7D4CE">Echte auto's uit onze studio in Vroomshoop: PPF, getinte ruiten en wraps.</p>
+      <div style="display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:12px -16px 0;padding:0 16px">
+        <span style="font-size:13px;font-weight:600;padding:0 14px;height:40px;display:flex;align-items:center;background:#C4A24D;color:#0B0B0C;border-radius:999px;white-space:nowrap">Alles</span>
+        <span style="font-size:13px;font-weight:500;padding:0 14px;height:40px;display:flex;align-items:center;border:1px solid #3A3B3F;border-radius:999px;white-space:nowrap">PPF</span>
+        <span style="font-size:13px;font-weight:500;padding:0 14px;height:40px;display:flex;align-items:center;border:1px solid #3A3B3F;border-radius:999px;white-space:nowrap">Ramen blinderen</span>
+        <span style="font-size:13px;font-weight:500;padding:0 14px;height:40px;display:flex;align-items:center;border:1px solid #3A3B3F;border-radius:999px;white-space:nowrap">Car wrapping</span>
+      </div>
+    </div>
+    <div style="padding:28px 16px 0;display:grid;grid-template-columns:1fr 1fr;gap:16px 12px">
+      <sc-for list="{{ projects }}" as="p" hint-placeholder-count="12">
+        <figure style="margin:0">
+          <sc-if value="{{ p.img }}" hint-placeholder-val="{{ true }}"><img src="{{ p.src }}" alt="" style="display:block;width:100%;aspect-ratio:4/3;object-fit:cover;object-position:{{ p.pos }};border-radius:6px"></sc-if>
+          <sc-if value="{{ p.ph }}" hint-placeholder-val="{{ false }}"><div style="aspect-ratio:4/3;background:#2E2F33;border:1px dashed #5C5D62;border-radius:6px;display:flex;align-items:center;justify-content:center;text-align:center;padding:10px;font-size:11px;line-height:1.4;color:#C9C7C1">{{ p.phText }}</div></sc-if>
+          <figcaption style="font-size:12px;line-height:1.4;color:#A3A39F;margin-top:6px">{{ p.cap }}</figcaption>
+        </figure>
+      </sc-for>
+    </div>
+    <div style="margin:56px 16px 64px;padding:28px 20px;background:#16171A;border:1px solid #2A2B2F;border-top:2px solid #C4A24D;border-radius:10px;display:flex;flex-direction:column;gap:10px">
+      <h2 style="font-size:24px;line-height:1.15;font-weight:600;letter-spacing:-.01em">Jouw auto als volgende?</h2>
+      <p style="font-size:15px;line-height:1.45;color:#A3A39F">Vraag een offerte aan of stuur ons een WhatsApp.</p>
+      <div style="display:flex;flex-direction:column;gap:10px;margin-top:10px"><a href="#" style="height:48px;background:#C4A24D;color:#0B0B0C;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:15px">Offerte aanvragen</a><a href="#" style="height:48px;border:1px solid #F2EFE9;color:#F2EFE9;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:15px">WhatsApp ons</a></div>
+    </div>
+    <div style="background:#060607;border-top:1px solid #2A2B2F;padding:40px 16px 24px;color:#A3A39F;font-size:13px;line-height:1.6;display:flex;flex-direction:column;gap:28px">
+      <div style="display:flex;flex-direction:column;gap:12px"><div style="display:flex;align-items:center;gap:8px"><svg viewBox="0 0 200 232" width="22" height="26"><path d="M100 8 184 36v82c0 54-42 88-84 106C58 206 16 172 16 118V36Z" fill="none" stroke="#C4A24D" stroke-width="12" stroke-linejoin="round"></path><text x="100" y="168" text-anchor="middle" font-family="Cinzel, serif" font-weight="700" font-size="132" fill="#C4A24D">V</text></svg><div style="font-family:Cinzel,serif;font-weight:700;font-size:14px;letter-spacing:.06em;color:#C4A24D">V-GUARD</div></div><div style="color:#F2EFE9;font-weight:500">V Guard Studio</div><div>Twentelaan 14 D, 7681 NE Vroomshoop<br>06 12 34 56 78<br>ma-vr 9:00-18:00, za 10:00-16:00</div></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px 16px"><a href="#" style="color:#F2EFE9;display:flex;align-items:center;height:36px">Home</a><a href="#" style="color:#F2EFE9;display:flex;align-items:center;height:36px">PPF</a><a href="#" style="color:#F2EFE9;display:flex;align-items:center;height:36px">Ramen blinderen</a><a href="#" style="color:#F2EFE9;display:flex;align-items:center;height:36px">Car wrapping</a><a href="#" style="color:#F2EFE9;display:flex;align-items:center;height:36px">Projecten</a><a href="#" style="color:#F2EFE9;display:flex;align-items:center;height:36px">Contact</a></div>
+      <div style="display:flex;gap:20px"><a href="#" style="color:#F2EFE9;display:flex;align-items:center;height:36px">TikTok</a><a href="#" style="color:#F2EFE9;display:flex;align-items:center;height:36px">Instagram</a><a href="#" style="color:#F2EFE9;display:flex;align-items:center;height:36px">Facebook</a></div>
+      <div style="border-top:1px solid #2A2B2F;padding-top:16px;display:flex;justify-content:space-between;font-size:12px"><a href="#" style="color:#A3A39F">Privacy</a><span>KvK 12345678</span></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;padding:8px 12px 12px;background:#0B0B0C;border-top:1px solid #2A2B2F">
+      <a href="#" style="display:flex;align-items:center;justify-content:center;height:48px;border-radius:6px;font-size:14px;font-weight:600;background:#16171A;border:1px solid #3A3B3F;color:#F2EFE9">WhatsApp</a><a href="#" style="display:flex;align-items:center;justify-content:center;height:48px;border-radius:6px;font-size:14px;font-weight:600;background:#16171A;border:1px solid #3A3B3F;color:#F2EFE9">Bellen</a><a href="#" style="display:flex;align-items:center;justify-content:center;height:48px;border-radius:6px;font-size:14px;font-weight:600;background:#C4A24D;color:#0B0B0C">Offerte</a>
+    </div>
+  </div>
+</div>
+
+<!-- FRAME 7a: Contact stap 1, volledige pagina -->
+<div id="7a" style="display:flex;flex-direction:column;gap:12px;flex:none">
+  <div style="font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#8A8B90">7a · Contact · stap 1 van 4 · 375</div>
+  <div data-screen-label="Contact stap 1" style="width:375px;background:#0B0B0C;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 0 0 1px #2A2B2F">
+    <div style="display:flex;align-items:center;justify-content:space-between;height:56px;padding:0 8px 0 16px;border-bottom:1px solid #2A2B2F">
+      <div style="display:flex;align-items:center;gap:8px"><svg viewBox="0 0 200 232" width="22" height="26"><path d="M100 8 184 36v82c0 54-42 88-84 106C58 206 16 172 16 118V36Z" fill="none" stroke="#C4A24D" stroke-width="12" stroke-linejoin="round"></path><text x="100" y="168" text-anchor="middle" font-family="Cinzel, serif" font-weight="700" font-size="132" fill="#C4A24D">V</text></svg><div><div style="font-family:Cinzel,serif;font-weight:700;font-size:14px;letter-spacing:.06em;color:#C4A24D;line-height:1">V-GUARD</div><div style="font-size:8px;letter-spacing:.32em;color:#A3A39F;margin-top:3px">STUDIO</div></div></div>
+      <div style="display:flex;align-items:center;gap:4px"><div style="font-size:13px;font-weight:500;padding:0 8px;height:44px;display:flex;align-items:center;gap:6px"><span>NL</span><span style="color:#5C5D62">/</span><span style="color:#A3A39F">UA</span></div><div style="width:44px;height:44px;display:flex;align-items:center;justify-content:center"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#F2EFE9" stroke-width="1.6"><path d="M2 6h18M2 11h18M2 16h18"></path></svg></div></div>
+    </div>
+    <div style="padding:32px 16px 0;display:flex;flex-direction:column;gap:10px">
+      <h1 style="font-size:28px;line-height:1.12;font-weight:600;letter-spacing:-.01em">Offerte aanvragen bij V Guard Studio</h1>
+      <p style="font-size:14px;line-height:1.45;color:#D7D4CE">Vier korte stappen. We nemen binnen 1 werkdag contact op via telefoon of WhatsApp.</p>
+    </div>
+    <div style="margin:20px 16px 0;background:#F2EFE9;color:#0B0B0C;border-radius:10px;padding:20px 16px;display:flex;flex-direction:column;gap:16px">
+      <div style="display:flex;flex-direction:column;gap:8px"><div style="font-size:13px;font-weight:600;color:#5C5C58">Stap 1 van 4</div><div style="display:grid;grid-template-columns:repeat(4,1fr);gap:4px"><span style="height:4px;border-radius:2px;background:#C4A24D"></span><span style="height:4px;border-radius:2px;background:#D9D6CF"></span><span style="height:4px;border-radius:2px;background:#D9D6CF"></span><span style="height:4px;border-radius:2px;background:#D9D6CF"></span></div></div>
+      <h2 style="font-size:20px;line-height:1.2;font-weight:600">Waarmee kunnen we je helpen?</h2>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+        <div style="height:92px;border:2px solid #C4A24D;border-radius:10px;background:#FFFFFF;padding:12px;display:flex;flex-direction:column;justify-content:space-between"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C4A24D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" fill="#C4A24D"></circle><path d="M8 12l3 3 5-6" stroke="#0B0B0C"></path></svg><div style="font-size:16px;font-weight:600">PPF</div></div>
+        <div style="height:92px;border:1px solid #A3A39F;border-radius:10px;background:#FFFFFF;padding:12px;display:flex;flex-direction:column;justify-content:flex-end"><div style="font-size:16px;font-weight:600">Ramen blinderen</div></div>
+        <div style="height:92px;border:1px solid #A3A39F;border-radius:10px;background:#FFFFFF;padding:12px;display:flex;flex-direction:column;justify-content:flex-end"><div style="font-size:16px;font-weight:600">Car wrapping</div></div>
+        <div style="height:92px;border:1px solid #A3A39F;border-radius:10px;background:#FFFFFF;padding:12px;display:flex;flex-direction:column;justify-content:flex-end"><div style="font-size:16px;font-weight:600">Ik wil advies</div></div>
+      </div>
+      <a href="#" style="height:48px;background:#C4A24D;color:#0B0B0C;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:15px">Volgende</a>
+    </div>
+    <div style="padding:56px 16px 64px;display:flex;flex-direction:column;gap:12px">
+      <h2 style="font-size:26px;line-height:1.15;font-weight:600;letter-spacing:-.01em">Studio in Vroomshoop</h2>
+      <div style="font-size:15px;line-height:1.6;color:#D7D4CE">Twentelaan 14 D, 7681 NE Vroomshoop<br>06 12 34 56 78<br>ma-vr 9:00-18:00, za 10:00-16:00</div>
+      <div style="display:flex;flex-direction:column;gap:10px;margin-top:8px"><a href="#" style="height:48px;background:#C4A24D;color:#0B0B0C;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:15px">Route in Google Maps</a><a href="#" style="height:48px;border:1px solid #F2EFE9;color:#F2EFE9;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:15px">WhatsApp ons</a></div>
+    </div>
+    <div style="background:#060607;border-top:1px solid #2A2B2F;padding:40px 16px 24px;color:#A3A39F;font-size:13px;line-height:1.6;display:flex;flex-direction:column;gap:28px">
+      <div style="display:flex;flex-direction:column;gap:12px"><div style="display:flex;align-items:center;gap:8px"><svg viewBox="0 0 200 232" width="22" height="26"><path d="M100 8 184 36v82c0 54-42 88-84 106C58 206 16 172 16 118V36Z" fill="none" stroke="#C4A24D" stroke-width="12" stroke-linejoin="round"></path><text x="100" y="168" text-anchor="middle" font-family="Cinzel, serif" font-weight="700" font-size="132" fill="#C4A24D">V</text></svg><div style="font-family:Cinzel,serif;font-weight:700;font-size:14px;letter-spacing:.06em;color:#C4A24D">V-GUARD</div></div><div style="color:#F2EFE9;font-weight:500">V Guard Studio</div><div>Twentelaan 14 D, 7681 NE Vroomshoop<br>06 12 34 56 78<br>ma-vr 9:00-18:00, za 10:00-16:00</div></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px 16px"><a href="#" style="color:#F2EFE9;display:flex;align-items:center;height:36px">Home</a><a href="#" style="color:#F2EFE9;display:flex;align-items:center;height:36px">PPF</a><a href="#" style="color:#F2EFE9;display:flex;align-items:center;height:36px">Ramen blinderen</a><a href="#" style="color:#F2EFE9;display:flex;align-items:center;height:36px">Car wrapping</a><a href="#" style="color:#F2EFE9;display:flex;align-items:center;height:36px">Projecten</a><a href="#" style="color:#F2EFE9;display:flex;align-items:center;height:36px">Contact</a></div>
+      <div style="display:flex;gap:20px"><a href="#" style="color:#F2EFE9;display:flex;align-items:center;height:36px">TikTok</a><a href="#" style="color:#F2EFE9;display:flex;align-items:center;height:36px">Instagram</a><a href="#" style="color:#F2EFE9;display:flex;align-items:center;height:36px">Facebook</a></div>
+      <div style="border-top:1px solid #2A2B2F;padding-top:16px;display:flex;justify-content:space-between;font-size:12px"><a href="#" style="color:#A3A39F">Privacy</a><span>KvK 12345678</span></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;padding:8px 12px 12px;background:#0B0B0C;border-top:1px solid #2A2B2F">
+      <a href="#" style="display:flex;align-items:center;justify-content:center;height:48px;border-radius:6px;font-size:14px;font-weight:600;background:#16171A;border:1px solid #3A3B3F;color:#F2EFE9">WhatsApp</a><a href="#" style="display:flex;align-items:center;justify-content:center;height:48px;border-radius:6px;font-size:14px;font-weight:600;background:#16171A;border:1px solid #3A3B3F;color:#F2EFE9">Bellen</a><a href="#" style="display:flex;align-items:center;justify-content:center;height:48px;border-radius:6px;font-size:14px;font-weight:600;background:#C4A24D;color:#0B0B0C">Offerte</a>
+    </div>
+  </div>
+</div>
+
+<!-- FRAME 7b: stap 2 -->
+<div id="7b" style="display:flex;flex-direction:column;gap:12px;flex:none">
+  <div style="font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#8A8B90">7b · Contact · stap 2 van 4</div>
+  <div data-screen-label="Contact stap 2" style="width:375px;background:#0B0B0C;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 0 0 1px #2A2B2F">
+    <div style="display:flex;align-items:center;justify-content:space-between;height:56px;padding:0 8px 0 16px;border-bottom:1px solid #2A2B2F">
+      <div style="display:flex;align-items:center;gap:8px"><svg viewBox="0 0 200 232" width="22" height="26"><path d="M100 8 184 36v82c0 54-42 88-84 106C58 206 16 172 16 118V36Z" fill="none" stroke="#C4A24D" stroke-width="12" stroke-linejoin="round"></path><text x="100" y="168" text-anchor="middle" font-family="Cinzel, serif" font-weight="700" font-size="132" fill="#C4A24D">V</text></svg><div><div style="font-family:Cinzel,serif;font-weight:700;font-size:14px;letter-spacing:.06em;color:#C4A24D;line-height:1">V-GUARD</div><div style="font-size:8px;letter-spacing:.32em;color:#A3A39F;margin-top:3px">STUDIO</div></div></div>
+      <div style="display:flex;align-items:center;gap:4px"><div style="font-size:13px;font-weight:500;padding:0 8px;height:44px;display:flex;align-items:center;gap:6px"><span>NL</span><span style="color:#5C5D62">/</span><span style="color:#A3A39F">UA</span></div><div style="width:44px;height:44px;display:flex;align-items:center;justify-content:center"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#F2EFE9" stroke-width="1.6"><path d="M2 6h18M2 11h18M2 16h18"></path></svg></div></div>
+    </div>
+    <div style="padding:32px 16px 0;display:flex;flex-direction:column;gap:10px"><h1 style="font-size:28px;line-height:1.12;font-weight:600;letter-spacing:-.01em">Offerte aanvragen bij V Guard Studio</h1><p style="font-size:14px;line-height:1.45;color:#D7D4CE">Vier korte stappen. We nemen binnen 1 werkdag contact op via telefoon of WhatsApp.</p></div>
+    <div style="margin:20px 16px 64px;background:#F2EFE9;color:#0B0B0C;border-radius:10px;padding:20px 16px;display:flex;flex-direction:column;gap:16px">
+      <div style="display:flex;flex-direction:column;gap:8px"><div style="font-size:13px;font-weight:600;color:#5C5C58">Stap 2 van 4</div><div style="display:grid;grid-template-columns:repeat(4,1fr);gap:4px"><span style="height:4px;border-radius:2px;background:#C4A24D"></span><span style="height:4px;border-radius:2px;background:#C4A24D"></span><span style="height:4px;border-radius:2px;background:#D9D6CF"></span><span style="height:4px;border-radius:2px;background:#D9D6CF"></span></div></div>
+      <h2 style="font-size:20px;line-height:1.2;font-weight:600">Welke auto?</h2>
+      <div style="display:flex;flex-direction:column;gap:6px"><label style="font-size:13px;font-weight:600">Merk</label><div style="height:48px;border:1px solid #A3A39F;border-radius:6px;background:#FFFFFF;padding:0 14px;display:flex;align-items:center;font-size:16px;color:#8A8B90">bijv. Volkswagen</div></div>
+      <div style="display:flex;flex-direction:column;gap:6px"><label style="font-size:13px;font-weight:600">Model</label><div style="height:48px;border:1px solid #A3A39F;border-radius:6px;background:#FFFFFF;padding:0 14px;display:flex;align-items:center;font-size:16px;color:#8A8B90">bijv. Golf</div></div>
+      <div style="display:flex;flex-direction:column;gap:6px"><label style="font-size:13px;font-weight:600">Bouwjaar</label><div style="height:48px;border:1px solid #A3A39F;border-radius:6px;background:#FFFFFF;padding:0 14px;display:flex;align-items:center;font-size:16px;color:#8A8B90">bijv. 2021</div></div>
+      <div style="display:flex;flex-direction:column;gap:8px"><label style="font-size:13px;font-weight:600">Carrosserie</label><div style="display:flex;flex-wrap:wrap;gap:8px"><span style="height:40px;padding:0 14px;display:flex;align-items:center;border:1px solid #A3A39F;border-radius:999px;font-size:14px;font-weight:500;background:#FFFFFF">Hatchback</span><span style="height:40px;padding:0 14px;display:flex;align-items:center;border:1px solid #A3A39F;border-radius:999px;font-size:14px;font-weight:500;background:#FFFFFF">Sedan</span><span style="height:40px;padding:0 14px;display:flex;align-items:center;border:2px solid #C4A24D;border-radius:999px;font-size:14px;font-weight:600;background:#FFFFFF">Stationwagon</span><span style="height:40px;padding:0 14px;display:flex;align-items:center;border:1px solid #A3A39F;border-radius:999px;font-size:14px;font-weight:500;background:#FFFFFF">Coupé</span><span style="height:40px;padding:0 14px;display:flex;align-items:center;border:1px solid #A3A39F;border-radius:999px;font-size:14px;font-weight:500;background:#FFFFFF">SUV</span><span style="height:40px;padding:0 14px;display:flex;align-items:center;border:1px solid #A3A39F;border-radius:999px;font-size:14px;font-weight:500;background:#FFFFFF">Bus</span><span style="height:40px;padding:0 14px;display:flex;align-items:center;border:1px solid #A3A39F;border-radius:999px;font-size:14px;font-weight:500;background:#FFFFFF">Anders</span></div></div>
+      <div style="display:grid;grid-template-columns:1fr 2fr;gap:10px;margin-top:4px"><a href="#" style="height:48px;border:1px solid #0B0B0C;color:#0B0B0C;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:15px">Terug</a><a href="#" style="height:48px;background:#C4A24D;color:#0B0B0C;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:15px">Volgende</a></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;padding:8px 12px 12px;background:#0B0B0C;border-top:1px solid #2A2B2F;margin-top:auto">
+      <a href="#" style="display:flex;align-items:center;justify-content:center;height:48px;border-radius:6px;font-size:14px;font-weight:600;background:#16171A;border:1px solid #3A3B3F;color:#F2EFE9">WhatsApp</a><a href="#" style="display:flex;align-items:center;justify-content:center;height:48px;border-radius:6px;font-size:14px;font-weight:600;background:#16171A;border:1px solid #3A3B3F;color:#F2EFE9">Bellen</a><a href="#" style="display:flex;align-items:center;justify-content:center;height:48px;border-radius:6px;font-size:14px;font-weight:600;background:#C4A24D;color:#0B0B0C">Offerte</a>
+    </div>
+  </div>
+</div>
+
+<!-- FRAME 7c: stap 3 PPF -->
+<div id="7c" style="display:flex;flex-direction:column;gap:12px;flex:none">
+  <div style="font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#8A8B90">7c · Contact · stap 3 van 4 (PPF)</div>
+  <div data-screen-label="Contact stap 3" style="width:375px;background:#0B0B0C;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 0 0 1px #2A2B2F">
+    <div style="display:flex;align-items:center;justify-content:space-between;height:56px;padding:0 8px 0 16px;border-bottom:1px solid #2A2B2F">
+      <div style="display:flex;align-items:center;gap:8px"><svg viewBox="0 0 200 232" width="22" height="26"><path d="M100 8 184 36v82c0 54-42 88-84 106C58 206 16 172 16 118V36Z" fill="none" stroke="#C4A24D" stroke-width="12" stroke-linejoin="round"></path><text x="100" y="168" text-anchor="middle" font-family="Cinzel, serif" font-weight="700" font-size="132" fill="#C4A24D">V</text></svg><div><div style="font-family:Cinzel,serif;font-weight:700;font-size:14px;letter-spacing:.06em;color:#C4A24D;line-height:1">V-GUARD</div><div style="font-size:8px;letter-spacing:.32em;color:#A3A39F;margin-top:3px">STUDIO</div></div></div>
+      <div style="display:flex;align-items:center;gap:4px"><div style="font-size:13px;font-weight:500;padding:0 8px;height:44px;display:flex;align-items:center;gap:6px"><span>NL</span><span style="color:#5C5D62">/</span><span style="color:#A3A39F">UA</span></div><div style="width:44px;height:44px;display:flex;align-items:center;justify-content:center"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#F2EFE9" stroke-width="1.6"><path d="M2 6h18M2 11h18M2 16h18"></path></svg></div></div>
+    </div>
+    <div style="padding:32px 16px 0;display:flex;flex-direction:column;gap:10px"><h1 style="font-size:28px;line-height:1.12;font-weight:600;letter-spacing:-.01em">Offerte aanvragen bij V Guard Studio</h1><p style="font-size:14px;line-height:1.45;color:#D7D4CE">Vier korte stappen. We nemen binnen 1 werkdag contact op via telefoon of WhatsApp.</p></div>
+    <div style="margin:20px 16px 0;background:#F2EFE9;color:#0B0B0C;border-radius:10px;padding:20px 16px;display:flex;flex-direction:column;gap:16px">
+      <div style="display:flex;flex-direction:column;gap:8px"><div style="font-size:13px;font-weight:600;color:#5C5C58">Stap 3 van 4</div><div style="display:grid;grid-template-columns:repeat(4,1fr);gap:4px"><span style="height:4px;border-radius:2px;background:#C4A24D"></span><span style="height:4px;border-radius:2px;background:#C4A24D"></span><span style="height:4px;border-radius:2px;background:#C4A24D"></span><span style="height:4px;border-radius:2px;background:#D9D6CF"></span></div></div>
+      <h2 style="font-size:20px;line-height:1.2;font-weight:600">Wat wil je laten doen?</h2>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div style="min-height:64px;border:2px solid #C4A24D;border-radius:10px;background:#FFFFFF;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px"><div><div style="font-size:16px;font-weight:600">Full Front</div><div style="font-size:13px;color:#5C5C58;margin-top:2px">vanaf €895 · 1-2 dagen</div></div><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" fill="#C4A24D"></circle><path d="M8 12l3 3 5-6" stroke="#0B0B0C"></path></svg></div>
+        <div style="min-height:64px;border:1px solid #A3A39F;border-radius:10px;background:#FFFFFF;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px"><div><div style="font-size:16px;font-weight:600">Full Body</div><div style="font-size:13px;color:#5C5C58;margin-top:2px">vanaf €2.995 · 3-5 dagen</div></div></div>
+        <div style="min-height:64px;border:1px solid #A3A39F;border-radius:10px;background:#FFFFFF;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px"><div><div style="font-size:16px;font-weight:600">Gedeeltelijk</div><div style="font-size:13px;color:#5C5C58;margin-top:2px">Koplampen, instaplijsten, spiegelkappen</div></div></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 2fr;gap:10px;margin-top:4px"><a href="#" style="height:48px;border:1px solid #0B0B0C;color:#0B0B0C;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:15px">Terug</a><a href="#" style="height:48px;background:#C4A24D;color:#0B0B0C;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:15px">Volgende</a></div>
+    </div>
+    <div style="margin:16px 16px 64px;padding:14px 16px;border:1px dashed #3A3B3F;border-radius:10px;font-size:12px;line-height:1.5;color:#A3A39F">Varianten van stap 3: ramen blinderen → Achterzijde · Voorste zijruiten · Complete auto · Chameleon. Car wrapping → Volledig · Dak · Spiegelkappen · Chrome delete + veld «Gewenste kleur of finish».</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;padding:8px 12px 12px;background:#0B0B0C;border-top:1px solid #2A2B2F;margin-top:auto">
+      <a href="#" style="display:flex;align-items:center;justify-content:center;height:48px;border-radius:6px;font-size:14px;font-weight:600;background:#16171A;border:1px solid #3A3B3F;color:#F2EFE9">WhatsApp</a><a href="#" style="display:flex;align-items:center;justify-content:center;height:48px;border-radius:6px;font-size:14px;font-weight:600;background:#16171A;border:1px solid #3A3B3F;color:#F2EFE9">Bellen</a><a href="#" style="display:flex;align-items:center;justify-content:center;height:48px;border-radius:6px;font-size:14px;font-weight:600;background:#C4A24D;color:#0B0B0C">Offerte</a>
+    </div>
+  </div>
+</div>
+
+<!-- FRAME 7d: stap 4 -->
+<div id="7d" style="display:flex;flex-direction:column;gap:12px;flex:none">
+  <div style="font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#8A8B90">7d · Contact · stap 4 van 4</div>
+  <div data-screen-label="Contact stap 4" style="width:375px;background:#0B0B0C;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 0 0 1px #2A2B2F">
+    <div style="display:flex;align-items:center;justify-content:space-between;height:56px;padding:0 8px 0 16px;border-bottom:1px solid #2A2B2F">
+      <div style="display:flex;align-items:center;gap:8px"><svg viewBox="0 0 200 232" width="22" height="26"><path d="M100 8 184 36v82c0 54-42 88-84 106C58 206 16 172 16 118V36Z" fill="none" stroke="#C4A24D" stroke-width="12" stroke-linejoin="round"></path><text x="100" y="168" text-anchor="middle" font-family="Cinzel, serif" font-weight="700" font-size="132" fill="#C4A24D">V</text></svg><div><div style="font-family:Cinzel,serif;font-weight:700;font-size:14px;letter-spacing:.06em;color:#C4A24D;line-height:1">V-GUARD</div><div style="font-size:8px;letter-spacing:.32em;color:#A3A39F;margin-top:3px">STUDIO</div></div></div>
+      <div style="display:flex;align-items:center;gap:4px"><div style="font-size:13px;font-weight:500;padding:0 8px;height:44px;display:flex;align-items:center;gap:6px"><span>NL</span><span style="color:#5C5D62">/</span><span style="color:#A3A39F">UA</span></div><div style="width:44px;height:44px;display:flex;align-items:center;justify-content:center"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#F2EFE9" stroke-width="1.6"><path d="M2 6h18M2 11h18M2 16h18"></path></svg></div></div>
+    </div>
+    <div style="padding:32px 16px 0;display:flex;flex-direction:column;gap:10px"><h1 style="font-size:28px;line-height:1.12;font-weight:600;letter-spacing:-.01em">Offerte aanvragen bij V Guard Studio</h1><p style="font-size:14px;line-height:1.45;color:#D7D4CE">Vier korte stappen. We nemen binnen 1 werkdag contact op via telefoon of WhatsApp.</p></div>
+    <div style="margin:20px 16px 64px;background:#F2EFE9;color:#0B0B0C;border-radius:10px;padding:20px 16px;display:flex;flex-direction:column;gap:16px">
+      <div style="display:flex;flex-direction:column;gap:8px"><div style="font-size:13px;font-weight:600;color:#5C5C58">Stap 4 van 4</div><div style="display:grid;grid-template-columns:repeat(4,1fr);gap:4px"><span style="height:4px;border-radius:2px;background:#C4A24D"></span><span style="height:4px;border-radius:2px;background:#C4A24D"></span><span style="height:4px;border-radius:2px;background:#C4A24D"></span><span style="height:4px;border-radius:2px;background:#C4A24D"></span></div></div>
+      <h2 style="font-size:20px;line-height:1.2;font-weight:600">Hoe bereiken we je?</h2>
+      <div style="display:flex;flex-direction:column;gap:6px"><label style="font-size:13px;font-weight:600">Naam*</label><div style="height:48px;border:1px solid #A3A39F;border-radius:6px;background:#FFFFFF;padding:0 14px;display:flex;align-items:center;font-size:16px">Jan de Vries</div></div>
+      <div style="display:flex;flex-direction:column;gap:6px"><label style="font-size:13px;font-weight:600">Telefoon of WhatsApp*</label><div style="height:48px;border:1px solid #A3A39F;border-radius:6px;background:#FFFFFF;padding:0 14px;display:flex;align-items:center;font-size:16px">06 12 34 56 78</div></div>
+      <div style="display:flex;flex-direction:column;gap:6px"><label style="font-size:13px;font-weight:600">E-mail (optioneel)</label><div style="height:48px;border:1px solid #A3A39F;border-radius:6px;background:#FFFFFF;padding:0 14px;display:flex;align-items:center;font-size:16px;color:#8A8B90">naam@voorbeeld.nl</div></div>
+      <div style="display:flex;flex-direction:column;gap:6px"><label style="font-size:13px;font-weight:600">Opmerking (optioneel)</label><div style="height:88px;border:1px solid #A3A39F;border-radius:6px;background:#FFFFFF;padding:12px 14px;font-size:16px;color:#8A8B90">Bijvoorbeeld de gewenste datum</div></div>
+      <label style="display:flex;gap:12px;align-items:flex-start;font-size:14px;line-height:1.4;min-height:44px"><span style="width:22px;height:22px;border:1px solid #0B0B0C;border-radius:4px;background:#FFFFFF;flex:none;margin-top:1px"></span><span>Ik ga akkoord met de <a href="#" style="color:#7F6820;text-decoration:underline">privacyverklaring</a>.</span></label>
+      <div style="display:grid;grid-template-columns:1fr 2fr;gap:10px"><a href="#" style="height:48px;border:1px solid #0B0B0C;color:#0B0B0C;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:15px">Terug</a><a href="#" style="height:48px;background:#C4A24D;color:#0B0B0C;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:15px">Versturen</a></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;padding:8px 12px 12px;background:#0B0B0C;border-top:1px solid #2A2B2F;margin-top:auto">
+      <a href="#" style="display:flex;align-items:center;justify-content:center;height:48px;border-radius:6px;font-size:14px;font-weight:600;background:#16171A;border:1px solid #3A3B3F;color:#F2EFE9">WhatsApp</a><a href="#" style="display:flex;align-items:center;justify-content:center;height:48px;border-radius:6px;font-size:14px;font-weight:600;background:#16171A;border:1px solid #3A3B3F;color:#F2EFE9">Bellen</a><a href="#" style="display:flex;align-items:center;justify-content:center;height:48px;border-radius:6px;font-size:14px;font-weight:600;background:#C4A24D;color:#0B0B0C">Offerte</a>
+    </div>
+  </div>
+</div>
+
+<!-- FRAME 7e: veldfout -->
+<div id="7e" style="display:flex;flex-direction:column;gap:12px;flex:none">
+  <div style="font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#8A8B90">7e · Contact · veldfout</div>
+  <div data-screen-label="Contact fout" style="width:375px;background:#0B0B0C;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 0 0 1px #2A2B2F">
+    <div style="display:flex;align-items:center;justify-content:space-between;height:56px;padding:0 8px 0 16px;border-bottom:1px solid #2A2B2F">
+      <div style="display:flex;align-items:center;gap:8px"><svg viewBox="0 0 200 232" width="22" height="26"><path d="M100 8 184 36v82c0 54-42 88-84 106C58 206 16 172 16 118V36Z" fill="none" stroke="#C4A24D" stroke-width="12" stroke-linejoin="round"></path><text x="100" y="168" text-anchor="middle" font-family="Cinzel, serif" font-weight="700" font-size="132" fill="#C4A24D">V</text></svg><div><div style="font-family:Cinzel,serif;font-weight:700;font-size:14px;letter-spacing:.06em;color:#C4A24D;line-height:1">V-GUARD</div><div style="font-size:8px;letter-spacing:.32em;color:#A3A39F;margin-top:3px">STUDIO</div></div></div>
+      <div style="display:flex;align-items:center;gap:4px"><div style="font-size:13px;font-weight:500;padding:0 8px;height:44px;display:flex;align-items:center;gap:6px"><span>NL</span><span style="color:#5C5D62">/</span><span style="color:#A3A39F">UA</span></div><div style="width:44px;height:44px;display:flex;align-items:center;justify-content:center"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#F2EFE9" stroke-width="1.6"><path d="M2 6h18M2 11h18M2 16h18"></path></svg></div></div>
+    </div>
+    <div style="padding:32px 16px 0;display:flex;flex-direction:column;gap:10px"><h1 style="font-size:28px;line-height:1.12;font-weight:600;letter-spacing:-.01em">Offerte aanvragen bij V Guard Studio</h1><p style="font-size:14px;line-height:1.45;color:#D7D4CE">Vier korte stappen. We nemen binnen 1 werkdag contact op via telefoon of WhatsApp.</p></div>
+    <div style="margin:20px 16px 64px;background:#F2EFE9;color:#0B0B0C;border-radius:10px;padding:20px 16px;display:flex;flex-direction:column;gap:16px">
+      <div style="display:flex;flex-direction:column;gap:8px"><div style="font-size:13px;font-weight:600;color:#5C5C58">Stap 4 van 4</div><div style="display:grid;grid-template-columns:repeat(4,1fr);gap:4px"><span style="height:4px;border-radius:2px;background:#C4A24D"></span><span style="height:4px;border-radius:2px;background:#C4A24D"></span><span style="height:4px;border-radius:2px;background:#C4A24D"></span><span style="height:4px;border-radius:2px;background:#C4A24D"></span></div></div>
+      <h2 style="font-size:20px;line-height:1.2;font-weight:600">Hoe bereiken we je?</h2>
+      <div style="display:flex;flex-direction:column;gap:6px"><label style="font-size:13px;font-weight:600">Naam*</label><div style="height:48px;border:1px solid #A3A39F;border-radius:6px;background:#FFFFFF;padding:0 14px;display:flex;align-items:center;font-size:16px">Jan de Vries</div></div>
+      <div style="display:flex;flex-direction:column;gap:6px"><label style="font-size:13px;font-weight:600">Telefoon of WhatsApp*</label><div style="height:48px;border:2px solid #B3261E;border-radius:6px;background:#FFFFFF;padding:0 13px;display:flex;align-items:center;font-size:16px">06 12</div><div style="display:flex;gap:6px;align-items:center;font-size:13px;font-weight:500;color:#B3261E"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#B3261E" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 8v5M12 16h.01"></path></svg>Vul een geldig telefoonnummer in.</div></div>
+      <div style="display:flex;flex-direction:column;gap:6px"><label style="font-size:13px;font-weight:600">E-mail (optioneel)</label><div style="height:48px;border:1px solid #A3A39F;border-radius:6px;background:#FFFFFF;padding:0 14px;display:flex;align-items:center;font-size:16px;color:#8A8B90">naam@voorbeeld.nl</div></div>
+      <div style="display:flex;flex-direction:column;gap:6px"><label style="font-size:13px;font-weight:600">Opmerking (optioneel)</label><div style="height:88px;border:1px solid #A3A39F;border-radius:6px;background:#FFFFFF;padding:12px 14px;font-size:16px;color:#8A8B90">Bijvoorbeeld de gewenste datum</div></div>
+      <label style="display:flex;gap:12px;align-items:flex-start;font-size:14px;line-height:1.4;min-height:44px"><span style="width:22px;height:22px;border-radius:4px;background:#C4A24D;flex:none;margin-top:1px;display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0B0B0C" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"></path></svg></span><span>Ik ga akkoord met de <a href="#" style="color:#7F6820;text-decoration:underline">privacyverklaring</a>.</span></label>
+      <div style="display:grid;grid-template-columns:1fr 2fr;gap:10px"><a href="#" style="height:48px;border:1px solid #0B0B0C;color:#0B0B0C;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:15px">Terug</a><a href="#" style="height:48px;background:#C4A24D;color:#0B0B0C;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:15px">Versturen</a></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;padding:8px 12px 12px;background:#0B0B0C;border-top:1px solid #2A2B2F;margin-top:auto">
+      <a href="#" style="display:flex;align-items:center;justify-content:center;height:48px;border-radius:6px;font-size:14px;font-weight:600;background:#16171A;border:1px solid #3A3B3F;color:#F2EFE9">WhatsApp</a><a href="#" style="display:flex;align-items:center;justify-content:center;height:48px;border-radius:6px;font-size:14px;font-weight:600;background:#16171A;border:1px solid #3A3B3F;color:#F2EFE9">Bellen</a><a href="#" style="display:flex;align-items:center;justify-content:center;height:48px;border-radius:6px;font-size:14px;font-weight:600;background:#C4A24D;color:#0B0B0C">Offerte</a>
+    </div>
+  </div>
+</div>
+
+<!-- FRAME 7f: succes -->
+<div id="7f" style="display:flex;flex-direction:column;gap:12px;flex:none">
+  <div style="font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#8A8B90">7f · Contact · succes</div>
+  <div data-screen-label="Contact succes" style="width:375px;height:812px;background:#0B0B0C;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 0 0 1px #2A2B2F">
+    <div style="display:flex;align-items:center;justify-content:space-between;height:56px;padding:0 8px 0 16px;border-bottom:1px solid #2A2B2F;flex:none">
+      <div style="display:flex;align-items:center;gap:8px"><svg viewBox="0 0 200 232" width="22" height="26"><path d="M100 8 184 36v82c0 54-42 88-84 106C58 206 16 172 16 118V36Z" fill="none" stroke="#C4A24D" stroke-width="12" stroke-linejoin="round"></path><text x="100" y="168" text-anchor="middle" font-family="Cinzel, serif" font-weight="700" font-size="132" fill="#C4A24D">V</text></svg><div><div style="font-family:Cinzel,serif;font-weight:700;font-size:14px;letter-spacing:.06em;color:#C4A24D;line-height:1">V-GUARD</div><div style="font-size:8px;letter-spacing:.32em;color:#A3A39F;margin-top:3px">STUDIO</div></div></div>
+      <div style="display:flex;align-items:center;gap:4px"><div style="font-size:13px;font-weight:500;padding:0 8px;height:44px;display:flex;align-items:center;gap:6px"><span>NL</span><span style="color:#5C5D62">/</span><span style="color:#A3A39F">UA</span></div><div style="width:44px;height:44px;display:flex;align-items:center;justify-content:center"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#F2EFE9" stroke-width="1.6"><path d="M2 6h18M2 11h18M2 16h18"></path></svg></div></div>
+    </div>
+    <div style="flex:1;display:flex;flex-direction:column;justify-content:center;padding:32px 16px">
+      <div style="background:#F2EFE9;color:#0B0B0C;border-radius:10px;padding:32px 20px;display:flex;flex-direction:column;gap:14px;align-items:flex-start">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z" stroke="#C4A24D"></path><path d="M8.5 12l2.5 2.5 4.5-5" stroke="#0B0B0C" stroke-width="2"></path></svg>
+        <h1 style="font-size:26px;line-height:1.15;font-weight:600;letter-spacing:-.01em">Bedankt, je aanvraag is binnen.</h1>
+        <p style="font-size:15px;line-height:1.5;color:#5C5C58">We nemen contact met je op via telefoon of WhatsApp. Heb je foto's van je auto? Stuur ze via WhatsApp.</p>
+        <a href="#" style="margin-top:8px;width:100%;height:48px;background:#C4A24D;color:#0B0B0C;border-radius:6px;display:flex;align-items:center;justify-content:center;gap:8px;font-weight:600;font-size:15px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l1.3-3.9A8 8 0 1 1 8.2 19.1L4 20z"></path></svg>Stuur foto's via WhatsApp</a>
+        <a href="#" style="font-size:14px;font-weight:600;color:#7F6820;height:44px;display:flex;align-items:center">Terug naar home</a>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;padding:8px 12px 12px;background:#0B0B0C;border-top:1px solid #2A2B2F;flex:none">
+      <a href="#" style="display:flex;align-items:center;justify-content:center;height:48px;border-radius:6px;font-size:14px;font-weight:600;background:#16171A;border:1px solid #3A3B3F;color:#F2EFE9">WhatsApp</a><a href="#" style="display:flex;align-items:center;justify-content:center;height:48px;border-radius:6px;font-size:14px;font-weight:600;background:#16171A;border:1px solid #3A3B3F;color:#F2EFE9">Bellen</a><a href="#" style="display:flex;align-items:center;justify-content:center;height:48px;border-radius:6px;font-size:14px;font-weight:600;background:#C4A24D;color:#0B0B0C">Offerte</a>
+    </div>
+  </div>
+</div>
+
+<!-- FRAME 10: 404 -->
+<div id="10" style="display:flex;flex-direction:column;gap:12px;flex:none">
+  <div style="font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#8A8B90">10 · 404 · 375</div>
+  <div data-screen-label="404" style="width:375px;height:812px;background:#0B0B0C;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 0 0 1px #2A2B2F">
+    <div style="display:flex;align-items:center;justify-content:space-between;height:56px;padding:0 8px 0 16px;border-bottom:1px solid #2A2B2F;flex:none">
+      <div style="display:flex;align-items:center;gap:8px"><svg viewBox="0 0 200 232" width="22" height="26"><path d="M100 8 184 36v82c0 54-42 88-84 106C58 206 16 172 16 118V36Z" fill="none" stroke="#C4A24D" stroke-width="12" stroke-linejoin="round"></path><text x="100" y="168" text-anchor="middle" font-family="Cinzel, serif" font-weight="700" font-size="132" fill="#C4A24D">V</text></svg><div><div style="font-family:Cinzel,serif;font-weight:700;font-size:14px;letter-spacing:.06em;color:#C4A24D;line-height:1">V-GUARD</div><div style="font-size:8px;letter-spacing:.32em;color:#A3A39F;margin-top:3px">STUDIO</div></div></div>
+      <div style="display:flex;align-items:center;gap:4px"><div style="font-size:13px;font-weight:500;padding:0 8px;height:44px;display:flex;align-items:center;gap:6px"><span>NL</span><span style="color:#5C5D62">/</span><span style="color:#A3A39F">UA</span></div><div style="width:44px;height:44px;display:flex;align-items:center;justify-content:center"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#F2EFE9" stroke-width="1.6"><path d="M2 6h18M2 11h18M2 16h18"></path></svg></div></div>
+    </div>
+    <div style="flex:1;display:flex;flex-direction:column;justify-content:center;padding:32px 16px;gap:16px">
+      <div style="font-size:72px;line-height:1;font-weight:600;letter-spacing:-.03em;color:#C4A24D">404</div>
+      <h1 style="font-size:28px;line-height:1.15;font-weight:600;letter-spacing:-.01em">Deze pagina bestaat niet (meer)</h1>
+      <p style="font-size:15px;line-height:1.5;color:#A3A39F">Ga terug naar home of vraag direct een offerte aan.</p>
+      <div style="display:flex;flex-direction:column;gap:10px;margin-top:8px"><a href="#" style="height:48px;border:1px solid #F2EFE9;color:#F2EFE9;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:15px">Naar home</a><a href="#" style="height:48px;background:#C4A24D;color:#0B0B0C;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:15px">Offerte aanvragen</a></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;padding:8px 12px 12px;background:#0B0B0C;border-top:1px solid #2A2B2F;flex:none">
+      <a href="#" style="display:flex;align-items:center;justify-content:center;height:48px;border-radius:6px;font-size:14px;font-weight:600;background:#16171A;border:1px solid #3A3B3F;color:#F2EFE9">WhatsApp</a><a href="#" style="display:flex;align-items:center;justify-content:center;height:48px;border-radius:6px;font-size:14px;font-weight:600;background:#16171A;border:1px solid #3A3B3F;color:#F2EFE9">Bellen</a><a href="#" style="display:flex;align-items:center;justify-content:center;height:48px;border-radius:6px;font-size:14px;font-weight:600;background:#C4A24D;color:#0B0B0C">Offerte</a>
+    </div>
+  </div>
+</div>
+
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() {
+    const P = (src,pos,cap)=>({img:true,ph:false,src,pos,cap});
+    const H = (phText,cap)=>({img:false,ph:true,phText,cap});
+    const projects = [
+      P("assets/photos/bmw-windshield-l.jpg","center 55%","BMW 3 Serie · ramen blinderen · chameleon"),
+      H("Foto nodig: Full Front PPF","Tesla Model 3 · PPF · Full Front"),
+      P("assets/photos/passat-rear-1.jpg","center 60%","Volkswagen Passat · ramen blinderen · 20%"),
+      P("assets/photos/suv-blue-1.jpg","center 50%","Lynk & Co 01 · ramen blinderen · chameleon"),
+      H("Foto nodig: volledige wrap","Audi A4 · car wrapping · satijn zwart"),
+      P("assets/photos/ford-after.jpg","center 58%","Ford Focus · ramen blinderen · 20%"),
+      P("assets/photos/hex-van-l1.jpg","center 60%","Ford Transit Custom · ramen blinderen · chameleon"),
+      P("assets/photos/bmw-34-p.png","22% 48%","BMW 3 Serie · car wrapping · spiegelkappen"),
+      H("Foto nodig: PPF op koplampen","BMW X5 · PPF · koplampen"),
+      P("assets/photos/golf-chameleon.png","center 35%","Volkswagen Golf GTI · ramen blinderen · chameleon"),
+      P("assets/photos/bmw-volvo.png","center 45%","BMW 3 en Volvo V60 · ramen blinderen"),
+      H("Foto nodig: dak in zwart","Volkswagen Polo · car wrapping · dak zwart")
+    ];
+    return { projects };
+  }
+}
+</script>
+</body>
+</html>

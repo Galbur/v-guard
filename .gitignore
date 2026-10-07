@@ -9,3 +9,9 @@ dist/
 Thumbs.db
 .claude/launch.json
 docs/qa/
+
+# Claude Design v2 archive: mockups and runtime are committed; the ~150 MB of images are not.
+# Images the site uses are copied to src/assets (illustrations, wrap-cars, photos/real-*).
+docs/design/v2/assets/
+docs/design/v2/uploads/
+docs/design/v2/.thumbnail
