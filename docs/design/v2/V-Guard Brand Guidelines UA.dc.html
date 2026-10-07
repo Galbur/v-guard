@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;family=Cinzel:wght@700&amp;family=Manrope:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>body{margin:0;background:#0B0B0C} a{color:#C4A24D} a:hover{color:#F2EFE9} image-slot{font-size:28px;line-height:1.35}</style>
+</helmet>
+<x-import component-from-global-scope="deck-stage" from="./deck-stage.js" width="1920" height="1080" hint-size="100%,100%" data-uneditable="">
+
+<section data-label="Обкладинка" data-speaker-notes="Recommended direction: one system, black + controlled gold, quality over speed." style="background:#0B0B0C;color:#F2EFE9;font-family:'Instrument Sans','Manrope',sans-serif;padding:96px 120px;box-sizing:border-box;display:flex;flex-direction:column;justify-content:space-between">
+  <div style="display:flex;justify-content:space-between;align-items:flex-start">
+    <svg viewBox="0 0 200 232" width="150" style="display:block"><path d="M100 8 184 36v82c0 54-42 88-84 106C58 206 16 172 16 118V36Z" fill="none" stroke="#C4A24D" stroke-width="7" stroke-linejoin="round"></path><text x="100" y="168" text-anchor="middle" font-family="Cinzel, serif" font-weight="700" font-size="132" fill="#C4A24D">V</text></svg>
+    <span style="font-size:24px;letter-spacing:.2em;text-transform:uppercase;color:#A3A39F">Фірмовий стиль · v1.0 · 2026</span>
+  </div>
+  <div>
+    <div style="font-family:Cinzel,serif;font-weight:700;font-size:112px;letter-spacing:.04em;color:#C4A24D;line-height:1">V-GUARD</div>
+    <div style="font-size:40px;letter-spacing:.34em;margin-top:18px">AUTO STUDIO</div>
+  </div>
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;border-top:1px solid #3A3B3F;padding-top:32px">
+    <div style="font-size:32px;line-height:1.4;max-width:900px">Захист. Точність. Майстерність.<br><span style="color:#A3A39F">Професійний PPF, тонування скла та обклеювання авто — Нідерланди.</span></div>
+    <div style="font-size:24px;color:#C4A24D;letter-spacing:.12em;text-transform:uppercase">Якість важливіша за швидкість</div>
+  </div>
+</section>
+
+<section data-label="Ідея бренду" style="background:#0B0B0C;color:#F2EFE9;font-family:'Instrument Sans','Manrope',sans-serif;padding:88px 120px 80px;box-sizing:border-box;display:flex;flex-direction:column">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid #3A3B3F;padding-bottom:28px;margin-bottom:64px"><h2 style="margin:0;font-size:56px;font-weight:500;letter-spacing:-.01em">Ідея бренду</h2><span style="font-size:24px;color:#C4A24D;letter-spacing:.18em;text-transform:uppercase">02 · Основа</span></div>
+  <div style="display:grid;grid-template-columns:1.1fr 1fr;gap:120px;flex:1">
+    <div>
+      <div style="font-size:72px;font-weight:500;line-height:1.1;letter-spacing:-.02em">Якість важливіша за швидкість.</div>
+      <p style="font-size:30px;line-height:1.5;color:#A3A39F;margin:40px 0 0;text-wrap:pretty">Невелика, але серйозна автомобільна студія. Більше часу йде на підготовку авто й нанесення плівки — тому результат чистіший і тримається довше. Айдентика має викликати у власника авто думку: <span style="color:#F2EFE9">«Ці люди акуратно працюватимуть з моїм автомобілем.»</span></p>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;align-content:start">
+      <div style="border:1px solid #3A3B3F;padding:28px;font-size:26px">Професійний</div>
+      <div style="border:1px solid #3A3B3F;padding:28px;font-size:26px">Точний</div>
+      <div style="border:1px solid #3A3B3F;padding:28px;font-size:26px">Стриманий</div>
+      <div style="border:1px solid #3A3B3F;padding:28px;font-size:26px">Технічний</div>
+      <div style="border:1px solid #3A3B3F;padding:28px;font-size:26px">Впевнений</div>
+      <div style="border:1px solid #3A3B3F;padding:28px;font-size:26px">Сучасний автомобільний</div>
+      <div style="grid-column:1/-1;margin-top:28px;font-size:24px;color:#A3A39F;line-height:1.5">Напрямок: <span style="color:#F2EFE9">преміальна автомобільна майстерня + сучасний європейський дизайн.</span> Не консьєрж-сервіс для суперкарів, не гоночний стиль, не вуличний тюнінг.</div>
+    </div>
+  </div>
+</section>
+
+<section data-label="Логотип: оригінал і пласка версія" data-speaker-notes="The 3D render stays for signage and video intros. The flat version is the working logo for web, print and social." style="background:#0B0B0C;color:#F2EFE9;font-family:'Instrument Sans','Manrope',sans-serif;padding:88px 120px 80px;box-sizing:border-box;display:flex;flex-direction:column">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid #3A3B3F;padding-bottom:28px;margin-bottom:56px"><h2 style="margin:0;font-size:56px;font-weight:500;letter-spacing:-.01em">Логотип: оригінал і пласка версія</h2><span style="font-size:24px;color:#C4A24D;letter-spacing:.18em;text-transform:uppercase">03 · Логотип</span></div>
+  <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;flex:1;min-height:0">
+    <div style="display:flex;flex-direction:column;gap:24px;min-height:0">
+      <div style="flex:1;min-height:0;background:#16171A;border:1px solid #3A3B3F;position:relative;overflow:hidden"><img src="assets/logo-original.jpg" alt="Original 3D logo render" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block"></div>
+      <div style="font-size:26px;line-height:1.5"><span style="color:#C4A24D">Оригінальний рендер</span> — вивіска, стіна майстерні, інтро відео, 3D. <span style="color:#A3A39F">Не для сайту, друку чи шаблонів соцмереж: фаски й хром не масштабуються і конфліктують зі стриманою системою.</span></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:24px;min-height:0">
+      <div style="flex:1;min-height:0;background:#16171A;border:1px solid #3A3B3F;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:36px">
+        <svg viewBox="0 0 200 232" width="220" style="display:block"><path d="M100 8 184 36v82c0 54-42 88-84 106C58 206 16 172 16 118V36Z" fill="none" stroke="#C4A24D" stroke-width="7" stroke-linejoin="round"></path><text x="100" y="168" text-anchor="middle" font-family="Cinzel, serif" font-weight="700" font-size="132" fill="#C4A24D">V</text></svg>
+        <div style="text-align:center"><div style="font-family:Cinzel,serif;font-weight:700;font-size:72px;letter-spacing:.04em;color:#C4A24D;line-height:1">V-GUARD</div><div style="font-size:26px;letter-spacing:.34em;margin-top:14px">AUTO STUDIO</div></div>
+      </div>
+      <div style="font-size:26px;line-height:1.5"><span style="color:#C4A24D">Плаский основний логотип</span> — той самий щит, те саме V, той самий напис, одне пласке золото. <span style="color:#A3A39F">Вектор, один колір, працює в будь-якому розмірі. Теглайн «Premium PPF &amp; Auto Detailing» прибрано з лого — він живе в текстах.</span></div>
+    </div>
+  </div>
+</section>
+
+<section data-label="Компонування лого" style="background:#0B0B0C;color:#F2EFE9;font-family:'Instrument Sans','Manrope',sans-serif;padding:88px 120px 80px;box-sizing:border-box;display:flex;flex-direction:column">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid #3A3B3F;padding-bottom:28px;margin-bottom:56px"><h2 style="margin:0;font-size:56px;font-weight:500;letter-spacing:-.01em">Варіанти компонування</h2><span style="font-size:24px;color:#C4A24D;letter-spacing:.18em;text-transform:uppercase">04 · Логотип</span></div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:32px;flex:1">
+    <div style="display:flex;flex-direction:column;gap:20px"><div style="flex:1;border:1px solid #3A3B3F;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px"><svg viewBox="0 0 200 232" width="150" style="display:block"><path d="M100 8 184 36v82c0 54-42 88-84 106C58 206 16 172 16 118V36Z" fill="none" stroke="#C4A24D" stroke-width="7" stroke-linejoin="round"></path><text x="100" y="168" text-anchor="middle" font-family="Cinzel, serif" font-weight="700" font-size="132" fill="#C4A24D">V</text></svg><div style="text-align:center"><div style="font-family:Cinzel,serif;font-weight:700;font-size:48px;letter-spacing:.04em;color:#C4A24D;line-height:1">V-GUARD</div><div style="font-size:24px;letter-spacing:.34em;margin-top:10px">AUTO STUDIO</div></div></div><div style="font-size:26px"><span style="color:#C4A24D">A · Вертикальний</span> <span style="color:#A3A39F">— за замовчуванням. Обкладинки, друк, аватари з написом.</span></div></div>
+    <div style="display:flex;flex-direction:column;gap:20px"><div style="flex:1;border:1px solid #3A3B3F;display:flex;align-items:center;justify-content:center;gap:28px"><svg viewBox="0 0 200 232" width="96" style="display:block"><path d="M100 8 184 36v82c0 54-42 88-84 106C58 206 16 172 16 118V36Z" fill="none" stroke="#C4A24D" stroke-width="7" stroke-linejoin="round"></path><text x="100" y="168" text-anchor="middle" font-family="Cinzel, serif" font-weight="700" font-size="132" fill="#C4A24D">V</text></svg><div><div style="font-family:Cinzel,serif;font-weight:700;font-size:44px;letter-spacing:.04em;color:#C4A24D;line-height:1">V-GUARD</div><div style="font-size:24px;letter-spacing:.3em;margin-top:8px">AUTO STUDIO</div></div></div><div style="font-size:26px"><span style="color:#C4A24D">B · Горизонтальний</span> <span style="color:#A3A39F">— хедер сайту, підпис email, інвойси.</span></div></div>
+    <div style="display:flex;flex-direction:column;gap:20px"><div style="flex:1;border:1px solid #3A3B3F;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 200 232" width="190" style="display:block"><path d="M100 8 184 36v82c0 54-42 88-84 106C58 206 16 172 16 118V36Z" fill="none" stroke="#C4A24D" stroke-width="7" stroke-linejoin="round"></path><text x="100" y="168" text-anchor="middle" font-family="Cinzel, serif" font-weight="700" font-size="132" fill="#C4A24D">V</text></svg></div><div style="font-size:26px"><span style="color:#C4A24D">C · Лише знак</span> <span style="color:#A3A39F">— favicon, аватар профілю, вотермарк, дрібні лейбли.</span></div></div>
+  </div>
+</section>
+
+<section data-label="Лого на темному/світлому" style="background:#0B0B0C;color:#F2EFE9;font-family:'Instrument Sans','Manrope',sans-serif;padding:88px 120px 80px;box-sizing:border-box;display:flex;flex-direction:column">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid #3A3B3F;padding-bottom:28px;margin-bottom:56px"><h2 style="margin:0;font-size:56px;font-weight:500;letter-spacing:-.01em">Логотип на темному і світлому</h2><span style="font-size:24px;color:#C4A24D;letter-spacing:.18em;text-transform:uppercase">05 · Логотип</span></div>
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;flex:1">
+    <div style="display:flex;flex-direction:column;gap:18px"><div style="flex:1;background:#0B0B0C;border:1px solid #3A3B3F;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 200 232" width="130"><path d="M100 8 184 36v82c0 54-42 88-84 106C58 206 16 172 16 118V36Z" fill="none" stroke="#C4A24D" stroke-width="7" stroke-linejoin="round"></path><text x="100" y="168" text-anchor="middle" font-family="Cinzel, serif" font-weight="700" font-size="132" fill="#C4A24D">V</text></svg></div><div style="font-size:24px;line-height:1.4"><span style="color:#C4A24D">Золото на чорному</span><br><span style="color:#A3A39F">Основний</span></div></div>
+    <div style="display:flex;flex-direction:column;gap:18px"><div style="flex:1;background:#16171A;border:1px solid #3A3B3F;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 200 232" width="130"><path d="M100 8 184 36v82c0 54-42 88-84 106C58 206 16 172 16 118V36Z" fill="none" stroke="#F2EFE9" stroke-width="7" stroke-linejoin="round"></path><text x="100" y="168" text-anchor="middle" font-family="Cinzel, serif" font-weight="700" font-size="132" fill="#F2EFE9">V</text></svg></div><div style="font-size:24px;line-height:1.4"><span style="color:#C4A24D">Off-white на графіті</span><br><span style="color:#A3A39F">Поверх фото, вотермарк на відео</span></div></div>
+    <div style="display:flex;flex-direction:column;gap:18px"><div style="flex:1;background:#F2EFE9;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 200 232" width="130"><path d="M100 8 184 36v82c0 54-42 88-84 106C58 206 16 172 16 118V36Z" fill="none" stroke="#0B0B0C" stroke-width="7" stroke-linejoin="round"></path><text x="100" y="168" text-anchor="middle" font-family="Cinzel, serif" font-weight="700" font-size="132" fill="#0B0B0C">V</text></svg></div><div style="font-size:24px;line-height:1.4"><span style="color:#C4A24D">Чорний на off-white</span><br><span style="color:#A3A39F">Світлі секції, документи</span></div></div>
+    <div style="display:flex;flex-direction:column;gap:18px"><div style="flex:1;background:#F2EFE9;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 200 232" width="130"><path d="M100 8 184 36v82c0 54-42 88-84 106C58 206 16 172 16 118V36Z" fill="none" stroke="#7F6820" stroke-width="7" stroke-linejoin="round"></path><text x="100" y="168" text-anchor="middle" font-family="Cinzel, serif" font-weight="700" font-size="132" fill="#7F6820">V</text></svg></div><div style="font-size:24px;line-height:1.4"><span style="color:#C4A24D">Deep Gold на off-white</span><br><span style="color:#A3A39F">Лише коли золото потрібне на світлому. Ніколи #C4A24D на світлому — надто слабкий контраст.</span></div></div>
+  </div>
+</section>
+
+<section data-label="Охоронне поле" style="background:#0B0B0C;color:#F2EFE9;font-family:'Instrument Sans','Manrope',sans-serif;padding:88px 120px 80px;box-sizing:border-box;display:flex;flex-direction:column">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid #3A3B3F;padding-bottom:28px;margin-bottom:56px"><h2 style="margin:0;font-size:56px;font-weight:500;letter-spacing:-.01em">Охоронне поле й мінімальний розмір</h2><span style="font-size:24px;color:#C4A24D;letter-spacing:.18em;text-transform:uppercase">06 · Логотип</span></div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:96px;flex:1;align-items:center">
+    <div style="display:flex;align-items:center;justify-content:center;position:relative;height:100%">
+      <div style="position:relative;padding:64px;border:1px dashed #C4A24D">
+        <svg viewBox="0 0 200 232" width="240" style="display:block"><path d="M100 8 184 36v82c0 54-42 88-84 106C58 206 16 172 16 118V36Z" fill="none" stroke="#F2EFE9" stroke-width="7" stroke-linejoin="round"></path><text x="100" y="168" text-anchor="middle" font-family="Cinzel, serif" font-weight="700" font-size="132" fill="#F2EFE9">V</text></svg>
+        <span style="position:absolute;top:8px;left:50%;transform:translateX(-50%);font-size:24px;color:#C4A24D">X</span>
+        <span style="position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:24px;color:#C4A24D">X</span>
+        <span style="position:absolute;bottom:8px;left:50%;transform:translateX(-50%);font-size:24px;color:#C4A24D">X</span>
+        <span style="position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:24px;color:#C4A24D">X</span>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:40px;font-size:28px;line-height:1.5">
+      <div><div style="color:#C4A24D;font-size:24px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:12px">Охоронне поле</div>X = ¼ висоти щита з кожного боку. Ніщо інше — текст, край фото, інші логотипи — не заходить у цю зону.</div>
+      <div><div style="color:#C4A24D;font-size:24px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:12px">Мінімальний розмір</div>Лише знак: 24 px екран / 8 мм друк.<br>Горизонтальний: 120 px / 30 мм завширшки.<br>Вертикальний: 72 px / 20 мм завширшки.</div>
+      <div><div style="color:#C4A24D;font-size:24px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:12px">Розміщення</div>Ліворуч угорі або по центру. На фото — краще знак у куті, ніж повний логотип поверх зображення.</div>
+    </div>
+  </div>
+</section>
+
+<section data-label="Неправильне використання" style="background:#0B0B0C;color:#F2EFE9;font-family:'Instrument Sans','Manrope',sans-serif;padding:88px 120px 80px;box-sizing:border-box;display:flex;flex-direction:column">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid #3A3B3F;padding-bottom:28px;margin-bottom:56px"><h2 style="margin:0;font-size:56px;font-weight:500;letter-spacing:-.01em">Неправильне використання</h2><span style="font-size:24px;color:#C4A24D;letter-spacing:.18em;text-transform:uppercase">07 · Логотип</span></div>
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;flex:1">
+    <div style="display:flex;flex-direction:column;gap:18px"><div style="flex:1;border:1px solid #3A3B3F;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#F5D67A,#8A6510,#F5D67A)"><svg viewBox="0 0 200 232" width="120"><path d="M100 8 184 36v82c0 54-42 88-84 106C58 206 16 172 16 118V36Z" fill="none" stroke="#0B0B0C" stroke-width="7" stroke-linejoin="round"></path><text x="100" y="168" text-anchor="middle" font-family="Cinzel, serif" font-weight="700" font-size="132" fill="#0B0B0C">V</text></svg></div><div style="font-size:24px;line-height:1.4;color:#A3A39F">Золоті градієнти чи металеві фони</div></div>
+    <div style="display:flex;flex-direction:column;gap:18px"><div style="flex:1;border:1px solid #3A3B3F;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 200 232" width="120" style="transform:scaleX(1.5)"><path d="M100 8 184 36v82c0 54-42 88-84 106C58 206 16 172 16 118V36Z" fill="none" stroke="#C4A24D" stroke-width="7" stroke-linejoin="round"></path><text x="100" y="168" text-anchor="middle" font-family="Cinzel, serif" font-weight="700" font-size="132" fill="#C4A24D">V</text></svg></div><div style="font-size:24px;line-height:1.4;color:#A3A39F">Розтягування, нахил чи поворот</div></div>
+    <div style="display:flex;flex-direction:column;gap:18px"><div style="flex:1;border:1px solid #3A3B3F;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 200 232" width="120"><path d="M100 8 184 36v82c0 54-42 88-84 106C58 206 16 172 16 118V36Z" fill="none" stroke="#E23A3A" stroke-width="7" stroke-linejoin="round"></path><text x="100" y="168" text-anchor="middle" font-family="Cinzel, serif" font-weight="700" font-size="132" fill="#3A8BE2">V</text></svg></div><div style="font-size:24px;line-height:1.4;color:#A3A39F">Будь-який колір поза палітрою</div></div>
+    <div style="display:flex;flex-direction:column;gap:18px"><div style="flex:1;border:1px solid #3A3B3F;display:flex;align-items:center;justify-content:center;background:#F2EFE9"><svg viewBox="0 0 200 232" width="120"><path d="M100 8 184 36v82c0 54-42 88-84 106C58 206 16 172 16 118V36Z" fill="none" stroke="#C4A24D" stroke-width="7" stroke-linejoin="round"></path><text x="100" y="168" text-anchor="middle" font-family="Cinzel, serif" font-weight="700" font-size="132" fill="#C4A24D">V</text></svg></div><div style="font-size:24px;line-height:1.4;color:#A3A39F">Світле золото на світлому — не проходить контраст</div></div>
+  </div>
+  <div style="margin-top:40px;font-size:26px;color:#A3A39F">Також не робити: тіні й світіння, обводка навколо напису, знак усередині іншої фігури, прапори чи маркери країни.</div>
+</section>
+
+<section data-label="Основні кольори" style="background:#0B0B0C;color:#F2EFE9;font-family:'Instrument Sans','Manrope',sans-serif;padding:88px 120px 80px;box-sizing:border-box;display:flex;flex-direction:column">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid #3A3B3F;padding-bottom:28px;margin-bottom:56px"><h2 style="margin:0;font-size:56px;font-weight:500;letter-spacing:-.01em">Основні кольори</h2><span style="font-size:24px;color:#C4A24D;letter-spacing:.18em;text-transform:uppercase">08 · Колір</span></div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;flex:1">
+    <div style="display:flex;flex-direction:column"><div style="flex:1;background:#0B0B0C;border:1px solid #3A3B3F"></div><div style="padding-top:24px;font-size:26px;line-height:1.5"><div style="font-size:34px;font-weight:500">Studio Black</div><div style="color:#A3A39F">#0B0B0C · RGB 11 11 12</div><div style="color:#A3A39F;margin-top:12px">Основний фон. Близько 60% будь-якого макета.</div></div></div>
+    <div style="display:flex;flex-direction:column"><div style="flex:1;background:#C4A24D"></div><div style="padding-top:24px;font-size:26px;line-height:1.5"><div style="font-size:34px;font-weight:500">Guard Gold</div><div style="color:#A3A39F">#C4A24D · RGB 196 162 77</div><div style="color:#A3A39F;margin-top:12px">Лише акцент: логотип, основний CTA, тонкі лінії, лейбли. Менше 10% будь-якої поверхні.</div></div></div>
+    <div style="display:flex;flex-direction:column"><div style="flex:1;background:#F2EFE9"></div><div style="padding-top:24px;font-size:26px;line-height:1.5"><div style="font-size:34px;font-weight:500">Off-White</div><div style="color:#A3A39F">#F2EFE9 · RGB 242 239 233</div><div style="color:#A3A39F;margin-top:12px">Текст на темному; фон контрастних секцій і документів.</div></div></div>
+  </div>
+</section>
+
+<section data-label="Другорядні кольори" style="background:#0B0B0C;color:#F2EFE9;font-family:'Instrument Sans','Manrope',sans-serif;padding:88px 120px 80px;box-sizing:border-box;display:flex;flex-direction:column">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid #3A3B3F;padding-bottom:28px;margin-bottom:56px"><h2 style="margin:0;font-size:56px;font-weight:500;letter-spacing:-.01em">Другорядні кольори і пропорції</h2><span style="font-size:24px;color:#C4A24D;letter-spacing:.18em;text-transform:uppercase">09 · Колір</span></div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:96px;flex:1">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;align-content:start">
+      <div style="display:flex;gap:20px;align-items:center;border:1px solid #3A3B3F;padding:20px"><div style="width:96px;height:96px;background:#16171A;border:1px solid #3A3B3F;flex:none"></div><div style="font-size:24px;line-height:1.4"><div style="font-weight:500;font-size:26px">Graphite</div><div style="color:#A3A39F">#16171A</div><div style="color:#A3A39F">Картки, панелі, хедер</div></div></div>
+      <div style="display:flex;gap:20px;align-items:center;border:1px solid #3A3B3F;padding:20px"><div style="width:96px;height:96px;background:#7F6820;flex:none"></div><div style="font-size:24px;line-height:1.4"><div style="font-weight:500;font-size:26px">Deep Gold</div><div style="color:#A3A39F">#7F6820</div><div style="color:#A3A39F">Золотий текст на світлому, при наведенні</div></div></div>
+      <div style="display:flex;gap:20px;align-items:center;border:1px solid #3A3B3F;padding:20px"><div style="width:96px;height:96px;background:#A3A39F;flex:none"></div><div style="font-size:24px;line-height:1.4"><div style="font-weight:500;font-size:26px">Grey 400</div><div style="color:#A3A39F">#A3A39F</div><div style="color:#A3A39F">Другорядний текст на темному</div></div></div>
+      <div style="display:flex;gap:20px;align-items:center;border:1px solid #3A3B3F;padding:20px"><div style="width:96px;height:96px;background:#3A3B3F;flex:none"></div><div style="font-size:24px;line-height:1.4"><div style="font-weight:500;font-size:26px">Grey 700</div><div style="color:#A3A39F">#3A3B3F</div><div style="color:#A3A39F">Рамки, роздільники, сітка</div></div></div>
+      <div style="display:flex;gap:20px;align-items:center;border:1px solid #3A3B3F;padding:20px"><div style="width:96px;height:96px;background:#5C5D61;flex:none"></div><div style="font-size:24px;line-height:1.4"><div style="font-weight:500;font-size:26px">Grey 600</div><div style="color:#A3A39F">#5C5D61</div><div style="color:#A3A39F">Другорядний текст на світлому</div></div></div>
+      <div style="display:flex;gap:20px;align-items:center;border:1px solid #3A3B3F;padding:20px"><div style="width:96px;height:96px;background:#2E7D4F;flex:none"></div><div style="font-size:24px;line-height:1.4"><div style="font-weight:500;font-size:26px">Confirm Green</div><div style="color:#A3A39F">#2E7D4F</div><div style="color:#A3A39F">Лише форми та WhatsApp</div></div></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:32px">
+      <div style="font-size:24px;letter-spacing:.18em;text-transform:uppercase;color:#C4A24D">Пропорції на типовій темній сторінці</div>
+      <div style="display:flex;height:72px;border:1px solid #3A3B3F"><div style="flex:60;background:#0B0B0C"></div><div style="flex:20;background:#16171A"></div><div style="flex:12;background:#F2EFE9"></div><div style="flex:8;background:#C4A24D"></div></div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);font-size:24px;color:#A3A39F;line-height:1.4"><div>60% чорний</div><div>20% графіт</div><div>12% off-white текст</div><div style="color:#F2EFE9">≤ 8% золото</div></div>
+      <p style="font-size:28px;line-height:1.5;color:#A3A39F;margin:24px 0 0;text-wrap:pretty">Золото ніколи не заповнює площу більшу за кнопку. Жодних золотих фонів секцій, градієнтів чи золотих текстових блоків. Якщо макет починає відчуватися «золотим» — прибирайте золото, доки він знову не стане чорним.</p>
+    </div>
+  </div>
+</section>
+
+<section data-label="Типографіка" style="background:#0B0B0C;color:#F2EFE9;font-family:'Instrument Sans','Manrope',sans-serif;padding:88px 120px 80px;box-sizing:border-box;display:flex;flex-direction:column">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid #3A3B3F;padding-bottom:28px;margin-bottom:56px"><h2 style="margin:0;font-size:56px;font-weight:500;letter-spacing:-.01em">Типографіка</h2><span style="font-size:24px;color:#C4A24D;letter-spacing:.18em;text-transform:uppercase">10 · Шрифт · Приклади</span></div>
+  <div style="display:grid;grid-template-columns:1fr 1.2fr;gap:96px;flex:1">
+    <div>
+      <div style="font-size:200px;font-weight:500;line-height:1;letter-spacing:-.03em">Aa</div>
+      <div style="font-size:40px;font-weight:500;margin-top:24px">Instrument Sans</div>
+      <p style="font-size:26px;line-height:1.5;color:#A3A39F;margin:16px 0 0;text-wrap:pretty">Один шрифт для всього. Нейтральний, трохи технічний, добре читається на екрані до малих розмірів. Насиченості 400 / 500 / 600. Відкрита ліцензія (Google Fonts). Другого UI-шрифту немає — напис у логотипі зберігає свою гарнітуру (Cinzel) і ніколи не з’являється в тексті. Instrument Sans має лише латиницю: для української комунікації резервний шрифт — Manrope (у цій презентації).</p>
+      <div style="margin-top:32px;font-size:26px;color:#A3A39F">Табличні цифри для цін і характеристик: <span style="color:#F2EFE9;font-variant-numeric:tabular-nums">€1.290 · 12 мм · 8 років</span></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:0;border-top:1px solid #3A3B3F">
+      <div style="display:grid;grid-template-columns:260px 1fr;gap:24px;padding:16px 0;border-bottom:1px solid #3A3B3F;align-items:baseline"><span style="font-size:24px;color:#A3A39F">Display / H1 · 500</span><span style="font-size:56px;font-weight:500;letter-spacing:-.02em;line-height:1.05">Захистіть покриття авто.</span></div>
+      <div style="display:grid;grid-template-columns:260px 1fr;gap:24px;padding:16px 0;border-bottom:1px solid #3A3B3F;align-items:baseline"><span style="font-size:24px;color:#A3A39F">H2 · 500</span><span style="font-size:44px;font-weight:500;letter-spacing:-.01em">Захисна плівка PPF</span></div>
+      <div style="display:grid;grid-template-columns:260px 1fr;gap:24px;padding:16px 0;border-bottom:1px solid #3A3B3F;align-items:baseline"><span style="font-size:24px;color:#A3A39F">H3 · 500</span><span style="font-size:32px;font-weight:500">Пакет «Повний фронт»</span></div>
+      <div style="display:grid;grid-template-columns:260px 1fr;gap:24px;padding:16px 0;border-bottom:1px solid #3A3B3F;align-items:baseline"><span style="font-size:24px;color:#A3A39F">Основний текст · 400</span><span style="font-size:26px;line-height:1.5;color:#F2EFE9">Ретельна підготовка поверхні перед кожним нанесенням. Загорнуті краї там, де дозволяє панель.</span></div>
+      <div style="display:grid;grid-template-columns:260px 1fr;gap:24px;padding:16px 0;border-bottom:1px solid #3A3B3F;align-items:baseline"><span style="font-size:24px;color:#A3A39F">Лейбл / Кнопка · 600</span><span style="font-size:24px;font-weight:600;letter-spacing:.08em;text-transform:uppercase">Отримати розрахунок</span></div>
+      <div style="display:grid;grid-template-columns:260px 1fr;gap:24px;padding:16px 0;border-bottom:1px solid #3A3B3F;align-items:baseline"><span style="font-size:24px;color:#A3A39F">Ціна · 500 tabular</span><span style="font-size:48px;font-weight:500;font-variant-numeric:tabular-nums">від €1.290</span></div>
+      <div style="display:grid;grid-template-columns:260px 1fr;gap:24px;padding:16px 0;border-bottom:1px solid #3A3B3F;align-items:baseline"><span style="font-size:24px;color:#A3A39F">Технічний · 400 caps</span><span style="font-size:24px;letter-spacing:.14em;text-transform:uppercase;color:#A3A39F">PPF · 190 мкм · Самовідновлюване покриття</span></div>
+    </div>
+  </div>
+</section>
+
+<section data-label="Ієрархія шрифту" style="background:#F2EFE9;color:#0B0B0C;font-family:'Instrument Sans','Manrope',sans-serif;padding:88px 120px 80px;box-sizing:border-box;display:flex;flex-direction:column">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid #C9C6BF;padding-bottom:28px;margin-bottom:56px"><h2 style="margin:0;font-size:56px;font-weight:500;letter-spacing:-.01em">Ієрархія шрифту в дії</h2><span style="font-size:24px;color:#7F6820;letter-spacing:.18em;text-transform:uppercase">11 · Шрифт · Приклад</span></div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:96px;flex:1">
+    <div>
+      <div style="font-size:24px;letter-spacing:.18em;text-transform:uppercase;color:#7F6820;margin-bottom:24px">Світла секція · інтро послуги</div>
+      <div style="font-size:64px;font-weight:500;letter-spacing:-.02em;line-height:1.05;max-width:700px">Збережіть оригінальний вигляд. Додайте шар, який бере удар на себе.</div>
+      <p style="font-size:28px;line-height:1.5;color:#5C5D61;margin:32px 0 0;max-width:700px;text-wrap:pretty">Захисна плівка — прозорий уретановий шар на панелях, найбільш вразливих до сколів і дорожнього сміття. При акуратному нанесенні майже непомітна.</p>
+      <div style="margin-top:36px;display:flex;gap:16px"><span style="font-size:24px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;background:#0B0B0C;color:#F2EFE9;padding:22px 36px">Отримати розрахунок</span><span style="font-size:24px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;border:1px solid #0B0B0C;color:#0B0B0C;padding:21px 36px">Переглянути послуги</span></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:24px">
+      <div style="font-size:24px;letter-spacing:.18em;text-transform:uppercase;color:#7F6820">Технічний блок</div>
+      <div style="background:#FFFFFF;border:1px solid #C9C6BF;padding:36px;display:flex;flex-direction:column;gap:0">
+        <div style="display:flex;justify-content:space-between;padding:18px 0;border-bottom:1px solid #E4E1DA;font-size:26px"><span style="color:#5C5D61">Плівка</span><span style="font-weight:500">PPF, глянець, 190 мкм</span></div>
+        <div style="display:flex;justify-content:space-between;padding:18px 0;border-bottom:1px solid #E4E1DA;font-size:26px"><span style="color:#5C5D61">Покриття</span><span style="font-weight:500">Повний фронт</span></div>
+        <div style="display:flex;justify-content:space-between;padding:18px 0;border-bottom:1px solid #E4E1DA;font-size:26px"><span style="color:#5C5D61">Краї</span><span style="font-weight:500">Загорнуті, де можливо</span></div>
+        <div style="display:flex;justify-content:space-between;padding:18px 0;border-bottom:1px solid #E4E1DA;font-size:26px"><span style="color:#5C5D61">Час у студії</span><span style="font-weight:500">3–4 дні</span></div>
+        <div style="display:flex;justify-content:space-between;padding:18px 0;font-size:26px;align-items:baseline"><span style="color:#5C5D61">Ціна</span><span style="font-size:40px;font-weight:500;font-variant-numeric:tabular-nums">від €1.290</span></div>
+      </div>
+      <div style="font-size:24px;color:#5C5D61;line-height:1.5">Правила: заголовки з великої лише першої літери, без знаків оклику, великі літери лише для лейблів і кнопок, ціни завжди з «від», якщо не фіксовані.</div>
+    </div>
+  </div>
+</section>
+
+<section data-label="Графічні елементи" style="background:#0B0B0C;color:#F2EFE9;font-family:'Instrument Sans','Manrope',sans-serif;padding:88px 120px 80px;box-sizing:border-box;display:flex;flex-direction:column">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid #3A3B3F;padding-bottom:28px;margin-bottom:56px"><h2 style="margin:0;font-size:56px;font-weight:500;letter-spacing:-.01em">Графічні елементи</h2><span style="font-size:24px;color:#C4A24D;letter-spacing:.18em;text-transform:uppercase">12 · Графіка</span></div>
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;flex:1">
+    <div style="display:flex;flex-direction:column;gap:20px"><div style="flex:1;border:1px solid #3A3B3F;position:relative;overflow:hidden"><div style="position:absolute;left:40px;right:40px;top:50%;height:1px;background:#C4A24D"></div><div style="position:absolute;left:40px;top:calc(50% - 6px);width:1px;height:13px;background:#C4A24D"></div><div style="position:absolute;right:40px;top:calc(50% - 6px);width:1px;height:13px;background:#C4A24D"></div></div><div style="font-size:24px;line-height:1.4"><span style="color:#C4A24D">Тонка золота лінія</span><br><span style="color:#A3A39F">1 px. Роздільники секцій, під лейблами, акценти карток. Ніколи товща за 2 px.</span></div></div>
+    <div style="display:flex;flex-direction:column;gap:20px"><div style="flex:1;border:1px solid #3A3B3F;position:relative;overflow:hidden"><svg viewBox="0 0 400 300" width="100%" height="100%" preserveAspectRatio="none" style="position:absolute;inset:0"><path d="M-20 210 C 90 200, 150 120, 260 110 S 400 118, 430 90" fill="none" stroke="#C4A24D" stroke-width="1.5"></path><path d="M-20 250 C 100 240, 170 170, 290 160 S 420 168, 440 140" fill="none" stroke="#3A3B3F" stroke-width="1.5"></path></svg></div><div style="font-size:24px;line-height:1.4"><span style="color:#C4A24D">Лінія кузова</span><br><span style="color:#A3A39F">Одна-дві довгі криві за мотивами плечової лінії авто. Лише фон, низький контраст, ніколи не перетинає текст.</span></div></div>
+    <div style="display:flex;flex-direction:column;gap:20px"><div style="flex:1;border:1px solid #3A3B3F;background-image:linear-gradient(#1F2024 1px,transparent 1px),linear-gradient(90deg,#1F2024 1px,transparent 1px);background-size:48px 48px;position:relative"><div style="position:absolute;left:48px;top:48px;width:9px;height:9px;border-top:1px solid #C4A24D;border-left:1px solid #C4A24D"></div><div style="position:absolute;right:48px;bottom:48px;width:9px;height:9px;border-bottom:1px solid #C4A24D;border-right:1px solid #C4A24D"></div></div><div style="font-size:24px;line-height:1.4"><span style="color:#C4A24D">Ледь помітна сітка + кутові мітки</span><br><span style="color:#A3A39F">Сітка 48 px із контрастом 10%. Кутові мітки обрамляють фото й «технічні» блоки.</span></div></div>
+    <div style="display:flex;flex-direction:column;gap:20px"><div style="flex:1;border:1px solid #3A3B3F;display:flex;flex-direction:column;justify-content:center;gap:16px;padding:40px"><span style="font-size:24px;letter-spacing:.16em;text-transform:uppercase;color:#C4A24D">01 — Preparation</span><span style="font-size:24px;letter-spacing:.16em;text-transform:uppercase;color:#A3A39F">PPF · Повний фронт</span><span style="font-size:24px;letter-spacing:.16em;text-transform:uppercase;color:#A3A39F;border:1px solid #3A3B3F;padding:10px 16px;align-self:flex-start">Tesla Model 3</span></div><div style="font-size:24px;line-height:1.4"><span style="color:#C4A24D">Технічні лейбли</span><br><span style="color:#A3A39F">Великі літери, розріджений трекінг, нумеровані кроки. Опційний контурний тег для моделі авто чи послуги.</span></div></div>
+  </div>
+  <div style="margin-top:40px;font-size:26px;color:#A3A39F">Не в системі: вогонь, картаті прапори, лінії швидкості, карбонова текстура, сліди шин, силуети авто, 3D-хром, важкі градієнти.</div>
+</section>
+
+<section data-label="Іконки" style="background:#0B0B0C;color:#F2EFE9;font-family:'Instrument Sans','Manrope',sans-serif;padding:88px 120px 80px;box-sizing:border-box;display:flex;flex-direction:column">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid #3A3B3F;padding-bottom:28px;margin-bottom:56px"><h2 style="margin:0;font-size:56px;font-weight:500;letter-spacing:-.01em">Стиль іконок</h2><span style="font-size:24px;color:#C4A24D;letter-spacing:.18em;text-transform:uppercase">13 · Графіка</span></div>
+  <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:96px;flex:1">
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:20px;align-content:start">
+      <div style="border:1px solid #3A3B3F;aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px"><svg viewBox="0 0 48 48" width="64" fill="none" stroke="#C4A24D" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M24 5 40 11v12c0 10-8 17-16 20-8-3-16-10-16-20V11Z"></path><path d="M17 24l5 5 9-10"></path></svg><span style="font-size:24px;color:#A3A39F">Захист</span></div>
+      <div style="border:1px solid #3A3B3F;aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px"><svg viewBox="0 0 48 48" width="64" fill="none" stroke="#C4A24D" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M8 30 26 12h14v14L22 44H8Z"></path><path d="M8 30h14V44"></path></svg><span style="font-size:24px;color:#A3A39F">Шар PPF</span></div>
+      <div style="border:1px solid #3A3B3F;aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px"><svg viewBox="0 0 48 48" width="64" fill="none" stroke="#C4A24D" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M6 32 14 14h20l8 18Z"></path><path d="M6 32h36v6H6Z"></path><path d="M30 14 26 32"></path></svg><span style="font-size:24px;color:#A3A39F">Тонування</span></div>
+      <div style="border:1px solid #3A3B3F;aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px"><svg viewBox="0 0 48 48" width="64" fill="none" stroke="#C4A24D" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M10 10h20a8 8 0 0 1 0 16H14a8 8 0 0 0 0 16h24"></path><path d="M34 38l4 4-4 4"></path></svg><span style="font-size:24px;color:#A3A39F">Обклеювання</span></div>
+      <div style="border:1px solid #3A3B3F;aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px"><svg viewBox="0 0 48 48" width="64" fill="none" stroke="#C4A24D" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M8 34h32"></path><path d="M12 34V22l6-6h12l6 6v12"></path><path d="M18 16v18M30 16v18"></path><path d="M24 4v8"></path></svg><span style="font-size:24px;color:#A3A39F">Часткове обклеювання</span></div>
+      <div style="border:1px solid #3A3B3F;aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px"><svg viewBox="0 0 48 48" width="64" fill="none" stroke="#C4A24D" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><circle cx="24" cy="24" r="16"></circle><path d="M24 12v12l8 4"></path></svg><span style="font-size:24px;color:#A3A39F">Час</span></div>
+      <div style="border:1px solid #3A3B3F;aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px"><svg viewBox="0 0 48 48" width="64" fill="none" stroke="#C4A24D" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M24 6c6 8 10 13 10 19a10 10 0 0 1-20 0c0-6 4-11 10-19Z"></path></svg><span style="font-size:24px;color:#A3A39F">Гідрофобність</span></div>
+      <div style="border:1px solid #3A3B3F;aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px"><svg viewBox="0 0 48 48" width="64" fill="none" stroke="#C4A24D" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M6 20h4l6-8h16l6 8h4v10H6Z"></path><circle cx="15" cy="32" r="4"></circle><circle cx="33" cy="32" r="4"></circle></svg><span style="font-size:24px;color:#A3A39F">Автомобіль</span></div>
+      <div style="border:1px solid #3A3B3F;aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px"><svg viewBox="0 0 48 48" width="64" fill="none" stroke="#C4A24D" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M8 40h32"></path><path d="M12 40V18l12-8 12 8v22"></path><path d="M20 40V28h8v12"></path></svg><span style="font-size:24px;color:#A3A39F">Студія</span></div>
+      <div style="border:1px solid #3A3B3F;aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px"><svg viewBox="0 0 48 48" width="64" fill="none" stroke="#C4A24D" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M40 30a16 16 0 1 0-6 6l8 2Z"></path><path d="M18 22h12M18 28h8"></path></svg><span style="font-size:24px;color:#A3A39F">WhatsApp</span></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:32px;font-size:28px;line-height:1.5">
+      <div><div style="color:#C4A24D;font-size:24px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:12px">Побудова</div>Контурні, обводка 1.5 px при 48 px, круглі кінці й з’єднання, радіус кутів 2 px. Без заливок, без двоколірності.</div>
+      <div><div style="color:#C4A24D;font-size:24px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:12px">Колір</div>Золото на темному для списків переваг; off-white або чорний для UI (навігація, форми). Один колір на іконку.</div>
+      <div><div style="color:#C4A24D;font-size:24px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:12px">Застосування</div>Списки послуг, кроки процесу, контакти. Не як декор і не більше за 64 px. Рекомендована бібліотека: Lucide (stroke 1.5).</div>
+    </div>
+  </div>
+</section>
+
+<section data-label="Стиль фото" style="background:#0B0B0C;color:#F2EFE9;font-family:'Instrument Sans','Manrope',sans-serif;padding:88px 120px 80px;box-sizing:border-box;display:flex;flex-direction:column">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid #3A3B3F;padding-bottom:28px;margin-bottom:56px"><h2 style="margin:0;font-size:56px;font-weight:500;letter-spacing:-.01em">Стиль фотографії</h2><span style="font-size:24px;color:#C4A24D;letter-spacing:.18em;text-transform:uppercase">14 · Фото</span></div>
+  <div style="display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:1fr 1fr;gap:20px;flex:1;min-height:0">
+    <div style="grid-row:1/3;position:relative;border:1px solid #3A3B3F"><image-slot id="ph-hero" shape="rect" placeholder="Готове авто, ¾ спереду, темна студія, м’яке верхнє світло — контрольовані відблиски"></image-slot></div>
+    <div style="position:relative;border:1px solid #3A3B3F"><image-slot id="ph-close" shape="rect" placeholder="Крупний план: край PPF, загорнутий на фару"></image-slot></div>
+    <div style="position:relative;border:1px solid #3A3B3F"><image-slot id="ph-hands" shape="rect" placeholder="Руки з ракелем, плівка в процесі нанесення"></image-slot></div>
+    <div style="position:relative;border:1px solid #3A3B3F"><image-slot id="ph-tint" shape="rect" placeholder="Тонування заднього скла, вид із салону, вечірнє світло"></image-slot></div>
+    <div style="position:relative;border:1px solid #3A3B3F"><image-slot id="ph-shop" shape="rect" placeholder="Майстерня: чистий бокс, розкладені інструменти"></image-slot></div>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:32px;margin-top:36px;font-size:24px;line-height:1.45;color:#A3A39F">
+    <div><span style="color:#F2EFE9">Світло</span> — контрольоване, м’яке, з одного боку. Темне або нейтральне оточення. Без кольорового LED.</div>
+    <div><span style="color:#F2EFE9">Контраст</span> — високий, але реалістичний. Чорне лишається чорним, золото в кадрі — лише якщо це логотип.</div>
+    <div><span style="color:#F2EFE9">Сюжет</span> — показувати роботу, не тільки авто: краї, стики, підготовка, руки, готові панелі.</div>
+    <div><span style="color:#F2EFE9">Уникати</span> — ширококутних спотворень, HDR, важких віньєток, «мокрих» вуличних кадрів, людей, що позують біля авто.</div>
+  </div>
+</section>
+
+<section data-label="Список кадрів" style="background:#16171A;color:#F2EFE9;font-family:'Instrument Sans','Manrope',sans-serif;padding:88px 120px 80px;box-sizing:border-box;display:flex;flex-direction:column">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid #3A3B3F;padding-bottom:28px;margin-bottom:56px"><h2 style="margin:0;font-size:56px;font-weight:500;letter-spacing:-.01em">Список кадрів</h2><span style="font-size:24px;color:#C4A24D;letter-spacing:.18em;text-transform:uppercase">15 · Фото</span></div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:48px;flex:1">
+    <div style="display:flex;flex-direction:column;gap:0"><div style="font-size:24px;letter-spacing:.18em;text-transform:uppercase;color:#C4A24D;padding-bottom:20px;border-bottom:1px solid #3A3B3F">Кожен проєкт</div>
+      <div style="padding:22px 0;border-bottom:1px solid #3A3B3F;font-size:26px;display:flex;gap:20px"><span style="color:#A3A39F;flex:none">01</span>Авто на приїзді, той самий ракурс, що й фінальний</div>
+      <div style="padding:22px 0;border-bottom:1px solid #3A3B3F;font-size:26px;display:flex;gap:20px"><span style="color:#A3A39F;flex:none">02</span>Підготовка: мийка, деконтамінація, маскування</div>
+      <div style="padding:22px 0;border-bottom:1px solid #3A3B3F;font-size:26px;display:flex;gap:20px"><span style="color:#A3A39F;flex:none">03</span>Нанесення, руки в кадрі</div>
+      <div style="padding:22px 0;border-bottom:1px solid #3A3B3F;font-size:26px;display:flex;gap:20px"><span style="color:#A3A39F;flex:none">04</span>Крупні плани країв і стиків</div>
+      <div style="padding:22px 0;border-bottom:1px solid #3A3B3F;font-size:26px;display:flex;gap:20px"><span style="color:#A3A39F;flex:none">05</span>Готове авто, ¾ спереду і ¾ ззаду</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:0"><div style="font-size:24px;letter-spacing:.18em;text-transform:uppercase;color:#C4A24D;padding-bottom:20px;border-bottom:1px solid #3A3B3F">Бібліотека деталей</div>
+      <div style="padding:22px 0;border-bottom:1px solid #3A3B3F;font-size:26px;display:flex;gap:20px"><span style="color:#A3A39F;flex:none">06</span>Поверхня плівки під ковзним світлом</div>
+      <div style="padding:22px 0;border-bottom:1px solid #3A3B3F;font-size:26px;display:flex;gap:20px"><span style="color:#A3A39F;flex:none">07</span>Краї на фарах і дзеркалах</div>
+      <div style="padding:22px 0;border-bottom:1px solid #3A3B3F;font-size:26px;display:flex;gap:20px"><span style="color:#A3A39F;flex:none">08</span>Тонування зсередини і ззовні</div>
+      <div style="padding:22px 0;border-bottom:1px solid #3A3B3F;font-size:26px;display:flex;gap:20px"><span style="color:#A3A39F;flex:none">09</span>Інструменти, леза, ракелі на чистій поверхні</div>
+      <div style="padding:22px 0;border-bottom:1px solid #3A3B3F;font-size:26px;display:flex;gap:20px"><span style="color:#A3A39F;flex:none">10</span>Команда за роботою, без погляду в камеру</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:24px">
+      <div style="flex:1;position:relative;border:1px solid #3A3B3F"><image-slot id="ph-edge" shape="rect" placeholder="Макро: загорнутий край на ковпаку дзеркала, ковзне світло"></image-slot></div>
+      <div style="font-size:24px;color:#A3A39F;line-height:1.5">Формат: 3:2 або 4:5 для соцмереж, 16:9 для головного екрана сайту. Знімати в RAW, баланс білого — нейтральний, без фільтрів і пресетів.</div>
+    </div>
+  </div>
+</section>
+
+<section data-label="Кнопки і CTA" style="background:#0B0B0C;color:#F2EFE9;font-family:'Instrument Sans','Manrope',sans-serif;padding:88px 120px 80px;box-sizing:border-box;display:flex;flex-direction:column">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid #3A3B3F;padding-bottom:28px;margin-bottom:56px"><h2 style="margin:0;font-size:56px;font-weight:500;letter-spacing:-.01em">Кнопки і CTA</h2><span style="font-size:24px;color:#C4A24D;letter-spacing:.18em;text-transform:uppercase">16 · Компоненти · Приклад</span></div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;flex:1">
+    <div style="border:1px solid #3A3B3F;padding:56px;display:flex;flex-direction:column;gap:40px">
+      <div style="font-size:24px;letter-spacing:.18em;text-transform:uppercase;color:#A3A39F">На темному</div>
+      <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:center">
+        <span style="font-size:24px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;background:#C4A24D;color:#0B0B0C;padding:22px 40px;border-radius:2px">Отримати розрахунок</span>
+        <span style="font-size:24px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;border:1px solid #F2EFE9;color:#F2EFE9;padding:21px 40px;border-radius:2px">Переглянути послуги</span>
+        <span style="display:inline-flex;align-items:center;gap:14px;font-size:24px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;border:1px solid #3A3B3F;color:#F2EFE9;padding:21px 32px;border-radius:2px"><svg viewBox="0 0 48 48" width="28" fill="none" stroke="#C4A24D" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M40 30a16 16 0 1 0-6 6l8 2Z"></path></svg>WhatsApp</span>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;font-size:24px;line-height:1.45;color:#A3A39F">
+        <div><span style="color:#C4A24D">Основна</span> — золота заливка, чорний текст. Одна на екран. При наведенні: #D4B462.</div>
+        <div><span style="color:#F2EFE9">Другорядна</span> — контур 1 px off-white. При наведенні: заливка off-white, чорний текст.</div>
+        <div><span style="color:#F2EFE9">WhatsApp</span> — третинний контур, золота іконка. Ніколи зелена заливка на темному.</div>
+      </div>
+    </div>
+    <div style="background:#F2EFE9;color:#0B0B0C;padding:56px;display:flex;flex-direction:column;gap:40px">
+      <div style="font-size:24px;letter-spacing:.18em;text-transform:uppercase;color:#5C5D61">На світлому</div>
+      <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:center">
+        <span style="font-size:24px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;background:#0B0B0C;color:#F2EFE9;padding:22px 40px;border-radius:2px">Отримати розрахунок</span>
+        <span style="font-size:24px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;border:1px solid #0B0B0C;color:#0B0B0C;padding:21px 40px;border-radius:2px">Переглянути послуги</span>
+        <span style="font-size:24px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#7F6820;padding:21px 0;border-bottom:1px solid #7F6820">Текстове посилання →</span>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;font-size:24px;line-height:1.45;color:#5C5D61">
+        <div><span style="color:#0B0B0C">Основна</span> — чорна заливка. Золото як заливка на світлому не використовується.</div>
+        <div><span style="color:#0B0B0C">Форма</span> — радіус 2 px, висота 64 px, бокові відступи 40 px. Ніколи форма «пігулки».</div>
+        <div><span style="color:#0B0B0C">Текст</span> — дієслово + об’єкт, 1–3 слова. Без «Зараз!», без стрілок на основних кнопках.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section data-label="Картка послуги" style="background:#0B0B0C;color:#F2EFE9;font-family:'Instrument Sans','Manrope',sans-serif;padding:88px 120px 80px;box-sizing:border-box;display:flex;flex-direction:column">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid #3A3B3F;padding-bottom:28px;margin-bottom:56px"><h2 style="margin:0;font-size:56px;font-weight:500;letter-spacing:-.01em">Картка послуги</h2><span style="font-size:24px;color:#C4A24D;letter-spacing:.18em;text-transform:uppercase">17 · Компоненти · Приклад</span></div>
+  <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;flex:1;min-height:0;overflow:hidden">
+    <div style="background:#16171A;border:1px solid #3A3B3F;display:flex;flex-direction:column">
+      <div style="height:230px;position:relative;flex:none"><image-slot id="svc-ppf" shape="rect" placeholder="Нанесення PPF на капот"></image-slot></div>
+      <div style="padding:36px;display:flex;flex-direction:column;gap:20px;flex:1">
+        <div style="font-size:24px;letter-spacing:.16em;text-transform:uppercase;color:#C4A24D">01 — Захист</div>
+        <div style="font-size:36px;font-weight:500;letter-spacing:-.01em">Захисна плівка PPF</div>
+        <p style="margin:0;font-size:24px;line-height:1.5;color:#A3A39F;text-wrap:pretty">Прозора самовідновлювана плівка на панелях, що приймають сколи. Ретельна підготовка поверхні, загорнуті краї там, де дозволяє панель.</p>
+        <div style="margin-top:auto;display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid #3A3B3F;padding-top:20px"><span style="font-size:28px;font-weight:500;font-variant-numeric:tabular-nums">від €1.290</span><span style="font-size:24px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#C4A24D">Детальніше →</span></div>
+      </div>
+    </div>
+    <div style="background:#16171A;border:1px solid #3A3B3F;display:flex;flex-direction:column">
+      <div style="height:230px;position:relative;flex:none"><image-slot id="svc-tint" shape="rect" placeholder="Тоноване заднє скло, вид із салону"></image-slot></div>
+      <div style="padding:36px;display:flex;flex-direction:column;gap:20px;flex:1">
+        <div style="font-size:24px;letter-spacing:.16em;text-transform:uppercase;color:#C4A24D">02 — Комфорт</div>
+        <div style="font-size:36px;font-weight:500;letter-spacing:-.01em">Тонування скла</div>
+        <p style="margin:0;font-size:24px;line-height:1.5;color:#A3A39F;text-wrap:pretty">Преміальні керамічні плівки для захисту від тепла й UV. Відтінки в межах нідерландського законодавства, розкрій під скло, без видимих стиків.</p>
+        <div style="margin-top:auto;display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid #3A3B3F;padding-top:20px"><span style="font-size:28px;font-weight:500;font-variant-numeric:tabular-nums">від €290</span><span style="font-size:24px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#C4A24D">Детальніше →</span></div>
+      </div>
+    </div>
+    <div style="background:#16171A;border:1px solid #3A3B3F;display:flex;flex-direction:column">
+      <div style="height:230px;position:relative;flex:none"><image-slot id="svc-wrap" shape="rect" placeholder="Дверцята в сатиновій плівці, крупний план фактури"></image-slot></div>
+      <div style="padding:36px;display:flex;flex-direction:column;gap:20px;flex:1">
+        <div style="font-size:24px;letter-spacing:.16em;text-transform:uppercase;color:#C4A24D">03 — Зовнішній вигляд</div>
+        <div style="font-size:36px;font-weight:500;letter-spacing:-.01em">Обклеювання авто</div>
+        <p style="margin:0;font-size:24px;line-height:1.5;color:#A3A39F;text-wrap:pretty">Повна зміна кольору або часткове обклеювання: дах, дзеркала, видалення хрому, акценти. Знімається, фарба під плівкою лишається оригінальною.</p>
+        <div style="margin-top:auto;display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid #3A3B3F;padding-top:20px"><span style="font-size:28px;font-weight:500;font-variant-numeric:tabular-nums">від €190</span><span style="font-size:24px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#C4A24D">Детальніше →</span></div>
+      </div>
+    </div>
+  </div>
+  <div style="margin-top:32px;font-size:24px;color:#A3A39F;line-height:1.5;flex:none">Анатомія картки: фото 3:2 → нумерований лейбл категорії → H3 → опис у два рядки → ціна й лінк на тонкій лінії. Поверхня Graphite, рамка 1 px Grey 700, радіус не більше 4 px, без тіні. При наведенні: рамка стає золотою.</div>
+</section>
+
+<section data-label="Картка портфоліо" style="background:#0B0B0C;color:#F2EFE9;font-family:'Instrument Sans','Manrope',sans-serif;padding:88px 120px 80px;box-sizing:border-box;display:flex;flex-direction:column">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid #3A3B3F;padding-bottom:28px;margin-bottom:56px"><h2 style="margin:0;font-size:56px;font-weight:500;letter-spacing:-.01em">Картка портфоліо</h2><span style="font-size:24px;color:#C4A24D;letter-spacing:.18em;text-transform:uppercase">18 · Компоненти · Приклад</span></div>
+  <div style="display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:24px;flex:1;min-height:0">
+    <div style="position:relative;border:1px solid #3A3B3F;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden">
+      <div style="position:absolute;inset:0"><image-slot id="pf-main" shape="rect" placeholder="Готовий BMW M340i, ¾ ззаду, відбиття у підлозі студії"></image-slot></div>
+      <div style="position:relative;padding:40px;background:linear-gradient(transparent,rgba(11,11,12,.92) 45%);pointer-events:none;display:flex;justify-content:space-between;align-items:flex-end;gap:24px">
+        <div><div style="font-size:24px;letter-spacing:.16em;text-transform:uppercase;color:#C4A24D;margin-bottom:12px">PPF · Повний фронт + пороги</div><div style="font-size:40px;font-weight:500;letter-spacing:-.01em">BMW M340i, Brooklyn Grey</div></div>
+        <div style="font-size:24px;color:#A3A39F;text-align:right;line-height:1.4;flex:none">4 дні<br>Глянець 190 мкм</div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:24px;min-height:0">
+      <div style="flex:1;background:#16171A;border:1px solid #3A3B3F;display:flex;flex-direction:column;min-height:0">
+        <div style="flex:1;position:relative;min-height:0"><image-slot id="pf-2" shape="rect" placeholder="Tesla Model Y, видалення хрому, крупний план молдингу"></image-slot></div>
+        <div style="padding:24px 28px;display:flex;justify-content:space-between;align-items:baseline;gap:20px;flex:none"><div><div style="font-size:24px;letter-spacing:.14em;text-transform:uppercase;color:#C4A24D">Часткове обклеювання</div><div style="font-size:28px;font-weight:500;margin-top:6px">Tesla Model Y · Видалення хрому</div></div><span style="font-size:24px;color:#A3A39F;flex:none">1 день</span></div>
+      </div>
+      <div style="flex:1;background:#16171A;border:1px solid #3A3B3F;display:flex;flex-direction:column;min-height:0">
+        <div style="flex:1;position:relative;min-height:0"><image-slot id="pf-3" shape="rect" placeholder="Audi RS6, тоновані задні вікна, вечір"></image-slot></div>
+        <div style="padding:24px 28px;display:flex;justify-content:space-between;align-items:baseline;gap:20px;flex:none"><div><div style="font-size:24px;letter-spacing:.14em;text-transform:uppercase;color:#C4A24D">Тонування скла</div><div style="font-size:28px;font-weight:500;margin-top:6px">Audi RS6 · Керамічна 20%</div></div><span style="font-size:24px;color:#A3A39F;flex:none">½ дня</span></div>
+      </div>
+    </div>
+  </div>
+  <div style="margin-top:36px;font-size:24px;color:#A3A39F;line-height:1.5">Запис портфоліо = лейбл послуги · авто + колір · час у студії · характеристика плівки. Факти, не прикметники. Переконує фото.</div>
+</section>
+
+<section data-label="До / Після" style="background:#0B0B0C;color:#F2EFE9;font-family:'Instrument Sans','Manrope',sans-serif;padding:88px 120px 80px;box-sizing:border-box;display:flex;flex-direction:column">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid #3A3B3F;padding-bottom:28px;margin-bottom:56px"><h2 style="margin:0;font-size:56px;font-weight:500;letter-spacing:-.01em">До / Після</h2><span style="font-size:24px;color:#C4A24D;letter-spacing:.18em;text-transform:uppercase">19 · Компоненти · Приклад</span></div>
+  <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:96px;flex:1;min-height:0">
+    <div style="display:flex;flex-direction:column;gap:20px;min-height:0;min-width:0">
+      <div style="flex:1;position:relative;border:1px solid #3A3B3F;min-height:0;overflow:hidden"><image-slot id="ba-split" shape="rect" src="assets/before-after-volvo.png" placeholder="До / Після, той самий кадр"></image-slot></div>
+      <div style="display:flex;justify-content:space-between;font-size:24px;color:#A3A39F"><span>Volvo V60 · Заднє скло · Тонування</span><span>Слайдер на сайті · розділений кадр у соцмережах</span></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:36px;font-size:28px;line-height:1.5">
+      <div><div style="color:#C4A24D;font-size:24px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:12px">Той самий кадр</div>Та сама позиція камери, той самий об’єктив, те саме світло. Змінюється лише робота. Інакше порівняння не викликає довіри.</div>
+      <div><div style="color:#C4A24D;font-size:24px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:12px">Лейбли</div>«До» на чорній плашці, «Після» на золотій (на фото-прикладі — англійські написи). Один тонкий золотий роздільник. Без стрілок, без «WOW», без червоних кружечків.</div>
+      <div><div style="color:#C4A24D;font-size:24px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:12px">Підпис</div>Авто · панель · послуга · плівка. Опційно одне речення про те, що виправлено. Без суперлативів.</div>
+    </div>
+  </div>
+</section>
+
+<section data-label="Відгуки" style="background:#F2EFE9;color:#0B0B0C;font-family:'Instrument Sans','Manrope',sans-serif;padding:88px 120px 80px;box-sizing:border-box;display:flex;flex-direction:column">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid #C9C6BF;padding-bottom:28px;margin-bottom:56px"><h2 style="margin:0;font-size:56px;font-weight:500;letter-spacing:-.01em">Відгуки</h2><span style="font-size:24px;color:#7F6820;letter-spacing:.18em;text-transform:uppercase">20 · Компоненти · Приклад</span></div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;flex:1;align-content:start">
+    <div style="background:#FFFFFF;border:1px solid #C9C6BF;padding:40px;display:flex;flex-direction:column;gap:24px">
+      <div style="display:flex;justify-content:space-between;align-items:center"><span style="color:#7F6820;font-size:24px;letter-spacing:.2em">★★★★★</span><span style="font-size:24px;color:#5C5D61">Google</span></div>
+      <p style="margin:0;font-size:28px;line-height:1.45;text-wrap:pretty">«Зробили на день довше, ніж обіцяли, бо бампер потребував додаткової підготовки. Не видно, де закінчується плівка.»</p>
+      <div style="margin-top:auto;border-top:1px solid #E4E1DA;padding-top:20px;font-size:24px;line-height:1.4"><div style="font-weight:500">Jeroen V.</div><div style="color:#5C5D61">BMW 3 Series · PPF повний фронт</div></div>
+    </div>
+    <div style="background:#FFFFFF;border:1px solid #C9C6BF;padding:40px;display:flex;flex-direction:column;gap:24px">
+      <div style="display:flex;justify-content:space-between;align-items:center"><span style="color:#7F6820;font-size:24px;letter-spacing:.2em">★★★★★</span><span style="font-size:24px;color:#5C5D61">Google</span></div>
+      <p style="margin:0;font-size:28px;line-height:1.45;text-wrap:pretty">«Чітко пояснили, який відтінок дозволений, без нав’язування. Чисті краї, без пилу під плівкою.»</p>
+      <div style="margin-top:auto;border-top:1px solid #E4E1DA;padding-top:20px;font-size:24px;line-height:1.4"><div style="font-weight:500">Sanne de B.</div><div style="color:#5C5D61">Tesla Model 3 · Тонування скла</div></div>
+    </div>
+    <div style="background:#0B0B0C;color:#F2EFE9;padding:40px;display:flex;flex-direction:column;gap:24px">
+      <div style="font-size:24px;letter-spacing:.18em;text-transform:uppercase;color:#C4A24D">Правила</div>
+      <div style="font-size:24px;line-height:1.5;color:#A3A39F;display:flex;flex-direction:column;gap:14px">
+        <div><span style="color:#F2EFE9">Лише реальні цитати</span>, дослівно, з джерелом (Google, WhatsApp — із дозволу).</div>
+        <div><span style="color:#F2EFE9">Ім’я + авто + послуга</span> — ніколи стокових аватарів чи вигаданих фото.</div>
+        <div><span style="color:#F2EFE9">Зірки Deep Gold</span> на світлому, Guard Gold на темному. Без бейджів на кшталт «Найкращий рейтинг».</div>
+        <div><span style="color:#F2EFE9">Перевага конкретиці</span>: що зроблено, скільки часу, що клієнт помітив.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section data-label="Пакети і ціни" style="background:#0B0B0C;color:#F2EFE9;font-family:'Instrument Sans','Manrope',sans-serif;padding:88px 120px 80px;box-sizing:border-box;display:flex;flex-direction:column">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid #3A3B3F;padding-bottom:28px;margin-bottom:56px"><h2 style="margin:0;font-size:56px;font-weight:500;letter-spacing:-.01em">Пакети і ціни</h2><span style="font-size:24px;color:#C4A24D;letter-spacing:.18em;text-transform:uppercase">21 · Компоненти · Приклад</span></div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;flex:1">
+    <div style="border:1px solid #3A3B3F;padding:40px;display:flex;flex-direction:column;gap:28px">
+      <div style="font-size:24px;letter-spacing:.16em;text-transform:uppercase;color:#A3A39F">PPF · Частковий фронт</div>
+      <div style="font-size:52px;font-weight:500;font-variant-numeric:tabular-nums;letter-spacing:-.01em">від €790</div>
+      <div style="font-size:24px;line-height:1.7;color:#A3A39F;border-top:1px solid #3A3B3F;padding-top:24px">Бампер<br>Частина капота (60 см)<br>Частина крил<br>Ковпаки дзеркал</div>
+      <div style="margin-top:auto;font-size:24px;color:#A3A39F">1–2 дні в студії</div>
+      <span style="font-size:24px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;border:1px solid #F2EFE9;color:#F2EFE9;padding:21px 0;text-align:center;border-radius:2px">Отримати розрахунок</span>
+    </div>
+    <div style="border:1px solid #C4A24D;padding:40px;display:flex;flex-direction:column;gap:28px;position:relative">
+      <span style="position:absolute;top:-16px;left:40px;background:#C4A24D;color:#0B0B0C;font-size:24px;letter-spacing:.14em;text-transform:uppercase;padding:6px 14px;font-weight:600">Найчастіше обирають</span>
+      <div style="font-size:24px;letter-spacing:.16em;text-transform:uppercase;color:#C4A24D">PPF · Повний фронт</div>
+      <div style="font-size:52px;font-weight:500;font-variant-numeric:tabular-nums;letter-spacing:-.01em">від €1.290</div>
+      <div style="font-size:24px;line-height:1.7;color:#A3A39F;border-top:1px solid #3A3B3F;padding-top:24px">Бампер<br>Капот повністю<br>Крила повністю<br>Ковпаки дзеркал, фари<br>Краї дверей</div>
+      <div style="margin-top:auto;font-size:24px;color:#A3A39F">3–4 дні в студії</div>
+      <span style="font-size:24px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;background:#C4A24D;color:#0B0B0C;padding:22px 0;text-align:center;border-radius:2px">Отримати розрахунок</span>
+    </div>
+    <div style="border:1px solid #3A3B3F;padding:40px;display:flex;flex-direction:column;gap:28px">
+      <div style="font-size:24px;letter-spacing:.16em;text-transform:uppercase;color:#A3A39F">PPF · Весь автомобіль</div>
+      <div style="font-size:52px;font-weight:500;font-variant-numeric:tabular-nums;letter-spacing:-.01em">за запитом</div>
+      <div style="font-size:24px;line-height:1.7;color:#A3A39F;border-top:1px solid #3A3B3F;padding-top:24px">Усі пофарбовані панелі<br>Загорнуті краї всюди<br>Опційно матове покриття<br>Гарантія на плівку 10 років</div>
+      <div style="margin-top:auto;font-size:24px;color:#A3A39F">5–7 днів у студії</div>
+      <span style="font-size:24px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;border:1px solid #F2EFE9;color:#F2EFE9;padding:21px 0;text-align:center;border-radius:2px">Отримати розрахунок</span>
+    </div>
+  </div>
+  <div style="margin-top:36px;font-size:24px;color:#A3A39F;line-height:1.5">Ціни — «від», з BTW, із вказаним часом у студії: час є частиною обіцянки. Один виділений пакет із золотою рамкою і тегом; решта нейтральні. Без перекреслених знижок і таймерів.</div>
+</section>
+
+<section data-label="Головний екран сайту · Приклад" style="background:#0B0B0C;color:#F2EFE9;font-family:'Instrument Sans','Manrope',sans-serif;box-sizing:border-box;display:flex;flex-direction:column;position:relative;overflow:hidden">
+  <div style="position:absolute;inset:0;background:#0B0B0C"></div><div style="position:absolute;top:0;bottom:0;right:0;left:42%"><image-slot id="hero-bg" shape="rect" placeholder="Головний екран: темний Mercedes у студії, ¾ спереду, м’яке верхнє світло"></image-slot></div>
+  <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(11,11,12,.92) 30%,rgba(11,11,12,.55) 60%,rgba(11,11,12,.15));pointer-events:none"></div>
+  <div style="position:relative;display:flex;justify-content:space-between;align-items:center;padding:36px 96px;border-bottom:1px solid rgba(242,239,233,.12);pointer-events:none">
+    <div style="display:flex;align-items:center;gap:18px"><svg viewBox="0 0 200 232" width="40"><path d="M100 8 184 36v82c0 54-42 88-84 106C58 206 16 172 16 118V36Z" fill="none" stroke="#C4A24D" stroke-width="7" stroke-linejoin="round"></path><text x="100" y="168" text-anchor="middle" font-family="Cinzel, serif" font-weight="700" font-size="132" fill="#C4A24D">V</text></svg><div><div style="font-family:Cinzel,serif;font-weight:700;font-size:26px;letter-spacing:.04em;color:#C4A24D;line-height:1">V-GUARD</div><div style="font-size:24px;letter-spacing:.3em;line-height:1;margin-top:4px;transform:scale(.6);transform-origin:left">AUTO STUDIO</div></div></div>
+    <div style="display:flex;gap:44px;font-size:24px;color:#F2EFE9">Послуги · Портфоліо · Ціни · Про нас · Контакти</div>
+    <span style="font-size:24px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;background:#C4A24D;color:#0B0B0C;padding:16px 28px;border-radius:2px">Отримати розрахунок</span>
+  </div>
+  <div style="position:relative;flex:1;display:flex;flex-direction:column;justify-content:center;padding:0 96px;pointer-events:none;max-width:1000px">
+    <div style="font-size:24px;letter-spacing:.18em;text-transform:uppercase;color:#C4A24D;margin-bottom:28px">PPF · Тонування скла · Обклеювання авто · Нідерланди</div>
+    <h1 style="margin:0;font-size:84px;font-weight:500;letter-spacing:-.025em;line-height:1.02;text-wrap:pretty">Захистіть лакофарбове покриття.<br>Збережіть оригінальний вигляд.</h1>
+    <p style="margin:32px 0 0;font-size:30px;line-height:1.5;color:#A3A39F;max-width:760px;text-wrap:pretty">Професійне нанесення PPF із ретельною підготовкою поверхні. Ми витрачаємо стільки часу, скільки потребує авто, а не графік.</p>
+    <div style="display:flex;gap:20px;margin-top:48px"><span style="font-size:24px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;background:#C4A24D;color:#0B0B0C;padding:22px 40px;border-radius:2px">Отримати розрахунок</span><span style="display:inline-flex;align-items:center;gap:14px;font-size:24px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;border:1px solid #F2EFE9;color:#F2EFE9;padding:21px 36px;border-radius:2px"><svg viewBox="0 0 48 48" width="28" fill="none" stroke="#C4A24D" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M40 30a16 16 0 1 0-6 6l8 2Z"></path></svg>WhatsApp</span></div>
+  </div>
+  <div style="position:relative;display:flex;gap:64px;padding:36px 96px;border-top:1px solid rgba(242,239,233,.12);font-size:24px;color:#A3A39F;pointer-events:none;background:rgba(11,11,12,.7)"><span><span style="color:#F2EFE9">Якість важливіша за швидкість</span> — 3–4 дні на повний фронт</span><span><span style="color:#F2EFE9">Гарантія на плівку</span> до 10 років</span><span><span style="color:#F2EFE9">Студія</span> в Нідерландах, за записом</span><span style="margin-left:auto;color:#C4A24D;letter-spacing:.16em;text-transform:uppercase;white-space:nowrap">Приклад головного екрана</span></div>
+</section>
+
+<section data-label="Хедер і футер" style="background:#16171A;color:#F2EFE9;font-family:'Instrument Sans','Manrope',sans-serif;padding:88px 120px 80px;box-sizing:border-box;display:flex;flex-direction:column">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid #3A3B3F;padding-bottom:28px;margin-bottom:48px"><h2 style="margin:0;font-size:56px;font-weight:500;letter-spacing:-.01em">Хедер і футер</h2><span style="font-size:24px;color:#C4A24D;letter-spacing:.18em;text-transform:uppercase">23 · Сайт · Приклад</span></div>
+  <div style="display:flex;flex-direction:column;gap:32px;flex:1">
+    <div style="background:#0B0B0C;border:1px solid #3A3B3F;display:flex;justify-content:space-between;align-items:center;padding:28px 56px">
+      <div style="display:flex;align-items:center;gap:16px"><svg viewBox="0 0 200 232" width="40"><path d="M100 8 184 36v82c0 54-42 88-84 106C58 206 16 172 16 118V36Z" fill="none" stroke="#C4A24D" stroke-width="7" stroke-linejoin="round"></path><text x="100" y="168" text-anchor="middle" font-family="Cinzel, serif" font-weight="700" font-size="132" fill="#C4A24D">V</text></svg><span style="font-family:Cinzel,serif;font-weight:700;font-size:28px;letter-spacing:.04em;color:#C4A24D">V-GUARD</span></div>
+      <div style="display:flex;gap:40px;font-size:24px"><span>Послуги</span><span>Портфоліо</span><span>Ціни</span><span>Про нас</span><span>Контакти</span></div>
+      <div style="display:flex;gap:16px;align-items:center"><span style="font-size:24px;color:#A3A39F">EN · NL</span><span style="font-size:24px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;background:#C4A24D;color:#0B0B0C;padding:16px 28px;border-radius:2px">Отримати розрахунок</span></div>
+    </div>
+    <div style="font-size:24px;color:#A3A39F;line-height:1.5">Хедер: 88 px, Studio Black, тонка нижня межа, горизонтальний логотип ліворуч, один золотий CTA праворуч. Фіксований, при скролі — 72 px. Перемикач мови EN · NL простим текстом.</div>
+    <div style="background:#0B0B0C;border:1px solid #3A3B3F;padding:56px;display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:48px;flex:1">
+      <div style="display:flex;flex-direction:column;gap:20px"><svg viewBox="0 0 200 232" width="56"><path d="M100 8 184 36v82c0 54-42 88-84 106C58 206 16 172 16 118V36Z" fill="none" stroke="#C4A24D" stroke-width="7" stroke-linejoin="round"></path><text x="100" y="168" text-anchor="middle" font-family="Cinzel, serif" font-weight="700" font-size="132" fill="#C4A24D">V</text></svg><div style="font-size:26px;line-height:1.5;color:#A3A39F;max-width:420px">Професійний PPF, тонування скла та обклеювання авто. Якість важливіша за швидкість.</div></div>
+      <div style="font-size:24px;line-height:2;color:#A3A39F"><div style="color:#C4A24D;letter-spacing:.16em;text-transform:uppercase;margin-bottom:8px">Послуги</div>Захисна плівка PPF<br>Тонування скла<br>Обклеювання авто<br>Часткове обклеювання</div>
+      <div style="font-size:24px;line-height:2;color:#A3A39F"><div style="color:#C4A24D;letter-spacing:.16em;text-transform:uppercase;margin-bottom:8px">Студія</div>Вулиця 00, 0000 AA Місто<br>Пн–Пт 9:00–18:00<br>За записом</div>
+      <div style="font-size:24px;line-height:2;color:#A3A39F"><div style="color:#C4A24D;letter-spacing:.16em;text-transform:uppercase;margin-bottom:8px">Контакти</div>WhatsApp<br>hello@vguard.nl<br>Instagram · TikTok · Google</div>
+      <div style="grid-column:1/-1;border-top:1px solid #3A3B3F;padding-top:24px;display:flex;justify-content:space-between;font-size:24px;color:#5C5D61"><span>© 2026 V-Guard Auto Studio · KvK 00000000</span><span>Конфіденційність · Умови</span></div>
+    </div>
+  </div>
+</section>
+
+<section data-label="Соцмережі" style="background:#0B0B0C;color:#F2EFE9;font-family:'Instrument Sans','Manrope',sans-serif;padding:88px 120px 80px;box-sizing:border-box;display:flex;flex-direction:column">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid #3A3B3F;padding-bottom:28px;margin-bottom:56px"><h2 style="margin:0;font-size:56px;font-weight:500;letter-spacing:-.01em">Напрямок для соцмереж</h2><span style="font-size:24px;color:#C4A24D;letter-spacing:.18em;text-transform:uppercase">24 · Соцмережі · Приклад</span></div>
+  <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:96px;flex:1;min-height:0">
+    <div style="display:flex;flex-direction:column;gap:32px;font-size:28px;line-height:1.5;min-width:0">
+      <div><div style="color:#C4A24D;font-size:24px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:12px">Стрічка</div>Фото насамперед. Чергуються три типи постів: готове авто, деталь/процес, до/після. Текст на фото — лише як дрібний розріджений лейбл у куті.</div>
+      <div><div style="color:#C4A24D;font-size:24px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:12px">Відео (TikTok / Reels)</div>Той самий матеріал, що й зараз, нова обгортка: без рожевих плашок, емодзі та прапорів. Один рядок off-white тексту на чорній плашці, ліворуч унизу, Instrument Sans. Підписи англійською (NL — де доречно).</div>
+      <div><div style="color:#C4A24D;font-size:24px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:12px">Вотермарк</div>Лише знак, off-white 70%, праворуч унизу, 5% ширини кадру.</div>
+      <div><div style="color:#C4A24D;font-size:24px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:12px">Мова</div>Нейтрально-європейська. Без прапорів країн, без заяв «найкращі», без хайпових текстів під музику.</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;align-content:start;min-width:0">
+      <div style="aspect-ratio:1;position:relative;border:1px solid #3A3B3F;min-width:0;overflow:hidden"><image-slot id="sm-1" shape="rect" placeholder="Готове авто"></image-slot></div>
+      <div style="aspect-ratio:1;position:relative;border:1px solid #3A3B3F;min-width:0;overflow:hidden"><image-slot id="sm-2" shape="rect" placeholder="Деталь: край"></image-slot></div>
+      <div style="aspect-ratio:1;position:relative;border:1px solid #3A3B3F;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);min-width:0;overflow:hidden"><div style="position:relative;border-right:1px solid #C4A24D"><image-slot id="sm-3a" shape="rect" placeholder="До"></image-slot></div><div style="position:relative"><image-slot id="sm-3b" shape="rect" placeholder="Після"></image-slot></div></div>
+      <div style="aspect-ratio:1;background:#0B0B0C;border:1px solid #3A3B3F;display:flex;flex-direction:column;justify-content:space-between;padding:28px"><span style="font-size:24px;letter-spacing:.16em;text-transform:uppercase;color:#C4A24D">Якість важливіша за швидкість</span><span style="font-size:30px;font-weight:500;line-height:1.2;letter-spacing:-.01em">Повний фронт займає у нас 3–4 дні. Ось чому.</span></div>
+      <div style="aspect-ratio:1;position:relative;border:1px solid #3A3B3F;min-width:0;overflow:hidden"><image-slot id="sm-5" shape="rect" placeholder="Процес: руки"></image-slot></div>
+      <div style="aspect-ratio:1;position:relative;border:1px solid #3A3B3F;min-width:0;overflow:hidden"><image-slot id="sm-6" shape="rect" placeholder="Готове авто"></image-slot></div>
+      <div style="grid-column:1/-1;font-size:24px;color:#A3A39F;line-height:1.5;margin-top:8px">Ритм сітки: не більше однієї текстової плитки на шість постів, завжди чорна із золотим лейблом.</div>
+    </div>
+  </div>
+</section>
+
+<section data-label="Обкладинки IG/TikTok" style="background:#16171A;color:#F2EFE9;font-family:'Instrument Sans','Manrope',sans-serif;padding:88px 120px 80px;box-sizing:border-box;display:flex;flex-direction:column">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid #3A3B3F;padding-bottom:28px;margin-bottom:48px"><h2 style="margin:0;font-size:56px;font-weight:500;letter-spacing:-.01em">Обкладинки Instagram / TikTok</h2><span style="font-size:24px;color:#C4A24D;letter-spacing:.18em;text-transform:uppercase">25 · Соцмережі · Приклад</span></div>
+  <div style="display:flex;gap:40px;flex:1;min-height:0;align-items:stretch">
+    <div style="width:340px;flex:none;position:relative;background:#0B0B0C;border:1px solid #3A3B3F;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden">
+      <div style="position:absolute;inset:0"><image-slot id="cv-1" shape="rect" placeholder="Вертикаль: PPF на капоті, руки, темний фон"></image-slot></div>
+      <div style="position:relative;padding:32px;background:linear-gradient(transparent,rgba(11,11,12,.9) 40%);pointer-events:none"><div style="font-size:24px;letter-spacing:.16em;text-transform:uppercase;color:#C4A24D;margin-bottom:10px">PPF · Повний фронт</div><div style="font-size:34px;font-weight:500;line-height:1.15;letter-spacing:-.01em">BMW M340i — день 2: краї</div></div>
+    </div>
+    <div style="width:340px;flex:none;position:relative;background:#0B0B0C;border:1px solid #3A3B3F;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden">
+      <div style="position:absolute;inset:0"><image-slot id="cv-2" shape="rect" placeholder="Вертикаль: тоноване заднє скло зсередини"></image-slot></div>
+      <div style="position:relative;padding:32px;background:linear-gradient(transparent,rgba(11,11,12,.9) 40%);pointer-events:none"><div style="font-size:24px;letter-spacing:.16em;text-transform:uppercase;color:#C4A24D;margin-bottom:10px">Тонування скла</div><div style="font-size:34px;font-weight:500;line-height:1.15;letter-spacing:-.01em">Який відтінок дозволений у Нідерландах?</div></div>
+    </div>
+    <div style="width:340px;flex:none;position:relative;background:#0B0B0C;border:1px solid #3A3B3F;display:flex;flex-direction:column;justify-content:space-between;padding:32px">
+      <svg viewBox="0 0 200 232" width="56"><path d="M100 8 184 36v82c0 54-42 88-84 106C58 206 16 172 16 118V36Z" fill="none" stroke="#C4A24D" stroke-width="7" stroke-linejoin="round"></path><text x="100" y="168" text-anchor="middle" font-family="Cinzel, serif" font-weight="700" font-size="132" fill="#C4A24D">V</text></svg>
+      <div><div style="font-size:24px;letter-spacing:.16em;text-transform:uppercase;color:#C4A24D;margin-bottom:14px">До / Після</div><div style="font-size:40px;font-weight:500;line-height:1.1;letter-spacing:-.02em">Сколи.<br>Потім плівка.</div></div>
+      <div style="font-size:24px;color:#A3A39F">Volvo XC60 · Капот</div>
+    </div>
+    <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:20px;font-size:24px;line-height:1.4;justify-content:center">
+      <div><span style="color:#C4A24D">Формат</span> — 1080×1920, фото на весь кадр, текст у нижній третині на м’якому чорному градієнті.</div>
+      <div><span style="color:#C4A24D">Текст</span> — золотий лейбл категорії + один заголовок, до 6 слів, з великої лише перша літера. Однакова позиція на кожній обкладинці.</div>
+      <div><span style="color:#C4A24D">Текстова обкладинка</span> — чорна, знак ліворуч угорі, заголовок ліворуч по центру. Лише для відкриття серій.</div>
+      <div><span style="color:#C4A24D">Ніколи</span> — кольорові плашки, емодзі, прапори, стрілки, «🔥», стікери, крик капслоком.</div>
+    </div>
+  </div>
+</section>
+
+<section data-label="Google Business Profile" style="background:#0B0B0C;color:#F2EFE9;font-family:'Instrument Sans','Manrope',sans-serif;padding:88px 120px 80px;box-sizing:border-box;display:flex;flex-direction:column">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid #3A3B3F;padding-bottom:28px;margin-bottom:56px"><h2 style="margin:0;font-size:56px;font-weight:500;letter-spacing:-.01em">Google Business Profile</h2><span style="font-size:24px;color:#C4A24D;letter-spacing:.18em;text-transform:uppercase">26 · Локальний пошук · Приклад</span></div>
+  <div style="display:grid;grid-template-columns:1fr 1.6fr;gap:64px;flex:1;min-height:0">
+    <div style="display:flex;flex-direction:column;gap:28px">
+      <div style="display:flex;gap:28px;align-items:center">
+        <div style="width:200px;height:200px;border-radius:50%;background:#0B0B0C;border:1px solid #3A3B3F;display:flex;align-items:center;justify-content:center;flex:none"><svg viewBox="0 0 200 232" width="104"><path d="M100 8 184 36v82c0 54-42 88-84 106C58 206 16 172 16 118V36Z" fill="none" stroke="#C4A24D" stroke-width="7" stroke-linejoin="round"></path><text x="100" y="168" text-anchor="middle" font-family="Cinzel, serif" font-weight="700" font-size="132" fill="#C4A24D">V</text></svg></div>
+        <div style="font-size:26px;line-height:1.5;color:#A3A39F"><span style="color:#F2EFE9">Аватар</span> — лише знак, золото на чорному, 720×720. Той самий файл для Instagram, TikTok, WhatsApp Business.</div>
+      </div>
+      <div style="font-size:26px;line-height:1.5;color:#A3A39F;display:flex;flex-direction:column;gap:16px;border-top:1px solid #3A3B3F;padding-top:28px">
+        <div><span style="color:#F2EFE9">Назва бізнесу</span> — «V-Guard Auto Studio», без доданих ключових слів.</div>
+        <div><span style="color:#F2EFE9">Категорія</span> — Автодетейлінг · Тонування скла · Обклеювання авто.</div>
+        <div><span style="color:#F2EFE9">Фото</span> — 10+ реальних фото зі списку кадрів, оновлення щомісяця. Без картинок лише з логотипом, окрім аватара.</div>
+        <div><span data-om-id="e368e087:848" style="color: rgb(242, 239, 233);">Опис</span> — три послуги, ідея «якість понад швидкість», робота за записом.&nbsp;</div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:20px;min-height:0">
+      <div style="flex:1;position:relative;border:1px solid #3A3B3F;overflow:hidden;min-height:0">
+        <image-slot id="gbp-cover" shape="rect" placeholder="Обкладинка 1024×576: готове авто перед входом у студію, денне світло, видно вивіску"></image-slot>
+        <div style="position:absolute;left:32px;bottom:32px;display:flex;align-items:center;gap:16px;background:rgba(11,11,12,.85);padding:14px 22px;pointer-events:none"><svg viewBox="0 0 200 232" width="30"><path d="M100 8 184 36v82c0 54-42 88-84 106C58 206 16 172 16 118V36Z" fill="none" stroke="#C4A24D" stroke-width="7" stroke-linejoin="round"></path><text x="100" y="168" text-anchor="middle" font-family="Cinzel, serif" font-weight="700" font-size="132" fill="#C4A24D">V</text></svg><span style="font-family:Cinzel,serif;font-weight:700;font-size:24px;letter-spacing:.04em;color:#C4A24D">V-GUARD</span></div>
+      </div>
+      <div style="font-size:24px;color:#A3A39F;line-height:1.5"><span style="color:#F2EFE9">Обкладинка</span> — реальне фото, не графіка. Авто + вхід у студію, щоб люди впізнавали місце. Невелика плашка з логотипом ліворуч унизу — лише якщо вивіски немає в кадрі.</div>
+    </div>
+  </div>
+</section>
+
+<section data-label="Голос бренду" style="background:#F2EFE9;color:#0B0B0C;font-family:'Instrument Sans','Manrope',sans-serif;padding:88px 120px 80px;box-sizing:border-box;display:flex;flex-direction:column">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid #C9C6BF;padding-bottom:28px;margin-bottom:56px"><h2 style="margin:0;font-size:56px;font-weight:500;letter-spacing:-.01em">Голос бренду</h2><span style="font-size:24px;color:#7F6820;letter-spacing:.18em;text-transform:uppercase">27 · Тексти · Приклади</span></div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;flex:1">
+    <div style="background:#FFFFFF;border:1px solid #C9C6BF;padding:48px;display:flex;flex-direction:column;gap:28px">
+      <div style="font-size:24px;letter-spacing:.18em;text-transform:uppercase;color:#7F6820">Писати так</div>
+      <div style="font-size:30px;line-height:1.45;display:flex;flex-direction:column;gap:24px">
+        <div>«Захистіть лакофарбове покриття. Збережіть оригінальний вигляд.»</div>
+        <div>«Професійне нанесення PPF із ретельною підготовкою поверхні.»</div>
+        <div>«Скажіть, на чому ви їздите і що хочете захистити — ми порадимо правильний варіант.»</div>
+        <div>«Повний фронт займає 3–4 дні. Цей час іде на підготовку.»</div>
+      </div>
+      <div style="margin-top:auto;font-size:24px;color:#5C5D61;line-height:1.5">Професійно, прямо, спокійно. Для власника авто, який не є експертом. Короткі речення. Цифри там, де вони допомагають.</div>
+    </div>
+    <div style="background:#0B0B0C;color:#F2EFE9;padding:48px;display:flex;flex-direction:column;gap:28px">
+      <div style="font-size:24px;letter-spacing:.18em;text-transform:uppercase;color:#C4A24D">Не так</div>
+      <div style="font-size:30px;line-height:1.45;display:flex;flex-direction:column;gap:24px;color:#A3A39F">
+        <div style="text-decoration:line-through;text-decoration-color:#C4A24D">«Трансформуйте свій досвід водіння з неперевершеною досконалістю.»</div>
+        <div style="text-decoration:line-through;text-decoration-color:#C4A24D">«Найкраща PPF-студія в Нідерландах. №1 за якістю.»</div>
+        <div style="text-decoration:line-through;text-decoration-color:#C4A24D">«Бездоганний, ідеальний результат щоразу.»</div>
+        <div style="text-decoration:line-through;text-decoration-color:#C4A24D">«Подивіться на результат! 🔥🔥🔥»</div>
+      </div>
+      <div style="margin-top:auto;font-size:24px;color:#A3A39F;line-height:1.5">Заборонено: найкращі, №1, лідер галузі, бездоганно, ідеально, найвища якість у Європі, неперевершений. Впевнені заяви мають бути перевірюваними: характеристика плівки, роки гарантії, дні в студії.</div>
+    </div>
+  </div>
+</section>
+
+<section data-label="Підтримує / руйнує" style="background:#0B0B0C;color:#F2EFE9;font-family:'Instrument Sans','Manrope',sans-serif;padding:88px 120px 80px;box-sizing:border-box;display:flex;flex-direction:column">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid #3A3B3F;padding-bottom:28px;margin-bottom:56px"><h2 style="margin:0;font-size:56px;font-weight:500;letter-spacing:-.01em">Що підтримує і що руйнує бренд</h2><span style="font-size:24px;color:#C4A24D;letter-spacing:.18em;text-transform:uppercase">28 · Підсумок</span></div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;flex:1">
+    <div style="border:1px solid #C4A24D;padding:36px 40px;display:flex;flex-direction:column;gap:16px">
+      <div style="font-size:24px;letter-spacing:.18em;text-transform:uppercase;color:#C4A24D;margin-bottom:8px">Підтримує</div>
+      <div style="font-size:25px;line-height:1.4;padding:12px 0;border-bottom:1px solid #3A3B3F">Чорні поверхні, золото як тонкий акцент, багато порожнього простору</div>
+      <div style="font-size:25px;line-height:1.4;padding:12px 0;border-bottom:1px solid #3A3B3F">Реальні фото роботи: краї, підготовка, руки, готові панелі</div>
+      <div style="font-size:25px;line-height:1.4;padding:12px 0;border-bottom:1px solid #3A3B3F">Один шрифт, заголовки з великої лише першої літери, розріджені лейбли великими літерами</div>
+      <div style="font-size:25px;line-height:1.4;padding:12px 0;border-bottom:1px solid #3A3B3F">Факти: характеристика плівки, дні в студії, гарантія, ціни «від»</div>
+      <div style="font-size:27px;line-height:1.4;padding:16px 0">Спокійні тексти, зрозумілі неекспертові</div>
+    </div>
+    <div style="border:1px solid #3A3B3F;padding:36px 40px;display:flex;flex-direction:column;gap:16px">
+      <div style="font-size:24px;letter-spacing:.18em;text-transform:uppercase;color:#A3A39F;margin-bottom:8px">Руйнує</div>
+      <div style="font-size:25px;line-height:1.4;padding:12px 0;border-bottom:1px solid #3A3B3F;color:#A3A39F">Золоті градієнти, хром, світіння, секції із золотою заливкою</div>
+      <div style="font-size:25px;line-height:1.4;padding:12px 0;border-bottom:1px solid #3A3B3F;color:#A3A39F">Вогонь, прапори, лінії швидкості, карбонова текстура, силуети авто</div>
+      <div style="font-size:25px;line-height:1.4;padding:12px 0;border-bottom:1px solid #3A3B3F;color:#A3A39F">Кольорові плашки, емодзі та прапори країн на відео</div>
+      <div style="font-size:25px;line-height:1.4;padding:12px 0;border-bottom:1px solid #3A3B3F;color:#A3A39F">«Найкращі», «№1», «бездоганно», таймери, перекреслені ціни</div>
+      <div style="font-size:25px;line-height:1.4;padding:12px 0;color:#A3A39F">Агресивні ракурси, HDR, кінематографічні кадри на мокрому асфальті для кожного авто</div>
+    </div>
+  </div>
+  <div style="margin-top:28px;display:flex;justify-content:space-between;align-items:baseline;gap:40px;border-top:1px solid #3A3B3F;padding-top:24px"><span style="font-size:28px;max-width:1200px">«Невелика, але серйозна студія. Тут не поспішають — тут акуратно працюють із моїм автомобілем.»</span><span style="font-size:24px;color:#C4A24D;letter-spacing:.12em;text-transform:uppercase;white-space:nowrap;flex:none">Якість важливіша за швидкість</span></div>
+</section>
+
+</x-import>
+</x-dc>
+</body>
+</html>
