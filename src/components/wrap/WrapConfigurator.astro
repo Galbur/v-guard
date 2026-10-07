@@ -409,7 +409,7 @@ const vanParts = wrapParts.filter((p) => p.vanPrice);
           draw();
         });
       },
-      { rootMargin: '300px 0px' },
+      { threshold: 0 },
     );
     io.observe(root);
 
@@ -666,8 +666,11 @@ const vanParts = wrapParts.filter((p) => p.vanPrice);
     background: rgb(196 162 77 / 0.14);
   }
 
+  /* Parts are included in a full wrap: dimmed, but text keeps AA contrast. */
   .cfg-chip.is-muted {
-    opacity: 0.45;
+    border-color: var(--c-line-dark);
+    background: transparent;
+    color: var(--c-muted);
   }
 
   .cfg-switch-row {
