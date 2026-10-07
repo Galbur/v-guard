@@ -1,0 +1,195 @@
+---
+// Closing CTA with an AI illustration (D18, decorative): portrait crop at 375, wide at 1280.
+import { getImage } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import { isLinked, whatsappUrl } from '../../config/site.ts';
+import { wrap } from '../../data/services.ts';
+import { t } from '../../i18n/index.ts';
+import { localizedPath, type Locale } from '../../i18n/routes.ts';
+import { illustration } from '../../lib/wrap-images.ts';
+
+interface Props {
+  locale: Locale;
+  title: string;
+  text: string;
+}
+
+const { locale, title, text } = Astro.props;
+const href = `${localizedPath('contact', locale)}?service=car-wrapping`;
+const wa = whatsappUrl();
+
+async function srcset(src: ImageMetadata, widths: number[], format: 'avif' | 'webp') {
+  const usable = widths.filter((w) => w <= src.width);
+  const images = await Promise.all(usable.map((width) => getImage({ src, width, format, quality: 60 })));
+  return images.map((img) => `${img.src} ${img.attributes.width}w`).join(', ');
+}
+
+const mobile = illustration(wrap.images.cta375.value);
+const desktop = illustration(wrap.images.cta1280.value);
+const mq = '(min-width: 64rem)';
+const fallback = await getImage({ src: mobile, width: 640, format: 'webp', quality: 60 });
+---
+
+<section class="section container">
+  <div class="wcta">
+    <picture class="wcta__media">
+      <source media={mq} type="image/avif" srcset={await srcset(desktop, [1024, 1280, 1600], 'avif')} sizes="1200px" />
+      <source media={mq} type="image/webp" srcset={await srcset(desktop, [1024, 1280, 1600], 'webp')} sizes="1200px" />
+      <source type="image/avif" srcset={await srcset(mobile, [360, 640, 1000], 'avif')} sizes="calc(100vw - 32px)" />
+      <source type="image/webp" srcset={await srcset(mobile, [360, 640, 1000], 'webp')} sizes="calc(100vw - 32px)" />
+      <img
+        src={fallback.src}
+        width={fallback.attributes.width}
+        height={fallback.attributes.height}
+        alt=""
+        loading="lazy"
+        decoding="async"
+      />
+    </picture>
+    <div class="wcta__shade" aria-hidden="true"></div>
+    <div class="wcta__content">
+      <div class="wcta__copy">
+        <h2 class="wcta__title">{title}</h2>
+        <p class="wcta__text">{text}</p>
+      </div>
+      <div class="wcta__actions">
+        {isLinked('contact') && <a class="btn btn--primary btn--hero" href={href}>{t('cta.quote', locale)}</a>}
+        {
+          wa && (
+            <a class="btn btn--ghost btn--hero" href={wa} target="_blank" rel="noopener">
+              {t('cta.whatsapp', locale)}
+            </a>
+          )
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .wcta {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    border: 1px solid var(--c-line-dark);
+    border-radius: var(--r-card);
+    background: var(--c-black);
+  }
+
+  .wcta__media,
+  .wcta__media img,
+  .wcta__shade {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .wcta__media {
+    z-index: -2;
+  }
+
+  .wcta__media img {
+    object-fit: cover;
+    object-position: center 40%;
+  }
+
+  .wcta__shade {
+    z-index: -1;
+    background: linear-gradient(
+      180deg,
+      rgb(var(--c-overlay) / 0) 0%,
+      rgb(var(--c-overlay) / 0.15) 25%,
+      rgb(var(--c-overlay) / 0.9) 50%,
+      rgb(var(--c-overlay) / 0.97) 100%
+    );
+  }
+
+  .wcta__content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 200px 20px 28px;
+  }
+
+  .wcta__copy {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .wcta__title {
+    font-size: 24px;
+    line-height: 1.15;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  .wcta__text {
+    font-size: 15px;
+    line-height: 1.45;
+    color: var(--c-text-soft);
+    text-wrap: pretty;
+  }
+
+  .wcta__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  @media (min-width: 64rem) {
+    .wcta {
+      display: flex;
+      align-items: flex-end;
+      min-height: 420px;
+    }
+
+    .wcta__media img {
+      object-position: center 55%;
+    }
+
+    .wcta__shade {
+      background:
+        linear-gradient(180deg, rgb(var(--c-overlay) / 0) 50%, rgb(var(--c-overlay) / 0.6) 100%),
+        linear-gradient(
+          90deg,
+          rgb(var(--c-overlay) / 0.94) 0%,
+          rgb(var(--c-overlay) / 0.8) 45%,
+          rgb(var(--c-overlay) / 0.25) 75%,
+          rgb(var(--c-overlay) / 0.05) 100%
+        );
+    }
+
+    .wcta__content {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 48px;
+      width: 100%;
+      padding: 48px;
+    }
+
+    .wcta__copy {
+      max-width: 560px;
+      gap: 12px;
+    }
+
+    .wcta__title {
+      font-size: 36px;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+
+    .wcta__text {
+      font-size: 17px;
+      line-height: 1.5;
+    }
+
+    .wcta__actions {
+      flex: none;
+      flex-direction: row;
+      gap: 12px;
+    }
+  }
+</style>

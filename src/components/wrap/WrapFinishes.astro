@@ -1,0 +1,107 @@
+---
+// «Finishes»: five square tiles. AI illustrations (D18): decorative, empty alt.
+import { Picture } from 'astro:assets';
+import type { WrapFinish } from '../../data/services.ts';
+import type { Locale } from '../../i18n/routes.ts';
+import { illustration } from '../../lib/wrap-images.ts';
+
+interface Props {
+  locale: Locale;
+  title: string;
+  finishes: WrapFinish[];
+}
+
+const { locale, title, finishes } = Astro.props;
+---
+
+<section class="section container">
+  <h2 class="h2 wfin__title">{title}</h2>
+  <ul class="wfin" role="list">
+    {
+      finishes.map((f) => (
+        <li class="wfin__item">
+          <Picture
+            src={illustration(f.image.value)}
+            alt=""
+            formats={['avif', 'webp']}
+            fallbackFormat="webp"
+            widths={[180, 360, 540]}
+            sizes="(min-width: 64rem) 225px, 50vw"
+            quality={60}
+            loading="lazy"
+            class="wfin__img"
+          />
+          <p class="wfin__name">{f.label[locale]}</p>
+          <p class="wfin__text">{f.text[locale]}</p>
+        </li>
+      ))
+    }
+  </ul>
+</section>
+
+<style>
+  .wfin__title {
+    margin-bottom: 16px;
+  }
+
+  .wfin {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .wfin__item {
+    display: flex;
+    flex-direction: column;
+  }
+
+  :global(.wfin__img) {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    margin-bottom: 8px;
+    border-radius: var(--r-btn);
+    object-fit: cover;
+    background: var(--c-graphite-2);
+  }
+
+  .wfin__name {
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  .wfin__text {
+    font-size: 13px;
+    line-height: 1.4;
+    color: var(--c-muted);
+  }
+
+  @media (min-width: 64rem) {
+    .wfin__title {
+      margin-bottom: 32px;
+    }
+
+    .wfin {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    :global(.wfin__img) {
+      margin-bottom: 12px;
+      border-radius: 8px;
+    }
+
+    .wfin__name {
+      font-size: 18px;
+    }
+
+    .wfin__text {
+      margin-top: 4px;
+      font-size: 14px;
+      line-height: 1.45;
+    }
+  }
+</style>
