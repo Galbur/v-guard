@@ -10,7 +10,7 @@ export const routes = {
   home: { nl: '/', uk: '/uk/' },
   ppf: { nl: '/ppf/', uk: '/uk/ppf/' },
   tint: { nl: '/ramen-blinderen/', uk: '/uk/tonuvannia/' },
-  wrap: { nl: '/car-wrapping/', uk: '/uk/car-wrapping/' },
+  wrap: { nl: '/car-wrapping/', uk: '/uk/obkleiuvannia/' },
   projects: { nl: '/projecten/', uk: '/uk/proiekty/' },
   contact: { nl: '/contact/', uk: '/uk/kontakty/' },
   privacy: { nl: '/privacy/', uk: '/uk/privacy/' },
