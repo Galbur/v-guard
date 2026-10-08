@@ -1,18 +1,22 @@
 ---
-// Car wrapping (/car-wrapping/, /uk/car-wrapping/): mockup «VG Site 04», Blueprint v1.3
-// deviation: ProjectGallery right after the cards.
-import { getCollection } from 'astro:content';
+// Car wrapping (/car-wrapping/, /uk/obkleiuvannia/): mockup «VG Site 04 Car wrapping v2».
+// Order: Hero · Proof · Wat is car wrapping · Configurator · Cards · Finishes · Wrappen of
+// overspuiten · Recent opgeleverd · Zo werkt het · FAQ (8) · CTA.
 import Base from '../layouts/Base.astro';
-import Hero from '../components/Hero.astro';
-import AnswerBox from '../components/AnswerBox.astro';
-import WrapCards from '../components/WrapCards.astro';
-import ProjectGallery from '../components/ProjectGallery.astro';
-import ProcessSteps from '../components/ProcessSteps.astro';
 import FAQ from '../components/FAQ.astro';
-import CtaBand from '../components/CtaBand.astro';
+import WrapAnswer from '../components/wrap/WrapAnswer.astro';
+import WrapCards from '../components/wrap/WrapCards.astro';
+import WrapCompare from '../components/wrap/WrapCompare.astro';
+import WrapConfigurator from '../components/wrap/WrapConfigurator.astro';
+import WrapCta from '../components/wrap/WrapCta.astro';
+import WrapFinishes from '../components/wrap/WrapFinishes.astro';
+import WrapHero from '../components/wrap/WrapHero.astro';
+import WrapProof from '../components/wrap/WrapProof.astro';
+import WrapRecent from '../components/wrap/WrapRecent.astro';
+import WrapSteps from '../components/wrap/WrapSteps.astro';
+import { headings } from '../copy/shared.ts';
 import { wrapCopy } from '../copy/wrap.ts';
-import { headings, prepSteps } from '../copy/shared.ts';
-import { wrap, wrapCards } from '../data/services.ts';
+import { wrapCards, wrapFinishes, wrapRecent } from '../data/services.ts';
 import { localizedPath, type Locale } from '../i18n/routes.ts';
 import { faqSchema, serviceSchema } from '../lib/schema.ts';
 
@@ -22,9 +26,6 @@ interface Props {
 
 const { locale } = Astro.props;
 const c = wrapCopy[locale];
-const projects = (await getCollection('projects', (p) => p.data.service === 'car-wrapping'))
-  .sort((a, b) => a.data.order - b.data.order)
-  .slice(0, 3);
 const url = new URL(localizedPath('wrap', locale), Astro.site ?? 'http://localhost').href;
 const schema = [
   serviceSchema({
@@ -38,31 +39,15 @@ const schema = [
 ---
 
 <Base locale={locale} pageKey="wrap" title={c.title} description={c.description} schema={schema}>
-  <Hero
-    locale={locale}
-    h1={c.h1}
-    sub={c.sub}
-    chips={c.chips}
-    long
-    service="car-wrapping"
-    photos={{ mobile: { file: 'bmw-34-p.png', position: 'center 55%' }, desktop: { file: 'bmw-34-p.png', position: 'center 62%' } }}
-  />
-  <AnswerBox title={c.answerTitle} text={c.answer} />
-  <WrapCards
-    locale={locale}
-    title={c.cardsTitle}
-    cards={wrapCards}
-    finishesLabel={c.finishesLabel}
-    finishes={wrap.finishes.value[locale]}
-    note={c.cardsNote}
-  />
-  <ProjectGallery
-    locale={locale}
-    title={c.galleryTitle}
-    items={projects}
-    more={{ href: localizedPath('projects', locale), label: c.galleryMore }}
-  />
-  <ProcessSteps title={headings.process[locale]} steps={prepSteps[locale]} />
+  <WrapHero locale={locale} h1={c.h1} sub={c.sub} cta={c.ctaBuild} chips={c.chips} />
+  <WrapProof items={c.proof} />
+  <WrapAnswer title={c.answerTitle} text={c.answer} />
+  <WrapConfigurator locale={locale} copy={c.cfg} />
+  <WrapCards locale={locale} title={c.cardsTitle} button={c.cardButton} note={c.cardsNote} cards={wrapCards} />
+  <WrapFinishes locale={locale} title={c.finishesTitle} finishes={wrapFinishes} />
+  <WrapCompare locale={locale} title={c.compareTitle} cols={c.compareCols} rows={c.compare} ppf={c.comparePpf} />
+  <WrapRecent locale={locale} title={c.recentTitle} more={c.recentMore} items={wrapRecent} />
+  <WrapSteps title={c.stepsTitle} steps={c.steps} />
   <FAQ title={headings.faq[locale]} items={c.faq} />
-  <CtaBand locale={locale} title={c.cta.title} text={c.cta.text} service="car-wrapping" />
+  <WrapCta locale={locale} title={c.cta.title} text={c.cta.text} />
 </Base>

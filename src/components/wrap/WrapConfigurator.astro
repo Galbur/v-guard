@@ -1,0 +1,1060 @@
+---
+// «Stel je wrap samen» (mockup «VG Site 04 Car wrapping v2», frames 1-3, 5, 7).
+// Without JS: the still Sedan photo and a «vanaf» price list; the controls stay hidden.
+// With JS the controls appear at once; the canvas car (scripts/wrap-car.ts) and its body image
+// load only when the block nears the viewport, so the island never touches LCP.
+// 375: preview sticks to the top (the header scrolls away). While the configurator is on
+// screen the StickyMobileBar slides away (transform, no layout shift) and the price bar takes
+// its place at the bottom; without JS the price bar stays above the StickyMobileBar.
+// No style attributes (CSP style-src 'self'): swatch colours are set through CSSOM in JS.
+import { Image } from 'astro:assets';
+import { linkPhone, waDigits } from '../../config/site.ts';
+import type { WrapCopy } from '../../copy/wrap.ts';
+import { wrapBase, wrapBodies, wrapCarbonSurcharge, wrapColors, wrapFinishes, wrapPakket, wrapParts } from '../../data/services.ts';
+import { localizedPath, type Locale } from '../../i18n/routes.ts';
+import { carStill, carUrl } from '../../lib/wrap-images.ts';
+import { euro, fullPrice, partPrice, type PriceConfig, type WrapState } from '../../lib/wrap-price.ts';
+
+interface Props {
+  locale: Locale;
+  copy: WrapCopy['cfg'];
+}
+
+const { locale, copy } = Astro.props;
+
+const price: PriceConfig = {
+  base: wrapBase.amount,
+  pakket: wrapPakket.amount,
+  carbon: wrapCarbonSurcharge.value,
+  bodies: wrapBodies.map((b) => ({
+    id: b.id,
+    factor: b.factor ? b.factor.value : 1,
+    van: b.van,
+    coach: b.id === 'coach',
+  })),
+  parts: wrapParts.map((p) => ({ id: p.id, price: p.price.amount, vanPrice: (p.vanPrice ?? p.price).amount })),
+};
+
+// Starts on the Sedan, the body of the no-JS still, so only one body image loads.
+const initial: WrapState & { color: number } = {
+  body: 'sedan',
+  full: true,
+  parts: { dak: false, spiegel: false, chroom: false },
+  finish: 'satijn',
+  color: 8,
+};
+
+const colors = wrapColors.value;
+const contact = localizedPath('contact', locale);
+const wa = linkPhone ? waDigits(linkPhone) : '';
+const from = (n: number) => `${copy.from} ${euro(n)}`;
+const fullLabel = (id: (typeof wrapBodies)[number]['id']) => {
+  const p = fullPrice(price, id);
+  return p === null ? copy.onRequest : from(p);
+};
+
+const config = {
+  price,
+  initial,
+  bodies: wrapBodies.map((b) => ({ id: b.id, label: b.label[locale], formBody: b.formBody, url: carUrl(b.id) })),
+  parts: wrapParts.map((p) => ({ id: p.id, label: p.label[locale], formPart: p.formPart })),
+  finishes: wrapFinishes.map((f) => ({ id: f.id, label: f.label[locale] })),
+  colors,
+  contact,
+  wa,
+  t: copy,
+};
+
+const vanParts = wrapParts.filter((p) => p.vanPrice);
+---
+
+<section class="cfg section" id="configurator" aria-labelledby="cfg-title" data-wrap-cfg data-config={JSON.stringify(config)}>
+  <div class="container">
+    <header class="cfg__head">
+      <h2 class="h2" id="cfg-title">{copy.title}</h2>
+      <p class="cfg__lead">{copy.sub}</p>
+    </header>
+
+    <div class="cfg__grid">
+      <div class="cfg__aside">
+        <div class="cfg__preview">
+          <div class="cfg__stage">
+            <img
+              class="cfg__still"
+              src={carUrl('sedan')}
+              width="800"
+              height="275"
+              alt={copy.stillAlt}
+              loading="lazy"
+              decoding="async"
+              data-still
+            />
+            <canvas class="cfg__canvas" width="800" height="275" role="img" aria-label={copy.previewAlt} data-canvas hidden
+            ></canvas>
+          </div>
+          <p class="cfg__caption">
+            <span class="cfg__color-label" data-color-label hidden></span>
+            <span class="cfg__ill">{copy.illustration}</span>
+          </p>
+        </div>
+
+        <div class="cfg__summary">
+          <dl class="cfg__rows" data-rows hidden>
+            <div><dt>{copy.rows.body}</dt><dd data-row="body"></dd></div>
+            <div><dt>{copy.rows.parts}</dt><dd data-row="parts"></dd></div>
+            <div><dt>{copy.rows.finish}</dt><dd data-row="finish"></dd></div>
+            <div><dt>{copy.rows.color}</dt><dd data-row="color"></dd></div>
+          </dl>
+          <div class="cfg__price-row" data-price-row hidden>
+            <p class="cfg__price-block">
+              <span class="cfg__price-label">{copy.priceLabel}</span>
+              <span class="cfg__price" data-price aria-live="polite"></span>
+            </p>
+            <p class="cfg__note">{copy.priceNote}</p>
+          </div>
+          <div class="cfg__buttons">
+            <a class="btn btn--primary cfg__btn" href={`${contact}?service=car-wrapping`} data-order>{copy.orderOnRequest}</a>
+            {
+              wa && (
+                <a class="btn btn--ghost cfg__btn" href={`https://wa.me/${wa}`} target="_blank" rel="noopener" data-wa>
+                  {copy.whatsapp}
+                </a>
+              )
+            }
+          </div>
+        </div>
+      </div>
+
+      <div class="cfg__controls" data-controls hidden>
+        <div class="cfg__group" role="group" aria-labelledby="cfg-step-body">
+          <p class="cfg__step" id="cfg-step-body">{copy.stepBody}</p>
+          <div class="cfg__bodies">
+            {
+              wrapBodies.map((b) => (
+                <button class="cfg-body" type="button" aria-pressed="false" data-body={b.id}>
+                  <Image
+                    src={carStill(b.id)}
+                    alt=""
+                    widths={[156, 312]}
+                    sizes="156px"
+                    format="webp"
+                    quality={70}
+                    loading="lazy"
+                    class="cfg-body__img"
+                  />
+                  <span class="cfg-body__label">{b.label[locale]}</span>
+                  <span class="cfg-body__sub" data-body-sub>
+                    {fullLabel(b.id)}
+                  </span>
+                </button>
+              ))
+            }
+          </div>
+        </div>
+
+        <div class="cfg__group" role="group" aria-labelledby="cfg-step-parts">
+          <p class="cfg__step" id="cfg-step-parts">{copy.stepParts}</p>
+          <div class="cfg-seg">
+            <button class="cfg-seg__btn" type="button" aria-pressed="true" data-mode="full">{copy.full}</button>
+            <button class="cfg-seg__btn" type="button" aria-pressed="false" data-mode="parts">{copy.parts}</button>
+          </div>
+          <div class="cfg__chips">
+            {
+              wrapParts.map((p) => (
+                <button class="cfg-chip" type="button" aria-pressed="false" data-part={p.id}>
+                  <span>{p.label[locale]}</span>
+                  <span class="cfg-chip__sub" data-part-sub>
+                    {copy.included}
+                  </span>
+                </button>
+              ))
+            }
+          </div>
+          <div class="cfg-switch-row">
+            <div>
+              <p class="cfg-switch-row__title" id="cfg-pakket">{copy.pakketTitle}</p>
+              <p class="cfg-switch-row__text">{copy.pakketText} · {from(wrapPakket.amount)}</p>
+            </div>
+            <button class="cfg-switch" type="button" role="switch" aria-checked="false" aria-labelledby="cfg-pakket" data-pakket>
+              <span class="cfg-switch__knob"></span>
+            </button>
+          </div>
+        </div>
+
+        <div class="cfg__group" role="group" aria-labelledby="cfg-step-finish">
+          <p class="cfg__step" id="cfg-step-finish">{copy.stepFinish}</p>
+          <div class="cfg__chips cfg__chips--scroll">
+            {
+              wrapFinishes.map((f) => (
+                <button class="cfg-chip" type="button" aria-pressed="false" data-finish={f.id}>
+                  <span>{f.label[locale]}</span>
+                  {f.id === 'carbon' && <span class="cfg-chip__sub">+{Math.round(wrapCarbonSurcharge.value * 100)}%</span>}
+                </button>
+              ))
+            }
+          </div>
+        </div>
+
+        <div class="cfg__group" role="group" aria-labelledby="cfg-step-color">
+          <p class="cfg__step" id="cfg-step-color">{copy.stepColor}</p>
+          <div class="cfg__swatches">
+            {
+              colors.map((c, i) => (
+                <button class="cfg-swatch" type="button" aria-pressed="false" aria-label={c.name} title={c.name} data-color={i}>
+                  <span class="cfg-swatch__dot" />
+                </button>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+
+      <div class="cfg__fallback" data-fallback>
+        <h3 class="cfg__fallback-title">{copy.fallbackFull}</h3>
+        <dl class="cfg__list">
+          {
+            wrapBodies.map((b) => (
+              <div>
+                <dt>{b.label[locale]}</dt>
+                <dd>{fullLabel(b.id)}</dd>
+              </div>
+            ))
+          }
+        </dl>
+        <h3 class="cfg__fallback-title">{copy.fallbackParts}</h3>
+        <dl class="cfg__list">
+          {
+            wrapParts.map((p) => (
+              <div>
+                <dt>{p.label[locale]}</dt>
+                <dd>
+                  {from(partPrice(price, p.id, 'sedan'))}
+                  {p.vanPrice && vanParts.includes(p) && (
+                    <span class="cfg__van">
+                      {copy.fallbackVan}: {from(partPrice(price, p.id, 'bus'))}
+                    </span>
+                  )}
+                </dd>
+              </div>
+            ))
+          }
+          <div>
+            <dt>{copy.pakketTitle}</dt>
+            <dd>{from(wrapPakket.amount)}</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { chosenParts, euro, isPakket, wrapPrice, type PriceConfig, type WrapState } from '../../lib/wrap-price.ts';
+
+  type State = WrapState & { color: number };
+  interface Config {
+    price: PriceConfig;
+    initial: State;
+    bodies: { id: WrapState['body']; label: string; formBody: string; url: string }[];
+    parts: { id: keyof WrapState['parts']; label: string; formPart: string }[];
+    finishes: { id: string; label: string }[];
+    colors: { name: string; hex: string }[];
+    contact: string;
+    wa: string;
+    t: Record<string, string> & { rows: Record<string, string> };
+  }
+
+  type CarModule = typeof import('../../scripts/wrap-car.ts');
+
+  function init(root: HTMLElement) {
+    const cfg: Config = JSON.parse(root.dataset.config ?? '{}');
+    const t = cfg.t;
+    const st: State = structuredClone(cfg.initial);
+    const $ = <T extends HTMLElement = HTMLElement>(sel: string) => root.querySelector<T>(sel)!;
+    const $$ = <T extends HTMLElement = HTMLElement>(sel: string) => Array.from(root.querySelectorAll<T>(sel));
+
+    const canvas = $<HTMLCanvasElement>('[data-canvas]');
+    const still = $<HTMLImageElement>('[data-still]');
+    const order = $<HTMLAnchorElement>('[data-order]');
+    const waLink = root.querySelector<HTMLAnchorElement>('[data-wa]');
+    const priceEl = $<HTMLElement>('[data-price]');
+    const colorLabel = $<HTMLElement>('[data-color-label]');
+    const pakket = $<HTMLButtonElement>('[data-pakket]');
+
+    // Show the interactive UI; the no-JS price list goes away.
+    root.classList.add('is-live');
+    $('[data-controls]').hidden = false;
+    $('[data-fallback]').hidden = true;
+    $('[data-rows]').hidden = false;
+    $('[data-price-row]').hidden = false;
+    colorLabel.hidden = false;
+    $$<HTMLButtonElement>('[data-color]').forEach((b) => {
+      b.querySelector<HTMLElement>('.cfg-swatch__dot')!.style.setProperty('--swatch', cfg.colors[Number(b.dataset.color)].hex);
+    });
+
+    const body = () => cfg.bodies.find((b) => b.id === st.body)!;
+    const finish = () => cfg.finishes.find((f) => f.id === st.finish)!;
+    const color = () => cfg.colors[st.color];
+    const coach = () => st.body === 'coach';
+
+    function partsText(): string {
+      if (st.full) return t.full;
+      if (isPakket(cfg.price, st)) return t.pakketParts;
+      const chosen = chosenParts(st);
+      return chosen.length ? chosen.map((id) => cfg.parts.find((p) => p.id === id)!.label).join(', ') : t.nothingYet;
+    }
+
+    function priceText(): string {
+      const p = wrapPrice(cfg.price, st);
+      if (p === null) return t.onRequest;
+      return p > 0 ? `${t.from} ${euro(p)}` : t.noParts;
+    }
+
+    function formOption(): string {
+      if (st.full) return 'volledig';
+      if (isPakket(cfg.price, st)) return 'pakket';
+      return 'delen';
+    }
+
+    function links() {
+      const params = new URLSearchParams({
+        service: 'car-wrapping',
+        option: formOption(),
+        body: body().formBody,
+        finish: st.finish,
+        kleur: color().name,
+      });
+      // Loose parts tick their checkboxes under «Losse delen» in the quote form.
+      const chosen = chosenParts(st);
+      if (formOption() === 'delen' && chosen.length) {
+        params.set('delen', chosen.map((id) => cfg.parts.find((p) => p.id === id)!.formPart).join(','));
+      }
+      order.href = `${cfg.contact}?${params}`;
+      if (waLink && cfg.wa) {
+        const lines = [
+          t.waIntro,
+          `${t.rows.body}: ${body().label}`,
+          `${t.rows.parts}: ${partsText()}`,
+          `${t.rows.finish}: ${finish().label}`,
+          `${t.rows.color}: ${color().name}`,
+          `${t.priceLabel}: ${priceText()}`,
+        ];
+        waLink.href = `https://wa.me/${cfg.wa}?text=${encodeURIComponent(lines.join('\n'))}`;
+      }
+    }
+
+    function render() {
+      const parts = !st.full;
+      $$<HTMLButtonElement>('[data-body]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.body === st.body)));
+      $$<HTMLElement>('[data-body-sub]').forEach((el) => (el.hidden = parts));
+      $$<HTMLButtonElement>('[data-mode]').forEach((b) =>
+        b.setAttribute('aria-pressed', String((b.dataset.mode === 'full') === st.full)),
+      );
+      $$<HTMLButtonElement>('[data-part]').forEach((b) => {
+        const id = b.dataset.part as keyof State['parts'];
+        b.setAttribute('aria-pressed', String(parts && st.parts[id]));
+        b.classList.toggle('is-muted', st.full);
+        b.querySelector<HTMLElement>('[data-part-sub]')!.textContent = st.full
+          ? t.included
+          : euro(cfg.price.parts.find((p) => p.id === id)![cfg.price.bodies.find((x) => x.id === st.body)!.van ? 'vanPrice' : 'price']);
+      });
+      pakket.setAttribute('aria-checked', String(isPakket(cfg.price, st)));
+      pakket.disabled = coach();
+      $$<HTMLButtonElement>('[data-finish]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.finish === st.finish)));
+      $$<HTMLButtonElement>('[data-color]').forEach((b) => b.setAttribute('aria-pressed', String(Number(b.dataset.color) === st.color)));
+
+      colorLabel.textContent = `${color().name} · ${finish().label}`;
+      $('[data-row="body"]').textContent = body().label;
+      $('[data-row="parts"]').textContent = partsText();
+      $('[data-row="finish"]').textContent = finish().label;
+      $('[data-row="color"]').textContent = color().name;
+      priceEl.textContent = priceText();
+      order.textContent = wrapPrice(cfg.price, st) === null ? t.orderOnRequest : t.order;
+      canvas.setAttribute('aria-label', `${t.previewAlt}: ${body().label}, ${partsText()}, ${color().name}, ${finish().label}`);
+      links();
+      draw();
+    }
+
+    // Canvas car: loaded when the block nears the viewport.
+    let car: CarModule | null = null;
+    let drawn = 0;
+    async function draw() {
+      if (!car) return;
+      const ticket = ++drawn;
+      const b = body();
+      root.classList.add('is-loading');
+      try {
+        const seg = await car.loadBody(b.id, b.url);
+        if (ticket !== drawn) return;
+        car.paint(canvas, seg, {
+          hex: color().hex,
+          finish: st.finish,
+          full: st.full,
+          dak: st.parts.dak,
+          spiegel: st.parts.spiegel,
+          chroom: st.parts.chroom,
+          pakket: isPakket(cfg.price, st),
+        });
+        canvas.hidden = false;
+        still.hidden = true;
+      } catch (error) {
+        console.error(error);
+      } finally {
+        if (ticket === drawn) root.classList.remove('is-loading');
+      }
+    }
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (!entries.some((e) => e.isIntersecting)) return;
+        io.disconnect();
+        import('../../scripts/wrap-car.ts').then((m) => {
+          car = m;
+          draw();
+        });
+      },
+      { threshold: 0 },
+    );
+    io.observe(root);
+
+    // 375: swap the StickyMobileBar for the price bar while the configurator grid is on screen.
+    const swap = new IntersectionObserver((entries) => {
+      document.documentElement.classList.toggle('cfg-in-view', entries.some((e) => e.isIntersecting));
+    });
+    swap.observe($('.cfg__grid'));
+
+    root.addEventListener('click', (e) => {
+      const btn = (e.target as Element).closest<HTMLButtonElement>('button');
+      if (!btn || !root.contains(btn) || btn.disabled) return;
+      const d = btn.dataset;
+      if (d.body) st.body = d.body as State['body'];
+      else if (d.mode) st.full = d.mode === 'full';
+      else if (d.part) {
+        const id = d.part as keyof State['parts'];
+        if (st.full) {
+          st.full = false;
+          st.parts = { dak: false, spiegel: false, chroom: false };
+        }
+        st.parts[id] = !st.parts[id];
+      } else if (btn.hasAttribute('data-pakket')) {
+        const on = !isPakket(cfg.price, st);
+        st.full = false;
+        st.parts = { dak: on, spiegel: on, chroom: on };
+      } else if (d.finish) st.finish = d.finish;
+      else if (d.color) st.color = Number(d.color);
+      else return;
+      render();
+    });
+
+    render();
+  }
+
+  document.querySelectorAll<HTMLElement>('[data-wrap-cfg]').forEach(init);
+</script>
+
+<style>
+  .cfg__head {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .cfg__lead {
+    font-size: 15px;
+    line-height: 1.45;
+    color: var(--c-muted);
+    max-width: 720px;
+  }
+
+  .cfg__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 20px;
+  }
+
+  .cfg__aside {
+    display: contents;
+  }
+
+  /* Preview: full width at 375, sticks to the top while the configurator is in view. */
+  .cfg__preview {
+    grid-row: 1;
+    position: sticky;
+    top: 0;
+    z-index: 3;
+    margin-inline: calc(-1 * var(--gutter));
+    padding-bottom: 6px;
+    background: #1c1d21;
+    border-block: 1px solid var(--c-line-dark);
+  }
+
+  .cfg__stage {
+    position: relative;
+    aspect-ratio: 800 / 275;
+    background: #1c1d21;
+    transition: opacity 0.2s;
+  }
+
+  .cfg.is-loading .cfg__stage {
+    opacity: 0.7;
+  }
+
+  .cfg__still,
+  .cfg__canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .cfg__caption {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 2px var(--gutter) 0;
+  }
+
+  .cfg__color-label {
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .cfg__ill {
+    font-size: 11px;
+    line-height: 1.3;
+    color: #8a8b90;
+    text-align: right;
+  }
+
+  .cfg__controls,
+  .cfg__fallback {
+    grid-row: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .cfg__group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .cfg__step {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--c-gold);
+  }
+
+  /* A: bodies */
+  .cfg__bodies {
+    display: flex;
+    gap: 8px;
+    margin-inline: calc(-1 * var(--gutter));
+    padding: 0 var(--gutter) 4px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .cfg__bodies::-webkit-scrollbar {
+    display: none;
+  }
+
+  .cfg-body {
+    display: flex;
+    flex: none;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    width: 132px;
+    min-height: 88px;
+    padding: 8px;
+    border: 1px solid var(--c-border-dark);
+    border-radius: 8px;
+    background: var(--c-graphite);
+    color: var(--c-off-white);
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+    scroll-snap-align: start;
+  }
+
+  :global(.cfg-body__img) {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 800 / 275;
+    border-radius: 4px;
+    object-fit: cover;
+  }
+
+  .cfg-body__label {
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  .cfg-body__sub {
+    font-size: 11px;
+    line-height: 1.2;
+    color: var(--c-muted);
+  }
+
+  /* B: segment, part chips, pakket switch */
+  .cfg-seg {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border: 1px solid var(--c-border-dark);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .cfg-seg__btn {
+    min-height: 44px;
+    border: 0;
+    background: transparent;
+    color: var(--c-off-white);
+    font: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .cfg-seg__btn[aria-pressed='true'] {
+    background: var(--c-gold);
+    color: var(--c-black);
+  }
+
+  .cfg__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .cfg__chips--scroll {
+    flex-wrap: nowrap;
+    margin-inline: calc(-1 * var(--gutter));
+    padding-inline: var(--gutter);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .cfg__chips--scroll::-webkit-scrollbar {
+    display: none;
+  }
+
+  .cfg-chip {
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    padding: 0 14px;
+    border: 1px solid var(--c-border-dark);
+    border-radius: 8px;
+    background: var(--c-graphite);
+    color: var(--c-off-white);
+    font: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    white-space: nowrap;
+    cursor: pointer;
+  }
+
+  .cfg-chip__sub {
+    font-size: 12px;
+    color: var(--c-muted);
+  }
+
+  .cfg-body[aria-pressed='true'],
+  .cfg-chip[aria-pressed='true'] {
+    border-color: var(--c-gold);
+    background: rgb(196 162 77 / 0.14);
+  }
+
+  /* Parts are included in a full wrap: dimmed, but text keeps AA contrast. */
+  .cfg-chip.is-muted {
+    border-color: var(--c-line-dark);
+    background: transparent;
+    color: var(--c-muted);
+  }
+
+  .cfg-switch-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    min-height: 44px;
+    padding: 4px 0;
+  }
+
+  .cfg-switch-row__title {
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .cfg-switch-row__text {
+    font-size: 12px;
+    color: var(--c-muted);
+  }
+
+  /* 48×28 switch inside a 44 px tap target */
+  .cfg-switch {
+    position: relative;
+    flex: none;
+    width: 56px;
+    height: 44px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .cfg-switch::before {
+    content: '';
+    position: absolute;
+    inset: 8px 4px;
+    border-radius: var(--r-pill);
+    background: var(--c-border-dark);
+  }
+
+  .cfg-switch__knob {
+    position: absolute;
+    top: 11px;
+    left: 7px;
+    width: 22px;
+    height: 22px;
+    border-radius: var(--r-pill);
+    background: var(--c-black);
+    transition: transform 0.15s;
+  }
+
+  .cfg-switch[aria-checked='true']::before {
+    background: var(--c-gold);
+  }
+
+  .cfg-switch[aria-checked='true'] .cfg-switch__knob {
+    transform: translateX(20px);
+  }
+
+  .cfg-switch:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  /* D: colour swatches */
+  .cfg__swatches {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 8px 4px;
+  }
+
+  .cfg-swatch {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 48px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .cfg-swatch__dot {
+    display: block;
+    width: 38px;
+    height: 38px;
+    border: 1px solid rgb(242 239 233 / 0.3);
+    border-radius: var(--r-pill);
+    background: var(--swatch, var(--c-graphite-2));
+  }
+
+  .cfg-swatch[aria-pressed='true'] .cfg-swatch__dot {
+    box-shadow:
+      0 0 0 2px var(--c-black),
+      0 0 0 4px var(--c-gold);
+  }
+
+  /* Summary: at 375 a price bar that sticks above the StickyMobileBar (no JS) or, with JS,
+     in its place at the bottom while the StickyMobileBar is slid away. */
+  .cfg__summary {
+    grid-row: 3;
+    position: sticky;
+    bottom: calc(var(--sticky-h) + env(safe-area-inset-bottom));
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-inline: calc(-1 * var(--gutter));
+    padding: 10px var(--gutter) 12px;
+    background: rgb(var(--c-overlay) / 0.96);
+    border-top: 1px solid var(--c-line-dark);
+  }
+
+  @media (max-width: 63.99rem) {
+    .cfg.is-live .cfg__summary {
+      bottom: 0;
+      padding-bottom: calc(12px + env(safe-area-inset-bottom));
+    }
+  }
+
+  :global(html .sticky) {
+    transition:
+      transform 0.2s ease,
+      visibility 0.2s;
+  }
+
+  :global(html.cfg-in-view .sticky) {
+    transform: translateY(100%);
+    visibility: hidden;
+  }
+
+  .cfg__rows {
+    display: none;
+  }
+
+  .cfg__price-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .cfg__price-block {
+    display: flex;
+    flex: none;
+    align-items: baseline;
+    gap: 8px;
+  }
+
+  .cfg__price-label {
+    font-size: 12px;
+    color: var(--c-muted);
+  }
+
+  .cfg__price {
+    font-size: 20px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .cfg__note {
+    flex: 1;
+    min-width: 0;
+    font-size: 11px;
+    line-height: 1.3;
+    color: #8a8b90;
+    text-align: right;
+  }
+
+  .cfg__buttons {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(0, 1fr);
+    gap: 8px;
+  }
+
+  .cfg__btn {
+    padding-inline: 4px;
+    font-size: 14px;
+    white-space: nowrap;
+  }
+
+  /* No-JS price list */
+  .cfg__fallback {
+    gap: 12px;
+  }
+
+  .cfg__fallback-title {
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .cfg__list > div {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--c-line-dark);
+    font-size: 14px;
+  }
+
+  .cfg__list dt {
+    color: var(--c-muted);
+  }
+
+  .cfg__list dd {
+    margin: 0;
+    font-weight: 500;
+    text-align: right;
+  }
+
+  .cfg__van {
+    display: block;
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--c-muted);
+  }
+
+  @media (min-width: 64rem) {
+    .cfg__head {
+      gap: 12px;
+      margin-bottom: 40px;
+    }
+
+    .cfg__lead {
+      font-size: 18px;
+    }
+
+    .cfg__grid {
+      grid-template-columns: 520px minmax(0, 1fr);
+      column-gap: 48px;
+      align-items: start;
+    }
+
+    .cfg__aside {
+      grid-column: 2;
+      grid-row: 1;
+      position: sticky;
+      top: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .cfg__preview {
+      position: static;
+      margin: 0;
+      padding-bottom: 14px;
+      border: 1px solid var(--c-line-dark);
+      border-radius: var(--r-card);
+      overflow: hidden;
+    }
+
+    .cfg__caption {
+      padding: 10px 20px 0;
+    }
+
+    .cfg__color-label {
+      font-size: 15px;
+    }
+
+    .cfg__ill {
+      font-size: 12px;
+    }
+
+    .cfg__controls,
+    .cfg__fallback {
+      grid-column: 1;
+      grid-row: 1;
+      gap: 32px;
+    }
+
+    .cfg__group {
+      gap: 14px;
+    }
+
+    .cfg__bodies {
+      gap: 10px;
+      margin: 0;
+      padding: 0 0 4px;
+    }
+
+    .cfg-body {
+      width: 156px;
+      min-height: 96px;
+      gap: 6px;
+    }
+
+    .cfg__chips--scroll {
+      flex-wrap: wrap;
+      margin: 0;
+      padding: 0;
+      overflow: visible;
+    }
+
+    .cfg__swatches {
+      grid-template-columns: repeat(6, 56px);
+      gap: 8px;
+    }
+
+    .cfg-swatch {
+      width: 56px;
+      height: 56px;
+    }
+
+    .cfg-swatch__dot {
+      width: 40px;
+      height: 40px;
+    }
+
+    .cfg__summary {
+      position: static;
+      gap: 16px;
+      margin: 0;
+      padding: 20px 24px 24px;
+      background: var(--c-graphite);
+      border: 1px solid var(--c-line-dark);
+      border-top: 2px solid var(--c-gold);
+      border-radius: var(--r-card);
+    }
+
+    .cfg__rows:not([hidden]) {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .cfg__rows > div {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 6px 0;
+      border-bottom: 1px solid var(--c-line-dark);
+      font-size: 14px;
+    }
+
+    .cfg__rows dt {
+      color: var(--c-muted);
+    }
+
+    .cfg__rows dd {
+      margin: 0;
+      font-weight: 500;
+      text-align: right;
+    }
+
+    .cfg__price-row {
+      align-items: flex-end;
+    }
+
+    .cfg__price-block {
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .cfg__price-label {
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .cfg__price {
+      font-size: 30px;
+      line-height: 1.1;
+    }
+
+    .cfg__note {
+      font-size: 13px;
+      color: var(--c-muted);
+    }
+
+    .cfg__btn {
+      min-height: 50px;
+      font-size: 15px;
+    }
+  }
+</style>

@@ -3,7 +3,7 @@
 // TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID come from Netlify env vars only (D5).
 // A Telegram failure is logged and never breaks the submission.
 import type { Handler } from '@netlify/functions';
-import { adviceOption, bodyTypes, getService } from '../../src/data/services.ts';
+import { adviceOption, bodyTypes, getService, wrapFormParts } from '../../src/data/services.ts';
 
 type FormData = Record<string, string | undefined>;
 
@@ -27,6 +27,16 @@ function bodyTypeLabel(id: string | undefined): string | undefined {
 
 const text = (value: string | undefined) => value?.trim() || EMPTY;
 
+/** Wrap «Losse delen»: part ids from the hidden «delen» field (or the raw checkbox without JS). */
+function partsLabel(data: FormData): string | undefined {
+  const ids = (data.delen || data.deel || '')
+    .split(',')
+    .map((id) => id.trim())
+    .filter(Boolean);
+  if (!ids.length) return undefined;
+  return ids.map((id) => wrapFormParts.find((p) => p.formPart === id)?.formLabel.nl.toLowerCase() ?? id).join(', ');
+}
+
 /** Plain-text Telegram message (block specs section 4). Form data only. */
 export function formatMessage(data: FormData): string {
   const car = [data.merk, data.model, data.bouwjaar, bodyTypeLabel(data.carrosserie)]
@@ -37,6 +47,9 @@ export function formatMessage(data: FormData): string {
     'Nieuwe aanvraag',
     `Dienst: ${serviceLabel(data.dienst)}`,
     `Optie: ${optionLabel(data.dienst, data.optie)}`,
+    // Wrap only: chosen parts (step W4) and colour or finish (step W3).
+    ...(partsLabel(data) ? [`Delen: ${partsLabel(data)}`] : []),
+    ...(data.kleur?.trim() ? [`Kleur/finish: ${data.kleur.trim()}`] : []),
     `Auto: ${car || EMPTY}`,
     `Naam: ${text(data.naam)}`,
     `Telefoon: ${text(data.telefoon)}`,

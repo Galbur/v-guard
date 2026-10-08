@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&amp;family=Cinzel:wght@700&amp;display=swap" rel="stylesheet">
+<style>body{margin:0;background:#1A1B1E} a{color:#C4A24D;text-decoration:none} a:hover{color:#F2EFE9} *{box-sizing:border-box} h1,h2,h3,p,ul{margin:0} ul{padding:0;list-style:none}</style>
+</helmet>
+<section style="display:flex;flex-wrap:wrap;gap:72px;align-items:flex-start;padding:56px;font-family:'Instrument Sans',sans-serif;color:#F2EFE9">
+
+<!-- FRAME 1: PPF NL 375, stan A -->
+<div id="f1" style="display:flex;flex-direction:column;gap:12px;flex:none">
+  <div style="font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#8A8B90">Frame 1 · PPF NL · 375 · stan A</div>
+  <div data-screen-label="PPF NL 375 A" style="position:relative;width:375px;background:#0B0B0C;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 0 0 1px #2A2B2F">
+    <div style="display:flex;align-items:center;justify-content:space-between;height:56px;padding:0 8px 0 16px;border-bottom:1px solid #2A2B2F">
+      <div style="display:flex;align-items:center;gap:8px"><svg viewBox="0 0 200 232" width="22" height="26"><path d="M100 8 184 36v82c0 54-42 88-84 106C58 206 16 172 16 118V36Z" fill="none" stroke="#C4A24D" stroke-width="12" stroke-linejoin="round"></path><text x="100" y="168" text-anchor="middle" font-family="Cinzel, serif" font-weight="700" font-size="132" fill="#C4A24D">V</text></svg><div><div style="font-family:Cinzel,serif;font-weight:700;font-size:14px;letter-spacing:.06em;color:#C4A24D;line-height:1">V-GUARD</div><div style="font-size:8px;letter-spacing:.32em;color:#A3A39F;margin-top:3px">STUDIO</div></div></div>
+      <div style="display:flex;align-items:center;gap:4px"><div style="font-size:13px;font-weight:500;padding:0 8px;height:44px;display:flex;align-items:center;gap:6px"><span>NL</span><span style="color:#5C5D62">/</span><span style="color:#A3A39F">UA</span></div><div style="width:44px;height:44px;display:flex;align-items:center;justify-content:center"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#F2EFE9" stroke-width="1.6"><path d="M2 6h18M2 11h18M2 16h18"></path></svg></div></div>
+    </div>
+    <div style="position:relative;height:556px;overflow:hidden">
+      <img src="assets/photos/bmw-34-p.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 55%">
+      <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,11,12,.1) 0%,rgba(11,11,12,.25) 25%,rgba(11,11,12,.88) 55%,#0B0B0C 100%)"></div>
+      <div style="position:absolute;left:16px;right:16px;bottom:16px;display:flex;flex-direction:column;gap:12px">
+        <h1 style="font-size:28px;line-height:1.12;font-weight:600;letter-spacing:-.01em;text-wrap:pretty">PPF in Vroomshoop: bescherm je lak tegen steenslag</h1>
+        <p style="font-size:15px;line-height:1.45;color:#D7D4CE">Transparante folie voor de voorkant, losse delen of de hele auto.</p>
+        <div style="display:flex;flex-direction:column;gap:10px;margin-top:2px">
+          <a href="#" style="display:flex;align-items:center;justify-content:center;height:48px;background:#C4A24D;color:#0B0B0C;font-weight:600;font-size:15px;border-radius:6px">Offerte aanvragen</a>
+          <a href="#" style="display:flex;align-items:center;justify-content:center;height:48px;border:1px solid #F2EFE9;color:#F2EFE9;font-weight:600;font-size:15px;border-radius:6px">WhatsApp ons</a>
+        </div>
+        <div style="display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:2px -16px 0;padding:0 16px">
+          <span style="font-size:12px;font-weight:500;padding:7px 12px;border:1px solid rgba(242,239,233,.4);border-radius:999px;white-space:nowrap">5 stappen voorbereiding</span>
+          <span style="display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:500;padding:7px 12px;border:1px solid rgba(242,239,233,.4);border-radius:999px;white-space:nowrap">3 jaar garantie op werk<sc-if value="{{ showPending }}" hint-placeholder-val="{{ true }}"><span style="font-size:9px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#8A8B90;border:1px solid #5C5D62;border-radius:3px;padding:2px 5px;line-height:1">pending</span></sc-if></span>
+          <span style="display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:500;padding:7px 12px;border:1px solid rgba(242,239,233,.4);border-radius:999px;white-space:nowrap">XPEL, BRAVIXX en LLumar<sc-if value="{{ showPending }}" hint-placeholder-val="{{ true }}"><span style="font-size:9px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#8A8B90;border:1px solid #5C5D62;border-radius:3px;padding:2px 5px;line-height:1">pending</span></sc-if></span>
+        </div>
+      </div>
+    </div>
+    <div style="position:absolute;left:0;right:0;top:599px;border-top:1px dashed #C4A24D;opacity:.7;pointer-events:none"><span style="position:absolute;right:8px;top:4px;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#C4A24D">vouw 375x667 boven StickyMobileBar</span></div>
+
+    <div style="margin:48px 16px 0;padding:20px 18px;background:#16171A;border:1px solid #2A2B2F;border-radius:10px">
+      <p style="font-size:16px;line-height:1.55;color:#F2EFE9;text-wrap:pretty">PPF (paint protection film), ook lakbeschermingsfolie of steenslagfolie genoemd, is een transparante folie op de lak. De folie vangt steenslag en lichte krassen op. V Guard Studio in Vroomshoop brengt PPF aan voor auto's uit heel Twente.</p>
+    </div>
+
+    <div style="padding:64px 16px 0;display:flex;flex-direction:column;gap:16px">
+      <h2 style="font-size:26px;line-height:1.15;font-weight:600;letter-spacing:-.01em">Kies hoeveel je beschermt</h2>
+      <sc-for list="{{ pkgNL }}" as="p" hint-placeholder-count="3">
+        <div style="background:#F2EFE9;color:#0B0B0C;border-radius:10px;padding:20px 18px;display:flex;flex-direction:column;gap:12px">
+          <svg viewBox="0 0 260 120" style="width:100%;height:auto;display:block" aria-hidden="true"><rect x="40" y="8" width="30" height="104" rx="4" fill="#8A8B90"></rect><rect x="190" y="8" width="30" height="104" rx="4" fill="#8A8B90"></rect><rect x="6" y="14" width="248" height="92" rx="22" fill="{{ p.cb }}"></rect><path d="M28 14H80V106H28A22 22 0 0 1 6 84V36A22 22 0 0 1 28 14Z" fill="{{ p.cf }}"></path><path d="M80 18L104 30V90L80 102Z" fill="#5C5D62"></path><path d="M168 30L188 20V100L168 90Z" fill="#5C5D62"></path><rect x="84" y="2" width="14" height="12" rx="3" fill="{{ p.cf }}"></rect><rect x="84" y="106" width="14" height="12" rx="3" fill="{{ p.cf }}"></rect><rect x="10" y="22" width="6" height="18" rx="2" fill="#F2EFE9" opacity=".8"></rect><rect x="10" y="80" width="6" height="18" rx="2" fill="#F2EFE9" opacity=".8"></rect><g opacity="{{ p.dots }}" fill="#C4A24D" stroke="#0B0B0C" stroke-width="1.5"><circle cx="14" cy="60" r="7"></circle><circle cx="122" cy="26" r="7"></circle><circle cx="122" cy="94" r="7"></circle><rect x="106" y="100" width="60" height="9" rx="4.5"></rect><circle cx="246" cy="60" r="7"></circle></g></svg>
+          <h3 style="font-size:20px;font-weight:600;line-height:1.2">{{ p.t }}</h3>
+          <p style="font-size:14px;line-height:1.45;color:#5C5C58">{{ p.d }}</p>
+          <div style="border-top:1px solid #D9D6CF;padding-top:10px;display:flex;flex-direction:column;gap:6px">
+            <ul style="display:flex;flex-direction:column;gap:4px;font-size:14px;line-height:1.4"><sc-for list="{{ p.zones }}" as="z" hint-placeholder-count="3"><li style="display:flex;gap:8px;align-items:flex-start"><span style="width:6px;height:6px;border-radius:999px;background:#C4A24D;margin-top:7px;flex:none"></span><span>{{ z }}</span></li></sc-for></ul>
+            <sc-if value="{{ showPending }}" hint-placeholder-val="{{ true }}"><span style="align-self:flex-start;font-size:9px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#6B6B67;border:1px solid #B8B5AE;border-radius:3px;padding:2px 5px;line-height:1">pending</span></sc-if>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;font-size:18px;font-weight:600">{{ p.price }}<sc-if value="{{ p.pend }}" hint-placeholder-val="{{ false }}"><span style="font-size:9px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#6B6B67;border:1px solid #B8B5AE;border-radius:3px;padding:2px 5px;line-height:1">pending</span></sc-if></div>
+          <a href="#" style="height:46px;background:#C4A24D;color:#0B0B0C;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px">Offerte aanvragen</a>
+        </div>
+      </sc-for>
+      <p style="font-size:13px;line-height:1.45;color:#A3A39F">De prijs hangt af van model, lakconditie en dekking.</p>
+    </div>
+
+    <div style="padding:64px 16px 0;display:flex;flex-direction:column;gap:16px">
+      <div><h2 style="font-size:26px;line-height:1.15;font-weight:600;letter-spacing:-.01em">Zo brengen we PPF aan</h2><p style="font-size:15px;color:#A3A39F;margin-top:6px">Kwaliteit boven snelheid.</p></div>
+      <div style="position:relative;aspect-ratio:16/9;border-radius:8px;overflow:hidden"><img src="assets/photos/hex-van-l1.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></div>
+      <ol style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column">
+      <sc-for list="{{ steps }}" as="s" hint-placeholder-count="5">
+        <li style="display:grid;grid-template-columns:36px 1fr;gap:14px;padding:16px 0;border-top:1px solid #2A2B2F"><div style="width:36px;height:36px;border:1px solid #C4A24D;border-radius:999px;display:flex;align-items:center;justify-content:center;color:#C4A24D;font-weight:600;font-size:13px">{{ s.n }}</div><div><div style="display:flex;align-items:center;gap:8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C4A24D" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="{{ s.icon }}"></path></svg><div style="font-size:16px;font-weight:600;line-height:1.3">{{ s.t }}</div></div><div style="font-size:14px;line-height:1.45;color:#A3A39F;margin-top:4px">{{ s.d }}</div></div></li>
+      </sc-for>
+      </ol>
+    </div>
+
+    <div style="padding:64px 16px 0;display:flex;flex-direction:column;gap:20px">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px"><h2 style="font-size:26px;line-height:1.15;font-weight:600;letter-spacing:-.01em">PPF van V Guard</h2><a href="#" style="font-size:14px;font-weight:500;white-space:nowrap;display:flex;align-items:center;height:44px">Alle projecten</a></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <sc-for list="{{ gallery }}" as="g" hint-placeholder-count="4">
+          <div style="display:flex;flex-direction:column;gap:6px"><div style="aspect-ratio:4/3;background:#2E2F33;border:1px dashed #5C5D62;border-radius:6px;display:flex;align-items:center;justify-content:center;text-align:center;padding:10px;font-size:11px;line-height:1.4;color:#C9C7C1">{{ g }}</div><div style="font-size:12px;color:#A3A39F">⟦Merk model⟧ · PPF Full Front</div></div>
+        </sc-for>
+      </div>
+    </div>
+
+    <div style="padding:64px 16px 0;display:flex;flex-direction:column">
+      <sc-for list="{{ trust }}" as="t" hint-placeholder-count="4">
+        <div style="display:grid;grid-template-columns:28px 1fr;gap:14px;align-items:start;padding:16px 0;border-top:1px solid #2A2B2F"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C4A24D" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="{{ t.icon }}"></path></svg><div style="display:flex;flex-direction:column;gap:6px;align-items:flex-start"><div style="font-size:15px;line-height:1.45;font-weight:500">{{ t.txt }}</div><sc-if value="{{ showPending }}" hint-placeholder-val="{{ true }}"><span style="font-size:9px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#8A8B90;border:1px solid #5C5D62;border-radius:3px;padding:2px 5px;line-height:1">pending</span></sc-if></div></div>
+      </sc-for>
+      <div style="border-top:1px solid #2A2B2F"></div>
+    </div>
+
+    <div style="padding:64px 16px 0;display:flex;flex-direction:column">
+      <h2 style="font-size:26px;line-height:1.15;font-weight:600;letter-spacing:-.01em;margin-bottom:12px">Veelgestelde vragen</h2>
+      <sc-for list="{{ faqA }}" as="f" hint-placeholder-count="6">
+        <div style="border-top:1px solid #2A2B2F;padding:16px 0">
+          <div style="display:flex;justify-content:space-between;gap:16px;align-items:flex-start;min-height:44px"><div style="font-size:16px;font-weight:600;line-height:1.35">{{ f.q }}</div><div style="width:24px;height:24px;flex:none;display:flex;align-items:center;justify-content:center;color:#C4A24D;font-size:18px;line-height:1">{{ f.sym }}</div></div>
+          <sc-if value="{{ f.open }}" hint-placeholder-val="{{ false }}"><div style="display:flex;flex-direction:column;gap:8px;align-items:flex-start;margin-top:8px;padding-right:40px"><p style="font-size:15px;line-height:1.55;color:#A3A39F">{{ f.a }}</p><sc-if value="{{ f.pend }}" hint-placeholder-val="{{ false }}"><span style="font-size:9px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#8A8B90;border:1px solid #5C5D62;border-radius:3px;padding:2px 5px;line-height:1">pending</span></sc-if></div></sc-if>
+        </div>
+      </sc-for>
+      <div style="border-top:1px solid #2A2B2F"></div>
+    </div>
+
+    <div style="margin:64px 16px 64px;padding:28px 20px;background:#16171A;border:1px solid #2A2B2F;border-top:2px solid #C4A24D;border-radius:10px;display:flex;flex-direction:column;gap:10px">
+      <h2 style="font-size:24px;line-height:1.15;font-weight:600;letter-spacing:-.01em">PPF voor jouw auto?</h2>
+      <p style="font-size:15px;line-height:1.45;color:#A3A39F;text-wrap:pretty">Uit Vroomshoop, Almelo, Hardenberg of Ommen? Stuur merk, model en bouwjaar.</p>
+      <div style="display:flex;flex-direction:column;gap:10px;margin-top:10px">
+        <a href="#" style="height:48px;background:#C4A24D;color:#0B0B0C;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:15px">Offerte aanvragen</a>
+        <a href="#" style="height:48px;border:1px solid #F2EFE9;color:#F2EFE9;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:15px">WhatsApp ons</a>
+      </div>
+    </div>
+
+    <div style="background:#060607;border-top:1px solid #2A2B2F;padding:40px 16px 24px;color:#A3A39F;font-size:13px;line-height:1.6;display:flex;flex-direction:column;gap:28px">
+      <div style="display:flex;flex-direction:column;gap:12px"><div style="display:flex;align-items:center;gap:8px"><svg viewBox="0 0 200 232" width="22" height="26"><path d="M100 8 184 36v82c0 54-42 88-84 106C58 206 16 172 16 118V36Z" fill="none" stroke="#C4A24D" stroke-width="12" stroke-linejoin="round"></path><text x="100" y="168" text-anchor="middle" font-family="Cinzel, serif" font-weight="700" font-size="132" fill="#C4A24D">V</text></svg><div style="font-family:Cinzel,serif;font-weight:700;font-size:14px;letter-spacing:.06em;color:#C4A24D">V-GUARD</div></div><div style="color:#F2EFE9;font-weight:500">V Guard Studio</div><div>⟦Adres⟧, Vroomshoop<br>⟦Telefoon⟧<br>⟦Openingstijden⟧</div></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px 16px"><a href="#" style="color:#F2EFE9;display:flex;align-items:center;height:36px">Home</a><a href="#" style="color:#F2EFE9;display:flex;align-items:center;height:36px">PPF</a><a href="#" style="color:#F2EFE9;display:flex;align-items:center;height:36px">Ramen blinderen</a><a href="#" style="color:#F2EFE9;display:flex;align-items:center;height:36px">Car wrapping</a><a href="#" style="color:#F2EFE9;display:flex;align-items:center;height:36px">Projecten</a><a href="#" style="color:#F2EFE9;display:flex;align-items:center;height:36px">Contact</a></div>
+      <div style="display:flex;gap:20px"><a href="#" style="color:#F2EFE9;display:flex;align-items:center;height:36px">TikTok</a><a href="#" style="color:#F2EFE9;display:flex;align-items:center;height:36px">Instagram</a><a href="#" style="color:#F2EFE9;display:flex;align-items:center;height:36px">Facebook</a></div>
+      <div style="border-top:1px solid #2A2B2F;padding-top:16px;display:flex;justify-content:space-between;font-size:12px"><a href="#" style="color:#A3A39F">Privacy</a><span>KvK ⟦nummer⟧</span></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;padding:8px 12px 12px;background:#0B0B0C;border-top:1px solid #2A2B2F">
+      <a href="#" style="display:flex;align-items:center;justify-content:center;height:48px;border-radius:6px;font-size:14px;font-weight:600;background:#16171A;border:1px solid #3A3B3F;color:#F2EFE9">WhatsApp</a>
+      <a href="#" style="display:flex;align-items:center;justify-content:center;height:48px;border-radius:6px;font-size:14px;font-weight:600;background:#16171A;border:1px solid #3A3B3F;color:#F2EFE9">Bellen</a>
+      <a href="#" style="display:flex;align-items:center;justify-content:center;height:48px;border-radius:6px;font-size:14px;font-weight:600;background:#C4A24D;color:#0B0B0C">Offerte</a>
+    </div>
+  </div>
+</div>
+
+<!-- FRAME 2: PPF NL 1280, stan A -->
+<div id="f2" style="display:flex;flex-direction:column;gap:12px;flex:none">
+  <div style="font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#8A8B90">Frame 2 · PPF NL · 1280 · stan A</div>
+  <div data-screen-label="PPF NL 1280 A" style="width:1280px;background:#0B0B0C;overflow:hidden;box-shadow:0 0 0 1px #2A2B2F">
+    <div style="display:flex;align-items:center;justify-content:space-between;height:72px;padding:0 40px;border-bottom:1px solid #2A2B2F">
+      <div style="display:flex;align-items:center;gap:10px"><svg viewBox="0 0 200 232" width="26" height="30"><path d="M100 8 184 36v82c0 54-42 88-84 106C58 206 16 172 16 118V36Z" fill="none" stroke="#C4A24D" stroke-width="12" stroke-linejoin="round"></path><text x="100" y="168" text-anchor="middle" font-family="Cinzel, serif" font-weight="700" font-size="132" fill="#C4A24D">V</text></svg><div><div style="font-family:Cinzel,serif;font-weight:700;font-size:16px;letter-spacing:.06em;color:#C4A24D;line-height:1">V-GUARD</div><div style="font-size:9px;letter-spacing:.32em;color:#A3A39F;margin-top:3px">STUDIO</div></div></div>
+      <nav style="display:flex;gap:28px;font-size:15px;font-weight:500"><a href="#" style="color:#C4A24D;border-bottom:1px solid #C4A24D;padding-bottom:2px">PPF</a><a href="#" style="color:#F2EFE9">Ramen blinderen</a><a href="#" style="color:#F2EFE9">Car wrapping</a><a href="#" style="color:#F2EFE9">Projecten</a><a href="#" style="color:#F2EFE9">Contact</a></nav>
+      <div style="display:flex;align-items:center;gap:20px"><div style="font-size:14px;font-weight:500;display:flex;gap:6px"><span>NL</span><span style="color:#5C5D62">/</span><span style="color:#A3A39F">UA</span></div><a href="#" style="height:44px;padding:0 20px;background:#C4A24D;color:#0B0B0C;border-radius:6px;display:flex;align-items:center;font-weight:600;font-size:14px">Offerte aanvragen</a></div>
+    </div>
+    <div style="position:relative;height:680px;overflow:hidden">
+      <img src="assets/photos/suv-blue-1.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 45%">
+      <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(11,11,12,.94) 0%,rgba(11,11,12,.82) 38%,rgba(11,11,12,.2) 70%,rgba(11,11,12,0) 100%)"></div>
+      <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,11,12,.3) 0%,rgba(11,11,12,0) 30%,rgba(11,11,12,.6) 80%,#0B0B0C 100%)"></div>
+      <div style="position:absolute;left:40px;bottom:72px;width:660px;display:flex;flex-direction:column;gap:20px">
+        <h1 style="font-size:50px;line-height:1.08;font-weight:600;letter-spacing:-.02em;text-wrap:pretty">PPF in Vroomshoop: bescherm je lak tegen steenslag</h1>
+        <p style="font-size:19px;line-height:1.45;color:#D7D4CE">Transparante folie voor de voorkant, losse delen of de hele auto.</p>
+        <div style="display:flex;gap:12px;margin-top:4px"><a href="#" style="display:flex;align-items:center;justify-content:center;height:52px;padding:0 28px;background:#C4A24D;color:#0B0B0C;font-weight:600;font-size:16px;border-radius:6px">Offerte aanvragen</a><a href="#" style="display:flex;align-items:center;justify-content:center;height:52px;padding:0 28px;border:1px solid #F2EFE9;color:#F2EFE9;font-weight:600;font-size:16px;border-radius:6px">WhatsApp ons</a></div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">
+          <span style="font-size:13px;font-weight:500;padding:8px 14px;border:1px solid rgba(242,239,233,.4);border-radius:999px">5 stappen voorbereiding</span>
+          <span style="display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:500;padding:8px 14px;border:1px solid rgba(242,239,233,.4);border-radius:999px">3 jaar garantie op werk<sc-if value="{{ showPending }}" hint-placeholder-val="{{ true }}"><span style="font-size:9px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#8A8B90;border:1px solid #5C5D62;border-radius:3px;padding:2px 5px;line-height:1">pending</span></sc-if></span>
+          <span style="display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:500;padding:8px 14px;border:1px solid rgba(242,239,233,.4);border-radius:999px">XPEL, BRAVIXX en LLumar<sc-if value="{{ showPending }}" hint-placeholder-val="{{ true }}"><span style="font-size:9px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#8A8B90;border:1px solid #5C5D62;border-radius:3px;padding:2px 5px;line-height:1">pending</span></sc-if></span>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin:72px 40px 0;padding:32px 40px;background:#16171A;border:1px solid #2A2B2F;border-radius:10px;max-width:960px">
+      <p style="font-size:20px;line-height:1.55;color:#F2EFE9;text-wrap:pretty">PPF (paint protection film), ook lakbeschermingsfolie of steenslagfolie genoemd, is een transparante folie op de lak. De folie vangt steenslag en lichte krassen op. V Guard Studio in Vroomshoop brengt PPF aan voor auto's uit heel Twente.</p>
+    </div>
+
+    <div style="padding:112px 40px 0"><h2 style="font-size:40px;line-height:1.1;font-weight:600;letter-spacing:-.02em;margin-bottom:32px">Kies hoeveel je beschermt</h2>
+      <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px">
+        <sc-for list="{{ pkgNL }}" as="p" hint-placeholder-count="3">
+          <div style="background:#F2EFE9;color:#0B0B0C;border-radius:10px;padding:28px 26px;display:flex;flex-direction:column;gap:14px">
+            <svg viewBox="0 0 260 120" style="width:100%;height:auto;display:block" aria-hidden="true"><rect x="40" y="8" width="30" height="104" rx="4" fill="#8A8B90"></rect><rect x="190" y="8" width="30" height="104" rx="4" fill="#8A8B90"></rect><rect x="6" y="14" width="248" height="92" rx="22" fill="{{ p.cb }}"></rect><path d="M28 14H80V106H28A22 22 0 0 1 6 84V36A22 22 0 0 1 28 14Z" fill="{{ p.cf }}"></path><path d="M80 18L104 30V90L80 102Z" fill="#5C5D62"></path><path d="M168 30L188 20V100L168 90Z" fill="#5C5D62"></path><rect x="84" y="2" width="14" height="12" rx="3" fill="{{ p.cf }}"></rect><rect x="84" y="106" width="14" height="12" rx="3" fill="{{ p.cf }}"></rect><rect x="10" y="22" width="6" height="18" rx="2" fill="#F2EFE9" opacity=".8"></rect><rect x="10" y="80" width="6" height="18" rx="2" fill="#F2EFE9" opacity=".8"></rect><g opacity="{{ p.dots }}" fill="#C4A24D" stroke="#0B0B0C" stroke-width="1.5"><circle cx="14" cy="60" r="7"></circle><circle cx="122" cy="26" r="7"></circle><circle cx="122" cy="94" r="7"></circle><rect x="106" y="100" width="60" height="9" rx="4.5"></rect><circle cx="246" cy="60" r="7"></circle></g></svg>
+            <h3 style="font-size:24px;font-weight:600;line-height:1.2">{{ p.t }}</h3>
+            <p style="font-size:15px;line-height:1.5;color:#5C5C58">{{ p.d }}</p>
+            <div style="border-top:1px solid #D9D6CF;padding-top:12px;display:flex;flex-direction:column;gap:8px;flex:1">
+              <ul style="display:flex;flex-direction:column;gap:5px;font-size:15px;line-height:1.4"><sc-for list="{{ p.zones }}" as="z" hint-placeholder-count="3"><li style="display:flex;gap:8px;align-items:flex-start"><span style="width:6px;height:6px;border-radius:999px;background:#C4A24D;margin-top:7px;flex:none"></span><span>{{ z }}</span></li></sc-for></ul>
+              <sc-if value="{{ showPending }}" hint-placeholder-val="{{ true }}"><span style="align-self:flex-start;font-size:9px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#6B6B67;border:1px solid #B8B5AE;border-radius:3px;padding:2px 5px;line-height:1">pending</span></sc-if>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;font-size:22px;font-weight:600">{{ p.price }}<sc-if value="{{ p.pend }}" hint-placeholder-val="{{ false }}"><span style="font-size:9px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#6B6B67;border:1px solid #B8B5AE;border-radius:3px;padding:2px 5px;line-height:1">pending</span></sc-if></div>
+            <a href="#" style="height:48px;background:#C4A24D;color:#0B0B0C;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:15px">Offerte aanvragen</a>
+          </div>
+        </sc-for>
+      </div>
+      <p style="font-size:14px;line-height:1.45;color:#A3A39F;margin-top:20px">De prijs hangt af van model, lakconditie en dekking.</p>
+    </div>
+
+    <div style="padding:112px 40px 0">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:end;margin-bottom:40px">
+        <div><h2 style="font-size:40px;line-height:1.1;font-weight:600;letter-spacing:-.02em">Zo brengen we PPF aan</h2><p style="font-size:18px;color:#A3A39F;margin-top:12px">Kwaliteit boven snelheid.</p></div>
+        <div style="position:relative;aspect-ratio:16/9;border-radius:8px;overflow:hidden"><img src="assets/photos/hex-van-l1.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></div>
+      </div>
+      <ol style="margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:24px">
+        <sc-for list="{{ steps }}" as="s" hint-placeholder-count="5">
+          <li style="padding-top:20px;border-top:1px solid #C4A24D"><div style="display:flex;justify-content:space-between;align-items:center"><div style="font-size:13px;color:#C4A24D;font-weight:600;letter-spacing:.08em">{{ s.n }}</div><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C4A24D" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="{{ s.icon }}"></path></svg></div><div style="font-size:19px;font-weight:600;line-height:1.3;margin-top:14px">{{ s.t }}</div><div style="font-size:14px;line-height:1.5;color:#A3A39F;margin-top:8px">{{ s.d }}</div></li>
+        </sc-for>
+      </ol>
+    </div>
+
+    <div style="padding:112px 40px 0">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:32px"><h2 style="font-size:40px;line-height:1.1;font-weight:600;letter-spacing:-.02em">PPF van V Guard</h2><a href="#" style="font-size:15px;font-weight:500">Alle projecten</a></div>
+      <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px">
+        <sc-for list="{{ gallery3 }}" as="g" hint-placeholder-count="3">
+          <div style="display:flex;flex-direction:column;gap:8px"><div style="aspect-ratio:4/3;background:#2E2F33;border:1px dashed #5C5D62;border-radius:6px;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;font-size:13px;line-height:1.4;color:#C9C7C1">{{ g }}</div><div style="font-size:14px;color:#A3A39F">⟦Merk model⟧ · PPF Full Front</div></div>
+        </sc-for>
+      </div>
+    </div>
+
+    <div style="padding:112px 40px 0">
+      <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px">
+        <sc-for list="{{ trust }}" as="t" hint-placeholder-count="4">
+          <div style="background:#16171A;border:1px solid #2A2B2F;border-radius:10px;padding:24px;display:flex;flex-direction:column;gap:16px;align-items:flex-start"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#C4A24D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="{{ t.icon }}"></path></svg><div style="font-size:16px;line-height:1.45;font-weight:500;flex:1">{{ t.txt }}</div><sc-if value="{{ showPending }}" hint-placeholder-val="{{ true }}"><span style="font-size:9px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#8A8B90;border:1px solid #5C5D62;border-radius:3px;padding:2px 5px;line-height:1">pending</span></sc-if></div>
+        </sc-for>
+      </div>
+    </div>
+
+    <div style="padding:112px 40px 0;display:grid;grid-template-columns:1fr 2fr;gap:48px"><h2 style="font-size:40px;line-height:1.1;font-weight:600;letter-spacing:-.02em">Veelgestelde vragen</h2>
+      <div style="display:flex;flex-direction:column">
+        <sc-for list="{{ faqA }}" as="f" hint-placeholder-count="6">
+          <div style="border-top:1px solid #2A2B2F;padding:20px 0">
+            <div style="display:flex;justify-content:space-between;gap:24px;align-items:flex-start;min-height:44px"><div style="font-size:19px;font-weight:600;line-height:1.35">{{ f.q }}</div><div style="width:24px;height:24px;flex:none;display:flex;align-items:center;justify-content:center;color:#C4A24D;font-size:20px;line-height:1">{{ f.sym }}</div></div>
+            <sc-if value="{{ f.open }}" hint-placeholder-val="{{ false }}"><div style="display:flex;flex-direction:column;gap:8px;align-items:flex-start;margin-top:10px;max-width:680px"><p style="font-size:16px;line-height:1.6;color:#A3A39F">{{ f.a }}</p><sc-if value="{{ f.pend }}" hint-placeholder-val="{{ false }}"><span style="font-size:9px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#8A8B90;border:1px solid #5C5D62;border-radius:3px;padding:2px 5px;line-height:1">pending</span></sc-if></div></sc-if>
+          </div>
+        </sc-for>
+        <div style="border-top:1px solid #2A2B2F"></div>
+      </div>
+    </div>
+
+    <div style="margin:112px 40px 112px;padding:48px;background:#16171A;border:1px solid #2A2B2F;border-top:2px solid #C4A24D;border-radius:10px;display:flex;justify-content:space-between;align-items:center;gap:48px">
+      <div><h2 style="font-size:32px;line-height:1.15;font-weight:600;letter-spacing:-.02em">PPF voor jouw auto?</h2><p style="font-size:16px;line-height:1.45;color:#A3A39F;margin-top:10px">Uit Vroomshoop, Almelo, Hardenberg of Ommen? Stuur merk, model en bouwjaar.</p></div>
+      <div style="display:flex;gap:12px;flex:none"><a href="#" style="height:52px;padding:0 28px;background:#C4A24D;color:#0B0B0C;border-radius:6px;display:flex;align-items:center;font-weight:600;font-size:16px">Offerte aanvragen</a><a href="#" style="height:52px;padding:0 28px;border:1px solid #F2EFE9;color:#F2EFE9;border-radius:6px;display:flex;align-items:center;font-weight:600;font-size:16px">WhatsApp ons</a></div>
+    </div>
+
+    <div style="background:#060607;border-top:1px solid #2A2B2F;padding:56px 40px 28px;color:#A3A39F;font-size:14px;line-height:1.6">
+      <div style="display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:48px">
+        <div style="display:flex;flex-direction:column;gap:14px"><div style="display:flex;align-items:center;gap:8px"><svg viewBox="0 0 200 232" width="24" height="28"><path d="M100 8 184 36v82c0 54-42 88-84 106C58 206 16 172 16 118V36Z" fill="none" stroke="#C4A24D" stroke-width="12" stroke-linejoin="round"></path><text x="100" y="168" text-anchor="middle" font-family="Cinzel, serif" font-weight="700" font-size="132" fill="#C4A24D">V</text></svg><div style="font-family:Cinzel,serif;font-weight:700;font-size:15px;letter-spacing:.06em;color:#C4A24D">V-GUARD</div></div><div style="color:#F2EFE9;font-weight:500">V Guard Studio</div><div>⟦Adres⟧, Vroomshoop<br>⟦Telefoon⟧<br>⟦Openingstijden⟧</div></div>
+        <div style="display:flex;flex-direction:column;gap:10px"><div style="color:#F2EFE9;font-weight:600;font-size:13px;letter-spacing:.08em;text-transform:uppercase">Diensten</div><a href="#" style="color:#D7D4CE">PPF</a><a href="#" style="color:#D7D4CE">Ramen blinderen</a><a href="#" style="color:#D7D4CE">Car wrapping</a></div>
+        <div style="display:flex;flex-direction:column;gap:10px"><div style="color:#F2EFE9;font-weight:600;font-size:13px;letter-spacing:.08em;text-transform:uppercase">Studio</div><a href="#" style="color:#D7D4CE">Home</a><a href="#" style="color:#D7D4CE">Projecten</a><a href="#" style="color:#D7D4CE">Contact</a></div>
+        <div style="display:flex;flex-direction:column;gap:10px"><div style="color:#F2EFE9;font-weight:600;font-size:13px;letter-spacing:.08em;text-transform:uppercase">Volg ons</div><a href="#" style="color:#D7D4CE">TikTok</a><a href="#" style="color:#D7D4CE">Instagram</a><a href="#" style="color:#D7D4CE">Facebook</a></div>
+      </div>
+      <div style="border-top:1px solid #2A2B2F;margin-top:48px;padding-top:20px;display:flex;justify-content:space-between;font-size:13px"><a href="#" style="color:#A3A39F">Privacy</a><span>KvK ⟦nummer⟧</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- FRAME 3: PackageCards stan B -->
+<div id="f3" style="display:flex;flex-direction:column;gap:12px;flex:none">
+  <div style="font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#8A8B90">Frame 3 · PackageCards · stan B (vanaf, pending) · 375 en 1280</div>
+  <div style="display:flex;gap:40px;align-items:flex-start">
+    <div data-screen-label="PackageCards B 375" style="width:375px;background:#0B0B0C;box-shadow:0 0 0 1px #2A2B2F;padding:48px 16px;display:flex;flex-direction:column;gap:16px">
+      <h2 style="font-size:26px;line-height:1.15;font-weight:600;letter-spacing:-.01em">Kies hoeveel je beschermt</h2>
+      <sc-for list="{{ pkgNLB }}" as="p" hint-placeholder-count="3">
+        <div style="background:#F2EFE9;color:#0B0B0C;border-radius:10px;padding:20px 18px;display:flex;flex-direction:column;gap:12px">
+          <svg viewBox="0 0 260 120" style="width:100%;height:auto;display:block" aria-hidden="true"><rect x="40" y="8" width="30" height="104" rx="4" fill="#8A8B90"></rect><rect x="190" y="8" width="30" height="104" rx="4" fill="#8A8B90"></rect><rect x="6" y="14" width="248" height="92" rx="22" fill="{{ p.cb }}"></rect><path d="M28 14H80V106H28A22 22 0 0 1 6 84V36A22 22 0 0 1 28 14Z" fill="{{ p.cf }}"></path><path d="M80 18L104 30V90L80 102Z" fill="#5C5D62"></path><path d="M168 30L188 20V100L168 90Z" fill="#5C5D62"></path><rect x="84" y="2" width="14" height="12" rx="3" fill="{{ p.cf }}"></rect><rect x="84" y="106" width="14" height="12" rx="3" fill="{{ p.cf }}"></rect><rect x="10" y="22" width="6" height="18" rx="2" fill="#F2EFE9" opacity=".8"></rect><rect x="10" y="80" width="6" height="18" rx="2" fill="#F2EFE9" opacity=".8"></rect><g opacity="{{ p.dots }}" fill="#C4A24D" stroke="#0B0B0C" stroke-width="1.5"><circle cx="14" cy="60" r="7"></circle><circle cx="122" cy="26" r="7"></circle><circle cx="122" cy="94" r="7"></circle><rect x="106" y="100" width="60" height="9" rx="4.5"></rect><circle cx="246" cy="60" r="7"></circle></g></svg>
+          <h3 style="font-size:20px;font-weight:600;line-height:1.2">{{ p.t }}</h3>
+          <p style="font-size:14px;line-height:1.45;color:#5C5C58">{{ p.d }}</p>
+          <div style="border-top:1px solid #D9D6CF;padding-top:10px;display:flex;flex-direction:column;gap:6px">
+            <ul style="display:flex;flex-direction:column;gap:4px;font-size:14px;line-height:1.4"><sc-for list="{{ p.zones }}" as="z" hint-placeholder-count="3"><li style="display:flex;gap:8px;align-items:flex-start"><span style="width:6px;height:6px;border-radius:999px;background:#C4A24D;margin-top:7px;flex:none"></span><span>{{ z }}</span></li></sc-for></ul>
+            <sc-if value="{{ showPending }}" hint-placeholder-val="{{ true }}"><span style="align-self:flex-start;font-size:9px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#6B6B67;border:1px solid #B8B5AE;border-radius:3px;padding:2px 5px;line-height:1">pending</span></sc-if>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;font-size:18px;font-weight:600">{{ p.price }}<sc-if value="{{ p.pend }}" hint-placeholder-val="{{ true }}"><span style="font-size:9px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#6B6B67;border:1px solid #B8B5AE;border-radius:3px;padding:2px 5px;line-height:1">pending</span></sc-if></div>
+          <a href="#" style="height:46px;background:#C4A24D;color:#0B0B0C;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px">Offerte aanvragen</a>
+        </div>
+      </sc-for>
+      <p style="font-size:13px;line-height:1.45;color:#A3A39F">De prijs hangt af van model, lakconditie en dekking.</p>
+    </div>
+    <div data-screen-label="PackageCards B 1280" style="width:1280px;background:#0B0B0C;box-shadow:0 0 0 1px #2A2B2F;padding:64px 40px">
+      <h2 style="font-size:40px;line-height:1.1;font-weight:600;letter-spacing:-.02em;margin-bottom:32px">Kies hoeveel je beschermt</h2>
+      <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px">
+        <sc-for list="{{ pkgNLB }}" as="p" hint-placeholder-count="3">
+          <div style="background:#F2EFE9;color:#0B0B0C;border-radius:10px;padding:28px 26px;display:flex;flex-direction:column;gap:14px">
+            <svg viewBox="0 0 260 120" style="width:100%;height:auto;display:block" aria-hidden="true"><rect x="40" y="8" width="30" height="104" rx="4" fill="#8A8B90"></rect><rect x="190" y="8" width="30" height="104" rx="4" fill="#8A8B90"></rect><rect x="6" y="14" width="248" height="92" rx="22" fill="{{ p.cb }}"></rect><path d="M28 14H80V106H28A22 22 0 0 1 6 84V36A22 22 0 0 1 28 14Z" fill="{{ p.cf }}"></path><path d="M80 18L104 30V90L80 102Z" fill="#5C5D62"></path><path d="M168 30L188 20V100L168 90Z" fill="#5C5D62"></path><rect x="84" y="2" width="14" height="12" rx="3" fill="{{ p.cf }}"></rect><rect x="84" y="106" width="14" height="12" rx="3" fill="{{ p.cf }}"></rect><rect x="10" y="22" width="6" height="18" rx="2" fill="#F2EFE9" opacity=".8"></rect><rect x="10" y="80" width="6" height="18" rx="2" fill="#F2EFE9" opacity=".8"></rect><g opacity="{{ p.dots }}" fill="#C4A24D" stroke="#0B0B0C" stroke-width="1.5"><circle cx="14" cy="60" r="7"></circle><circle cx="122" cy="26" r="7"></circle><circle cx="122" cy="94" r="7"></circle><rect x="106" y="100" width="60" height="9" rx="4.5"></rect><circle cx="246" cy="60" r="7"></circle></g></svg>
+            <h3 style="font-size:24px;font-weight:600;line-height:1.2">{{ p.t }}</h3>
+            <p style="font-size:15px;line-height:1.5;color:#5C5C58">{{ p.d }}</p>
+            <div style="border-top:1px solid #D9D6CF;padding-top:12px;display:flex;flex-direction:column;gap:8px;flex:1">
+              <ul style="display:flex;flex-direction:column;gap:5px;font-size:15px;line-height:1.4"><sc-for list="{{ p.zones }}" as="z" hint-placeholder-count="3"><li style="display:flex;gap:8px;align-items:flex-start"><span style="width:6px;height:6px;border-radius:999px;background:#C4A24D;margin-top:7px;flex:none"></span><span>{{ z }}</span></li></sc-for></ul>
+              <sc-if value="{{ showPending }}" hint-placeholder-val="{{ true }}"><span style="align-self:flex-start;font-size:9px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#6B6B67;border:1px solid #B8B5AE;border-radius:3px;padding:2px 5px;line-height:1">pending</span></sc-if>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;font-size:22px;font-weight:600">{{ p.price }}<sc-if value="{{ p.pend }}" hint-placeholder-val="{{ true }}"><span style="font-size:9px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#6B6B67;border:1px solid #B8B5AE;border-radius:3px;padding:2px 5px;line-height:1">pending</span></sc-if></div>
+            <a href="#" style="height:48px;background:#C4A24D;color:#0B0B0C;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:15px">Offerte aanvragen</a>
+          </div>
+        </sc-for>
+      </div>
+      <p style="font-size:14px;line-height:1.45;color:#A3A39F;margin-top:20px">De prijs hangt af van model, lakconditie en dekking.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FRAME 4: PPF UA 375, shar 1 -->
+<div id="f4" style="display:flex;flex-direction:column;gap:12px;flex:none">
+  <div style="font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#8A8B90">Frame 4 · PPF UA · 375 · Hero, ProofStrip, AnswerBox, PackageCards</div>
+  <div data-screen-label="PPF UA 375" style="position:relative;width:375px;background:#0B0B0C;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 0 0 1px #2A2B2F;padding-bottom:48px">
+    <div style="display:flex;align-items:center;justify-content:space-between;height:56px;padding:0 8px 0 16px;border-bottom:1px solid #2A2B2F">
+      <div style="display:flex;align-items:center;gap:8px"><svg viewBox="0 0 200 232" width="22" height="26"><path d="M100 8 184 36v82c0 54-42 88-84 106C58 206 16 172 16 118V36Z" fill="none" stroke="#C4A24D" stroke-width="12" stroke-linejoin="round"></path><text x="100" y="168" text-anchor="middle" font-family="Cinzel, serif" font-weight="700" font-size="132" fill="#C4A24D">V</text></svg><div><div style="font-family:Cinzel,serif;font-weight:700;font-size:14px;letter-spacing:.06em;color:#C4A24D;line-height:1">V-GUARD</div><div style="font-size:8px;letter-spacing:.32em;color:#A3A39F;margin-top:3px">STUDIO</div></div></div>
+      <div style="display:flex;align-items:center;gap:4px"><div style="font-size:13px;font-weight:500;padding:0 8px;height:44px;display:flex;align-items:center;gap:6px"><span style="color:#A3A39F">NL</span><span style="color:#5C5D62">/</span><span>UA</span></div><div style="width:44px;height:44px;display:flex;align-items:center;justify-content:center"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#F2EFE9" stroke-width="1.6"><path d="M2 6h18M2 11h18M2 16h18"></path></svg></div></div>
+    </div>
+    <div style="position:relative;height:556px;overflow:hidden">
+      <img src="assets/photos/bmw-34-p.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 55%">
+      <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,11,12,.1) 0%,rgba(11,11,12,.25) 25%,rgba(11,11,12,.88) 55%,#0B0B0C 100%)"></div>
+      <div style="position:absolute;left:16px;right:16px;bottom:16px;display:flex;flex-direction:column;gap:12px">
+        <h1 style="font-size:28px;line-height:1.12;font-weight:600;letter-spacing:-.01em;text-wrap:pretty">PPF у Vroomshoop: захист лаку від сколів</h1>
+        <p style="font-size:15px;line-height:1.45;color:#D7D4CE">Прозора плівка на передню частину, окремі деталі або все авто.</p>
+        <div style="display:flex;flex-direction:column;gap:10px;margin-top:2px">
+          <a href="#" style="display:flex;align-items:center;justify-content:center;height:48px;background:#C4A24D;color:#0B0B0C;font-weight:600;font-size:15px;border-radius:6px">Отримати оцінку</a>
+          <a href="#" style="display:flex;align-items:center;justify-content:center;height:48px;border:1px solid #F2EFE9;color:#F2EFE9;font-weight:600;font-size:15px;border-radius:6px">Написати у WhatsApp</a>
+        </div>
+        <div style="display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:2px -16px 0;padding:0 16px">
+          <span style="font-size:12px;font-weight:500;padding:7px 12px;border:1px solid rgba(242,239,233,.4);border-radius:999px;white-space:nowrap">Підготовка у 5 кроків</span>
+          <span style="display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:500;padding:7px 12px;border:1px solid rgba(242,239,233,.4);border-radius:999px;white-space:nowrap">3 роки гарантії на роботу<sc-if value="{{ showPending }}" hint-placeholder-val="{{ true }}"><span style="font-size:9px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#8A8B90;border:1px solid #5C5D62;border-radius:3px;padding:2px 5px;line-height:1">pending</span></sc-if></span>
+          <span style="display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:500;padding:7px 12px;border:1px solid rgba(242,239,233,.4);border-radius:999px;white-space:nowrap">XPEL, BRAVIXX і LLumar<sc-if value="{{ showPending }}" hint-placeholder-val="{{ true }}"><span style="font-size:9px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#8A8B90;border:1px solid #5C5D62;border-radius:3px;padding:2px 5px;line-height:1">pending</span></sc-if></span>
+        </div>
+      </div>
+    </div>
+    <div style="position:absolute;left:0;right:0;top:599px;border-top:1px dashed #C4A24D;opacity:.7;pointer-events:none"><span style="position:absolute;right:8px;top:4px;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#C4A24D">згин 375x667 над StickyMobileBar</span></div>
+    <div style="margin:48px 16px 0;padding:20px 18px;background:#16171A;border:1px solid #2A2B2F;border-radius:10px">
+      <p style="font-size:16px;line-height:1.55;color:#F2EFE9;text-wrap:pretty">PPF (paint protection film), нідерландською lakbeschermingsfolie або steenslagfolie, це прозора плівка на лаку. Вона бере на себе сколи і дрібні подряпини. V Guard Studio у Vroomshoop наносить PPF на авто з усього Твенте.</p>
+    </div>
+    <div style="padding:64px 16px 0;display:flex;flex-direction:column;gap:16px">
+      <h2 style="font-size:26px;line-height:1.15;font-weight:600;letter-spacing:-.01em">Оберіть, скільки захищати</h2>
+      <sc-for list="{{ pkgUA }}" as="p" hint-placeholder-count="3">
+        <div style="background:#F2EFE9;color:#0B0B0C;border-radius:10px;padding:20px 18px;display:flex;flex-direction:column;gap:12px">
+          <svg viewBox="0 0 260 120" style="width:100%;height:auto;display:block" aria-hidden="true"><rect x="40" y="8" width="30" height="104" rx="4" fill="#8A8B90"></rect><rect x="190" y="8" width="30" height="104" rx="4" fill="#8A8B90"></rect><rect x="6" y="14" width="248" height="92" rx="22" fill="{{ p.cb }}"></rect><path d="M28 14H80V106H28A22 22 0 0 1 6 84V36A22 22 0 0 1 28 14Z" fill="{{ p.cf }}"></path><path d="M80 18L104 30V90L80 102Z" fill="#5C5D62"></path><path d="M168 30L188 20V100L168 90Z" fill="#5C5D62"></path><rect x="84" y="2" width="14" height="12" rx="3" fill="{{ p.cf }}"></rect><rect x="84" y="106" width="14" height="12" rx="3" fill="{{ p.cf }}"></rect><rect x="10" y="22" width="6" height="18" rx="2" fill="#F2EFE9" opacity=".8"></rect><rect x="10" y="80" width="6" height="18" rx="2" fill="#F2EFE9" opacity=".8"></rect><g opacity="{{ p.dots }}" fill="#C4A24D" stroke="#0B0B0C" stroke-width="1.5"><circle cx="14" cy="60" r="7"></circle><circle cx="122" cy="26" r="7"></circle><circle cx="122" cy="94" r="7"></circle><rect x="106" y="100" width="60" height="9" rx="4.5"></rect><circle cx="246" cy="60" r="7"></circle></g></svg>
+          <h3 style="font-size:20px;font-weight:600;line-height:1.2">{{ p.t }}</h3>
+          <p style="font-size:14px;line-height:1.45;color:#5C5C58">{{ p.d }}</p>
+          <div style="border-top:1px solid #D9D6CF;padding-top:10px;display:flex;flex-direction:column;gap:6px">
+            <ul style="display:flex;flex-direction:column;gap:4px;font-size:14px;line-height:1.4"><sc-for list="{{ p.zones }}" as="z" hint-placeholder-count="3"><li style="display:flex;gap:8px;align-items:flex-start"><span style="width:6px;height:6px;border-radius:999px;background:#C4A24D;margin-top:7px;flex:none"></span><span>{{ z }}</span></li></sc-for></ul>
+            <sc-if value="{{ showPending }}" hint-placeholder-val="{{ true }}"><span style="align-self:flex-start;font-size:9px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#6B6B67;border:1px solid #B8B5AE;border-radius:3px;padding:2px 5px;line-height:1">pending</span></sc-if>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;font-size:18px;font-weight:600">{{ p.price }}<sc-if value="{{ p.pend }}" hint-placeholder-val="{{ false }}"><span style="font-size:9px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#6B6B67;border:1px solid #B8B5AE;border-radius:3px;padding:2px 5px;line-height:1">pending</span></sc-if></div>
+          <a href="#" style="height:46px;background:#C4A24D;color:#0B0B0C;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px">Отримати оцінку</a>
+        </div>
+      </sc-for>
+      <p style="font-size:13px;line-height:1.45;color:#A3A39F">Ціна залежить від моделі, стану лаку і площі покриття.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FRAME 5: FAQ 375 -->
+<div id="f5" style="display:flex;flex-direction:column;gap:12px;flex:none">
+  <div style="font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#8A8B90">Frame 5 · FAQ · 375 · alles dicht / een open</div>
+  <div style="display:flex;gap:40px;align-items:flex-start">
+    <div data-screen-label="FAQ 375 dicht" style="width:375px;background:#0B0B0C;box-shadow:0 0 0 1px #2A2B2F;padding:48px 16px;display:flex;flex-direction:column">
+      <h2 style="font-size:26px;line-height:1.15;font-weight:600;letter-spacing:-.01em;margin-bottom:12px">Veelgestelde vragen</h2>
+      <sc-for list="{{ faqClosed }}" as="f" hint-placeholder-count="6">
+        <div style="border-top:1px solid #2A2B2F;padding:16px 0"><div style="display:flex;justify-content:space-between;gap:16px;align-items:flex-start;min-height:44px"><div style="font-size:16px;font-weight:600;line-height:1.35">{{ f.q }}</div><div style="width:24px;height:24px;flex:none;display:flex;align-items:center;justify-content:center;color:#C4A24D;font-size:18px;line-height:1">{{ f.sym }}</div></div></div>
+      </sc-for>
+      <div style="border-top:1px solid #2A2B2F"></div>
+    </div>
+    <div data-screen-label="FAQ 375 een open" style="width:375px;background:#0B0B0C;box-shadow:0 0 0 1px #2A2B2F;padding:48px 16px;display:flex;flex-direction:column">
+      <h2 style="font-size:26px;line-height:1.15;font-weight:600;letter-spacing:-.01em;margin-bottom:12px">Veelgestelde vragen</h2>
+      <sc-for list="{{ faqOne }}" as="f" hint-placeholder-count="6">
+        <div style="border-top:1px solid #2A2B2F;padding:16px 0">
+          <div style="display:flex;justify-content:space-between;gap:16px;align-items:flex-start;min-height:44px"><div style="font-size:16px;font-weight:600;line-height:1.35">{{ f.q }}</div><div style="width:24px;height:24px;flex:none;display:flex;align-items:center;justify-content:center;color:#C4A24D;font-size:18px;line-height:1">{{ f.sym }}</div></div>
+          <sc-if value="{{ f.open }}" hint-placeholder-val="{{ false }}"><div style="display:flex;flex-direction:column;gap:8px;align-items:flex-start;margin-top:8px;padding-right:40px"><p style="font-size:15px;line-height:1.55;color:#A3A39F">{{ f.a }}</p><sc-if value="{{ f.pend }}" hint-placeholder-val="{{ false }}"><span style="font-size:9px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#8A8B90;border:1px solid #5C5D62;border-radius:3px;padding:2px 5px;line-height:1">pending</span></sc-if></div></sc-if>
+        </div>
+      </sc-for>
+      <div style="border-top:1px solid #2A2B2F"></div>
+    </div>
+  </div>
+</div>
+
+<!-- FRAME 6: ProjectGallery zonder foto -->
+<div id="f6" style="display:flex;flex-direction:column;gap:12px;flex:none">
+  <div style="font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#8A8B90">Frame 6 · ProjectGallery zonder foto · 375 en 1280</div>
+  <div style="display:flex;gap:40px;align-items:flex-start">
+    <div data-screen-label="Gallery 375" style="width:375px;background:#0B0B0C;box-shadow:0 0 0 1px #2A2B2F;padding:48px 16px;display:flex;flex-direction:column;gap:20px">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px"><h2 style="font-size:26px;line-height:1.15;font-weight:600;letter-spacing:-.01em">PPF van V Guard</h2><a href="#" style="font-size:14px;font-weight:500;white-space:nowrap;display:flex;align-items:center;height:44px">Alle projecten</a></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <sc-for list="{{ gallery }}" as="g" hint-placeholder-count="4">
+          <div style="display:flex;flex-direction:column;gap:6px"><div style="aspect-ratio:4/3;background:#2E2F33;border:1px dashed #5C5D62;border-radius:6px;display:flex;align-items:center;justify-content:center;text-align:center;padding:10px;font-size:11px;line-height:1.4;color:#C9C7C1">{{ g }}</div><div style="font-size:12px;color:#A3A39F">⟦Merk model⟧ · PPF Full Front</div></div>
+        </sc-for>
+      </div>
+    </div>
+    <div data-screen-label="Gallery 1280" style="width:1280px;background:#0B0B0C;box-shadow:0 0 0 1px #2A2B2F;padding:64px 40px">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:32px"><h2 style="font-size:40px;line-height:1.1;font-weight:600;letter-spacing:-.02em">PPF van V Guard</h2><a href="#" style="font-size:15px;font-weight:500">Alle projecten</a></div>
+      <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px">
+        <sc-for list="{{ gallery3 }}" as="g" hint-placeholder-count="3">
+          <div style="display:flex;flex-direction:column;gap:8px"><div style="aspect-ratio:4/3;background:#2E2F33;border:1px dashed #5C5D62;border-radius:6px;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;font-size:13px;line-height:1.4;color:#C9C7C1">{{ g }}</div><div style="font-size:14px;color:#A3A39F">⟦Merk model⟧ · PPF Full Front</div></div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+</div>
+
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;showPending&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Mockup&quot;},&quot;priceState&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;A&quot;,&quot;options&quot;:[&quot;A&quot;,&quot;B&quot;],&quot;tsType&quot;:&quot;'A' | 'B'&quot;,&quot;section&quot;:&quot;Mockup&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const showPending = this.props.showPending ?? true;
+    const priceState = this.props.priceState ?? "A";
+    const ACC = "#C4A24D", BASE = "#D9D6CF";
+    const shape = [{cf:ACC,cb:BASE,dots:0},{cf:ACC,cb:ACC,dots:0},{cf:BASE,cb:BASE,dots:1}];
+    const nl = [
+      {t:"Full Front",d:"De voorkant, waar de meeste steenslag terechtkomt.",zones:["Voorbumper","volledige motorkap","voorschermen","spiegelkappen","koplampen"],vanaf:"vanaf €1.495"},
+      {t:"Full Body",d:"Alle gelakte delen van de auto onder folie.",zones:["Alle gelakte carrosseriedelen"],vanaf:"vanaf €3.995"},
+      {t:"Custom (losse delen)",d:"Alleen de delen die jij kiest.",zones:["Bijv. voorbumper","deurgreepbakjes","deurranden","instaplijsten","laaddrempel"],vanaf:"vanaf €99"}
+    ];
+    const ua = [
+      {t:"Full Front",d:"Передня частина, куди летить найбільше сколів.",zones:["Передній бампер","увесь капот","передні крила","корпуси дзеркал","фари"],vanaf:"від €1 495"},
+      {t:"Full Body",d:"Усі пофарбовані деталі авто під плівкою.",zones:["Усі пофарбовані деталі кузова"],vanaf:"від €3 995"},
+      {t:"Custom (окремі деталі)",d:"Лише деталі, які оберете ви.",zones:["Напр. передній бампер","ніші ручок","торці дверей","пороги","поріг багажника"],vanaf:"від €99"}
+    ];
+    const mk = (list, state, onReq) => list.map((p,i)=>({...p,...shape[i],price: state==="B" ? p.vanaf : onReq, pend: state==="B" && showPending}));
+    const pkgNL = mk(nl, priceState, "Prijs op aanvraag");
+    const pkgNLB = mk(nl, "B", "Prijs op aanvraag");
+    const pkgUA = mk(ua, priceState, "Ціна за запитом");
+    const icons = {
+      droplet:"M12 3c3.5 4.5 6 7.8 6 11a6 6 0 0 1-12 0c0-3.2 2.5-6.5 6-11z",
+      layers:"M3 8l9-4 9 4-9 4-9-4zM3 12l9 4 9-4M3 16l9 4 9-4",
+      spray:"M8 9h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1V10a1 1 0 0 1 1-1zM10 9V6h3v3M13 6h3M19 4v1M19 8v1M21 6h1",
+      film:"M4 6h16v12H4zM4 10h16M4 14h16M8 6v12M16 6v12",
+      check:"M5 12l5 5L20 7",
+      shield:"M12 3l8 3v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6zM8.5 12l2.5 2.5 4.5-5",
+      badge:"M12 15a6 6 0 1 0 0-12 6 6 0 0 0 0 12zM8.5 14l-1.5 7 5-2.5 5 2.5-1.5-7",
+      cert:"M3 4h18v14H3zM7 9h10M7 13h6M17 16.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5z"
+    };
+    const steps = [["Wassen","Grondige reiniging van de auto in meerdere fasen.","droplet"],["Kleibehandeling","Clay haalt vastzittend vuil uit de lak.","layers"],["Ontvetten","Alcoholreiniging zodat de folie goed hecht.","spray"],["Aanbrengen","De folie gaat op de schone, voorbereide lak.","film"],["Controle","Eindcontrole van randen en oppervlak voor oplevering.","check"]].map((s,i)=>({n:String(i+1).padStart(2,"0"),t:s[0],d:s[1],icon:icons[s[2]]}));
+    const trust = [
+      {txt:"3 jaar garantie op ons werk.",icon:icons.shield},
+      {txt:"Fabrieksgarantie op de folie: 5, 7 of 10 jaar, afhankelijk van het merk.",icon:icons.badge},
+      {txt:"Gecertificeerd voor het aanbrengen van PPF.",icon:icons.cert},
+      {txt:"Wij werken met folies van XPEL, BRAVIXX en LLumar.",icon:icons.layers}
+    ];
+    const gallery = ["Foto: close-up rand van de folie op de motorkap","Foto: close-up rand van de folie op de hoek van de bumper","Foto: close-up rand van de folie op de spiegelkap","Foto: close-up rand van de folie op de koplamp"];
+    const gallery3 = gallery.slice(0,3);
+    const faqBase = [
+      {q:"Wat kost PPF voor mijn auto?",a:"Dat hangt af van het model, de conditie van de lak en hoeveel delen je laat beschermen. Stuur merk, model en bouwjaar, dan krijg je een prijs voor jouw auto.",pend:false},
+      {q:"Is alleen de voorbumper genoeg?",a:"De bumper vangt veel steenslag, maar de motorkap, voorschermen en spiegels worden ook geraakt. Met Full Front bescherm je de hele voorkant in één keer, zodat er geen onbeschermde randen midden op de motorkap zitten.",pend:false},
+      {q:"PPF of keramische coating?",a:"Een keramische coating is een dunne, harde laag voor glans en makkelijker wassen. PPF is een dikkere folie die steenslag en krassen opvangt voordat ze de lak raken. Coating beschermt de glans, PPF beschermt de lak zelf.",pend:false},
+      {q:"Hoe lang duurt het aanbrengen?",a:"Full Front duurt meestal 1-2 werkdagen, Full Body 3-5 werkdagen. Bij de offerte hoor je wanneer je auto klaar is.",pend:true},
+      {q:"Hoe onderhoud ik een auto met PPF?",a:"Was de auto de eerste 7 dagen niet, zodat de folie goed hecht. Daarna kun je normaal wassen. Richt een hogedrukspuit niet direct op de randen van de folie.",pend:true},
+      {q:"Welke garantie krijg ik en wordt de folie geel?",a:"Op ons werk geven we 3 jaar garantie. Op de folie geldt daarnaast de fabrieksgarantie van 5, 7 of 10 jaar, afhankelijk van het merk, ook tegen vergelen en loslaten.",pend:true}
+    ];
+    const faqWith = (openIdx) => faqBase.map((f,i)=>({...f,open:i===openIdx,sym:i===openIdx?"−":"+",pend:f.pend&&showPending}));
+    return { showPending, pkgNL, pkgNLB, pkgUA, steps, trust, gallery, gallery3, faqA: faqWith(0), faqClosed: faqWith(-1), faqOne: faqWith(3) };
+  }
+}
+</script>
+</body>
+</html>

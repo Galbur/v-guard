@@ -43,6 +43,8 @@ export function cellLabel(p: Price, locale: Locale): string {
 export interface ServiceOption {
   id: string;
   label: Localized;
+  /** Shown only for this service in the quote form (e.g. Touringcar for car wrapping). */
+  only?: ServiceSlug;
 }
 
 export interface Service {
@@ -80,11 +82,15 @@ export const services: Service[] = [
   {
     slug: 'car-wrapping',
     order: 3,
-    label: { nl: 'Car wrapping', uk: 'Car wrapping' },
-    // Blueprint v1.3: volledig / gedeeltelijk + finish; finish goes into «opmerking».
+    // UA: native term «обклеювання плівкою», not «car wrapping» (step W3).
+    label: { nl: 'Car wrapping', uk: 'Обклеювання плівкою' },
+    // Step W4: «Losse delen» holds checkboxes for the parts (wrapFormParts); the colour or
+    // finish goes into the separate «kleur» field of step 3.
     options: [
-      { id: 'volledig', label: { nl: 'Volledig', uk: 'Повністю' } },
-      { id: 'gedeeltelijk', label: { nl: 'Gedeeltelijk', uk: 'Частково' } },
+      { id: 'volledig', label: { nl: 'Volledige wrap', uk: 'Повне обклеювання' } },
+      { id: 'pakket', label: { nl: 'Black styling pakket', uk: 'Антихром-пакет' } },
+      { id: 'delen', label: { nl: 'Losse delen', uk: 'Окремі деталі' } },
+      { id: 'anders', label: { nl: 'Iets anders', uk: 'Інше' } },
     ],
   },
 ];
@@ -98,7 +104,9 @@ export const bodyTypes: ServiceOption[] = [
   { id: 'stationwagon', label: { nl: 'Stationwagon', uk: 'Універсал' } },
   { id: 'coupe', label: { nl: 'Coupé', uk: 'Купе' } },
   { id: 'suv', label: { nl: 'SUV', uk: 'SUV' } },
-  { id: 'bus', label: { nl: 'Bus', uk: 'Бус' } },
+  // One item for vans and passenger buses, all services (step W4).
+  { id: 'bus', label: { nl: 'Bus / personenbus', uk: 'Бус / мікроавтобус' } },
+  { id: 'touringcar', label: { nl: 'Touringcar', uk: 'Автобус' }, only: 'car-wrapping' },
   { id: 'anders', label: { nl: 'Anders', uk: 'Інше' } },
 ];
 
@@ -274,80 +282,318 @@ export const tint = {
 };
 
 // ---------------------------------------------------------------- Car wrapping
+// Mockup «VG Site 04 Car wrapping v2» (step W3): configurator data, cards and page facts.
+// Every price, factor and duration is a «value | hint» default from the mockup (R2).
+
+export type WrapBodyId = 'hatch' | 'sedan' | 'station' | 'suv' | 'bus' | 'coach';
+export type WrapPartId = 'dak' | 'spiegel' | 'chroom';
+export type WrapFinishId = 'glans' | 'satijn' | 'mat' | 'metallic' | 'carbon';
+
+export interface WrapBody {
+  id: WrapBodyId;
+  /** Quote form «carrosserie» id. */
+  formBody: string;
+  label: Localized;
+  /** Factor on the hatchback base price. Missing: the base itself; null: price on request. */
+  factor?: Fact<number | null>;
+  /** Vans and buses have their own part prices. */
+  van: boolean;
+}
+
+/** Volledige wrap on a hatchback; other bodies multiply it. */
+export const wrapBase: Price = price(1795, 'default', 'Hatchback; ринок ~€2.000-3.500', { from: true });
+
+const factor = (value: number | null, hint = 'дефолт') => fact<number | null>(value, 'default', hint);
+
+export const wrapBodies: WrapBody[] = [
+  { id: 'hatch', formBody: 'hatchback', label: { nl: 'Hatchback', uk: 'Хетчбек' }, van: false },
+  { id: 'sedan', formBody: 'sedan', label: { nl: 'Sedan', uk: 'Седан' }, factor: factor(1.1), van: false },
+  {
+    id: 'station',
+    formBody: 'stationwagon',
+    label: { nl: 'Stationwagon', uk: 'Універсал' },
+    factor: factor(1.15),
+    van: false,
+  },
+  { id: 'suv', formBody: 'suv', label: { nl: 'SUV', uk: 'Позашляховик (SUV)' }, factor: factor(1.3), van: false },
+  {
+    id: 'bus',
+    formBody: 'bus',
+    label: { nl: 'Personenbus', uk: 'Мікроавтобус' },
+    factor: factor(1.5),
+    van: true,
+  },
+  {
+    id: 'coach',
+    formBody: 'touringcar',
+    label: { nl: 'Touringcar', uk: 'Автобус' },
+    factor: factor(null, 'op aanvraag; автобус лише після оцінки'),
+    van: true,
+  },
+];
+
+export interface WrapPart {
+  id: WrapPartId;
+  /** Quote form checkbox under «Losse delen». */
+  formPart: string;
+  label: Localized;
+  /** Label of the quote form checkbox. */
+  formLabel: Localized;
+  price: Price;
+  /** Personenbus and touringcar; missing: same as price. */
+  vanPrice?: Price;
+}
+
+export const wrapParts: WrapPart[] = [
+  {
+    id: 'dak',
+    formPart: 'dak',
+    label: { nl: 'Dak', uk: 'Дах' },
+    formLabel: { nl: 'Dak', uk: 'Дах' },
+    price: price(249, 'default', 'дах, легкове авто', { from: true }),
+    vanPrice: price(349, 'default', 'дах, бус і автобус', { from: true }),
+  },
+  {
+    id: 'spiegel',
+    formPart: 'spiegelkappen',
+    label: { nl: 'Spiegelkappen', uk: 'Дзеркала' },
+    formLabel: { nl: 'Spiegelkappen', uk: 'Дзеркала' },
+    price: price(69, 'default', 'ковпаки дзеркал, легкове авто', { from: true }),
+    vanPrice: price(89, 'default', 'дзеркала, бус і автобус', { from: true }),
+  },
+  {
+    id: 'chroom',
+    formPart: 'chrome-delete',
+    label: { nl: 'Chroom (ontchromen)', uk: 'Хром (антихром)' },
+    formLabel: { nl: 'Chrome delete', uk: 'Антихром' },
+    price: price(149, 'default', 'ринок від €175', { from: true }),
+  },
+];
+
+/** Dak, spiegelkappen and chroom in black; not for a touringcar. */
+export const wrapPakket: Price = price(395, 'default', 'Black styling pakket', { from: true });
+
+/** Carbon look surcharge on the whole indication. */
+export const wrapCarbonSurcharge = fact(0.1, 'default', 'Carbon look +10%');
+
+export interface WrapFinish {
+  id: WrapFinishId;
+  label: Localized;
+  /** Finishes tile: one line about the look. */
+  text: Localized;
+  image: Fact<string>;
+}
+
+/** AI illustration (D18): allowed in illustrative slots, never in the list of finished work. */
+const illustration = (file: string) => fact(file, 'default', 'AI-ілюстрація (D18), замінити фото V Guard, коли буде');
+
+export const wrapFinishes: WrapFinish[] = [
+  {
+    id: 'glans',
+    label: { nl: 'Glans', uk: 'Глянець' },
+    text: { nl: 'diep en spiegelend', uk: 'глибокий дзеркальний блиск' },
+    image: illustration('wrap-fin-glans.png'),
+  },
+  {
+    id: 'satijn',
+    label: { nl: 'Satijn', uk: 'Сатин' },
+    text: { nl: 'zachte glans, strak en modern', uk: 'мʼякий блиск, стримано і сучасно' },
+    image: illustration('wrap-fin-satijn.png'),
+  },
+  {
+    id: 'mat',
+    label: { nl: 'Mat', uk: 'Мат' },
+    text: { nl: 'geen reflectie, stoer', uk: 'без відблисків, брутально' },
+    image: illustration('wrap-fin-mat.png'),
+  },
+  {
+    id: 'metallic',
+    label: { nl: 'Metallic', uk: 'Металік' },
+    text: { nl: 'fijne schittering in het licht', uk: 'дрібні іскри на світлі' },
+    image: illustration('wrap-fin-metallic.png'),
+  },
+  {
+    id: 'carbon',
+    label: { nl: 'Carbon look', uk: 'Під карбон' },
+    text: { nl: 'structuur van koolstofvezel', uk: 'фактура вуглеволокна' },
+    image: illustration('wrap-fin-carbon.png'),
+  },
+];
+
+/** Which finishes V Guard offers (the list above). */
+export const wrapFinishList = fact(
+  wrapFinishes.map((f) => f.label.nl),
+  'default',
+  'фініші V Guard',
+);
+
+export interface WrapColor {
+  name: string;
+  hex: string;
+}
+
+/** Configurator swatches. Names and hex codes are mockup placeholders for V Guard's colours. */
+export const wrapColors = fact<WrapColor[]>(
+  [
+    { name: 'Gloss Black', hex: '#0A0A0B' },
+    { name: 'Satin Black', hex: '#1C1C1E' },
+    { name: 'Matte Grey', hex: '#6B6C70' },
+    { name: 'Nardo Grey', hex: '#8E9094' },
+    { name: 'Satin Dark Grey', hex: '#45474B' },
+    { name: 'Gloss White', hex: '#F4F4F2' },
+    { name: 'Pearl White', hex: '#ECE9E1' },
+    { name: 'Racing Green', hex: '#0F3D2E' },
+    { name: 'Midnight Blue', hex: '#15213D' },
+    { name: 'Satin Khaki', hex: '#6F6B4F' },
+    { name: 'Metallic Silver', hex: '#B9BCC0' },
+    { name: 'Candy Red', hex: '#B3122E' },
+  ],
+  'default',
+  'назви і hex кольорів V Guard (плейсхолдери макета)',
+);
+
+export const wrap = {
+  fullDuration: fact<Localized>({ nl: '3-5 dagen', uk: '3-5 днів' }, 'default', 'тривалість повного wrap, V Guard'),
+  partsDuration: fact<Localized>({ nl: '1 dag', uk: '1 день' }, 'default', 'тривалість дах або дзеркала, V Guard'),
+  lifetime: fact<Localized>({ nl: '5-7 jaar', uk: '5-7 років' }, 'default', 'термін служби wrap, V Guard'),
+  brands: fact(['3M', 'Avery Dennison'], 'default', 'бренди плівки для wrap, V Guard'),
+  /** «Je kunt ook een proefstuk op je auto laten zetten.» */
+  proefstuk: fact(true, 'default', 'пробний шматок плівки на авто клієнта, V Guard'),
+  /** Hero, compare and CTA illustrations. */
+  images: {
+    hero375: illustration('wrap-hero-375.png'),
+    hero1280: illustration('wrap-hero-1280.png'),
+    compare: illustration('wrap-compare.png'),
+    cta375: illustration('wrap-cta-a.png'),
+    cta1280: illustration('wrap-cta-b.png'),
+  },
+};
 
 export interface WrapCard {
   id: string;
+  /** Quote form option preselected by the card button. */
   formOption: string;
+  /** For «Losse delen»: the part checkbox to tick. */
+  formPart?: string;
   title: Localized;
   description: Localized;
   price: Price;
-  duration: Fact<Localized>;
-  /** File name in src/assets/photos; only cards with a real photo get an image (R4). */
-  photo?: { file: string; position: string };
+  duration?: Fact<Localized>;
+  badge?: Localized;
+  image: Fact<string>;
 }
 
-const oneDay = fact<Localized>({ nl: '1 dag', uk: '1 день' }, 'default', 'тривалість V Guard');
+const [roofPart, mirrorPart, chromePart] = wrapParts;
 
+/** Checkboxes under «Losse delen» in quote form step 3, in mockup order. */
+export const wrapFormParts: WrapPart[] = [chromePart, roofPart, mirrorPart];
+
+/** «Wat wil je laten wrappen?»: one large card and four. */
 export const wrapCards: WrapCard[] = [
   {
     id: 'volledig',
     formOption: 'volledig',
-    title: { nl: 'Volledige wrap', uk: 'Повний wrap' },
+    title: { nl: 'Volledige wrap', uk: 'Повне обклеювання' },
     description: { nl: 'De hele auto in een nieuwe kleur of finish.', uk: 'Усе авто в новому кольорі або фініші.' },
-    price: price(1795, 'default', 'ринок ~€2.000-3.500', { from: true }),
-    duration: fact({ nl: '3-5 dagen', uk: '3-5 днів' }, 'default', 'тривалість V Guard'),
+    price: wrapBase,
+    duration: wrap.fullDuration,
+    image: illustration('wrap-card-volledig.png'),
   },
   {
-    id: 'dak',
-    formOption: 'gedeeltelijk',
-    title: { nl: 'Dak', uk: 'Дах' },
-    description: { nl: 'Zwart of in kleur, voor een sportieve look.', uk: 'Чорний або кольоровий, для спортивного вигляду.' },
-    price: price(249, 'default', undefined, { from: true }),
-    duration: oneDay,
-  },
-  {
-    id: 'spiegelkappen',
-    formOption: 'gedeeltelijk',
-    title: { nl: 'Spiegelkappen', uk: 'Ковпаки дзеркал' },
-    description: { nl: 'Kleine upgrade, groot verschil.', uk: 'Невелике оновлення, помітна різниця.' },
-    price: price(69, 'default', 'ковпаки дзеркал', { from: true }),
-    duration: oneDay,
-    photo: { file: 'bmw-34-p.png', position: '22% 48%' },
+    id: 'pakket',
+    formOption: 'pakket',
+    title: { nl: 'Black styling pakket', uk: 'Антихром-пакет' },
+    description: {
+      nl: 'Ontchromen, zwart dak en spiegelkappen in één keer.',
+      uk: 'Антихром, чорний дах і дзеркала за один візит.',
+    },
+    price: wrapPakket,
+    badge: { nl: 'Pakketvoordeel', uk: 'Вигідніше разом' },
+    image: illustration('wrap-card-pakket.png'),
   },
   {
     id: 'chrome-delete',
-    formOption: 'gedeeltelijk',
-    title: { nl: 'Chrome delete', uk: 'Chrome delete' },
+    formOption: 'delen',
+    formPart: 'chrome-delete',
+    title: { nl: 'Ontchromen (chrome delete)', uk: 'Антихром' },
     description: { nl: 'Chroomdelen in zwart of kleur.', uk: 'Хромовані деталі в чорний або колір.' },
-    price: price(149, 'default', 'ринок від €175', { from: true }),
-    duration: oneDay,
-    photo: { file: 'bmw-front-p.png', position: 'center 70%' },
+    price: chromePart.price,
+    image: illustration('wrap-card-ontchromen.png'),
+  },
+  {
+    id: 'dak',
+    formOption: 'delen',
+    formPart: 'dak',
+    title: { nl: 'Dak', uk: 'Обклеювання даху' },
+    description: {
+      nl: 'Zwart dak voor een sportieve two-tone look.',
+      uk: 'Чорний дах для спортивного двоколірного вигляду.',
+    },
+    price: roofPart.price,
+    image: illustration('wrap-card-dak.png'),
+  },
+  {
+    id: 'spiegelkappen',
+    formOption: 'delen',
+    formPart: 'spiegelkappen',
+    title: { nl: 'Spiegelkappen', uk: 'Обклеювання дзеркал' },
+    description: {
+      nl: 'Spiegelkappen in zwart, carbon look of kleur.',
+      uk: 'Дзеркала в чорному, під карбон або в кольорі.',
+    },
+    price: mirrorPart.price,
+    image: illustration('wrap-card-spiegel.png'),
   },
 ];
 
-export const wrap = {
-  finishes: fact<Localized<string[]>>(
-    {
-      nl: ['Glans', 'Mat', 'Satijn', 'Metallic', 'Carbon look'],
-      uk: ['Глянець', 'Мат', 'Сатин', 'Металік', 'Під карбон'],
-    },
-    'default',
-    'фініші V Guard',
-  ),
-  lifetime: fact<Localized>({ nl: '5-7 jaar', uk: '5-7 років' }, 'default', 'термін служби wrap, V Guard'),
-  colors: fact<Localized>(
-    {
-      nl: 'Glans, mat, satijn, metallic en carbon look, in tientallen kleuren. Bekijk de stalen in de studio.',
-      uk: 'Глянець, мат, сатин, металік, під карбон, десятки кольорів. Зразки можна подивитися в студії.',
-    },
-    'default',
-    'кольори і фініші V Guard',
-  ),
-};
+export interface WrapRecent {
+  id: string;
+  /** Real V Guard photo in src/assets/photos. Never an AI illustration (D18). */
+  file: string;
+  car: Localized;
+  detail: Localized;
+  /** Month of the job. */
+  date: Fact<Localized>;
+}
+
+const jobMonth = () =>
+  fact<Localized>({ nl: 'okt 2026', uk: 'жовт. 2026' }, 'default', 'місяць роботи і підпис, V Guard');
+
+/** «Recent opgeleverd»: real photos with captions from the mockup. */
+export const wrapRecent: WrapRecent[] = [
+  {
+    id: 'bmw-3-front',
+    file: 'real-bmw-3-front.png',
+    car: { nl: 'BMW 3 Serie', uk: 'BMW 3 Series' },
+    detail: { nl: 'spiegelkappen zwart', uk: 'чорні корпуси дзеркал' },
+    date: jobMonth(),
+  },
+  {
+    id: 'volvo-v60',
+    file: 'real-volvo-v60.png',
+    car: { nl: 'Volvo V60', uk: 'Volvo V60' },
+    detail: { nl: 'ramen blinderen', uk: 'тонування вікон' },
+    date: jobMonth(),
+  },
+  {
+    id: 'audi-a7-zij',
+    file: 'real-audi-a7-zij.png',
+    car: { nl: 'Audi A7', uk: 'Audi A7' },
+    detail: { nl: 'voorruit chameleon', uk: 'лобове скло хамелеон' },
+    date: jobMonth(),
+  },
+  {
+    id: 'bmw-3-voorruit',
+    file: 'real-bmw-3-voorruit.png',
+    car: { nl: 'BMW 3 Serie', uk: 'BMW 3 Series' },
+    detail: { nl: 'voorruit chameleon', uk: 'лобове скло хамелеон' },
+    date: jobMonth(),
+  },
+];
 
 /** Lowest wrap price, e.g. Home card «vanaf €69». */
 export const wrapFrom: Price = wrapCards.reduce((min, c) => (c.price.amount < min.price.amount ? c : min)).price;
-export const wrapFull: Price = wrapCards[0].price;
+export const wrapFull: Price = wrapBase;
 export const ppfFrom: Price = ppfPackages[0].price;
 
 /** «vanaf» price per service for cards and the mobile menu. */
@@ -372,9 +618,10 @@ export function optionDetail(service: ServiceSlug, optionId: string, locale: Loc
     const row = tintOptionPrices.find((r) => r.formOption === optionId);
     return row && isPriceShown(row.price) ? cellLabel(row.price, locale) : '';
   }
-  if (optionId === 'volledig') return withDuration(wrapCards[0].price, wrapCards[0].duration);
-  return wrapCards
-    .filter((c) => c.formOption === optionId)
-    .map((c, i) => (i ? c.title[locale].toLowerCase() : c.title[locale]))
-    .join(', ');
+  if (optionId === 'delen') {
+    const cheapest = wrapFormParts.reduce((min, p) => (p.price.amount < min.price.amount ? p : min)).price;
+    return isPriceShown(cheapest) ? fromLabel(cheapest, locale) : '';
+  }
+  const card = wrapCards.find((c) => c.formOption === optionId);
+  return card ? withDuration(card.price, card.duration) : '';
 }

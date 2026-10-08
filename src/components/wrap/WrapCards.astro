@@ -1,0 +1,275 @@
+---
+// «Wat wil je laten wrappen?»: one large card and four (mockup v2). Images are AI
+// illustrations (D18): decorative, empty alt. Buttons preselect the quote form option.
+import { Picture } from 'astro:assets';
+import { fromLabel, isPriceShown, type WrapCard } from '../../data/services.ts';
+import { localizedPath, type Locale } from '../../i18n/routes.ts';
+import { illustration } from '../../lib/wrap-images.ts';
+
+interface Props {
+  locale: Locale;
+  title: string;
+  button: string;
+  note: string;
+  cards: WrapCard[];
+}
+
+const { locale, title, button, note, cards } = Astro.props;
+const contact = localizedPath('contact', locale);
+---
+
+<section class="section wcards">
+  <div class="container">
+    <h2 class="h2 wcards__title">{title}</h2>
+  </div>
+  <ul class="wcards__list" role="list">
+    {
+      cards.map((card, i) => (
+        <li class:list={['wcard surface-light', { 'wcard--big': i === 0 }]}>
+          <div class="wcard__media">
+            <Picture
+              src={illustration(card.image.value)}
+              alt=""
+              formats={['avif', 'webp']}
+              fallbackFormat="webp"
+              widths={[320, 560, 880]}
+              sizes={i === 0 ? '(min-width: 64rem) 440px, 264px' : '(min-width: 64rem) 380px, 264px'}
+              quality={60}
+              loading="lazy"
+              class:list={['wcard__img', `wcard__img--${card.id}`]}
+            />
+            {card.badge && <span class="wcard__badge">{card.badge[locale]}</span>}
+          </div>
+          <div class="wcard__body">
+            <h3 class="wcard__name">{card.title[locale]}</h3>
+            <p class="wcard__desc">{card.description[locale]}</p>
+            <div class="wcard__foot">
+              <p class="wcard__price">
+                {isPriceShown(card.price) && <span>{fromLabel(card.price, locale)}</span>}
+                {card.duration && <span class="wcard__dur">{card.duration.value[locale]}</span>}
+              </p>
+              <a class="btn wcard__btn" href={`${contact}?service=car-wrapping&option=${card.formOption}${card.formPart ? `&delen=${card.formPart}` : ''}`}>
+                {button}
+              </a>
+            </div>
+          </div>
+        </li>
+      ))
+    }
+  </ul>
+  <div class="container">
+    <p class="note wcards__note">{note}</p>
+  </div>
+</section>
+
+<style>
+  .wcards__title {
+    margin-bottom: 16px;
+  }
+
+  .wcards__list {
+    display: flex;
+    gap: 12px;
+    margin: 0;
+    padding: 0 var(--gutter) 4px;
+    list-style: none;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .wcards__list::-webkit-scrollbar {
+    display: none;
+  }
+
+  .wcard {
+    display: flex;
+    flex: none;
+    flex-direction: column;
+    width: 264px;
+    overflow: hidden;
+    scroll-snap-align: start;
+  }
+
+  .wcard__media {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    background: var(--c-graphite-2);
+  }
+
+  :global(.wcard__img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 50%;
+  }
+
+  :global(.wcard__img--volledig),
+  :global(.wcard__img--pakket) {
+    object-position: center 55%;
+  }
+
+  :global(.wcard__img--chrome-delete) {
+    object-position: center 45%;
+  }
+
+  .wcard__badge {
+    position: absolute;
+    right: 8px;
+    bottom: 8px;
+    padding: 4px 8px;
+    border-radius: var(--r-badge);
+    background: var(--c-gold);
+    color: var(--c-black);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+
+  .wcard__body {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 8px;
+    padding: 16px;
+  }
+
+  .wcard__name {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  .wcard__desc {
+    flex: 1;
+    font-size: 14px;
+    line-height: 1.45;
+    color: var(--c-muted-light);
+  }
+
+  .wcard__foot {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .wcard__price {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    font-size: 17px;
+    font-weight: 600;
+  }
+
+  .wcard__dur {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--c-muted-light);
+  }
+
+  .wcard__btn {
+    min-height: 44px;
+    margin-top: 4px;
+    border-color: var(--c-black);
+    color: var(--c-black);
+    font-size: 14px;
+  }
+
+  .wcards__note {
+    margin-top: 16px;
+  }
+
+  @media (min-width: 64rem) {
+    .wcards__title {
+      margin-bottom: 32px;
+    }
+
+    .wcards__list {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr 1fr;
+      gap: 24px;
+      max-width: var(--container);
+      margin-inline: auto;
+      overflow: visible;
+    }
+
+    .wcard {
+      width: auto;
+    }
+
+    .wcard--big {
+      grid-row: span 2;
+    }
+
+    .wcard__body {
+      gap: 8px;
+      padding: 18px 20px 20px;
+    }
+
+    .wcard__name {
+      font-size: 19px;
+    }
+
+    .wcard__foot {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-top: 4px;
+    }
+
+    .wcard__price {
+      font-size: 18px;
+    }
+
+    .wcard__btn {
+      margin-top: 0;
+      padding: 0 18px;
+    }
+
+    .wcard--big .wcard__body {
+      justify-content: flex-end;
+      gap: 10px;
+      padding: 28px;
+    }
+
+    .wcard--big .wcard__name {
+      font-size: 28px;
+      line-height: 1.15;
+    }
+
+    .wcard--big .wcard__desc {
+      flex: none;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    .wcard--big .wcard__foot {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 6px;
+      margin-top: 6px;
+    }
+
+    .wcard--big .wcard__price {
+      font-size: 22px;
+    }
+
+    .wcard--big .wcard__dur {
+      font-size: 14px;
+    }
+
+    .wcard--big .wcard__btn {
+      min-height: 48px;
+      margin-top: 6px;
+      padding: 0 28px;
+      background: var(--c-black);
+      color: var(--c-off-white);
+      font-size: 15px;
+    }
+
+    .wcards__note {
+      margin-top: 20px;
+    }
+  }
+</style>

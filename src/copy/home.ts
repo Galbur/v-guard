@@ -37,7 +37,7 @@ export const home = {
     title: 'PPF, тонування і car wrapping у Vroomshoop | V Guard Studio',
     description:
       'V Guard Studio у Vroomshoop, Твенте: PPF захист лаку, тонування і car wrapping. Подивіться ціни і наші роботи та отримайте оцінку.',
-    h1: 'PPF, тонування і car wrapping у Vroomshoop',
+    h1: 'PPF, тонування і обклеювання плівкою у Vroomshoop',
     sub: 'Захист і новий вигляд вашого авто. Студія у Твенте.',
     chips: [chipWarranty.uk, brands, chipPrep.uk],
     servicesTitle: 'Що ми робимо',
@@ -49,9 +49,9 @@ export const home = {
         more: 'Детальніше про тонування',
       },
       'car-wrapping': {
-        title: 'Car wrapping',
+        title: 'Обклеювання плівкою',
         text: 'Новий колір або фініш плівкою, повністю чи частково.',
-        more: 'Детальніше про car wrapping',
+        more: 'Детальніше про обклеювання',
       },
     } satisfies Record<ServiceSlug, { title: string; text: string; more: string }>,
     processTitle: 'Якість важливіша за швидкість',
