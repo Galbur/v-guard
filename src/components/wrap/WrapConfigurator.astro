@@ -3,8 +3,9 @@
 // Without JS: the still Sedan photo and a «vanaf» price list; the controls stay hidden.
 // With JS the controls appear at once; the canvas car (scripts/wrap-car.ts) and its body image
 // load only when the block nears the viewport, so the island never touches LCP.
-// 375: preview sticks to the top (the header scrolls away), the price bar above the
-// StickyMobileBar.
+// 375: preview sticks to the top (the header scrolls away). While the configurator is on
+// screen the StickyMobileBar slides away (transform, no layout shift) and the price bar takes
+// its place at the bottom; without JS the price bar stays above the StickyMobileBar.
 // No style attributes (CSP style-src 'self'): swatch colours are set through CSSOM in JS.
 import { Image } from 'astro:assets';
 import { linkPhone, waDigits } from '../../config/site.ts';
@@ -281,6 +282,7 @@ const vanParts = wrapParts.filter((p) => p.vanPrice);
     const pakket = $<HTMLButtonElement>('[data-pakket]');
 
     // Show the interactive UI; the no-JS price list goes away.
+    root.classList.add('is-live');
     $('[data-controls]').hidden = false;
     $('[data-fallback]').hidden = true;
     $('[data-rows]').hidden = false;
@@ -414,6 +416,12 @@ const vanParts = wrapParts.filter((p) => p.vanPrice);
       { threshold: 0 },
     );
     io.observe(root);
+
+    // 375: swap the StickyMobileBar for the price bar while the configurator grid is on screen.
+    const swap = new IntersectionObserver((entries) => {
+      document.documentElement.classList.toggle('cfg-in-view', entries.some((e) => e.isIntersecting));
+    });
+    swap.observe($('.cfg__grid'));
 
     root.addEventListener('click', (e) => {
       const btn = (e.target as Element).closest<HTMLButtonElement>('button');
@@ -771,7 +779,8 @@ const vanParts = wrapParts.filter((p) => p.vanPrice);
       0 0 0 4px var(--c-gold);
   }
 
-  /* Summary: at 375 a price bar that sticks above the StickyMobileBar. */
+  /* Summary: at 375 a price bar that sticks above the StickyMobileBar (no JS) or, with JS,
+     in its place at the bottom while the StickyMobileBar is slid away. */
   .cfg__summary {
     grid-row: 3;
     position: sticky;
@@ -784,6 +793,24 @@ const vanParts = wrapParts.filter((p) => p.vanPrice);
     padding: 10px var(--gutter) 12px;
     background: rgb(var(--c-overlay) / 0.96);
     border-top: 1px solid var(--c-line-dark);
+  }
+
+  @media (max-width: 63.99rem) {
+    .cfg.is-live .cfg__summary {
+      bottom: 0;
+      padding-bottom: calc(12px + env(safe-area-inset-bottom));
+    }
+  }
+
+  :global(html .sticky) {
+    transition:
+      transform 0.2s ease,
+      visibility 0.2s;
+  }
+
+  :global(html.cfg-in-view .sticky) {
+    transform: translateY(100%);
+    visibility: hidden;
   }
 
   .cfg__rows {
