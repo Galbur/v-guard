@@ -56,7 +56,7 @@ const config = {
   price,
   initial,
   bodies: wrapBodies.map((b) => ({ id: b.id, label: b.label[locale], formBody: b.formBody, url: carUrl(b.id) })),
-  parts: wrapParts.map((p) => ({ id: p.id, label: p.label[locale], formOption: p.formOption })),
+  parts: wrapParts.map((p) => ({ id: p.id, label: p.label[locale], formPart: p.formPart })),
   finishes: wrapFinishes.map((f) => ({ id: f.id, label: f.label[locale] })),
   colors,
   contact,
@@ -255,7 +255,7 @@ const vanParts = wrapParts.filter((p) => p.vanPrice);
     price: PriceConfig;
     initial: State;
     bodies: { id: WrapState['body']; label: string; formBody: string; url: string }[];
-    parts: { id: keyof WrapState['parts']; label: string; formOption: string }[];
+    parts: { id: keyof WrapState['parts']; label: string; formPart: string }[];
     finishes: { id: string; label: string }[];
     colors: { name: string; hex: string }[];
     contact: string;
@@ -311,8 +311,7 @@ const vanParts = wrapParts.filter((p) => p.vanPrice);
     function formOption(): string {
       if (st.full) return 'volledig';
       if (isPakket(cfg.price, st)) return 'pakket';
-      const chosen = chosenParts(st);
-      return chosen.length === 1 ? cfg.parts.find((p) => p.id === chosen[0])!.formOption : 'anders';
+      return 'delen';
     }
 
     function links() {
@@ -323,8 +322,11 @@ const vanParts = wrapParts.filter((p) => p.vanPrice);
         finish: st.finish,
         kleur: color().name,
       });
+      // Loose parts tick their checkboxes under «Losse delen» in the quote form.
       const chosen = chosenParts(st);
-      if (!st.full && formOption() === 'anders' && chosen.length) params.set('delen', chosen.join(','));
+      if (formOption() === 'delen' && chosen.length) {
+        params.set('delen', chosen.map((id) => cfg.parts.find((p) => p.id === id)!.formPart).join(','));
+      }
       order.href = `${cfg.contact}?${params}`;
       if (waLink && cfg.wa) {
         const lines = [
