@@ -71,6 +71,7 @@ export const uk: Record<UiKey, string> = {
   'form.sending': 'Надсилаємо',
   'form.err.required': 'Заповніть це поле.',
   'form.err.choose': 'Оберіть варіант.',
+  'form.err.parts': 'Оберіть хоча б одну деталь.',
   'form.err.phone': 'Вкажіть коректний номер телефону.',
   'form.err.email': 'Вкажіть коректний email.',
   'form.err.year': 'Вкажіть рік від 1950 до {max}.',
@@ -85,4 +86,5 @@ export const uk: Record<UiKey, string> = {
   'form.wa.option': 'Варіант',
   'form.wa.car': 'Авто',
   'form.wa.kleur': 'Колір або фініш',
+  'form.wa.delen': 'Деталі',
 };

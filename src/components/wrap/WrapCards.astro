@@ -48,7 +48,7 @@ const contact = localizedPath('contact', locale);
                 {isPriceShown(card.price) && <span>{fromLabel(card.price, locale)}</span>}
                 {card.duration && <span class="wcard__dur">{card.duration.value[locale]}</span>}
               </p>
-              <a class="btn wcard__btn" href={`${contact}?service=car-wrapping&option=${card.formOption}`}>
+              <a class="btn wcard__btn" href={`${contact}?service=car-wrapping&option=${card.formOption}${card.formPart ? `&delen=${card.formPart}` : ''}`}>
                 {button}
               </a>
             </div>

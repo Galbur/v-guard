@@ -69,6 +69,7 @@ export const nl = {
   'form.sending': 'Bezig met versturen',
   'form.err.required': 'Vul dit veld in.',
   'form.err.choose': 'Maak een keuze.',
+  'form.err.parts': 'Kies minimaal één deel.',
   'form.err.phone': 'Vul een geldig telefoonnummer in.',
   'form.err.email': 'Vul een geldig e-mailadres in.',
   'form.err.year': 'Vul een bouwjaar in tussen 1950 en {max}.',
@@ -83,6 +84,7 @@ export const nl = {
   'form.wa.option': 'Optie',
   'form.wa.car': 'Auto',
   'form.wa.kleur': 'Kleur of finish',
+  'form.wa.delen': 'Delen',
 } as const;
 
 export type UiKey = keyof typeof nl;

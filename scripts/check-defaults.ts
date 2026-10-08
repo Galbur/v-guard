@@ -72,7 +72,7 @@ function walk(node: unknown, path: string, file: string) {
 for (const [name, value] of Object.entries(siteModule)) walk(value, name, 'src/config/site.ts');
 for (const [name, value] of Object.entries(servicesModule)) {
   // derived aliases (tintFrom, wrapFrom, serviceFrom, ...) point at prices already listed
-  if (['tintFrom', 'wrapFrom', 'wrapFull', 'ppfFrom', 'serviceFrom'].includes(name)) continue;
+  if (['tintFrom', 'wrapFrom', 'wrapFull', 'ppfFrom', 'serviceFrom', 'wrapFormParts'].includes(name)) continue;
   walk(value, name, 'src/data/services.ts');
 }
 

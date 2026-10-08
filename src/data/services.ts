@@ -43,6 +43,8 @@ export function cellLabel(p: Price, locale: Locale): string {
 export interface ServiceOption {
   id: string;
   label: Localized;
+  /** Shown only for this service in the quote form (e.g. Touringcar for car wrapping). */
+  only?: ServiceSlug;
 }
 
 export interface Service {
@@ -82,14 +84,12 @@ export const services: Service[] = [
     order: 3,
     // UA: native term «обклеювання плівкою», not «car wrapping» (step W3).
     label: { nl: 'Car wrapping', uk: 'Обклеювання плівкою' },
-    // Mockup «VG Site 04 Car wrapping v2»: one option per card; the colour or finish goes into
-    // the separate «kleur» field of step 3.
+    // Step W4: «Losse delen» holds checkboxes for the parts (wrapFormParts); the colour or
+    // finish goes into the separate «kleur» field of step 3.
     options: [
       { id: 'volledig', label: { nl: 'Volledige wrap', uk: 'Повне обклеювання' } },
       { id: 'pakket', label: { nl: 'Black styling pakket', uk: 'Антихром-пакет' } },
-      { id: 'chrome-delete', label: { nl: 'Chrome delete', uk: 'Антихром' } },
-      { id: 'dak', label: { nl: 'Dak', uk: 'Дах' } },
-      { id: 'spiegelkappen', label: { nl: 'Spiegelkappen', uk: 'Дзеркала' } },
+      { id: 'delen', label: { nl: 'Losse delen', uk: 'Окремі деталі' } },
       { id: 'anders', label: { nl: 'Iets anders', uk: 'Інше' } },
     ],
   },
@@ -104,10 +104,9 @@ export const bodyTypes: ServiceOption[] = [
   { id: 'stationwagon', label: { nl: 'Stationwagon', uk: 'Універсал' } },
   { id: 'coupe', label: { nl: 'Coupé', uk: 'Купе' } },
   { id: 'suv', label: { nl: 'SUV', uk: 'SUV' } },
-  { id: 'bus', label: { nl: 'Bus', uk: 'Бус' } },
-  // Wrap configurator bodies (step W3)
-  { id: 'personenbus', label: { nl: 'Personenbus', uk: 'Мікроавтобус' } },
-  { id: 'touringcar', label: { nl: 'Touringcar', uk: 'Автобус' } },
+  // One item for vans and passenger buses, all services (step W4).
+  { id: 'bus', label: { nl: 'Bus / personenbus', uk: 'Бус / мікроавтобус' } },
+  { id: 'touringcar', label: { nl: 'Touringcar', uk: 'Автобус' }, only: 'car-wrapping' },
   { id: 'anders', label: { nl: 'Anders', uk: 'Інше' } },
 ];
 
@@ -319,7 +318,7 @@ export const wrapBodies: WrapBody[] = [
   { id: 'suv', formBody: 'suv', label: { nl: 'SUV', uk: 'Позашляховик (SUV)' }, factor: factor(1.3), van: false },
   {
     id: 'bus',
-    formBody: 'personenbus',
+    formBody: 'bus',
     label: { nl: 'Personenbus', uk: 'Мікроавтобус' },
     factor: factor(1.5),
     van: true,
@@ -335,9 +334,11 @@ export const wrapBodies: WrapBody[] = [
 
 export interface WrapPart {
   id: WrapPartId;
-  /** Quote form option for this part alone. */
-  formOption: string;
+  /** Quote form checkbox under «Losse delen». */
+  formPart: string;
   label: Localized;
+  /** Label of the quote form checkbox. */
+  formLabel: Localized;
   price: Price;
   /** Personenbus and touringcar; missing: same as price. */
   vanPrice?: Price;
@@ -346,22 +347,25 @@ export interface WrapPart {
 export const wrapParts: WrapPart[] = [
   {
     id: 'dak',
-    formOption: 'dak',
+    formPart: 'dak',
     label: { nl: 'Dak', uk: 'Дах' },
+    formLabel: { nl: 'Dak', uk: 'Дах' },
     price: price(249, 'default', 'дах, легкове авто', { from: true }),
     vanPrice: price(349, 'default', 'дах, бус і автобус', { from: true }),
   },
   {
     id: 'spiegel',
-    formOption: 'spiegelkappen',
+    formPart: 'spiegelkappen',
     label: { nl: 'Spiegelkappen', uk: 'Дзеркала' },
+    formLabel: { nl: 'Spiegelkappen', uk: 'Дзеркала' },
     price: price(69, 'default', 'ковпаки дзеркал, легкове авто', { from: true }),
     vanPrice: price(89, 'default', 'дзеркала, бус і автобус', { from: true }),
   },
   {
     id: 'chroom',
-    formOption: 'chrome-delete',
+    formPart: 'chrome-delete',
     label: { nl: 'Chroom (ontchromen)', uk: 'Хром (антихром)' },
+    formLabel: { nl: 'Chrome delete', uk: 'Антихром' },
     price: price(149, 'default', 'ринок від €175', { from: true }),
   },
 ];
@@ -469,6 +473,8 @@ export interface WrapCard {
   id: string;
   /** Quote form option preselected by the card button. */
   formOption: string;
+  /** For «Losse delen»: the part checkbox to tick. */
+  formPart?: string;
   title: Localized;
   description: Localized;
   price: Price;
@@ -478,6 +484,9 @@ export interface WrapCard {
 }
 
 const [roofPart, mirrorPart, chromePart] = wrapParts;
+
+/** Checkboxes under «Losse delen» in quote form step 3, in mockup order. */
+export const wrapFormParts: WrapPart[] = [chromePart, roofPart, mirrorPart];
 
 /** «Wat wil je laten wrappen?»: one large card and four. */
 export const wrapCards: WrapCard[] = [
@@ -504,7 +513,8 @@ export const wrapCards: WrapCard[] = [
   },
   {
     id: 'chrome-delete',
-    formOption: 'chrome-delete',
+    formOption: 'delen',
+    formPart: 'chrome-delete',
     title: { nl: 'Ontchromen (chrome delete)', uk: 'Антихром' },
     description: { nl: 'Chroomdelen in zwart of kleur.', uk: 'Хромовані деталі в чорний або колір.' },
     price: chromePart.price,
@@ -512,7 +522,8 @@ export const wrapCards: WrapCard[] = [
   },
   {
     id: 'dak',
-    formOption: 'dak',
+    formOption: 'delen',
+    formPart: 'dak',
     title: { nl: 'Dak', uk: 'Обклеювання даху' },
     description: {
       nl: 'Zwart dak voor een sportieve two-tone look.',
@@ -523,7 +534,8 @@ export const wrapCards: WrapCard[] = [
   },
   {
     id: 'spiegelkappen',
-    formOption: 'spiegelkappen',
+    formOption: 'delen',
+    formPart: 'spiegelkappen',
     title: { nl: 'Spiegelkappen', uk: 'Обклеювання дзеркал' },
     description: {
       nl: 'Spiegelkappen in zwart, carbon look of kleur.',
@@ -605,6 +617,10 @@ export function optionDetail(service: ServiceSlug, optionId: string, locale: Loc
     if (optionId === 'achterzijde') return withDuration(tintFrom, tint.duration);
     const row = tintOptionPrices.find((r) => r.formOption === optionId);
     return row && isPriceShown(row.price) ? cellLabel(row.price, locale) : '';
+  }
+  if (optionId === 'delen') {
+    const cheapest = wrapFormParts.reduce((min, p) => (p.price.amount < min.price.amount ? p : min)).price;
+    return isPriceShown(cheapest) ? fromLabel(cheapest, locale) : '';
   }
   const card = wrapCards.find((c) => c.formOption === optionId);
   return card ? withDuration(card.price, card.duration) : '';

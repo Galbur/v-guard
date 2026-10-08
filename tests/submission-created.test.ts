@@ -48,14 +48,25 @@ test('wrap request carries the colour or finish line after the option', () => {
     ...data,
     dienst: 'car-wrapping',
     optie: 'pakket',
-    carrosserie: 'personenbus',
+    carrosserie: 'bus',
     kleur: 'Midnight Blue, Satijn',
     opmerking: '',
   });
   assert.match(
     message,
-    /^Dienst: Car wrapping\nOptie: Black styling pakket\nKleur\/finish: Midnight Blue, Satijn\nAuto: BMW X5 2021 Personenbus$/m,
+    /^Dienst: Car wrapping\nOptie: Black styling pakket\nKleur\/finish: Midnight Blue, Satijn\nAuto: BMW X5 2021 Bus \/ personenbus$/m,
   );
+});
+
+test('wrap «Losse delen» lists the parts on their own line', () => {
+  const message = formatMessage({
+    ...data,
+    dienst: 'car-wrapping',
+    optie: 'delen',
+    delen: 'dak,spiegelkappen',
+    carrosserie: 'touringcar',
+  });
+  assert.match(message, /^Optie: Losse delen\nDelen: dak, spiegelkappen\nAuto: BMW X5 2021 Touringcar$/m);
 });
 
 test('no colour line when the field is empty', () => {

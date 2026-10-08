@@ -3,10 +3,20 @@
 // Without JS all steps are visible and the form posts natively to Netlify; with JS it is a
 // 4-step flow with validation, «Terug» that keeps values, ?service= / &option= preselect,
 // and a success state with the WhatsApp continuation. The wrap configurator also passes
-// &body= (carrosserie), &finish=, &kleur= and &delen= (step W3).
+// &body= (carrosserie), &finish=, &kleur= and &delen= (step W3). Car wrapping «Losse delen»
+// has part checkboxes (step W4); on submit their ids go into the hidden «delen» field.
 import Icon from './Icon.astro';
 import { linkPhone, waDigits } from '../config/site.ts';
-import { adviceOption, bodyTypes, optionDetail, services, wrapFinishes, wrapParts } from '../data/services.ts';
+import {
+  adviceOption,
+  bodyTypes,
+  fromLabel,
+  isPriceShown,
+  optionDetail,
+  services,
+  wrapFinishes,
+  wrapFormParts,
+} from '../data/services.ts';
 import { t, type UiKey } from '../i18n/index.ts';
 import { localizedPath, type Locale } from '../i18n/routes.ts';
 
@@ -35,6 +45,8 @@ const messageKeys: UiKey[] = [
   'form.wa.option',
   'form.wa.car',
   'form.wa.kleur',
+  'form.wa.delen',
+  'form.err.parts',
 ];
 const messages = Object.fromEntries(messageKeys.map((k) => [k, t(k, locale)]));
 // Empty without TEST_PHONE: the WhatsApp continuation button is then not rendered.
@@ -43,7 +55,7 @@ const pagePath = localizedPath('contact', locale);
 // Labels for the wrap configurator prefill (finish id and part ids in the URL).
 const wrapLabels = {
   finishes: Object.fromEntries(wrapFinishes.map((f) => [f.id, f.label[locale]])),
-  parts: Object.fromEntries(wrapParts.map((p) => [p.id, p.label[locale]])),
+  parts: Object.fromEntries(wrapFormParts.map((p) => [p.formPart, p.formLabel[locale]])),
 };
 ---
 
@@ -140,7 +152,7 @@ const wrapLabels = {
         <div class="pills">
           {
             bodyTypes.map((b) => (
-              <label class="pill">
+              <label class="pill" data-only-for={b.only}>
                 <input
                   class="visually-hidden"
                   type="radio"
@@ -167,16 +179,32 @@ const wrapLabels = {
             {s.options.map((o) => {
               const detail = optionDetail(s.slug, o.id, locale);
               return (
-                <label class="option">
-                  <input class="visually-hidden" type="radio" name="optie" value={o.id} aria-describedby="err-optie" />
-                  <span>
-                    <span class="option__title">{o.label[locale]}</span>
-                    {detail && <span class="option__detail">{detail}</span>}
-                  </span>
-                  <Icon name="check-circle" size={24} class="option__check" />
-                </label>
+                <>
+                  <label class="option">
+                    <input class="visually-hidden" type="radio" name="optie" value={o.id} aria-describedby="err-optie" />
+                    <span>
+                      <span class="option__title">{o.label[locale]}</span>
+                      {detail && <span class="option__detail">{detail}</span>}
+                    </span>
+                    <Icon name="check-circle" size={24} class="option__check" />
+                  </label>
+                  {s.slug === 'car-wrapping' && o.id === 'delen' && (
+                    <fieldset class="parts" data-parts>
+                      <legend class="visually-hidden">{o.label[locale]}</legend>
+                      {wrapFormParts.map((p) => (
+                        <label class="part">
+                          <input type="checkbox" name="deel" value={p.formPart} aria-describedby="err-deel" />
+                          <span class="part__title">{p.formLabel[locale]}</span>
+                          {isPriceShown(p.price) && <span class="part__detail">{fromLabel(p.price, locale)}</span>}
+                        </label>
+                      ))}
+                      <p class="field__error" id="err-deel" hidden />
+                    </fieldset>
+                  )}
+                </>
               );
             })}
+            {s.slug === 'car-wrapping' && <input type="hidden" name="delen" value="" />}
             {s.slug === 'car-wrapping' && (
               <div class="field options__extra">
                 <label for="f-kleur">{t('form.kleur', locale)}</label>
@@ -278,6 +306,9 @@ const wrapLabels = {
     const optionGroups = Array.from(form.querySelectorAll<HTMLElement>('[data-options-for]'));
     const maxYear = new Date().getFullYear() + 1;
     let current = 0;
+    const wrapLabels: { finishes: Record<string, string>; parts: Record<string, string> } = JSON.parse(
+      root.dataset.wrapLabels ?? '{"finishes":{},"parts":{}}',
+    );
 
     form.noValidate = true;
     root.dataset.enhanced = '';
@@ -304,6 +335,28 @@ const wrapLabels = {
         group.hidden = !active;
         group.querySelectorAll<HTMLInputElement>('input').forEach((i) => (i.disabled = !active));
       }
+      // Bodies for one service only (Touringcar: car wrapping).
+      form.querySelectorAll<HTMLElement>('[data-only-for]').forEach((pill) => {
+        const on = pill.dataset.onlyFor === service();
+        const input = pill.querySelector('input')!;
+        pill.hidden = !on;
+        input.disabled = !on;
+        if (!on) input.checked = false;
+      });
+      syncParts();
+    }
+
+    const optie = () => form.querySelector<HTMLInputElement>('input[name="optie"]:checked:not(:disabled)')?.value ?? '';
+    const partsBox = form.querySelector<HTMLElement>('[data-parts]');
+    const chosenParts = () =>
+      Array.from(form.querySelectorAll<HTMLInputElement>('input[name="deel"]:checked:not(:disabled)')).map((i) => i.value);
+
+    // Part checkboxes show and submit only under «Losse delen».
+    function syncParts() {
+      if (!partsBox) return;
+      const on = service() === 'car-wrapping' && optie() === 'delen';
+      partsBox.hidden = !on;
+      partsBox.querySelectorAll<HTMLInputElement>('input').forEach((i) => (i.disabled = !on));
     }
 
     const visibleSteps = () => steps.filter((s) => s.dataset.step !== 'option' || hasOptions());
@@ -336,6 +389,9 @@ const wrapLabels = {
         errors.push(['carrosserie', value('carrosserie') ? null : messages['form.err.choose']]);
       } else if (step === 'option') {
         errors.push(['optie', checkedLabel('optie') ? null : messages['form.err.choose']]);
+        if (service() === 'car-wrapping' && optie() === 'delen') {
+          errors.push(['deel', chosenParts().length ? null : messages['form.err.parts']]);
+        }
       } else {
         errors.push(['naam', value('naam') ? null : messages['form.err.required']]);
         const phone = value('telefoon');
@@ -380,6 +436,7 @@ const wrapLabels = {
         syncOptions();
         show(current, false);
       }
+      if (target.name === 'optie') syncParts();
       if (target.type === 'radio' || target.type === 'checkbox') setError(target.name, null);
     });
 
@@ -406,6 +463,8 @@ const wrapLabels = {
       submit.disabled = true;
       submit.textContent = messages['form.sending'];
       try {
+        const delenField = form.querySelector<HTMLInputElement>('input[name="delen"]');
+        if (delenField) delenField.value = chosenParts().join(',');
         const body = new URLSearchParams(new FormData(form) as unknown as Record<string, string>);
         const res = await fetch('/', {
           method: 'POST',
@@ -430,6 +489,10 @@ const wrapLabels = {
           messages['form.wa.intro'],
           `${messages['form.wa.service']}: ${checkedLabel('dienst')}`,
           checkedLabel('optie') && `${messages['form.wa.option']}: ${checkedLabel('optie')}`,
+          chosenParts().length &&
+            `${messages['form.wa.delen']}: ${chosenParts()
+              .map((id) => (wrapLabels.parts[id] ?? id).toLowerCase())
+              .join(', ')}`,
           value('kleur') && `${messages['form.wa.kleur']}: ${value('kleur')}`,
           `${messages['form.wa.car']}: ${[car, checkedLabel('carrosserie')].filter(Boolean).join(', ')}`,
         ].filter(Boolean);
@@ -447,8 +510,13 @@ const wrapLabels = {
     );
     if (preService) preService.checked = true;
     syncOptions();
+    // Old wrap links (?option=dak) open «Losse delen» with that part ticked.
+    let preOptionId = params.get('option') ?? params.get('optie') ?? '';
+    const legacyPart =
+      preService?.value === 'car-wrapping' && ['dak', 'spiegelkappen', 'chrome-delete'].includes(preOptionId) ? preOptionId : null;
+    if (legacyPart) preOptionId = 'delen';
     const preOption = form.querySelector<HTMLInputElement>(
-      `input[name="optie"]:not(:disabled)[value="${CSS.escape(params.get('option') ?? params.get('optie') ?? '')}"]`,
+      `input[name="optie"]:not(:disabled)[value="${CSS.escape(preOptionId)}"]`,
     );
     if (preOption) preOption.checked = true;
     // Wrap configurator: carrosserie, colour with finish, and the chosen parts.
@@ -456,18 +524,15 @@ const wrapLabels = {
       `input[name="carrosserie"][value="${CSS.escape(params.get('body') ?? '')}"]`,
     );
     if (preBody) preBody.checked = true;
-    const wrapLabels: { finishes: Record<string, string>; parts: Record<string, string> } = JSON.parse(
-      root.dataset.wrapLabels ?? '{"finishes":{},"parts":{}}',
-    );
     const kleur = form.querySelector<HTMLInputElement>('[name="kleur"]');
     const preKleur = [params.get('kleur'), wrapLabels.finishes[params.get('finish') ?? '']].filter(Boolean).join(', ');
     if (kleur && preKleur && !kleur.disabled) kleur.value = preKleur.slice(0, 120);
-    const opmerking = form.querySelector<HTMLTextAreaElement>('[name="opmerking"]');
-    const delen = (params.get('delen') ?? '')
-      .split(',')
-      .map((id) => wrapLabels.parts[id])
-      .filter(Boolean);
-    if (opmerking && delen.length && preService?.value === 'car-wrapping' && !opmerking.value) opmerking.value = delen.join(', ');
+    // Parts tick their checkboxes under «Losse delen».
+    for (const id of (params.get('delen') ?? '').split(',').concat(legacyPart ?? [])) {
+      const box = form.querySelector<HTMLInputElement>(`input[name="deel"][value="${CSS.escape(id)}"]`);
+      if (box && id) box.checked = true;
+    }
+    syncParts();
     show(preService ? 1 : 0, false);
   }
 
@@ -665,6 +730,53 @@ const wrapLabels = {
 
   .options__extra {
     margin-top: 6px;
+  }
+
+  /* Car wrapping «Losse delen»: part checkboxes under the option */
+  .parts {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+    margin: 0;
+    padding: 0 0 4px 16px;
+    border: 0;
+  }
+
+  .part {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 48px;
+    padding: 0 14px;
+    border: 1px solid var(--c-muted);
+    border-radius: var(--r-btn);
+    background: var(--c-white);
+    cursor: pointer;
+  }
+
+  .part:has(input:checked) {
+    border: 2px solid var(--c-gold);
+    padding: 0 13px;
+  }
+
+  .part input {
+    flex: none;
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    accent-color: var(--c-gold-text);
+  }
+
+  .part__title {
+    flex: 1;
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  .part__detail {
+    font-size: 13px;
+    color: var(--c-muted-light);
   }
 
   .option {
