@@ -2,7 +2,7 @@
 import { trust } from '../config/site.ts';
 import type { Locale } from '../data/fact.ts';
 import type { ServiceSlug } from '../data/services.ts';
-import { chipPrep, chipWarranty, prepSteps, type Step } from './shared.ts';
+import { chipPrep, chipWarranty, type Step } from './shared.ts';
 
 const brands = trust.brands.value.join(', ');
 
@@ -12,27 +12,38 @@ export const home = {
     description:
       'V Guard Studio in Vroomshoop, Twente: PPF lakbescherming, ramen blinderen en car wrapping. Bekijk prijzen en ons werk en vraag een offerte aan.',
     h1: 'PPF, ramen blinderen en car wrapping in Vroomshoop',
-    sub: 'Bescherming en een nieuwe look voor je auto. Studio in Twente.',
+    sub: 'Bescherming en een nieuwe uitstraling voor je auto. Onze studio vind je in Twente.',
     chips: [chipWarranty.nl, brands, chipPrep.nl],
     servicesTitle: 'Wat we doen',
     cards: {
-      ppf: { title: 'PPF lakbescherming', text: 'Transparante folie die je lak beschermt tegen steenslag en krassen.', more: 'Meer over PPF' },
-      'ramen-blinderen': { title: 'Ramen blinderen', text: 'Meer privacy en minder felle zon in je auto.', more: 'Meer over ramen blinderen' },
+      ppf: { title: 'PPF-lakbescherming', text: 'Transparante beschermfolie tegen steenslag en lichte krassen.', more: 'Meer over PPF' },
+      'ramen-blinderen': {
+        title: 'Ramen blinderen',
+        text: 'Meer privacy en minder hinder van fel zonlicht.',
+        more: 'Meer over ramen blinderen',
+      },
       'car-wrapping': {
         title: 'Car wrapping',
-        text: 'Nieuwe kleur of finish met folie, volledig of gedeeltelijk.',
+        text: 'Een nieuwe kleur of afwerking voor je hele auto of losse onderdelen.',
         more: 'Meer over car wrapping',
       },
     } satisfies Record<ServiceSlug, { title: string; text: string; more: string }>,
     processTitle: 'Kwaliteit boven snelheid',
-    processSub: 'Zo werken we bij PPF en wraps.',
-    steps: prepSteps.nl,
-    recentTitle: 'Recent werk',
+    processSub: 'Zo brengen we PPF en wrapfolie aan.',
+    // Home only: the PPF page has its own steps.
+    steps: [
+      { title: 'Wassen', text: 'We reinigen de auto grondig in meerdere stappen.' },
+      { title: 'Kleibehandeling', text: 'Met reinigingsklei verwijderen we vastzittend vuil van de lak.' },
+      { title: 'Ontvetten', text: 'We ontvetten de lak zodat de folie goed hecht.' },
+      { title: 'Aanbrengen', text: 'We brengen de folie zorgvuldig aan op de voorbereide lak.' },
+      { title: 'Controle', text: 'We controleren de randen en het oppervlak voordat je de auto ophaalt.' },
+    ] satisfies Step[],
+    recentTitle: 'Recent uitgevoerde projecten',
     whyTitle: 'Waarom V Guard Studio',
     reviewsTitle: 'Wat klanten zeggen',
     reviewsLink: 'Alle reviews op Google',
-    quoteTitle: 'Waarvoor wil je een offerte?',
-    quoteText: 'Kies een dienst en vertel ons welke auto je hebt.',
+    quoteTitle: 'Waarvoor wil je een offerte aanvragen?',
+    quoteText: 'Kies een dienst en vertel ons wat voor auto je hebt.',
   },
   uk: {
     title: 'PPF, тонування і обклеювання плівкою у Vroomshoop | V Guard Studio',

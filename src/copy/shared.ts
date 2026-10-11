@@ -46,8 +46,8 @@ export type TrustIcon = 'shield' | 'award' | 'certificate' | 'layers';
 /** «Waarom V Guard Studio» / «Garantie en folies» (F6, F7, F8, F9). */
 export const trustItems: Record<Locale, { icon: TrustIcon; text: string }[]> = {
   nl: [
-    { icon: 'shield', text: `${years} jaar garantie op ons werk` },
-    { icon: 'award', text: `Fabrieksgarantie op de folie, tot ${filmYears.ppf} jaar` },
+    { icon: 'shield', text: `${years} jaar garantie op de montage` },
+    { icon: 'award', text: `Tot ${filmYears.ppf} jaar fabrieksgarantie op de folie` },
     ...(trust.certifiedPpf.value ? [{ icon: 'certificate' as const, text: 'Gecertificeerd voor PPF' }] : []),
     { icon: 'layers', text: `Folies van ${join(trust.brands.value, 'en')}` },
   ],
@@ -60,7 +60,7 @@ export const trustItems: Record<Locale, { icon: TrustIcon; text: string }[]> = {
 };
 
 export const chipWarranty: Localized = { nl: `${years} jaar garantie`, uk: `${years} роки гарантії` };
-export const chipPrep: Localized = { nl: '5-staps voorbereiding', uk: 'Монтаж у 5 етапів' };
+export const chipPrep: Localized = { nl: 'Werkwijze in 5 stappen', uk: 'Монтаж у 5 етапів' };
 
 export const headings = {
   process: { nl: 'Zo werken we', uk: 'Як ми працюємо' },
