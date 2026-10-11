@@ -142,7 +142,7 @@ const ppfParts = [
   { label: { nl: 'Spiegelkappen', uk: 'Корпуси дзеркал' }, price: price(79, 'default', 'ціни за деталь', { from: true }) },
 ];
 
-/** «Bijv. koplampen», «instaplijsten», ... from the priced parts; no prefix: «Фари», «пороги», ... */
+/** «Koplampen», «instaplijsten», ... from the priced parts; an optional prefix goes before the first. */
 function partExamples(locale: Locale, prefix?: string): string[] {
   return ppfParts.map((p, i) => {
     const label = p.label[locale].toLowerCase();
@@ -157,7 +157,7 @@ export const ppfPackages: Package[] = [
     formOption: 'full-front',
     title: { nl: 'Full Front', uk: 'Full Front' },
     description: {
-      nl: 'De voorkant, waar de meeste steenslag terechtkomt.',
+      nl: 'Bescherm de voorzijde tegen steenslag.',
       uk: 'Захист передньої частини від каміння та сколів.',
     },
     highlight: 'front',
@@ -176,7 +176,7 @@ export const ppfPackages: Package[] = [
     id: 'full-body',
     formOption: 'full-body',
     title: { nl: 'Full Body', uk: 'Full Body' },
-    description: { nl: 'Alle gelakte delen van de auto onder folie.', uk: 'Захист усіх пофарбованих деталей кузова.' },
+    description: { nl: 'Bescherming voor alle gelakte carrosseriedelen.', uk: 'Захист усіх пофарбованих деталей кузова.' },
     highlight: 'full',
     zones: fact(
       { nl: ['Alle gelakte carrosseriedelen'], uk: ['Усі пофарбовані деталі кузова'] },
@@ -190,11 +190,11 @@ export const ppfPackages: Package[] = [
     id: 'gedeeltelijk',
     formOption: 'gedeeltelijk',
     title: { nl: 'Custom (losse delen)', uk: 'Custom (окремі деталі)' },
-    description: { nl: 'Alleen de delen die jij kiest.', uk: 'Захист обраних деталей автомобіля.' },
+    description: { nl: 'Bescherm alleen de onderdelen die je wilt.', uk: 'Захист обраних деталей автомобіля.' },
     highlight: 'spots',
     // Zones = the priced parts, so «vanaf» matches the parts listed on the card.
     zones: fact(
-      { nl: partExamples('nl', 'Bijv.'), uk: partExamples('uk') },
+      { nl: partExamples('nl'), uk: partExamples('uk') },
       'default',
       'деталі з ppfParts (ціни за деталь)',
     ),

@@ -4,7 +4,7 @@
 import { trust } from '../config/site.ts';
 import { euro, type Locale } from '../data/fact.ts';
 import { ppfCare, ppfPackages } from '../data/services.ts';
-import { headings, join, prepSteps, type CtaBand, type Faq, type Step, type TrustIcon } from './shared.ts';
+import { headings, join, type CtaBand, type Faq, type Step, type TrustIcon } from './shared.ts';
 
 const [front, body, custom] = ppfPackages;
 const years = trust.workWarrantyYears.value;
@@ -17,21 +17,28 @@ export const ppf = {
   nl: {
     title: 'PPF Vroomshoop: lakbescherming tegen steenslag | V Guard Studio',
     description: `PPF en steenslagfolie in Vroomshoop, Twente: Full Front vanaf ${price.front}, Full Body of losse delen. Voorbereiding in 5 stappen. Vraag een prijs voor jouw auto aan.`,
-    h1: 'PPF in Vroomshoop: bescherm je lak tegen steenslag',
-    sub: 'Transparante folie voor de voorkant, losse delen of de hele auto.',
+    h1: 'PPF in Vroomshoop: bescherm je autolak tegen steenslag',
+    sub: 'Transparante beschermfolie voor de voorzijde, losse onderdelen of de hele auto.',
     heroAlt: 'Auto bij de studio van V Guard Studio in Vroomshoop',
     whatsapp: 'Hoi V Guard, ik wil een prijs voor PPF op mijn auto.',
-    chips: ['5 stappen voorbereiding', `${years} jaar garantie op werk`, join(brands, 'en')],
+    chips: ['Aanbrengen in 5 stappen', `${years} jaar garantie op montage`, join(brands, 'en')],
     answer:
-      "PPF (paint protection film), ook lakbeschermingsfolie of steenslagfolie genoemd, is een transparante folie op de lak. De folie vangt steenslag en lichte krassen op. V Guard Studio in Vroomshoop brengt PPF aan voor auto's uit heel Twente.",
-    packagesTitle: 'Kies hoeveel je beschermt',
-    packagesNote: 'De prijs hangt af van model, lakconditie en dekking.',
-    processTitle: 'Zo brengen we PPF aan',
+      "PPF (Paint Protection Film), ook wel lakbeschermingsfolie genoemd, beschermt je autolak tegen steenslag en lichte krassen. V Guard Studio in Vroomshoop brengt PPF aan op auto's van klanten uit heel Twente.",
+    packagesTitle: 'Kies jouw PPF-pakket',
+    packagesNote: 'De prijs hangt af van het automodel, de staat van de lak en het te beschermen oppervlak.',
+    processTitle: 'Zo brengen wij PPF aan',
     processSub: 'Kwaliteit boven snelheid.',
-    steps: prepSteps.nl,
+    // PPF only: Home keeps the shared prepSteps wording.
+    steps: [
+      { title: 'Wassen', text: 'We reinigen de auto grondig in meerdere stappen.' },
+      { title: 'Kleibehandeling', text: 'Met speciale reinigingsklei verwijderen we hardnekkig vuil van het lakoppervlak.' },
+      { title: 'Ontvetten', text: 'We ontvetten de lak voor een goede hechting van de folie.' },
+      { title: 'Aanbrengen', text: 'We brengen de folie zorgvuldig aan op de voorbereide lak.' },
+      { title: 'Controle', text: 'We controleren de randen en het oppervlak voordat je de auto ophaalt.' },
+    ] satisfies Step[],
     galleryTitle: 'PPF van V Guard',
     trust: [
-      { icon: 'shield', text: `${years} jaar garantie op ons werk.` },
+      { icon: 'shield', text: `${years} jaar garantie op de montage.` },
       { icon: 'award', text: `Fabrieksgarantie op de folie: ${join(filmYears, 'of')} jaar, afhankelijk van het merk.` },
       ...(trust.certifiedPpf.value ? [{ icon: 'certificate' as const, text: 'Gecertificeerd voor het aanbrengen van PPF.' }] : []),
       { icon: 'layers', text: `Wij werken met folies van ${join(brands, 'en')}.` },
@@ -39,10 +46,10 @@ export const ppf = {
     faq: [
       {
         q: 'Wat kost PPF voor mijn auto?',
-        a: `Dat hangt af van het model, de conditie van de lak en hoeveel delen je laat beschermen. Full Front kost vanaf ${price.front}, Full Body vanaf ${price.body}, losse delen vanaf ${price.custom}. Stuur merk, model en bouwjaar, dan krijg je een prijs voor jouw auto.`,
+        a: `De prijs hangt af van je automodel, de staat van de lak en het te beschermen oppervlak. Full Front vanaf ${price.front}, Full Body vanaf ${price.body} en losse onderdelen vanaf ${price.custom}. Stuur je merk, model en bouwjaar door voor een prijs op maat.`,
       },
       {
-        q: 'Is alleen de voorbumper genoeg?',
+        q: 'Is alleen de voorbumper beschermen voldoende?',
         a: 'De bumper vangt veel steenslag, maar de motorkap, voorschermen en spiegels worden ook geraakt. Met Full Front bescherm je de hele voorkant in één keer, zodat er geen onbeschermde randen midden op de motorkap zitten.',
       },
       {
@@ -50,23 +57,23 @@ export const ppf = {
         a: 'Een keramische coating is een dunne, harde laag voor glans en makkelijker wassen. PPF is een dikkere folie die steenslag en krassen opvangt voordat ze de lak raken. Coating beschermt de glans, PPF beschermt de lak zelf.',
       },
       {
-        q: 'Hoe lang duurt het aanbrengen?',
+        q: 'Hoe lang duurt het aanbrengen van PPF?',
         a: `Full Front duurt meestal ${front.duration.value.nl}, Full Body ${body.duration.value.nl}. Bij de offerte hoor je wanneer je auto klaar is.`,
       },
       { q: 'Hoe onderhoud ik een auto met PPF?', a: ppfCare.value.nl },
       {
-        q: 'Welke garantie krijg ik en wordt de folie geel?',
+        q: 'Welke garantie krijg ik? Kan de folie vergelen?',
         a: `Op ons werk geven we ${years} jaar garantie. Op de folie geldt daarnaast de fabrieksgarantie van ${join(filmYears, 'of')} jaar, afhankelijk van het merk, ook tegen ${film.covers.nl}.`,
       },
       {
-        q: 'Verbergt PPF bestaande steenslag?',
+        q: 'Maakt PPF bestaande steenslagschade onzichtbaar?',
         a: 'Nee. Bestaande steenslag en krassen blijven onder de folie zichtbaar, want de folie is transparant. Wil je een strak resultaat, laat de schade dan eerst herstellen.',
       },
     ] satisfies Faq[],
     faqTitle: headings.faq.nl,
     cta: {
-      title: 'PPF voor jouw auto?',
-      text: 'Uit Vroomshoop, Almelo, Hardenberg of Ommen? Stuur merk, model en bouwjaar.',
+      title: 'Jouw auto beschermen met PPF?',
+      text: 'Woon je in Vroomshoop, Almelo, Hardenberg of Ommen? Stuur je merk, model en bouwjaar door.',
     } satisfies CtaBand,
   },
   uk: {
