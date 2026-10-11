@@ -12,7 +12,6 @@ import TrustBlock from '../components/TrustBlock.astro';
 import FAQ from '../components/FAQ.astro';
 import CtaBand from '../components/CtaBand.astro';
 import { ppf } from '../copy/ppf.ts';
-import { headings, prepSteps } from '../copy/shared.ts';
 import { ppfPackages } from '../data/services.ts';
 import { t } from '../i18n/index.ts';
 import { localizedPath, type Locale } from '../i18n/routes.ts';
@@ -56,7 +55,7 @@ const schema = [
   <ProcessSteps
     title={c.processTitle}
     sub={c.processSub}
-    steps={prepSteps[locale]}
+    steps={c.steps}
     photos={['ppf-step-wash.webp', 'ppf-step-clay.webp', 'ppf-step-degrease.webp', 'ppf-step-install.jpg', 'ppf-step-check.webp']}
   />
   <ProjectGallery
@@ -66,6 +65,6 @@ const schema = [
     more={{ href: localizedPath('projects', locale), label: t('cta.allProjects', locale) }}
   />
   <TrustBlock items={c.trust} />
-  <FAQ title={headings.faq[locale]} items={c.faq} />
+  <FAQ title={c.faqTitle} items={c.faq} />
   <CtaBand locale={locale} title={c.cta.title} text={c.cta.text} service="ppf" waText={c.whatsapp} />
 </Base>
