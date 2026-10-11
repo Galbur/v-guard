@@ -423,31 +423,31 @@ export const wrapFinishes: WrapFinish[] = [
   {
     id: 'glans',
     label: { nl: 'Glans', uk: 'Глянець' },
-    text: { nl: 'diep en spiegelend', uk: 'насичений дзеркальний блиск' },
+    text: { nl: 'diepe, spiegelende glans', uk: 'насичений дзеркальний блиск' },
     image: illustration('wrap-fin-glans.png'),
   },
   {
     id: 'satijn',
     label: { nl: 'Satijn', uk: 'Сатин' },
-    text: { nl: 'zachte glans, strak en modern', uk: 'м’який блиск, стриманий вигляд' },
+    text: { nl: 'subtiele glans, strak en modern', uk: 'м’який блиск, стриманий вигляд' },
     image: illustration('wrap-fin-satijn.png'),
   },
   {
     id: 'mat',
     label: { nl: 'Mat', uk: 'Мат' },
-    text: { nl: 'geen reflectie, stoer', uk: 'без блиску, виразний вигляд' },
+    text: { nl: 'zonder glans, stoere uitstraling', uk: 'без блиску, виразний вигляд' },
     image: illustration('wrap-fin-mat.png'),
   },
   {
     id: 'metallic',
     label: { nl: 'Metallic', uk: 'Металік' },
-    text: { nl: 'fijne schittering in het licht', uk: 'металевий блиск на світлі' },
+    text: { nl: 'subtiele metallic glans', uk: 'металевий блиск на світлі' },
     image: illustration('wrap-fin-metallic.png'),
   },
   {
     id: 'carbon',
-    label: { nl: 'Carbon look', uk: 'Карбон' },
-    text: { nl: 'structuur van koolstofvezel', uk: 'текстура вуглецевого волокна' },
+    label: { nl: 'Carbonlook', uk: 'Карбон' },
+    text: { nl: 'look van geweven carbon', uk: 'текстура вуглецевого волокна' },
     image: illustration('wrap-fin-carbon.png'),
   },
 ];
@@ -525,8 +525,8 @@ export const wrapCards: WrapCard[] = [
   {
     id: 'volledig',
     formOption: 'volledig',
-    title: { nl: 'Volledige wrap', uk: 'Повне обклеювання' },
-    description: { nl: 'De hele auto in een nieuwe kleur of finish.', uk: 'Новий колір або фактура всього кузова.' },
+    title: { nl: 'Complete carwrap', uk: 'Повне обклеювання' },
+    description: { nl: 'Een nieuwe kleur of afwerking voor je hele auto.', uk: 'Новий колір або фактура всього кузова.' },
     price: wrapBase,
     duration: wrap.fullDuration,
     image: illustration('wrap-card-volledig.png'),
@@ -534,9 +534,9 @@ export const wrapCards: WrapCard[] = [
   {
     id: 'pakket',
     formOption: 'pakket',
-    title: { nl: 'Black styling pakket', uk: 'Антихром-пакет' },
+    title: { nl: 'Black styling-pakket', uk: 'Антихром-пакет' },
     description: {
-      nl: 'Ontchromen, zwart dak en spiegelkappen in één keer.',
+      nl: 'Ontchromen, een zwart dak en zwarte spiegelkappen in één afspraak.',
       uk: 'Антихром, чорний дах і дзеркала за одне відвідування.',
     },
     price: wrapPakket,
@@ -548,7 +548,7 @@ export const wrapCards: WrapCard[] = [
     formOption: 'delen',
     formPart: 'chrome-delete',
     title: { nl: 'Ontchromen (chrome delete)', uk: 'Антихром' },
-    description: { nl: 'Chroomdelen in zwart of kleur.', uk: 'Обклеювання хромованих деталей чорною або кольоровою плівкою.' },
+    description: { nl: 'Chroomdelen wrappen in zwart of een andere kleur.', uk: 'Обклеювання хромованих деталей чорною або кольоровою плівкою.' },
     price: chromePart.price,
     image: illustration('wrap-card-ontchromen.png'),
   },
@@ -558,7 +558,7 @@ export const wrapCards: WrapCard[] = [
     formPart: 'dak',
     title: { nl: 'Dak', uk: 'Обклеювання даху' },
     description: {
-      nl: 'Zwart dak voor een sportieve two-tone look.',
+      nl: 'Een zwart dak voor een sportieve tweekleurige uitstraling.',
       uk: 'Чорний дах для виразного двоколірного дизайну.',
     },
     price: roofPart.price,
@@ -570,7 +570,7 @@ export const wrapCards: WrapCard[] = [
     formPart: 'spiegelkappen',
     title: { nl: 'Spiegelkappen', uk: 'Обклеювання дзеркал' },
     description: {
-      nl: 'Spiegelkappen in zwart, carbon look of kleur.',
+      nl: 'Spiegelkappen in zwart, carbonlook of een andere kleur.',
       uk: 'Дзеркала в чорному кольорі, з ефектом карбону або в іншому відтінку.',
     },
     price: mirrorPart.price,
@@ -584,6 +584,8 @@ export interface WrapRecent {
   file: string;
   car: Localized;
   detail: Localized;
+  /** Image alt detail when the caption wording differs (alt text keeps its wording). */
+  altDetail?: Localized;
   /** Month of the job. */
   date: Fact<Localized>;
 }
@@ -597,7 +599,8 @@ export const wrapRecent: WrapRecent[] = [
     id: 'bmw-3-front',
     file: 'real-bmw-3-front.png',
     car: { nl: 'BMW 3 Serie', uk: 'BMW 3 Series' },
-    detail: { nl: 'spiegelkappen zwart', uk: 'чорні корпуси дзеркал' },
+    detail: { nl: 'zwarte spiegelkappen', uk: 'чорні корпуси дзеркал' },
+    altDetail: { nl: 'spiegelkappen zwart', uk: 'чорні корпуси дзеркал' },
     date: jobMonth(),
   },
   {
@@ -611,14 +614,16 @@ export const wrapRecent: WrapRecent[] = [
     id: 'audi-a7-zij',
     file: 'real-audi-a7-zij.png',
     car: { nl: 'Audi A7', uk: 'Audi A7' },
-    detail: { nl: 'voorruit chameleon', uk: 'лобове скло з плівкою Chameleon' },
+    detail: { nl: 'voorruit met Chameleon-folie', uk: 'лобове скло з плівкою Chameleon' },
+    altDetail: { nl: 'voorruit chameleon', uk: 'лобове скло з плівкою Chameleon' },
     date: jobMonth(),
   },
   {
     id: 'bmw-3-voorruit',
     file: 'real-bmw-3-voorruit.png',
     car: { nl: 'BMW 3 Serie', uk: 'BMW 3 Series' },
-    detail: { nl: 'voorruit chameleon', uk: 'лобове скло з плівкою Chameleon' },
+    detail: { nl: 'voorruit met Chameleon-folie', uk: 'лобове скло з плівкою Chameleon' },
+    altDetail: { nl: 'voorruit chameleon', uk: 'лобове скло з плівкою Chameleon' },
     date: jobMonth(),
   },
 ];

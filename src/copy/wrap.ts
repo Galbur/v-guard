@@ -80,21 +80,21 @@ export const wrapCopy: Record<Locale, WrapCopy> = {
     description: cfgOn
       ? `Auto wrappen in Vroomshoop: volledige wrap vanaf ${full}, ontchromen vanaf ${chrome}, dak en spiegelkappen. Stel je wrap samen en zie je prijsindicatie.`
       : `Auto wrappen in Vroomshoop: volledige wrap vanaf ${full}, ontchromen vanaf ${chrome}, dak en spiegelkappen. Bekijk finishes en ons werk.`,
-    h1: 'Car wrapping in Vroomshoop: nieuwe kleur zonder overspuiten',
+    h1: 'Auto wrappen in Vroomshoop: een nieuwe kleur zonder spuiten',
     sub: cfgOn
       ? 'Volledig of alleen dak, spiegels en chroom. Zie direct je prijsindicatie.'
-      : 'Volledig of alleen dak, spiegels en chroom. Vaste prijs na je aanvraag.',
+      : 'Je hele auto of alleen het dak, de spiegelkappen en chroomdelen. Een vaste prijs na je aanvraag.',
     ctaBuild: cfgOn ? 'Stel je wrap samen' : 'Offerte aanvragen',
-    chips: [`${years} jaar garantie`, `Volledige wrap vanaf ${full}`, `Ontchromen vanaf ${chrome}`],
+    chips: [`${years} jaar garantie`, `Complete carwrap vanaf ${full}`, `Ontchromen vanaf ${chrome}`],
     proof: [
-      { icon: 'shield', text: `${years} jaar garantie op het werk` },
+      { icon: 'shield', text: `${years} jaar garantie op de montage` },
       { icon: 'layers', text: `Folie van ${brands.join(' en ')}` },
-      { icon: 'eye', text: 'Lak vooraf gecontroleerd' },
+      { icon: 'eye', text: 'Lakcontrole vóór het wrappen' },
       { icon: 'pin', text: 'Studio in Vroomshoop, Twente' },
     ],
-    answerTitle: 'Wat is car wrapping',
+    answerTitle: 'Wat is car wrapping?',
     answer:
-      "Car wrapping (auto wrappen) is je auto bekleden met gekleurde folie: volledig of alleen dak, spiegelkappen of chroom. De originele lak blijft eronder, zodat je later terug kunt naar de originele kleur. V Guard Studio wrapt auto's in Vroomshoop.",
+      'Bij car wrapping krijgt je auto een nieuwe kleur met wrapfolie. Je kunt de hele auto laten wrappen of alleen onderdelen zoals het dak en de spiegelkappen. De originele lak blijft behouden en na het verwijderen van de folie komt de oorspronkelijke kleur weer tevoorschijn. V Guard Studio verzorgt car wrapping in Vroomshoop.',
     cfg: {
       title: 'Stel je wrap samen',
       sub: 'Kies je auto, kleur en delen. Je ziet direct hoe het eruitziet en wat het ongeveer kost.',
@@ -128,41 +128,41 @@ export const wrapCopy: Record<Locale, WrapCopy> = {
     },
     cardsTitle: 'Wat wil je laten wrappen?',
     cardButton: 'Aanvragen',
-    cardsNote: 'Prijzen incl. btw. Eindprijs hangt af van auto, folie en delen.',
-    finishesTitle: 'Finishes',
+    cardsNote: 'Prijzen incl. btw. De uiteindelijke prijs hangt af van het automodel, de folie en de te wrappen onderdelen.',
+    finishesTitle: 'Afwerkingen',
     compareTitle: 'Wrappen of overspuiten?',
     compareCols: ['Wrappen', 'Overspuiten'],
     compare: [
-      { k: 'Terug naar de originele kleur', w: 'Ja, folie eraf', o: 'Alleen door opnieuw te spuiten' },
-      { k: 'Originele lak blijft behouden', w: 'Ja', o: 'Nee' },
-      { k: 'Auto weg', w: 'Een paar dagen', o: 'Vaak langer' },
-      { k: 'Alleen dak of chroom', w: 'Ja, los te kiezen', o: 'Lastig' },
+      { k: 'Originele kleur herstellen', w: 'Ja, na verwijderen van de folie', o: 'Alleen door opnieuw te spuiten' },
+      { k: 'Originele lak behouden', w: 'Ja', o: 'Nee' },
+      { k: 'Tijdsduur zonder auto', w: 'Enkele dagen', o: 'Vaak langer' },
+      { k: 'Alleen dak of chroomdelen', w: 'Ja, afzonderlijk mogelijk', o: 'Minder eenvoudig' },
     ],
-    comparePpf: ['Wil je je lak ook tegen steenslag beschermen?', 'Kijk naar PPF.'],
-    recentTitle: 'Recent opgeleverd',
+    comparePpf: ['Wil je je autolak ook tegen steenslag beschermen?', 'Bekijk onze PPF-bescherming.'],
+    recentTitle: 'Recent uitgevoerde projecten',
     recentMore: 'Bekijk alle projecten',
     stepsTitle: 'Zo werkt het',
     steps: [
       { icon: 'sliders', text: cfgOn ? "Stel samen of stuur foto's" : "Stuur foto's of vraag een offerte aan" },
       { icon: 'chat', text: 'Offerte op maat via WhatsApp' },
-      { icon: 'shield', text: 'Lak checken en voorbereiden' },
-      { icon: 'flag', text: 'Ophalen in je nieuwe kleur' },
+      { icon: 'shield', text: 'Lak controleren en voorbereiden' },
+      { icon: 'flag', text: 'Je auto ophalen in de nieuwe kleur' },
     ],
     faq: [
       {
-        q: 'Hoe lang staat mijn auto bij jullie?',
-        a: `Een volledige wrap duurt ${wrap.fullDuration.value.nl}, een dak of spiegelkappen meestal ${wrap.partsDuration.value.nl}.`,
+        q: 'Hoe lang duurt het wrappen van mijn auto?',
+        a: `Een complete carwrap duurt ${wrap.fullDuration.value.nl}. Het dak of de spiegelkappen wrappen duurt meestal ${wrap.partsDuration.value.nl}.`,
       },
       {
-        q: 'Hoe lang gaat een wrap mee?',
+        q: 'Hoe lang gaat wrapfolie mee?',
         a: `Bij goed onderhoud ${wrap.lifetime.value.nl}, afhankelijk van folie en gebruik.`,
       },
       {
-        q: 'Beschadigt een wrap de lak?',
+        q: 'Kan wrapfolie de lak beschadigen?',
         a: 'Op originele lak in goede staat laat folie bij vakkundig verwijderen meestal los zonder schade. Bij overgespoten of beschadigde lak is er meer risico; daarom bekijken we de lak vooraf.',
       },
       {
-        q: 'Moet ik een nieuwe kleur doorgeven aan de RDW?',
+        q: 'Moet ik een kleurwijziging doorgeven aan de RDW?',
         a: 'Ja. Verandert de kleur van je auto door een wrap, ook tijdelijk, dan geef je de nieuwe kleur door aan de RDW. Dat is gratis en kan online met DigiD.',
       },
       {
@@ -170,7 +170,7 @@ export const wrapCopy: Record<Locale, WrapCopy> = {
         a: 'Een wrap verandert vooral de look en beschermt weinig tegen steenslag. Daarvoor is PPF bedoeld.',
       },
       {
-        q: 'Kan ik de kleur eerst zien?',
+        q: 'Kan ik de foliekleur vooraf bekijken?',
         a: `Ja, in de studio liggen stalen.${wrap.proefstuk.value ? ' Je kunt ook een proefstuk op je auto laten zetten.' : ''}`,
       },
       {
@@ -184,8 +184,8 @@ export const wrapCopy: Record<Locale, WrapCopy> = {
     ],
     faqTitle: headings.faq.nl,
     cta: {
-      title: 'Klaar voor een nieuwe kleur?',
-      text: `Stuur merk, model en je idee. Je krijgt ${site.responseTime.value.nl} een offerte.`,
+      title: 'Toe aan een nieuwe kleur?',
+      text: `Stuur het merk, model en je wensen door. Je ontvangt ${site.responseTime.value.nl} een offerte.`,
     },
   },
   uk: {
