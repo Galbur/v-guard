@@ -14,7 +14,6 @@ import WrapHero from '../components/wrap/WrapHero.astro';
 import WrapProof from '../components/wrap/WrapProof.astro';
 import WrapRecent from '../components/wrap/WrapRecent.astro';
 import WrapSteps from '../components/wrap/WrapSteps.astro';
-import { headings } from '../copy/shared.ts';
 import { wrapCopy } from '../copy/wrap.ts';
 import { wrapCards, wrapFinishes, wrapRecent } from '../data/services.ts';
 import { localizedPath, type Locale } from '../i18n/routes.ts';
@@ -63,6 +62,6 @@ const schema = [
   <WrapCompare locale={locale} title={c.compareTitle} cols={c.compareCols} rows={c.compare} ppf={c.comparePpf} />
   <WrapRecent locale={locale} title={c.recentTitle} more={c.recentMore} items={wrapRecent} />
   <WrapSteps title={c.stepsTitle} steps={c.steps} />
-  <FAQ title={headings.faq[locale]} items={c.faq} />
+  <FAQ title={c.faqTitle} items={c.faq} />
   <WrapCta locale={locale} title={c.cta.title} text={c.cta.text} />
 </Base>
