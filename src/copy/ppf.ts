@@ -4,7 +4,7 @@
 import { trust } from '../config/site.ts';
 import { euro, type Locale } from '../data/fact.ts';
 import { ppfCare, ppfPackages } from '../data/services.ts';
-import { join, type CtaBand, type Faq, type TrustIcon } from './shared.ts';
+import { headings, join, prepSteps, type CtaBand, type Faq, type Step, type TrustIcon } from './shared.ts';
 
 const [front, body, custom] = ppfPackages;
 const years = trust.workWarrantyYears.value;
@@ -28,6 +28,7 @@ export const ppf = {
     packagesNote: 'De prijs hangt af van model, lakconditie en dekking.',
     processTitle: 'Zo brengen we PPF aan',
     processSub: 'Kwaliteit boven snelheid.',
+    steps: prepSteps.nl,
     galleryTitle: 'PPF van V Guard',
     trust: [
       { icon: 'shield', text: `${years} jaar garantie op ons werk.` },
@@ -62,6 +63,7 @@ export const ppf = {
         a: 'Nee. Bestaande steenslag en krassen blijven onder de folie zichtbaar, want de folie is transparant. Wil je een strak resultaat, laat de schade dan eerst herstellen.',
       },
     ] satisfies Faq[],
+    faqTitle: headings.faq.nl,
     cta: {
       title: 'PPF voor jouw auto?',
       text: 'Uit Vroomshoop, Almelo, Hardenberg of Ommen? Stuur merk, model en bouwjaar.',
@@ -69,32 +71,40 @@ export const ppf = {
   },
   uk: {
     title: 'PPF у Vroomshoop: антигравійна плівка на лак | V Guard Studio',
-    description: `Антигравійна плівка PPF у Vroomshoop, Твенте: Full Front від ${price.front}, Full Body або окремі деталі. Підготовка у 5 кроків. Отримайте ціну для свого авто.`,
-    h1: 'PPF у Vroomshoop: захист лаку від сколів',
-    sub: 'Прозора плівка на передню частину, окремі деталі або все авто.',
+    description: `Антигравійна плівка PPF у Vroomshoop, Твенте: Full Front від ${price.front}, Full Body або окремі деталі. Монтаж у 5 етапів. Отримайте ціну для свого авто.`,
+    h1: 'PPF у Vroomshoop: захист кузова від сколів',
+    sub: 'Прозора захисна плівка для передньої частини, окремих деталей або всього авто.',
     heroAlt: 'Авто біля студії V Guard Studio у Vroomshoop',
     whatsapp: 'Вітаю! Хочу дізнатися ціну PPF для мого авто.',
-    chips: ['Підготовка у 5 кроків', `${years} роки гарантії на роботу`, join(brands, 'і')],
+    chips: ['Монтаж у 5 етапів', `${years} роки гарантії на монтаж`, join(brands, 'і')],
     answer:
-      'PPF (paint protection film), або антигравійна плівка, нідерландською lakbeschermingsfolie чи steenslagfolie, це прозора плівка на лаку. Вона бере на себе сколи і дрібні подряпини. V Guard Studio у Vroomshoop наносить PPF на авто з усього Твенте.',
-    packagesTitle: 'Оберіть, скільки захищати',
-    packagesNote: 'Ціна залежить від моделі, стану лаку і площі покриття.',
-    processTitle: 'Як ми наносимо PPF',
+      'PPF (Paint Protection Film), або антигравійна плівка, захищає лакофарбове покриття від сколів і дрібних подряпин. V Guard Studio у Vroomshoop встановлює PPF для клієнтів із регіону Twente.',
+    packagesTitle: 'Оберіть рівень захисту',
+    packagesNote: 'Ціна залежить від моделі авто, стану покриття та площі захисту.',
+    processTitle: 'Як ми встановлюємо PPF',
     processSub: 'Якість важливіша за швидкість.',
+    // PPF only: Home keeps the shared prepSteps wording.
+    steps: [
+      { title: 'Миття', text: 'Ретельно миємо автомобіль і видаляємо забруднення.' },
+      { title: 'Очищення глиною', text: 'Спеціальна глина видаляє стійкі забруднення з поверхні кузова.' },
+      { title: 'Знежирення', text: 'Знежирюємо поверхню для надійного зчеплення плівки.' },
+      { title: 'Монтаж', text: 'Встановлюємо плівку на підготовлену поверхню.' },
+      { title: 'Перевірка', text: 'Перевіряємо краї та поверхню плівки перед видачею авто.' },
+    ] satisfies Step[],
     galleryTitle: 'PPF від V Guard',
     trust: [
-      { icon: 'shield', text: `${years} роки гарантії на нашу роботу.` },
+      { icon: 'shield', text: `${years} роки гарантії на монтаж.` },
       { icon: 'award', text: `Гарантія виробника на плівку: ${join(filmYears, 'або')} років залежно від бренду.` },
-      ...(trust.certifiedPpf.value ? [{ icon: 'certificate' as const, text: 'Сертифікат на нанесення PPF.' }] : []),
+      ...(trust.certifiedPpf.value ? [{ icon: 'certificate' as const, text: 'Сертифікат на встановлення PPF.' }] : []),
       { icon: 'layers', text: `Працюємо з плівками ${join(brands, 'і')}.` },
     ] satisfies { icon: TrustIcon; text: string }[],
     faq: [
       {
         q: 'Скільки коштує PPF для мого авто?',
-        a: `Це залежить від моделі, стану лаку і кількості деталей, які захищаємо. Full Front від ${price.front}, Full Body від ${price.body}, окремі деталі від ${price.custom}. Надішліть марку, модель і рік, і отримаєте ціну саме для свого авто.`,
+        a: `Це залежить від моделі, стану лаку і площі захисту. Full Front від ${price.front}, Full Body від ${price.body}, окремі деталі від ${price.custom}. Надішліть марку, модель і рік випуску, і ми розрахуємо вартість.`,
       },
       {
-        q: 'Чи вистачить захистити лише бампер?',
+        q: 'Чи достатньо захистити лише бампер?',
         a: 'Бампер ловить багато сколів, але капот, крила і дзеркала теж страждають. Full Front захищає всю передню частину за раз, без незахищених країв посеред капота.',
       },
       {
@@ -102,22 +112,23 @@ export const ppf = {
         a: 'Керамічне покриття це тонкий твердий шар для блиску і легшого миття. PPF це товща плівка, яка приймає сколи й подряпини замість лаку. Покриття береже блиск, PPF береже сам лак.',
       },
       {
-        q: 'Скільки триває нанесення?',
+        q: 'Скільки триває встановлення PPF?',
         a: `Full Front зазвичай ${front.duration.value.uk}, Full Body ${body.duration.value.uk}. Точний термін назвемо разом з оцінкою.`,
       },
-      { q: 'Як доглядати авто з PPF?', a: ppfCare.value.uk },
+      { q: 'Як доглядати за авто з PPF?', a: ppfCare.value.uk },
       {
         q: 'Яка гарантія і чи жовтіє плівка?',
         a: `На нашу роботу ${years} роки гарантії. На плівку додатково діє гарантія виробника ${join(filmYears, 'або')} років залежно від бренду, зокрема від ${film.covers.uk}.`,
       },
       {
-        q: 'Чи сховає PPF наявні сколи?',
+        q: 'Чи приховає PPF наявні сколи?',
         a: 'Ні. Наявні сколи й подряпини лишаються видимими під плівкою, бо вона прозора. Для рівного результату пошкодження спершу варто усунути.',
       },
     ] satisfies Faq[],
+    faqTitle: 'Поширені запитання',
     cta: {
-      title: 'PPF для вашого авто?',
-      text: 'З Vroomshoop, Almelo, Hardenberg чи Ommen? Надішліть марку, модель і рік.',
+      title: 'Хочете захистити авто PPF?',
+      text: 'Ви з Vroomshoop, Almelo, Hardenberg чи Ommen? Надішліть марку, модель і рік випуску авто.',
     } satisfies CtaBand,
   },
 } satisfies Record<Locale, unknown>;

@@ -142,11 +142,12 @@ const ppfParts = [
   { label: { nl: 'Spiegelkappen', uk: 'Корпуси дзеркал' }, price: price(79, 'default', 'ціни за деталь', { from: true }) },
 ];
 
-/** «Bijv. koplampen», «instaplijsten», ... from the priced parts. */
-function partExamples(locale: Locale, prefix: string): string[] {
+/** «Bijv. koplampen», «instaplijsten», ... from the priced parts; no prefix: «Фари», «пороги», ... */
+function partExamples(locale: Locale, prefix?: string): string[] {
   return ppfParts.map((p, i) => {
     const label = p.label[locale].toLowerCase();
-    return i === 0 ? `${prefix} ${label}` : label;
+    if (i > 0) return label;
+    return prefix ? `${prefix} ${label}` : p.label[locale];
   });
 }
 
@@ -157,7 +158,7 @@ export const ppfPackages: Package[] = [
     title: { nl: 'Full Front', uk: 'Full Front' },
     description: {
       nl: 'De voorkant, waar de meeste steenslag terechtkomt.',
-      uk: 'Передня частина, куди летить найбільше сколів.',
+      uk: 'Захист передньої частини від каміння та сколів.',
     },
     highlight: 'front',
     zones: fact(
@@ -175,7 +176,7 @@ export const ppfPackages: Package[] = [
     id: 'full-body',
     formOption: 'full-body',
     title: { nl: 'Full Body', uk: 'Full Body' },
-    description: { nl: 'Alle gelakte delen van de auto onder folie.', uk: 'Усі пофарбовані деталі авто під плівкою.' },
+    description: { nl: 'Alle gelakte delen van de auto onder folie.', uk: 'Захист усіх пофарбованих деталей кузова.' },
     highlight: 'full',
     zones: fact(
       { nl: ['Alle gelakte carrosseriedelen'], uk: ['Усі пофарбовані деталі кузова'] },
@@ -189,11 +190,11 @@ export const ppfPackages: Package[] = [
     id: 'gedeeltelijk',
     formOption: 'gedeeltelijk',
     title: { nl: 'Custom (losse delen)', uk: 'Custom (окремі деталі)' },
-    description: { nl: 'Alleen de delen die jij kiest.', uk: 'Лише деталі, які оберете ви.' },
+    description: { nl: 'Alleen de delen die jij kiest.', uk: 'Захист обраних деталей автомобіля.' },
     highlight: 'spots',
     // Zones = the priced parts, so «vanaf» matches the parts listed on the card.
     zones: fact(
-      { nl: partExamples('nl', 'Bijv.'), uk: partExamples('uk', 'Напр.') },
+      { nl: partExamples('nl', 'Bijv.'), uk: partExamples('uk') },
       'default',
       'деталі з ppfParts (ціни за деталь)',
     ),
