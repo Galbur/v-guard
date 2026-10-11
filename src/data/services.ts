@@ -423,31 +423,31 @@ export const wrapFinishes: WrapFinish[] = [
   {
     id: 'glans',
     label: { nl: 'Glans', uk: 'Глянець' },
-    text: { nl: 'diep en spiegelend', uk: 'глибокий дзеркальний блиск' },
+    text: { nl: 'diep en spiegelend', uk: 'насичений дзеркальний блиск' },
     image: illustration('wrap-fin-glans.png'),
   },
   {
     id: 'satijn',
     label: { nl: 'Satijn', uk: 'Сатин' },
-    text: { nl: 'zachte glans, strak en modern', uk: 'мʼякий блиск, стримано і сучасно' },
+    text: { nl: 'zachte glans, strak en modern', uk: 'м’який блиск, стриманий вигляд' },
     image: illustration('wrap-fin-satijn.png'),
   },
   {
     id: 'mat',
     label: { nl: 'Mat', uk: 'Мат' },
-    text: { nl: 'geen reflectie, stoer', uk: 'без відблисків, брутально' },
+    text: { nl: 'geen reflectie, stoer', uk: 'без блиску, виразний вигляд' },
     image: illustration('wrap-fin-mat.png'),
   },
   {
     id: 'metallic',
     label: { nl: 'Metallic', uk: 'Металік' },
-    text: { nl: 'fijne schittering in het licht', uk: 'дрібні іскри на світлі' },
+    text: { nl: 'fijne schittering in het licht', uk: 'металевий блиск на світлі' },
     image: illustration('wrap-fin-metallic.png'),
   },
   {
     id: 'carbon',
-    label: { nl: 'Carbon look', uk: 'Під карбон' },
-    text: { nl: 'structuur van koolstofvezel', uk: 'фактура вуглеволокна' },
+    label: { nl: 'Carbon look', uk: 'Карбон' },
+    text: { nl: 'structuur van koolstofvezel', uk: 'текстура вуглецевого волокна' },
     image: illustration('wrap-fin-carbon.png'),
   },
 ];
@@ -526,7 +526,7 @@ export const wrapCards: WrapCard[] = [
     id: 'volledig',
     formOption: 'volledig',
     title: { nl: 'Volledige wrap', uk: 'Повне обклеювання' },
-    description: { nl: 'De hele auto in een nieuwe kleur of finish.', uk: 'Усе авто в новому кольорі або фініші.' },
+    description: { nl: 'De hele auto in een nieuwe kleur of finish.', uk: 'Новий колір або фактура всього кузова.' },
     price: wrapBase,
     duration: wrap.fullDuration,
     image: illustration('wrap-card-volledig.png'),
@@ -537,10 +537,10 @@ export const wrapCards: WrapCard[] = [
     title: { nl: 'Black styling pakket', uk: 'Антихром-пакет' },
     description: {
       nl: 'Ontchromen, zwart dak en spiegelkappen in één keer.',
-      uk: 'Антихром, чорний дах і дзеркала за один візит.',
+      uk: 'Антихром, чорний дах і дзеркала за одне відвідування.',
     },
     price: wrapPakket,
-    badge: { nl: 'Pakketvoordeel', uk: 'Вигідніше разом' },
+    badge: { nl: 'Pakketvoordeel', uk: 'Вигідний комплект' },
     image: illustration('wrap-card-pakket.png'),
   },
   {
@@ -548,7 +548,7 @@ export const wrapCards: WrapCard[] = [
     formOption: 'delen',
     formPart: 'chrome-delete',
     title: { nl: 'Ontchromen (chrome delete)', uk: 'Антихром' },
-    description: { nl: 'Chroomdelen in zwart of kleur.', uk: 'Хромовані деталі в чорний або колір.' },
+    description: { nl: 'Chroomdelen in zwart of kleur.', uk: 'Обклеювання хромованих деталей чорною або кольоровою плівкою.' },
     price: chromePart.price,
     image: illustration('wrap-card-ontchromen.png'),
   },
@@ -559,7 +559,7 @@ export const wrapCards: WrapCard[] = [
     title: { nl: 'Dak', uk: 'Обклеювання даху' },
     description: {
       nl: 'Zwart dak voor een sportieve two-tone look.',
-      uk: 'Чорний дах для спортивного двоколірного вигляду.',
+      uk: 'Чорний дах для виразного двоколірного дизайну.',
     },
     price: roofPart.price,
     image: illustration('wrap-card-dak.png'),
@@ -571,7 +571,7 @@ export const wrapCards: WrapCard[] = [
     title: { nl: 'Spiegelkappen', uk: 'Обклеювання дзеркал' },
     description: {
       nl: 'Spiegelkappen in zwart, carbon look of kleur.',
-      uk: 'Дзеркала в чорному, під карбон або в кольорі.',
+      uk: 'Дзеркала в чорному кольорі, з ефектом карбону або в іншому відтінку.',
     },
     price: mirrorPart.price,
     image: illustration('wrap-card-spiegel.png'),
@@ -584,12 +584,14 @@ export interface WrapRecent {
   file: string;
   car: Localized;
   detail: Localized;
+  /** Image alt detail when the caption wording differs (alt text stays as it was). */
+  altDetail?: Localized;
   /** Month of the job. */
   date: Fact<Localized>;
 }
 
 const jobMonth = () =>
-  fact<Localized>({ nl: 'okt 2026', uk: 'жовт. 2026' }, 'default', 'місяць роботи і підпис, V Guard');
+  fact<Localized>({ nl: 'okt 2026', uk: 'жовтень 2026' }, 'default', 'місяць роботи і підпис, V Guard');
 
 /** «Recent opgeleverd»: real photos with captions from the mockup. */
 export const wrapRecent: WrapRecent[] = [
@@ -611,14 +613,16 @@ export const wrapRecent: WrapRecent[] = [
     id: 'audi-a7-zij',
     file: 'real-audi-a7-zij.png',
     car: { nl: 'Audi A7', uk: 'Audi A7' },
-    detail: { nl: 'voorruit chameleon', uk: 'лобове скло хамелеон' },
+    detail: { nl: 'voorruit chameleon', uk: 'лобове скло з плівкою Chameleon' },
+    altDetail: { nl: 'voorruit chameleon', uk: 'лобове скло хамелеон' },
     date: jobMonth(),
   },
   {
     id: 'bmw-3-voorruit',
     file: 'real-bmw-3-voorruit.png',
     car: { nl: 'BMW 3 Serie', uk: 'BMW 3 Series' },
-    detail: { nl: 'voorruit chameleon', uk: 'лобове скло хамелеон' },
+    detail: { nl: 'voorruit chameleon', uk: 'лобове скло з плівкою Chameleon' },
+    altDetail: { nl: 'voorruit chameleon', uk: 'лобове скло хамелеон' },
     date: jobMonth(),
   },
 ];
