@@ -11,7 +11,7 @@ import ReviewsBlock from '../components/ReviewsBlock.astro';
 import QuoteEntry from '../components/QuoteEntry.astro';
 import ContactBlock from '../components/ContactBlock.astro';
 import { home } from '../copy/home.ts';
-import { prepSteps, trustItems } from '../copy/shared.ts';
+import { trustItems } from '../copy/shared.ts';
 import { t } from '../i18n/index.ts';
 import { localizedPath, type Locale } from '../i18n/routes.ts';
 
@@ -57,7 +57,7 @@ const recent = (await getCollection('projects', (p) => p.data.home)).sort((a, b)
   <ProcessSteps
     title={c.processTitle}
     sub={c.processSub}
-    steps={prepSteps[locale]}
+    steps={c.steps}
     image={{ file: 'hex-van-l2.jpg', alt: alt('Ford Transit Custom', 'ramen blinderen', 'тонування') }}
   />
   <ProjectGallery

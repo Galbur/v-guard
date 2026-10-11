@@ -2,7 +2,7 @@
 import { trust } from '../config/site.ts';
 import type { Locale } from '../data/fact.ts';
 import type { ServiceSlug } from '../data/services.ts';
-import { chipPrep, chipWarranty } from './shared.ts';
+import { chipPrep, chipWarranty, prepSteps, type Step } from './shared.ts';
 
 const brands = trust.brands.value.join(', ');
 
@@ -26,6 +26,7 @@ export const home = {
     } satisfies Record<ServiceSlug, { title: string; text: string; more: string }>,
     processTitle: 'Kwaliteit boven snelheid',
     processSub: 'Zo werken we bij PPF en wraps.',
+    steps: prepSteps.nl,
     recentTitle: 'Recent werk',
     whyTitle: 'Waarom V Guard Studio',
     reviewsTitle: 'Wat klanten zeggen',
@@ -37,30 +38,38 @@ export const home = {
     title: 'PPF, тонування і обклеювання плівкою у Vroomshoop | V Guard Studio',
     description:
       'V Guard Studio у Vroomshoop, Твенте: PPF захист лаку, тонування і car wrapping. Подивіться ціни і наші роботи та отримайте оцінку.',
-    h1: 'PPF, тонування і обклеювання плівкою у Vroomshoop',
-    sub: 'Захист і новий вигляд вашого авто. Студія у Твенте.',
+    h1: 'PPF, тонування та обклеювання авто у Vroomshoop',
+    sub: 'Захист кузова та оновлення вигляду авто. Студія в регіоні Twente.',
     chips: [chipWarranty.uk, brands, chipPrep.uk],
     servicesTitle: 'Що ми робимо',
     cards: {
-      ppf: { title: 'PPF захист лаку', text: 'Прозора плівка, що захищає лак від сколів і подряпин.', more: 'Детальніше про PPF' },
+      ppf: { title: 'PPF захист кузова', text: 'Прозора плівка для захисту кузова від сколів і подряпин.', more: 'Детальніше про PPF' },
       'ramen-blinderen': {
-        title: 'Тонування вікон',
-        text: 'Більше приватності й менше яскравого сонця в салоні.',
+        title: 'Тонування скла',
+        text: 'Більше приватності та захист від яскравого сонця.',
         more: 'Детальніше про тонування',
       },
       'car-wrapping': {
         title: 'Обклеювання плівкою',
-        text: 'Новий колір або фініш плівкою, повністю чи частково.',
+        text: 'Зміна кольору або фактури всього кузова чи окремих деталей.',
         more: 'Детальніше про обклеювання',
       },
     } satisfies Record<ServiceSlug, { title: string; text: string; more: string }>,
     processTitle: 'Якість важливіша за швидкість',
-    processSub: 'Так ми працюємо з PPF і wrap.',
+    processSub: 'Так ми встановлюємо захисну та вінілову плівку.',
+    // Home only: the PPF page has its own steps.
+    steps: [
+      { title: 'Миття', text: 'Ретельно миємо авто та видаляємо забруднення.' },
+      { title: 'Очищення глиною', text: 'Спеціальна глина видаляє стійкі забруднення з поверхні кузова.' },
+      { title: 'Знежирення', text: 'Знежирюємо поверхню для надійного зчеплення плівки.' },
+      { title: 'Монтаж', text: 'Встановлюємо плівку на підготовлену поверхню.' },
+      { title: 'Перевірка', text: 'Перевіряємо краї та поверхню плівки перед видачею авто.' },
+    ] satisfies Step[],
     recentTitle: 'Наші роботи',
     whyTitle: 'Чому V Guard Studio',
     reviewsTitle: 'Відгуки клієнтів',
     reviewsLink: 'Усі відгуки в Google',
-    quoteTitle: 'Для чого потрібна оцінка?',
-    quoteText: 'Оберіть послугу і розкажіть, яке у вас авто.',
+    quoteTitle: 'Як дізнатися вартість?',
+    quoteText: 'Оберіть послугу та вкажіть марку й модель авто.',
   },
 } satisfies Record<Locale, unknown>;
