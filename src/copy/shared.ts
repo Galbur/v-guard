@@ -52,15 +52,15 @@ export const trustItems: Record<Locale, { icon: TrustIcon; text: string }[]> = {
     { icon: 'layers', text: `Folies van ${join(trust.brands.value, 'en')}` },
   ],
   uk: [
-    { icon: 'shield', text: `${years} роки гарантії на нашу роботу` },
-    { icon: 'award', text: `Гарантія виробника на плівку, до ${filmYears.ppf} років` },
+    { icon: 'shield', text: `${years} роки гарантії на монтаж` },
+    { icon: 'award', text: `Гарантія виробника на плівку: до ${filmYears.ppf} років` },
     ...(trust.certifiedPpf.value ? [{ icon: 'certificate' as const, text: 'Сертифіковані для PPF' }] : []),
     { icon: 'layers', text: `Плівки ${join(trust.brands.value, 'і')}` },
   ],
 };
 
 export const chipWarranty: Localized = { nl: `${years} jaar garantie`, uk: `${years} роки гарантії` };
-export const chipPrep: Localized = { nl: '5-staps voorbereiding', uk: 'Підготовка у 5 кроків' };
+export const chipPrep: Localized = { nl: '5-staps voorbereiding', uk: 'Монтаж у 5 етапів' };
 
 export const headings = {
   process: { nl: 'Zo werken we', uk: 'Як ми працюємо' },
