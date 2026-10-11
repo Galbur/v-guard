@@ -3,7 +3,7 @@
 import { trust } from '../config/site.ts';
 import { euro, type Locale } from '../data/fact.ts';
 import { tint, tintFrom } from '../data/services.ts';
-import { chipWarranty, join, type CtaBand, type Faq } from './shared.ts';
+import { chipWarranty, headings, join, type CtaBand, type Faq } from './shared.ts';
 
 const years = trust.workWarrantyYears.value;
 const film = trust.filmWarrantyYears.value.tint;
@@ -63,54 +63,59 @@ export const tintCopy = {
         a: `Op ons werk geven we ${years} jaar garantie. Op de tintfolie geldt de fabrieksgarantie, tot ${film} jaar.`,
       },
     ] satisfies Faq[],
+    faqTitle: headings.faq.nl,
     cta: { title: 'Ramen laten blinderen?', text: 'Stuur merk, model en bouwjaar. Je krijgt direct een prijs.' } satisfies CtaBand,
   },
   uk: {
     title: 'Тонування вікон авто у Vroomshoop | V Guard Studio',
     description: `Тонування вікон авто у Vroomshoop від ${from}. Фіксована ціна за типом кузова, пояснення правила 55%, готово за ${tint.duration.value.uk}.`,
-    h1: 'Тонування вікон авто у Vroomshoop',
-    sub: `Більше приватності й менше яскравого сонця. Плівка за розміром, готово за ${tint.duration.value.uk}.`,
-    chips: [`Задня частина від ${from}`, chipWarranty.uk, `Плівки ${join(trust.tintBrands.value, 'і')}`],
-    answerTitle: 'Що таке тонування',
+    h1: 'Тонування скла автомобіля у Vroomshoop',
+    sub: `Більше приватності та захист від яскравого сонця. Точна підгонка плівки, монтаж за ${tint.duration.value.uk}.`,
+    chips: [`Задні вікна від ${from}`, chipWarranty.uk, `Плівки ${join(trust.tintBrands.value, 'і')}`],
+    answerTitle: 'Що таке тонування скла',
     answer:
-      'Тонування, або ramen blinderen, це нанесення тонованої плівки на внутрішній бік вікон авто. Воно дає більше приватності й менше яскравого сонця. V Guard Studio тонує вікна авто у Vroomshoop, Твенте.',
-    legalTitle: 'Що дозволено в Нідерландах',
+      'Тонування це встановлення спеціальної плівки з внутрішнього боку автомобільного скла. Вона зменшує яскравість сонячного світла та забезпечує більше приватності. V Guard Studio виконує тонування авто у Vroomshoop, регіон Twente.',
+    legalTitle: 'Правила тонування в Нідерландах',
     legal: [
-      { zone: 'light', label: 'Лобове скло:', text: 'щонайменше 55% світла' },
-      { zone: 'light', label: 'Бічні біля водія:', text: 'щонайменше 55% світла' },
-      { zone: 'dark', label: 'Задні бічні і заднє скло:', text: 'можна темніше, якщо є дзеркала зліва і справа' },
+      { zone: 'light', label: 'Лобове скло:', text: 'світлопропускання не менше 55%' },
+      { zone: 'light', label: 'Передні бічні вікна:', text: 'світлопропускання не менше 55%' },
+      { zone: 'dark', label: 'Задні бічні вікна та заднє скло:', text: 'дозволено темніше тонування за наявності обох зовнішніх дзеркал' },
     ],
     legalDarker: 'темніше',
     legalSource: 'Джерело:',
     legalSourceLink: 'Rijksoverheid',
     pricesTitle: 'Ціни на тонування',
-    bodyCaption: 'Задня частина (від стійки B, стандартна плівка)',
+    bodyCaption: 'Задні вікна (від середньої стійки кузова, стандартна плівка)',
     bodyHead: ['Тип кузова', 'Ціна'],
     optionsCaption: 'Опції',
     optionsHead: ['Опція', 'Ціна'],
-    pricesNote: `Оберіть тон: ${join(shades, 'або')}. Ціни з BTW.`,
-    beforeAfterTitle: 'До і після',
-    galleryTitle: 'Тоновані вікна від V Guard',
+    pricesNote: `Оберіть світлопропускання: ${join(shades, 'або')}. Ціни з ПДВ.`,
+    beforeAfterTitle: 'До та після',
+    galleryTitle: 'Наші роботи з тонування',
     faq: [
       {
-        q: 'Наскільки темно можна?',
-        a: 'Лобове і бічні біля водія щонайменше 55% світла; задні бічні і заднє скло темніше, якщо є дзеркала зліва і справа. Рахується скло разом із плівкою.',
+        q: 'Яке тонування дозволено?',
+        a: 'Лобове та передні бічні вікна мають пропускати щонайменше 55% світла. Заднє скло та задні бічні вікна можна тонувати темніше за наявності обох зовнішніх дзеркал. Враховується світлопропускання скла разом із плівкою.',
       },
       {
-        q: 'Чи перевіряють на APK?',
+        q: 'Чи перевіряють тонування під час APK?',
         a: 'На APK не перевіряють. Поліція може виміряти: штраф і можливе вилучення свідоцтва про реєстрацію.',
       },
       {
-        q: 'Який тон обрати?',
+        q: 'Який ступінь тонування обрати?',
         a: `${join(shades, 'або')}; для задньої частини найчастіше ${tint.popularShade.value}%.`,
       },
       {
-        q: 'Скільки триває?',
+        q: 'Скільки триває тонування?',
         a: `${tint.duration.value.uk}; ${tint.keepClosedDays.value} дні не опускати вікна.`,
       },
-      { q: 'Як мити?', a: tint.care.value.uk },
+      { q: 'Як доглядати за тонованим склом?', a: tint.care.value.uk },
       { q: 'Яка гарантія?', a: `${years} роки на роботу, на плівку гарантія виробника до ${film} років.` },
     ] satisfies Faq[],
-    cta: { title: 'Затонувати вікна?', text: 'Надішліть марку, модель і рік випуску. Ціну отримаєте одразу.' } satisfies CtaBand,
+    faqTitle: 'Поширені запитання',
+    cta: {
+      title: 'Хочете затонувати авто?',
+      text: 'Надішліть марку, модель і рік випуску авто, і ми розрахуємо вартість.',
+    } satisfies CtaBand,
   },
 } satisfies Record<Locale, unknown>;

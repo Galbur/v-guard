@@ -225,12 +225,12 @@ export interface PriceRow {
 const tintHint = 'нижній поріг ринку NL';
 // Achterzijde (from the B-pillar, standard film), incl. btw.
 export const tintBodyPrices: PriceRow[] = [
-  { id: 'hatchback-3', label: { nl: 'Hatchback 3-deurs', uk: 'Хетчбек 3-дверний' }, price: price(129, 'default', `${tintHint}; V Guard озвучував €200 (P1)`) },
-  { id: 'hatchback-5', label: { nl: 'Hatchback 5-deurs', uk: 'Хетчбек 5-дверний' }, price: price(149, 'default', tintHint) },
+  { id: 'hatchback-3', label: { nl: 'Hatchback 3-deurs', uk: 'Тридверний хетчбек' }, price: price(129, 'default', `${tintHint}; V Guard озвучував €200 (P1)`) },
+  { id: 'hatchback-5', label: { nl: 'Hatchback 5-deurs', uk: "П'ятидверний хетчбек" }, price: price(149, 'default', tintHint) },
   { id: 'sedan-coupe', label: { nl: 'Sedan / coupé', uk: 'Седан / купе' }, price: price(179, 'default', tintHint) },
   { id: 'stationwagon', label: { nl: 'Stationwagon', uk: 'Універсал' }, price: price(189, 'default', tintHint) },
   { id: 'suv', label: { nl: 'SUV', uk: 'SUV' }, price: price(199, 'default', tintHint) },
-  { id: 'bus-mpv', label: { nl: 'Bus / MPV', uk: 'Бус / мінівен' }, price: price(249, 'default', tintHint) },
+  { id: 'bus-mpv', label: { nl: 'Bus / MPV', uk: 'Мікроавтобус / мінівен' }, price: price(249, 'default', tintHint) },
   {
     id: 'tesla',
     label: { nl: 'Tesla Model 3 / Model Y', uk: 'Tesla Model 3 / Model Y' },
@@ -242,24 +242,24 @@ export const tintOptionPrices: PriceRow[] = [
   {
     id: 'voorste-zijruiten',
     formOption: 'voorste-zijruiten',
-    label: { nl: 'Voorste zijruiten, lichte folie (minimaal 55%)', uk: 'Передні бічні, світла плівка (від 55%)' },
+    label: { nl: 'Voorste zijruiten, lichte folie (minimaal 55%)', uk: 'Передні бічні вікна, світла плівка (світлопропускання від 55%)' },
     price: price(99, 'default', 'ринок €100-150', { plus: true }),
   },
   {
     id: 'keramisch',
-    label: { nl: 'Keramische warmtewerende folie', uk: 'Керамічна плівка проти тепла' },
+    label: { nl: 'Keramische warmtewerende folie', uk: 'Керамічна плівка для захисту від спеки' },
     price: price(69, 'default', 'апгрейд, ринок +€70-100', { plus: true }),
   },
   { id: 'achterruit', label: { nl: 'Alleen achterruit', uk: 'Лише заднє скло' }, price: price(79, 'default') },
   {
     id: 'chameleon',
     formOption: 'chameleon',
-    label: { nl: 'Chameleon voorruit', uk: 'Chameleon на лобове' },
+    label: { nl: 'Chameleon voorruit', uk: 'Плівка Chameleon на лобове скло' },
     price: price(199, 'default', 'V Guard озвучував €500 (P3)', { from: true }),
   },
   {
     id: 'complete',
-    label: { nl: 'Complete auto (achterzijde + voorste zijruiten)', uk: 'Усе авто (задня частина + передні бічні)' },
+    label: { nl: 'Complete auto (achterzijde + voorste zijruiten)', uk: 'Усі вікна (задні та передні бічні)' },
     price: price(239, 'default', 'пакет зі знижкою; V Guard озвучував €450 (P2)', { from: true }),
   },
 ];
@@ -286,20 +286,20 @@ export const tint = {
   steps: fact<{ title: Localized; text: Localized }[]>(
     [
       {
-        title: { nl: 'Advies', uk: 'Порада' },
-        text: { nl: 'We kiezen samen de tint en de ruiten.', uk: 'Разом обираємо тон і вікна.' },
+        title: { nl: 'Advies', uk: 'Консультація' },
+        text: { nl: 'We kiezen samen de tint en de ruiten.', uk: 'Допомагаємо обрати ступінь тонування та вікна.' },
       },
       {
         title: { nl: 'Reinigen', uk: 'Очищення' },
-        text: { nl: 'Ruiten worden binnen en buiten grondig schoongemaakt.', uk: 'Вікна ретельно миються зсередини і ззовні.' },
+        text: { nl: 'Ruiten worden binnen en buiten grondig schoongemaakt.', uk: 'Ретельно очищуємо скло з обох боків.' },
       },
       {
-        title: { nl: 'Op maat snijden', uk: 'Розкрій за розміром' },
-        text: { nl: 'De folie wordt per ruit op maat gemaakt.', uk: 'Плівку підганяють під кожне вікно.' },
+        title: { nl: 'Op maat snijden', uk: 'Підготовка плівки' },
+        text: { nl: 'De folie wordt per ruit op maat gemaakt.', uk: 'Точно підганяємо плівку під розміри кожного скла.' },
       },
       {
-        title: { nl: 'Aanbrengen', uk: 'Нанесення' },
-        text: { nl: 'Folie aan de binnenkant, daarna eindcontrole.', uk: 'Плівка зсередини, потім фінальна перевірка.' },
+        title: { nl: 'Aanbrengen', uk: 'Монтаж' },
+        text: { nl: 'Folie aan de binnenkant, daarna eindcontrole.', uk: 'Встановлюємо плівку зсередини та перевіряємо якість монтажу.' },
       },
     ],
     'default',
