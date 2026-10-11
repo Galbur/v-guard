@@ -34,7 +34,7 @@ export const home = {
     quoteText: 'Kies een dienst en vertel ons welke auto je hebt.',
   },
   uk: {
-    title: 'PPF, тонування і car wrapping у Vroomshoop | V Guard Studio',
+    title: 'PPF, тонування і обклеювання плівкою у Vroomshoop | V Guard Studio',
     description:
       'V Guard Studio у Vroomshoop, Твенте: PPF захист лаку, тонування і car wrapping. Подивіться ціни і наші роботи та отримайте оцінку.',
     h1: 'PPF, тонування і обклеювання плівкою у Vroomshoop',

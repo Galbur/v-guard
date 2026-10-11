@@ -584,8 +584,6 @@ export interface WrapRecent {
   file: string;
   car: Localized;
   detail: Localized;
-  /** Image alt detail when the caption wording differs (alt text stays as it was). */
-  altDetail?: Localized;
   /** Month of the job. */
   date: Fact<Localized>;
 }
@@ -614,7 +612,6 @@ export const wrapRecent: WrapRecent[] = [
     file: 'real-audi-a7-zij.png',
     car: { nl: 'Audi A7', uk: 'Audi A7' },
     detail: { nl: 'voorruit chameleon', uk: 'лобове скло з плівкою Chameleon' },
-    altDetail: { nl: 'voorruit chameleon', uk: 'лобове скло хамелеон' },
     date: jobMonth(),
   },
   {
@@ -622,7 +619,6 @@ export const wrapRecent: WrapRecent[] = [
     file: 'real-bmw-3-voorruit.png',
     car: { nl: 'BMW 3 Serie', uk: 'BMW 3 Series' },
     detail: { nl: 'voorruit chameleon', uk: 'лобове скло з плівкою Chameleon' },
-    altDetail: { nl: 'voorruit chameleon', uk: 'лобове скло хамелеон' },
     date: jobMonth(),
   },
 ];

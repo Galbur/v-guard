@@ -31,7 +31,7 @@ export const contactCopy = {
   uk: {
     title: 'Оцінка і контакти | V Guard Studio',
     description: 'Отримайте оцінку на PPF, тонування або car wrapping у чотири кроки. V Guard Studio, Twentelaan 14 D, Vroomshoop.',
-    h1: 'Отримати оцінку у V Guard Studio',
+    h1: 'Дізнатися вартість у V Guard Studio',
     sub: `Чотири короткі кроки. Зв'яжемося ${site.responseTime.value.uk} телефоном або у WhatsApp.`,
   },
 } satisfies Record<Locale, unknown>;
