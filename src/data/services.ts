@@ -97,7 +97,7 @@ export const services: Service[] = [
 ];
 
 // Extra choice in quote form step 1; has no options step.
-export const adviceOption = { id: 'advies', label: { nl: 'Ik wil advies', uk: 'Потрібна порада' } } as const;
+export const adviceOption = { id: 'advies', label: { nl: 'Ik wil advies', uk: 'Потрібна консультація' } } as const;
 
 export const bodyTypes: ServiceOption[] = [
   { id: 'hatchback', label: { nl: 'Hatchback', uk: 'Хетчбек' } },
@@ -615,7 +615,6 @@ export const wrapRecent: WrapRecent[] = [
     file: 'real-audi-a7-zij.png',
     car: { nl: 'Audi A7', uk: 'Audi A7' },
     detail: { nl: 'voorruit met Chameleon-folie', uk: 'лобове скло з плівкою Chameleon' },
-    altDetail: { nl: 'voorruit chameleon', uk: 'лобове скло з плівкою Chameleon' },
     date: jobMonth(),
   },
   {
@@ -623,7 +622,6 @@ export const wrapRecent: WrapRecent[] = [
     file: 'real-bmw-3-voorruit.png',
     car: { nl: 'BMW 3 Serie', uk: 'BMW 3 Series' },
     detail: { nl: 'voorruit met Chameleon-folie', uk: 'лобове скло з плівкою Chameleon' },
-    altDetail: { nl: 'voorruit chameleon', uk: 'лобове скло з плівкою Chameleon' },
     date: jobMonth(),
   },
 ];
