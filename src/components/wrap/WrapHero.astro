@@ -1,7 +1,8 @@
 ---
 // Wrap hero (mockup «VG Site 04 Car wrapping v2», frames 1, 2, 4). AI illustration (D18),
-// decorative: empty alt. Separate crops for 375 and 1280; never lazy. Primary button jumps to
-// the configurator, secondary is WhatsApp (hidden without TEST_PHONE, D16).
+// decorative: empty alt. Separate crops for 375 and 1280; never lazy. Primary button: the quote
+// form, or the configurator when it is switched on (D19); secondary is WhatsApp (hidden without
+// TEST_PHONE, D16).
 import { getImage } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 import { whatsappUrl } from '../../config/site.ts';
@@ -15,10 +16,11 @@ interface Props {
   h1: string;
   sub: string;
   cta: string;
+  ctaHref: string;
   chips: string[];
 }
 
-const { locale, h1, sub, cta, chips } = Astro.props;
+const { locale, h1, sub, cta, ctaHref, chips } = Astro.props;
 const mobile = illustration(wrap.images.hero375.value);
 const desktop = illustration(wrap.images.hero1280.value);
 
@@ -60,7 +62,7 @@ const wa = whatsappUrl();
     <h1 class="whero__h1">{h1}</h1>
     <p class="whero__sub">{sub}</p>
     <div class="whero__actions">
-      <a class="btn btn--primary btn--hero" href="#configurator">{cta}</a>
+      <a class="btn btn--primary btn--hero" href={ctaHref}>{cta}</a>
       {
         wa && (
           <a class="btn btn--ghost btn--hero" href={wa} target="_blank" rel="noopener">

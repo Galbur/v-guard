@@ -1,9 +1,10 @@
 // Services, packages, body types, form options and prices. The only place prices live
 // (Site Truth section 6). A price renders when priceStatus is 'confirmed' or, until launch,
 // 'default' (owner decision R2). Hints from «value | hint» marker stay here and in check:defaults.
-import { euro, fact, type Fact, type Locale, type Localized } from './fact.ts';
+import { features } from '../config/site.ts';
+import { euro, fact, type Fact, type Locale, type Localized, type Status } from './fact.ts';
 
-export type PriceStatus = 'confirmed' | 'spoken' | 'default' | 'none';
+export type PriceStatus = 'confirmed' | 'spoken' | 'default' | 'dormant' | 'none';
 export type ServiceSlug = 'ppf' | 'ramen-blinderen' | 'car-wrapping';
 export type { Localized };
 
@@ -327,7 +328,13 @@ export interface WrapBody {
 /** Volledige wrap on a hatchback; other bodies multiply it. */
 export const wrapBase: Price = price(1795, 'default', 'Hatchback; ринок ~€2.000-3.500', { from: true });
 
-const factor = (value: number | null, hint = 'дефолт') => fact<number | null>(value, 'default', hint);
+/**
+ * Defaults only the wrap configurator uses: 'dormant' while it is switched off (D19), so
+ * check:defaults does not ask to confirm what is not on the site; 'default' when it is on.
+ */
+const configuratorStatus: Status = features.wrapConfigurator ? 'default' : 'dormant';
+
+const factor = (value: number | null, hint = 'дефолт') => fact<number | null>(value, configuratorStatus, hint);
 
 export const wrapBodies: WrapBody[] = [
   { id: 'hatch', formBody: 'hatchback', label: { nl: 'Hatchback', uk: 'Хетчбек' }, van: false },
@@ -375,7 +382,7 @@ export const wrapParts: WrapPart[] = [
     label: { nl: 'Dak', uk: 'Дах' },
     formLabel: { nl: 'Dak', uk: 'Дах' },
     price: price(249, 'default', 'дах, легкове авто', { from: true }),
-    vanPrice: price(349, 'default', 'дах, бус і автобус', { from: true }),
+    vanPrice: price(349, configuratorStatus, 'дах, бус і автобус', { from: true }),
   },
   {
     id: 'spiegel',
@@ -383,7 +390,7 @@ export const wrapParts: WrapPart[] = [
     label: { nl: 'Spiegelkappen', uk: 'Дзеркала' },
     formLabel: { nl: 'Spiegelkappen', uk: 'Дзеркала' },
     price: price(69, 'default', 'ковпаки дзеркал, легкове авто', { from: true }),
-    vanPrice: price(89, 'default', 'дзеркала, бус і автобус', { from: true }),
+    vanPrice: price(89, configuratorStatus, 'дзеркала, бус і автобус', { from: true }),
   },
   {
     id: 'chroom',
@@ -398,7 +405,7 @@ export const wrapParts: WrapPart[] = [
 export const wrapPakket: Price = price(395, 'default', 'Black styling pakket', { from: true });
 
 /** Carbon look surcharge on the whole indication. */
-export const wrapCarbonSurcharge = fact(0.1, 'default', 'Carbon look +10%');
+export const wrapCarbonSurcharge = fact(0.1, configuratorStatus, 'Carbon look +10%');
 
 export interface WrapFinish {
   id: WrapFinishId;
@@ -472,7 +479,7 @@ export const wrapColors = fact<WrapColor[]>(
     { name: 'Metallic Silver', hex: '#B9BCC0' },
     { name: 'Candy Red', hex: '#B3122E' },
   ],
-  'default',
+  configuratorStatus,
   'назви і hex кольорів V Guard (плейсхолдери макета)',
 );
 

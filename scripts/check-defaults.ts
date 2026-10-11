@@ -1,6 +1,8 @@
 // Lists every value that still renders as a default (status 'default', from the design
 // prompt «value | hint» markers) or as an ОЗВУЧЕНО fact ('spoken'), with its hint.
 // Owner rule R2: before launch this list must be empty or explicitly approved.
+// 'dormant' values belong to a switched-off feature (D19: wrap configurator); they are not on the
+// site, so they are only counted, not listed. Switching the feature on turns them into defaults.
 // Usage: npm run check:defaults        report, exit 0
 //        npm run check:defaults -- --strict   exit 1 when anything is listed (launch gate)
 import { readdirSync, readFileSync } from 'node:fs';
@@ -17,6 +19,7 @@ interface Row {
 }
 
 const rows: Row[] = [];
+let dormant = 0;
 const seen = new WeakSet<object>();
 
 function show(value: unknown): string {
@@ -47,6 +50,10 @@ function walk(node: unknown, path: string, file: string) {
   seen.add(node);
   const obj = node as Record<string, unknown>;
   const status = obj.status;
+  if (status === 'dormant' && ('amount' in obj || 'value' in obj)) {
+    dormant++;
+    return;
+  }
   if (status === 'default' || status === 'spoken') {
     if ('amount' in obj) {
       rows.push({ file, field: path, status, value: priceText(obj), hint: String(obj.hint ?? '') });
@@ -103,4 +110,5 @@ console.log(`|${widths.map((w) => '-'.repeat(w + 2)).join('|')}|`);
 for (const r of rows) console.log(line(cols.map((c) => cut(r[c], limits[c]))));
 const counts = rows.reduce<Record<string, number>>((acc, r) => ({ ...acc, [r.status]: (acc[r.status] ?? 0) + 1 }), {});
 console.log(`\ncheck:defaults: ${rows.length} value(s) not confirmed (${Object.entries(counts).map(([k, v]) => `${k} ${v}`).join(', ')})`);
+if (dormant) console.log(`check:defaults: ${dormant} dormant value(s) of switched-off features not listed (features in site.ts)`);
 if (process.argv.includes('--strict') && rows.length > 0) process.exit(1);

@@ -1,13 +1,13 @@
 ---
 // Car wrapping (/car-wrapping/, /uk/obkleiuvannia/): mockup «VG Site 04 Car wrapping v2».
 // Order: Hero · Proof · Wat is car wrapping · Configurator · Cards · Finishes · Wrappen of
-// overspuiten · Recent opgeleverd · Zo werkt het · FAQ (8) · CTA.
+// overspuiten · Recent opgeleverd · Zo werkt het · FAQ (8) · CTA. The configurator is off (D19,
+// features.wrapConfigurator) and is then not imported at all: no markup, script, car images or CSS.
 import Base from '../layouts/Base.astro';
 import FAQ from '../components/FAQ.astro';
 import WrapAnswer from '../components/wrap/WrapAnswer.astro';
 import WrapCards from '../components/wrap/WrapCards.astro';
 import WrapCompare from '../components/wrap/WrapCompare.astro';
-import WrapConfigurator from '../components/wrap/WrapConfigurator.astro';
 import WrapCta from '../components/wrap/WrapCta.astro';
 import WrapFinishes from '../components/wrap/WrapFinishes.astro';
 import WrapHero from '../components/wrap/WrapHero.astro';
@@ -26,6 +26,12 @@ interface Props {
 
 const { locale } = Astro.props;
 const c = wrapCopy[locale];
+// __WRAP_CONFIGURATOR__ is features.wrapConfigurator as a build-time constant: with false the
+// dynamic import is dropped, so neither the component nor its script, styles or car images ship.
+const WrapConfigurator = __WRAP_CONFIGURATOR__
+  ? (await import('../components/wrap/WrapConfigurator.astro')).default
+  : null;
+const heroHref = WrapConfigurator ? '#configurator' : `${localizedPath('contact', locale)}?service=car-wrapping`;
 const url = new URL(localizedPath('wrap', locale), Astro.site ?? 'http://localhost').href;
 const schema = [
   serviceSchema({
@@ -39,10 +45,19 @@ const schema = [
 ---
 
 <Base locale={locale} pageKey="wrap" title={c.title} description={c.description} schema={schema}>
-  <WrapHero locale={locale} h1={c.h1} sub={c.sub} cta={c.ctaBuild} chips={c.chips} />
+  <WrapHero locale={locale} h1={c.h1} sub={c.sub} cta={c.ctaBuild} ctaHref={heroHref} chips={c.chips} />
   <WrapProof items={c.proof} />
   <WrapAnswer title={c.answerTitle} text={c.answer} />
-  <WrapConfigurator locale={locale} copy={c.cfg} />
+  {/*
+    WRAP-CONFIGURATOR вимкнено рішенням Oleksii. Щоб увімкнути: features.wrapConfigurator = true.
+    Код: src/components/wrap/ (конфігуратор і рендер авто), розрахунок: wrap-price.ts, дані:
+    services.ts (кузови, множники, деталі, кольори), тексти: copy/wrap.ts, макет: docs/design/v2/
+    «VG Site 04 Car wrapping v2.dc.html» і «VG Wrap Car.dc.html». Усе працює і протестовано в
+    PR #2 (W3, W4): не розробляти з нуля. При увімкненні повернути: кнопку hero «Stel je wrap
+    samen», «prijsindicatie» в sub і meta, крок 1 «Stel samen», перемикання StickyMobileBar.
+    Тексти, кнопка hero і check:defaults (dormant -> default) перемикаються прапорцем самі.
+  */}
+  {WrapConfigurator && <WrapConfigurator locale={locale} copy={c.cfg} />}
   <WrapCards locale={locale} title={c.cardsTitle} button={c.cardButton} note={c.cardsNote} cards={wrapCards} />
   <WrapFinishes locale={locale} title={c.finishesTitle} finishes={wrapFinishes} />
   <WrapCompare locale={locale} title={c.compareTitle} cols={c.compareCols} rows={c.compare} ppf={c.comparePpf} />

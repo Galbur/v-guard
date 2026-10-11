@@ -1,7 +1,7 @@
 // Car wrapping (/car-wrapping/, /uk/obkleiuvannia/). NL verbatim from mockup «VG Site 04 Car
 // wrapping v2»; UA native terms from step W3 («обклеювання плівкою», not «car wrapping»).
 // Prices, durations and brands come from services.ts and site.ts.
-import { site, trust } from '../config/site.ts';
+import { features, site, trust } from '../config/site.ts';
 import type { Locale } from '../data/fact.ts';
 import { euro } from '../data/fact.ts';
 import { wrap, wrapBase, wrapParts } from '../data/services.ts';
@@ -10,6 +10,8 @@ import type { CtaBand, Faq } from './shared.ts';
 const full = euro(wrapBase.amount);
 const chrome = euro(wrapParts.find((p) => p.id === 'chroom')!.price.amount);
 const years = trust.workWarrantyYears.value;
+/** D19: with the configurator off, hero, meta and step 1 point to the quote form instead. */
+const cfgOn = features.wrapConfigurator;
 const brands = wrap.brands.value;
 
 export interface WrapCopy {
@@ -17,6 +19,7 @@ export interface WrapCopy {
   description: string;
   h1: string;
   sub: string;
+  /** Hero primary button: «Stel je wrap samen» (configurator) or the quote form. */
   ctaBuild: string;
   chips: string[];
   proof: { icon: 'shield' | 'layers' | 'eye' | 'pin'; text: string }[];
@@ -72,10 +75,14 @@ export interface WrapCopy {
 export const wrapCopy: Record<Locale, WrapCopy> = {
   nl: {
     title: 'Car wrapping, auto wrappen en ontchromen in Vroomshoop | V Guard Studio',
-    description: `Auto wrappen in Vroomshoop: volledige wrap vanaf ${full}, ontchromen vanaf ${chrome}, dak en spiegelkappen. Stel je wrap samen en zie je prijsindicatie.`,
+    description: cfgOn
+      ? `Auto wrappen in Vroomshoop: volledige wrap vanaf ${full}, ontchromen vanaf ${chrome}, dak en spiegelkappen. Stel je wrap samen en zie je prijsindicatie.`
+      : `Auto wrappen in Vroomshoop: volledige wrap vanaf ${full}, ontchromen vanaf ${chrome}, dak en spiegelkappen. Bekijk finishes en ons werk.`,
     h1: 'Car wrapping in Vroomshoop: nieuwe kleur zonder overspuiten',
-    sub: 'Volledig of alleen dak, spiegels en chroom. Zie direct je prijsindicatie.',
-    ctaBuild: 'Stel je wrap samen',
+    sub: cfgOn
+      ? 'Volledig of alleen dak, spiegels en chroom. Zie direct je prijsindicatie.'
+      : 'Volledig of alleen dak, spiegels en chroom. Vaste prijs na je aanvraag.',
+    ctaBuild: cfgOn ? 'Stel je wrap samen' : 'Offerte aanvragen',
     chips: [`${years} jaar garantie`, `Volledige wrap vanaf ${full}`, `Ontchromen vanaf ${chrome}`],
     proof: [
       { icon: 'shield', text: `${years} jaar garantie op het werk` },
@@ -134,7 +141,7 @@ export const wrapCopy: Record<Locale, WrapCopy> = {
     recentMore: 'Bekijk alle projecten',
     stepsTitle: 'Zo werkt het',
     steps: [
-      { icon: 'sliders', text: "Stel samen of stuur foto's" },
+      { icon: 'sliders', text: cfgOn ? "Stel samen of stuur foto's" : "Stuur foto's of vraag een offerte aan" },
       { icon: 'chat', text: 'Offerte op maat via WhatsApp' },
       { icon: 'shield', text: 'Lak checken en voorbereiden' },
       { icon: 'flag', text: 'Ophalen in je nieuwe kleur' },
@@ -180,10 +187,14 @@ export const wrapCopy: Record<Locale, WrapCopy> = {
   },
   uk: {
     title: 'Обклеювання авто плівкою у Vroomshoop | V Guard Studio',
-    description: `Обклеювання авто плівкою у Vroomshoop: повне від ${full}, антихром від ${chrome}, дах і дзеркала. Зберіть свій варіант і подивіться ціну.`,
+    description: cfgOn
+      ? `Обклеювання авто плівкою у Vroomshoop: повне від ${full}, антихром від ${chrome}, дах і дзеркала. Зберіть свій варіант і подивіться ціну.`
+      : `Обклеювання авто плівкою у Vroomshoop: повне від ${full}, антихром від ${chrome}, дах і дзеркала. Фініші та наші роботи.`,
     h1: 'Обклеювання авто плівкою у Vroomshoop: новий колір без перефарбування',
-    sub: 'Повністю або лише дах, дзеркала і хром. Одразу побачите орієнтовну ціну.',
-    ctaBuild: 'Зібрати свій варіант',
+    sub: cfgOn
+      ? 'Повністю або лише дах, дзеркала і хром. Одразу побачите орієнтовну ціну.'
+      : 'Повністю або лише дах, дзеркала і хром. Фіксована ціна після заявки.',
+    ctaBuild: cfgOn ? 'Зібрати свій варіант' : 'Отримати оцінку',
     chips: [`${years} роки гарантії`, `Повне обклеювання від ${full}`, `Антихром від ${chrome}`],
     proof: [
       { icon: 'shield', text: `${years} роки гарантії на роботу` },
@@ -242,7 +253,7 @@ export const wrapCopy: Record<Locale, WrapCopy> = {
     recentMore: 'Усі роботи',
     stepsTitle: 'Як це працює',
     steps: [
-      { icon: 'sliders', text: 'Зберіть варіант або надішліть фото' },
+      { icon: 'sliders', text: cfgOn ? 'Зберіть варіант або надішліть фото' : 'Надішліть фото або залиште заявку' },
       { icon: 'chat', text: 'Оцінка у WhatsApp' },
       { icon: 'shield', text: 'Перевірка і підготовка лаку' },
       { icon: 'flag', text: 'Забираєте авто в новому кольорі' },

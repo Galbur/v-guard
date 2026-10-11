@@ -121,6 +121,13 @@ export const links = {
 // falls back to Netlify's URL env var.
 export const SITE_URL: string | null = null;
 
+// Optional features. wrapConfigurator: «Stel je wrap samen» on the wrap page (built in PR #2,
+// steps W3 and W4). Off by Oleksii's decision D19 (Site Truth v7): not part of the package.
+// With false nothing of it ships: no markup, script, car images or styles.
+export const features = {
+  wrapConfigurator: false as boolean,
+};
+
 // Page keys from src/i18n/routes.ts that are launched. Empty until launch:
 // every page is noindex and the sitemap is empty. While empty, the whole site is
 // a preview and all pages are linked; after launch only live pages are linked.
