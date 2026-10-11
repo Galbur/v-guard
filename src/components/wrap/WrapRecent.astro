@@ -29,7 +29,7 @@ const projects = localizedPath('projects', locale);
         <li class:list={['wrecent__item', { 'wrecent__item--wide': i > 2 }]}>
           <Picture
             src={photo(item.file)}
-            alt={`${item.car[locale]}, ${(item.altDetail ?? item.detail)[locale]}`}
+            alt={`${item.car[locale]}, ${item.detail[locale]}`}
             formats={['avif', 'webp']}
             fallbackFormat="webp"
             widths={[240, 480, 720]}

@@ -197,7 +197,7 @@ export const wrapCopy: Record<Locale, WrapCopy> = {
     sub: cfgOn
       ? 'Повністю або лише дах, дзеркала і хром. Одразу побачите орієнтовну ціну.'
       : 'Увесь кузов або окремі деталі: дах, дзеркала, хром. Точна вартість після заявки.',
-    ctaBuild: cfgOn ? 'Зібрати свій варіант' : 'Отримати оцінку',
+    ctaBuild: cfgOn ? 'Зібрати свій варіант' : 'Дізнатися вартість',
     chips: [`${years} роки гарантії`, `Повне обклеювання від ${full}`, `Антихром від ${chrome}`],
     proof: [
       { icon: 'shield', text: `${years} роки гарантії на монтаж` },
@@ -228,7 +228,7 @@ export const wrapCopy: Record<Locale, WrapCopy> = {
       onRequest: 'Ціна за запитом',
       noParts: 'Оберіть хоча б одну деталь',
       order: 'Замовити цей варіант',
-      orderOnRequest: 'Отримати оцінку',
+      orderOnRequest: 'Дізнатися вартість',
       whatsapp: 'Надіслати у WhatsApp',
       pakketParts: 'Антихром-пакет: дах, дзеркала, хром',
       nothingYet: 'Деталі ще не обрано',

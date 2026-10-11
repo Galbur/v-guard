@@ -38,7 +38,7 @@ export const site = {
   // F15 ОЧІКУЄ
   hours: fact(
     {
-      label: { nl: 'ma-vr 9:00-18:00, za 10:00-16:00', uk: 'пн-пт 9:00-18:00, сб 10:00-16:00' } as Localized,
+      label: { nl: 'ma-vr 9:00-18:00, za 10:00-16:00', uk: 'пн-пт 09:00-18:00, сб 10:00-16:00' } as Localized,
       schema: ['Mo-Fr 09:00-18:00', 'Sa 10:00-16:00'],
     },
     'default',
