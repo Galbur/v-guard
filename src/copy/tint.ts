@@ -14,47 +14,47 @@ export const tintCopy = {
   nl: {
     title: `Ramen blinderen Vroomshoop vanaf ${from} | V Guard Studio`,
     description: `Ramen blinderen en autoruiten tinten in Vroomshoop vanaf ${from}. Vaste prijs per carrosserie, uitleg over de 55%-regel, klaar in ${tint.duration.value.nl}.`,
-    h1: 'Ramen blinderen en autoruiten tinten in Vroomshoop',
-    sub: `Meer privacy en minder felle zon. Folie op maat, klaar in ${tint.duration.value.nl}.`,
-    chips: [`Achterzijde vanaf ${from}`, chipWarranty.nl, `${join(trust.tintBrands.value, 'en')} folie`],
-    answerTitle: 'Wat is ramen blinderen',
+    h1: 'Autoruiten blinderen in Vroomshoop',
+    sub: `Meer privacy en minder hinder van de zon. Folie op maat, klaar in ${tint.duration.value.nl}.`,
+    chips: [`Achterzijde vanaf ${from}`, chipWarranty.nl, `Folie van ${join(trust.tintBrands.value, 'en')}`],
+    answerTitle: 'Wat is autoruiten blinderen?',
     answer:
-      'Ramen blinderen, ook autoruiten tinten genoemd, is het aanbrengen van getinte folie aan de binnenkant van de autoruiten. Het geeft meer privacy en minder felle zon. V Guard Studio blindeert autoruiten in Vroomshoop, Twente.',
-    legalTitle: 'Wat mag in Nederland',
+      'Bij autoruiten blinderen brengen we getinte folie aan op de binnenzijde van de ruiten. Dit zorgt voor meer privacy en vermindert hinder van fel zonlicht. V Guard Studio blindeert autoruiten in Vroomshoop, Twente.',
+    legalTitle: 'Wat zijn de regels in Nederland?',
     // F10
     legal: [
-      { zone: 'light', label: 'Voorruit:', text: 'minimaal 55% licht' },
-      { zone: 'light', label: 'Zijruiten naast de bestuurder:', text: 'minimaal 55% licht' },
-      { zone: 'dark', label: 'Achterzijruiten en achterruit:', text: 'donkerder mag, met buitenspiegels links en rechts' },
+      { zone: 'light', label: 'Voorruit:', text: 'minimaal 55% lichtdoorlatendheid' },
+      { zone: 'light', label: 'Voorste zijruiten:', text: 'minimaal 55% lichtdoorlatendheid' },
+      { zone: 'dark', label: 'Achterste zijruiten en achterruit:', text: 'donkerder toegestaan bij twee buitenspiegels' },
     ],
     legalDarker: 'donkerder',
     legalSource: 'Bron:',
     legalSourceLink: 'Rijksoverheid',
-    pricesTitle: 'Prijzen ramen blinderen',
-    bodyCaption: 'Achterzijde (vanaf de B-stijl, standaard folie)',
-    bodyHead: ['Carrosserie', 'Prijs'],
+    pricesTitle: 'Prijzen voor autoruiten blinderen',
+    bodyCaption: 'Achterste ruiten (vanaf de B-stijl, standaardfolie)',
+    bodyHead: ['Type auto', 'Prijs'],
     optionsCaption: 'Opties',
     optionsHead: ['Optie', 'Prijs'],
-    pricesNote: `Kies je tint: ${join(shades, 'of')}. Prijzen incl. btw.`,
+    pricesNote: `Kies de lichtdoorlatendheid: ${join(shades, 'of')}. Alle prijzen zijn incl. btw.`,
     beforeAfterTitle: 'Voor en na',
-    galleryTitle: 'Getinte ruiten van V Guard',
+    galleryTitle: 'Ons werk: autoruiten blinderen',
     faq: [
       {
         // F10, F10b
-        q: 'Hoe donker mag ik mijn autoruiten laten blinderen?',
-        a: 'De voorruit en de zijruiten naast de bestuurder moeten minimaal 55% licht doorlaten. Achterzijruiten en achterruit mogen donkerder, als je auto links en rechts een buitenspiegel heeft. Het gaat om ruit en folie samen, want fabrieksglas houdt zelf ook licht tegen.',
+        q: 'Hoe donker mogen mijn autoruiten zijn?',
+        a: 'De voorruit en voorste zijruiten moeten minimaal 55% licht doorlaten. De achterste zijruiten en achterruit mogen donkerder zijn als de auto twee buitenspiegels heeft. De lichtdoorlatendheid geldt voor het glas en de folie samen.',
       },
       {
         // F10b
-        q: 'Wordt dit gecontroleerd bij de APK?',
+        q: 'Wordt de lichtdoorlatendheid bij de APK gecontroleerd?',
         a: 'Bij de APK wordt de lichtdoorlatendheid van de voorste ruiten niet getest. De politie kan wel meten. Laten de voorruit of de zijruiten naast de bestuurder te weinig licht door, dan kun je een boete krijgen en kan de politie je kentekenbewijs innemen.',
       },
       {
-        q: 'Welke tint kan ik kiezen?',
+        q: 'Welke tint past bij mijn auto?',
         a: `${join(shades, 'of')}. De meeste klanten kiezen ${tint.popularShade.value}% voor de achterzijde.`,
       },
       {
-        q: 'Hoe lang duurt het en wanneer mag het raam weer open?',
+        q: 'Hoe lang duurt het tinten en wanneer mogen de ramen weer open?',
         a: `Het blinderen duurt ${tint.duration.value.nl}. Houd de ramen daarna ${tint.keepClosedDays.value} dagen dicht.`,
       },
       { q: 'Hoe maak ik getinte ruiten schoon?', a: tint.care.value.nl },
@@ -64,7 +64,10 @@ export const tintCopy = {
       },
     ] satisfies Faq[],
     faqTitle: headings.faq.nl,
-    cta: { title: 'Ramen laten blinderen?', text: 'Stuur merk, model en bouwjaar. Je krijgt direct een prijs.' } satisfies CtaBand,
+    cta: {
+      title: 'Je autoruiten laten blinderen?',
+      text: 'Stuur het merk, model en bouwjaar van je auto door voor een prijsopgave.',
+    } satisfies CtaBand,
   },
   uk: {
     title: 'Тонування вікон авто у Vroomshoop | V Guard Studio',
