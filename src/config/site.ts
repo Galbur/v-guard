@@ -44,8 +44,12 @@ export const site = {
     'default',
     'години V Guard (F15)',
   ),
-  legalName: null as string | null, // F14 ОЧІКУЄ
+  // F14 ОЧІКУЄ. Step 13 default (owner): legal entity behind the trade name, for the privacy page.
+  legalName: fact('V Guard Studio', 'default', 'юридична назва V Guard (F14)'),
   kvk: fact('12345678', 'default', 'KvK V Guard (F14)'),
+  // F13 ОЧІКУЄ. Public contact email for the privacy page. null until V Guard gives it (owner decision
+  // 12.10.2026): the privacy page then names only the phone; check:defaults lists it, so --strict fails.
+  email: fact<string | null>(null, 'default', 'публічний email V Guard для Privacy (F13)'),
   emailNotify: null as string | null, // F13 ОЧІКУЄ; Netlify Forms notifications are set in the Netlify UI
   // F16 ОЧІКУЄ. No URL, no link: a guessed profile URL could point to someone else.
   socials: {
