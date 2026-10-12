@@ -43,7 +43,6 @@ const schema = [
     sub={c.sub}
     chips={c.chips}
     service="ppf"
-    waText={c.whatsapp}
     photos={{
       // 375: real photo as in the mockup (the AI frame put the car behind the H1); 1280: AI frame, alt="" (D18)
       mobile: { file: 'bmw-34-p.png', position: 'center 55%', alt: c.heroAlt },
@@ -66,5 +65,5 @@ const schema = [
   />
   <TrustBlock items={c.trust} />
   <FAQ title={c.faqTitle} items={c.faq} />
-  <CtaBand locale={locale} title={c.cta.title} text={c.cta.text} service="ppf" waText={c.whatsapp} />
+  <CtaBand locale={locale} title={c.cta.title} text={c.cta.text} service="ppf" />
 </Base>

@@ -2,7 +2,7 @@
 // «Studio in Vroomshoop»: NAP from site.ts, route link (no map embed, D7), WhatsApp.
 import Photo from './Photo.astro';
 import { fullAddress, links, site, telUrl, whatsappUrl } from '../config/site.ts';
-import { headings } from '../copy/shared.ts';
+import { headings, waText } from '../copy/shared.ts';
 import { t } from '../i18n/index.ts';
 import type { Locale } from '../i18n/routes.ts';
 import { photo } from '../lib/photos.ts';
@@ -14,7 +14,7 @@ interface Props {
 }
 
 const { locale, image } = Astro.props;
-const wa = whatsappUrl();
+const wa = whatsappUrl(waText(Astro.url.pathname, locale));
 const tel = telUrl();
 ---
 

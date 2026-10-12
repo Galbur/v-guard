@@ -2,6 +2,7 @@
 // section 12 where it exists, otherwise translated without new facts (see step 01 report).
 import { trust } from '../config/site.ts';
 import type { Locale, Localized } from '../data/fact.ts';
+import { pageKeyFor } from '../i18n/routes.ts';
 
 export interface Step {
   title: string;
@@ -50,5 +51,31 @@ export const headings = {
   studio: { nl: 'Studio in Vroomshoop', uk: 'Студія у Vroomshoop' },
   pricesIncl: { nl: 'Prijzen incl. btw.', uk: 'Ціни з BTW.' },
 } satisfies Record<string, Localized>;
+
+/** Prefilled WhatsApp texts (step 12): each service page has its own, every other page the general one. */
+export const waTemplates = {
+  ppf: {
+    nl: 'Hallo V Guard Studio, ik wil graag een offerte voor PPF lakbescherming. Mijn auto:',
+    uk: 'Добрий день, V Guard Studio! Хочу дізнатися вартість захисної плівки PPF. Моє авто:',
+  },
+  tint: {
+    nl: 'Hallo V Guard Studio, ik wil graag een offerte voor ramen blinderen. Mijn auto:',
+    uk: 'Добрий день, V Guard Studio! Хочу дізнатися вартість тонування вікон. Моє авто:',
+  },
+  wrap: {
+    nl: 'Hallo V Guard Studio, ik wil graag een offerte voor car wrapping. Mijn auto:',
+    uk: 'Добрий день, V Guard Studio! Хочу дізнатися вартість обклеювання авто плівкою. Моє авто:',
+  },
+  general: {
+    nl: 'Hallo V Guard Studio, ik heb een vraag over mijn auto. Mijn auto:',
+    uk: 'Добрий день, V Guard Studio! Маю питання щодо свого авто. Моє авто:',
+  },
+} satisfies Record<string, Localized>;
+
+/** WhatsApp text for the page at `pathname` (Home, Projecten, Contact, Privacy and 404 get the general one). */
+export function waText(pathname: string, locale: Locale): string {
+  const key = pageKeyFor(pathname);
+  return (key === 'ppf' || key === 'tint' || key === 'wrap' ? waTemplates[key] : waTemplates.general)[locale];
+}
 
 export { join };
