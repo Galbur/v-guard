@@ -628,7 +628,6 @@ export const wrapRecent: WrapRecent[] = [
 
 /** Lowest wrap price, e.g. Home card «vanaf €69». */
 export const wrapFrom: Price = wrapCards.reduce((min, c) => (c.price.amount < min.price.amount ? c : min)).price;
-export const wrapFull: Price = wrapBase;
 export const ppfFrom: Price = ppfPackages[0].price;
 
 /** «vanaf» price per service for cards and the mobile menu. */

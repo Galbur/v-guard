@@ -28,7 +28,7 @@ export const ppf = {
     packagesNote: 'De prijs hangt af van het automodel, de staat van de lak en het te beschermen oppervlak.',
     processTitle: 'Zo brengen wij PPF aan',
     processSub: 'Kwaliteit boven snelheid.',
-    // PPF only: Home keeps the shared prepSteps wording.
+    // PPF only: Home has its own steps in home.ts.
     steps: [
       { title: 'Wassen', text: 'We reinigen de auto grondig in meerdere stappen.' },
       { title: 'Kleibehandeling', text: 'Met speciale reinigingsklei verwijderen we hardnekkig vuil van het lakoppervlak.' },
@@ -90,7 +90,7 @@ export const ppf = {
     packagesNote: 'Ціна залежить від моделі авто, стану покриття та площі захисту.',
     processTitle: 'Як ми встановлюємо PPF',
     processSub: 'Якість важливіша за швидкість.',
-    // PPF only: Home keeps the shared prepSteps wording.
+    // PPF only: Home has its own steps in home.ts.
     steps: [
       { title: 'Миття', text: 'Ретельно миємо автомобіль і видаляємо забруднення.' },
       { title: 'Очищення глиною', text: 'Спеціальна глина видаляє стійкі забруднення з поверхні кузова.' },
