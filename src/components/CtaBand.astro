@@ -1,6 +1,7 @@
 ---
 // Closing CTA (headline up to 6 words): quote form with ?service= and WhatsApp.
 import { isLinked, whatsappUrl } from '../config/site.ts';
+import { waText } from '../copy/shared.ts';
 import { t } from '../i18n/index.ts';
 import { localizedPath, type Locale } from '../i18n/routes.ts';
 
@@ -9,13 +10,11 @@ interface Props {
   title: string;
   text: string;
   service?: string;
-  /** Prefilled wa.me text. */
-  waText?: string;
 }
 
-const { locale, title, text, service, waText } = Astro.props;
+const { locale, title, text, service } = Astro.props;
 const href = `${localizedPath('contact', locale)}${service ? `?service=${service}` : ''}`;
-const wa = whatsappUrl(waText);
+const wa = whatsappUrl(waText(Astro.url.pathname, locale));
 ---
 
 <section class="section container">

@@ -6,6 +6,7 @@
 import { getImage } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 import { whatsappUrl } from '../../config/site.ts';
+import { waText } from '../../copy/shared.ts';
 import { wrap } from '../../data/services.ts';
 import { t } from '../../i18n/index.ts';
 import type { Locale } from '../../i18n/routes.ts';
@@ -38,7 +39,7 @@ const sources = {
   desktopWebp: await srcset(desktop, [1024, 1280, 1600], 'webp'),
 };
 const fallback = await getImage({ src: mobile, width: 640, format: 'webp', quality: 60 });
-const wa = whatsappUrl();
+const wa = whatsappUrl(waText(Astro.url.pathname, locale));
 ---
 
 <section class="whero">

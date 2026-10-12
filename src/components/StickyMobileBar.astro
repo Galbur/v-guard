@@ -2,6 +2,7 @@
 // Always-visible mobile CTA bar (mockup 8c): WhatsApp · Bellen · Offerte. Hidden from 1024 px.
 import Icon from './Icon.astro';
 import { isLinked, telUrl, whatsappUrl } from '../config/site.ts';
+import { waText } from '../copy/shared.ts';
 import { t } from '../i18n/index.ts';
 import { localizedPath, type Locale } from '../i18n/routes.ts';
 
@@ -10,7 +11,7 @@ interface Props {
 }
 
 const { locale } = Astro.props;
-const wa = whatsappUrl();
+const wa = whatsappUrl(waText(Astro.url.pathname, locale));
 const tel = telUrl();
 ---
 

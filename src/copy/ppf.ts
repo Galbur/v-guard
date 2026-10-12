@@ -20,7 +20,6 @@ export const ppf = {
     h1: 'PPF in Vroomshoop: bescherm je autolak tegen steenslag',
     sub: 'Transparante beschermfolie voor de voorzijde, losse onderdelen of de hele auto.',
     heroAlt: 'Auto bij de studio van V Guard Studio in Vroomshoop',
-    whatsapp: 'Hoi V Guard, ik wil een prijs voor PPF op mijn auto.',
     chips: ['Aanbrengen in 5 stappen', `${years} jaar garantie op montage`, join(brands, 'en')],
     answer:
       "PPF (Paint Protection Film), ook wel lakbeschermingsfolie genoemd, beschermt je autolak tegen steenslag en lichte krassen. V Guard Studio in Vroomshoop brengt PPF aan op auto's van klanten uit heel Twente.",
@@ -82,7 +81,6 @@ export const ppf = {
     h1: 'PPF у Vroomshoop: захист кузова від сколів',
     sub: 'Прозора захисна плівка для передньої частини, окремих деталей або всього авто.',
     heroAlt: 'Авто біля студії V Guard Studio у Vroomshoop',
-    whatsapp: 'Вітаю! Хочу дізнатися ціну PPF для мого авто.',
     chips: ['Монтаж у 5 етапів', `${years} роки гарантії на монтаж`, join(brands, 'і')],
     answer:
       'PPF (Paint Protection Film), або антигравійна плівка, захищає лакофарбове покриття від сколів і дрібних подряпин. V Guard Studio у Vroomshoop встановлює PPF для клієнтів із регіону Twente.',
