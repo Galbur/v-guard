@@ -23,24 +23,6 @@ const filmYears = trust.filmWarrantyYears.value;
 const join = (list: readonly string[], last: string) =>
   list.length < 2 ? list.join('') : `${list.slice(0, -1).join(', ')} ${last} ${list[list.length - 1]}`;
 
-/** PPF and wrap preparation, Site Truth F5: content ПІДТВЕРДЖЕНО; wording still to be agreed with V Guard. */
-export const prepSteps: Record<Locale, Step[]> = {
-  nl: [
-    { title: 'Wassen', text: 'Grondige reiniging van de auto in meerdere fasen.' },
-    { title: 'Kleibehandeling', text: 'Clay haalt vastzittend vuil uit de lak.' },
-    { title: 'Ontvetten', text: 'Alcoholreiniging zodat de folie goed hecht.' },
-    { title: 'Aanbrengen', text: 'De folie gaat op de schone, voorbereide lak.' },
-    { title: 'Controle', text: 'Eindcontrole van randen en oppervlak voor oplevering.' },
-  ],
-  uk: [
-    { title: 'Миття', text: 'Ретельне очищення авто в кілька етапів.' },
-    { title: 'Clay', text: 'Clay прибирає вʼїлий бруд із лаку.' },
-    { title: 'Знежирення', text: 'Очищення спиртом, щоб плівка добре трималася.' },
-    { title: 'Нанесення', text: 'Плівка лягає на чистий, підготовлений лак.' },
-    { title: 'Перевірка', text: 'Фінальна перевірка країв і поверхні перед видачею.' },
-  ],
-};
-
 export type TrustIcon = 'shield' | 'award' | 'certificate' | 'layers';
 
 /** «Waarom V Guard Studio» / «Garantie en folies» (F6, F7, F8, F9). */
