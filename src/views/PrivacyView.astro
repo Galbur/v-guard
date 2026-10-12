@@ -12,9 +12,10 @@ interface Props {
 const { locale } = Astro.props;
 const c = privacyCopy[locale];
 
-/** Text before and after the link label in a paragraph with a link. */
+/** Text before and after the link label in a paragraph with a link. A missing label fails the build. */
 const split = (b: Exclude<PrivacyBlock, string | string[]>) => {
   const at = b.text.indexOf(b.link.label);
+  if (at < 0) throw new Error(`privacy: link label «${b.link.label}» not found in «${b.text}»`);
   return [b.text.slice(0, at), b.text.slice(at + b.link.label.length)];
 };
 ---
