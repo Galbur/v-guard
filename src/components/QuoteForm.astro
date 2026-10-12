@@ -36,7 +36,6 @@ const messageKeys: UiKey[] = [
   'form.err.phone',
   'form.err.email',
   'form.err.year',
-  'form.err.privacy',
   'form.err.submit',
   'form.sending',
   'form.submit',
@@ -245,16 +244,10 @@ const wrapLabels = {
         <textarea id="f-opmerking" name="opmerking" rows="3" placeholder={t('form.opmerking.placeholder', locale)}
         ></textarea>
       </div>
-      <div class="check">
-        <input id="f-privacy" name="privacy" type="checkbox" value="ja" required aria-describedby="err-privacy" />
-        <label for="f-privacy">
-          {t('form.privacy.before', locale)}
-          <a href={localizedPath('privacy', locale)} target="_blank">{t('form.privacy.link', locale)}</a>{
-            t('form.privacy.after', locale)
-          }
-        </label>
-        <p class="field__error" id="err-privacy" hidden></p>
-      </div>
+      <p class="notice">
+        {t('form.privacy.before', locale)}{' '}
+        <a href={localizedPath('privacy', locale)}>{t('form.privacy.link', locale)}</a>{t('form.privacy.after', locale)}
+      </p>
     </fieldset>
 
     <div class="quote__nav">
@@ -400,8 +393,6 @@ const wrapLabels = {
         errors.push(['telefoon', phoneOk ? null : messages['form.err.phone']]);
         const email = value('email');
         errors.push(['email', !email || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ? null : messages['form.err.email']]);
-        const privacy = field('privacy') as HTMLInputElement;
-        errors.push(['privacy', privacy.checked ? null : messages['form.err.privacy']]);
       }
       let first: HTMLElement | null = null;
       for (const [name, message] of errors) {
@@ -836,31 +827,16 @@ const wrapLabels = {
     border-color: var(--c-error);
   }
 
-  /* Privacy checkbox */
-  .check {
-    display: grid;
-    grid-template-columns: 22px 1fr;
-    gap: 6px 12px;
-    align-items: start;
-    min-height: 44px;
+  /* Privacy notice above the submit button (step 13: no consent checkbox) */
+  .notice {
+    margin: 0;
     font-size: 14px;
     line-height: 1.4;
   }
 
-  .check input {
-    width: 22px;
-    height: 22px;
-    margin: 1px 0 0;
-    accent-color: var(--c-gold-text);
-  }
-
-  .check a {
+  .notice a {
     color: var(--c-gold-text);
     text-decoration: underline;
-  }
-
-  .check .field__error {
-    grid-column: 1 / -1;
   }
 
   .field__error {

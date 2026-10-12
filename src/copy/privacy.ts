@@ -1,111 +1,256 @@
-// Privacy (/privacy/, /uk/privacy/). No source text in the canon or design prompt:
-// written from the actual data flow of this site (QuoteForm, Netlify Forms, Telegram
-// function, no cookies or analytics). V Guard must review before launch (step 01 report).
+// Privacy (/privacy/, /uk/privacy/). Text from Oleksii, step 13 and its addendum (12.10.2026).
+// Tokens come from site.ts: legal name and KvK (F14), address (F2), email (F13), phone (F11) and
+// the retention term. While the email is null (F13 ОЧІКУЄ), the two email sentences name only the
+// phone (owner decision 12.10.2026). No [SESSION] sentence: the form keeps no data in the browser.
 import { fullAddress, site } from '../config/site.ts';
 import type { Locale } from '../data/fact.ts';
 
+/** A paragraph, a bulleted list, or a paragraph with one plain link inside it. */
+export type PrivacyBlock = string | string[] | { text: string; link: { label: string; href: string } };
+
 export interface PrivacySection {
   title: string;
-  paragraphs?: string[];
-  list?: string[];
+  blocks: PrivacyBlock[];
 }
 
-const months = site.retentionMonths.value;
-const phone = site.phone.value.display;
-const kvk = site.kvk.value;
+export interface PrivacyCopy {
+  title: string;
+  description: string;
+  h1: string;
+  /** «Laatst bijgewerkt: 12 oktober 2026» */
+  updated: { label: string; date: string; iso: string };
+  intro: string;
+  sections: PrivacySection[];
+}
 
-export const privacyCopy: Record<Locale, { title: string; description: string; h1: string; intro: string; sections: PrivacySection[] }> = {
+const legalName = site.legalName.value;
+const address = fullAddress;
+const kvk = site.kvk.value;
+const email = site.email.value;
+const phone = site.phone.value.display;
+const retentionMonths = site.retentionMonths.value;
+const updatedIso = '2026-10-12';
+
+const ap = { label: 'autoriteitpersoonsgegevens.nl', href: 'https://www.autoriteitpersoonsgegevens.nl' };
+
+export const privacyCopy: Record<Locale, PrivacyCopy> = {
   nl: {
     title: 'Privacyverklaring | V Guard Studio',
-    description: 'Hoe V Guard Studio in Vroomshoop omgaat met de gegevens uit het offerteformulier en WhatsApp.',
+    description:
+      'Hoe V Guard Studio in Vroomshoop omgaat met uw gegevens uit het offerteformulier, WhatsApp en telefoon.',
     h1: 'Privacyverklaring',
-    intro: `${site.name}, ${fullAddress} (KvK ${kvk}), is verantwoordelijk voor de gegevens die je via deze website stuurt.`,
+    updated: { label: 'Laatst bijgewerkt:', date: '12 oktober 2026', iso: updatedIso },
+    intro:
+      'V Guard Studio gaat zorgvuldig om met uw persoonsgegevens. Hier leest u welke gegevens wij verzamelen, waarom, hoe lang wij ze bewaren en welke rechten u heeft.',
     sections: [
       {
-        title: 'Welke gegevens',
-        paragraphs: ['Via het offerteformulier ontvangen we:'],
-        list: [
-          'de dienst en optie die je kiest',
-          'merk, model, bouwjaar en carrosserie van je auto',
-          'je naam en telefoonnummer',
-          'je e-mailadres en opmerking, als je die invult',
-          'de taal en de pagina waarop je het formulier verstuurt',
+        title: 'Wie zijn wij',
+        blocks: [
+          `V Guard Studio is een handelsnaam van ${legalName}, ${address}, KvK ${kvk}. Wij zijn verantwoordelijk voor de verwerking van uw gegevens. ${
+            email ? `Vragen over privacy stelt u via ${email} of ${phone}.` : `Vragen over privacy stelt u via ${phone}.`
+          }`,
         ],
       },
       {
-        title: 'Waarvoor',
-        paragraphs: [
-          'We gebruiken deze gegevens alleen om je aanvraag te beantwoorden, een offerte te maken en een afspraak te plannen. We sturen geen nieuwsbrieven en verkopen geen gegevens.',
+        title: 'Welke gegevens wij verwerken',
+        blocks: [
+          'Via het offerteformulier:',
+          [
+            'naam en telefoonnummer;',
+            'e-mailadres, als u dat invult;',
+            'merk, model, bouwjaar, carrosserie en kleur van uw auto;',
+            'de gewenste dienst, opties en uw opmerking;',
+            'de taal en de pagina van waaruit u het formulier verstuurt.',
+          ],
+          'Naam, telefoonnummer, merk, model, carrosserie en de gewenste dienst zijn nodig om uw aanvraag te behandelen. Zonder deze gegevens kunnen wij geen offerte maken. De overige velden zijn vrijwillig.',
+          "Via WhatsApp of telefoon: de gegevens en foto's die u zelf stuurt.",
+          'Bij een bezoek aan de website: technische gegevens zoals IP-adres en browsertype. Netlify verwerkt die voor beveiliging en het oplossen van storingen en bewaart ze volgens de eigen termijnen van Netlify.',
+          "Foto's van auto's op deze website tonen geen leesbaar kenteken en geen herkenbare personen.",
         ],
       },
       {
-        title: 'Waar je gegevens staan',
-        paragraphs: [
-          'De website en het formulier draaien bij Netlify. Een kopie van je aanvraag gaat naar een interne Telegram-chat van V Guard Studio, zodat we snel kunnen reageren. Stuur je ons een WhatsApp, dan gelden ook de voorwaarden van WhatsApp.',
+        title: 'Waarvoor en op welke grondslag',
+        blocks: [
+          [
+            'Uw offerteaanvraag beantwoorden en een afspraak maken: stappen op uw verzoek voordat er een overeenkomst is (art. 6 lid 1 sub b AVG).',
+            'De opdracht uitvoeren en factureren: uitvoering van de overeenkomst en de wettelijke bewaarplicht (art. 6 lid 1 sub b en c AVG).',
+            'De website beveiligen en spam tegengaan: ons gerechtvaardigd belang (art. 6 lid 1 sub f AVG).',
+          ],
+          'Wij gebruiken uw gegevens niet voor nieuwsbrieven of reclame en verkopen ze niet aan anderen.',
         ],
       },
       {
-        title: 'Hoe lang',
-        paragraphs: [`We bewaren aanvragen maximaal ${months} maanden, tenzij er een opdracht uit volgt en we gegevens langer moeten bewaren voor de administratie.`],
+        title: 'Wie uw gegevens ontvangt',
+        blocks: [
+          'Alleen partijen die wij nodig hebben om uw aanvraag te behandelen:',
+          [
+            'Netlify, Inc. (Verenigde Staten): hosting van de website en verwerking van formulieren, inclusief een automatisch spamfilter;',
+            'Telegram: interne melding van een nieuwe aanvraag met uw contactgegevens aan onze medewerkers, zodat wij u snel kunnen terugbellen;',
+            'WhatsApp (Meta): alleen als u ons zelf via WhatsApp benadert;',
+            'de technisch beheerder van de website, die in onze opdracht werkt.',
+          ],
+          'Met partijen die gegevens voor ons verwerken, maken wij afspraken over de beveiliging van uw gegevens.',
+        ],
+      },
+      {
+        title: 'Gegevens buiten de EU',
+        blocks: [
+          'Netlify, Inc. is gevestigd in de Verenigde Staten en neemt deel aan het EU-VS Data Privacy Framework. Telegram en WhatsApp zijn diensten van bedrijven buiten de Europese Economische Ruimte. Gegevens die via deze diensten lopen, kunnen daar worden verwerkt volgens de voorwaarden van die diensten.',
+        ],
+      },
+      {
+        title: 'Hoe lang wij gegevens bewaren',
+        blocks: [
+          [
+            `Offerteaanvragen zonder opdracht: maximaal ${retentionMonths} maanden na het laatste contact.`,
+            'Gegevens van klanten: zolang nodig voor de opdracht en de garantie. Facturen bewaren wij 7 jaar, zoals de wet voorschrijft.',
+            'Meldingen in Telegram en berichten in WhatsApp bewaren wij niet langer dan nodig voor de aanvraag, de opdracht en de garantie.',
+          ],
+        ],
       },
       {
         title: 'Cookies',
-        paragraphs: [
-          'Deze website gebruikt geen cookies, geen analytics en geen trackers. Google Maps opent alleen als je zelf op de link klikt.',
+        blocks: [
+          'Deze website plaatst geen cookies en gebruikt geen analytics of advertentiepixels. Kaarten en sociale media openen pas na uw klik, op de website van die dienst. Daar gelden de voorwaarden van die dienst.',
         ],
       },
       {
-        title: 'Je rechten',
-        paragraphs: [
-          `Je kunt je gegevens inzien, laten aanpassen of laten verwijderen. Neem contact op via ${phone} of WhatsApp. Ben je het niet eens met hoe we met je gegevens omgaan, dan kun je een klacht indienen bij de Autoriteit Persoonsgegevens.`,
+        title: 'Beveiliging',
+        blocks: [
+          'De website werkt via een beveiligde verbinding (HTTPS). Alleen medewerkers die uw aanvraag behandelen, hebben toegang tot uw gegevens.',
+        ],
+      },
+      {
+        title: 'Uw rechten',
+        blocks: [
+          `U kunt ons vragen uw gegevens in te zien, te corrigeren, te verwijderen of over te dragen, voor zover de AVG dat in uw situatie toestaat. U kunt ook vragen de verwerking te beperken of bezwaar maken. ${
+            email ? `Stuur uw verzoek naar ${email}.` : `Stuur uw verzoek via ${phone}.`
+          } Wij reageren binnen een maand en kunnen u vragen uw identiteit te bevestigen.`,
+          {
+            text: 'Bent u het niet eens met hoe wij met uw gegevens omgaan, dan kunt u een klacht indienen bij de Autoriteit Persoonsgegevens (autoriteitpersoonsgegevens.nl).',
+            link: ap,
+          },
+        ],
+      },
+      {
+        title: 'Geautomatiseerde besluiten',
+        blocks: ['Wij nemen geen besluiten over u die uitsluitend geautomatiseerd tot stand komen.'],
+      },
+      {
+        title: 'Wijzigingen',
+        blocks: [
+          'Wij kunnen deze verklaring aanpassen. De datum bovenaan laat zien wanneer dat voor het laatst is gebeurd.',
         ],
       },
     ],
   },
   uk: {
     title: 'Політика конфіденційності | V Guard Studio',
-    description: 'Як V Guard Studio у Vroomshoop поводиться з даними з форми оцінки і WhatsApp.',
+    description:
+      'Як V Guard Studio у Vroomshoop обробляє ваші дані з форми заявки, WhatsApp і телефонних дзвінків.',
     h1: 'Політика конфіденційності',
-    intro: `${site.name}, ${fullAddress} (KvK ${kvk}), відповідає за дані, які ви надсилаєте через цей сайт.`,
+    updated: { label: 'Оновлено:', date: '12 жовтня 2026', iso: updatedIso },
+    intro:
+      'V Guard Studio дбайливо ставиться до ваших персональних даних. Тут пояснюємо, які дані ми збираємо, навіщо, скільки їх зберігаємо і які у вас права. Ця політика діє також нідерландською мовою; у разі розбіжностей переважає нідерландська версія.',
     sections: [
       {
-        title: 'Які дані',
-        paragraphs: ['Через форму оцінки ми отримуємо:'],
-        list: [
-          'послугу і варіант, які ви обираєте',
-          'марку, модель, рік випуску і тип кузова авто',
-          "ваше ім'я і номер телефону",
-          'email і коментар, якщо ви їх вказали',
-          'мову і сторінку, з якої надіслано форму',
+        title: 'Хто ми',
+        blocks: [
+          `V Guard Studio є торговою назвою ${legalName}, ${address}, KvK ${kvk}. Ми відповідаємо за обробку ваших даних. ${
+            email
+              ? `Питання щодо конфіденційності надсилайте на ${email} або телефонуйте ${phone}.`
+              : `З питаннями щодо конфіденційності телефонуйте ${phone}.`
+          }`,
         ],
       },
       {
-        title: 'Для чого',
-        paragraphs: [
-          'Ми використовуємо ці дані лише для відповіді на заявку, оцінки і запису. Ми не надсилаємо розсилок і не продаємо дані.',
+        title: 'Які дані ми обробляємо',
+        blocks: [
+          'Через форму заявки:',
+          [
+            "ім'я і номер телефону;",
+            'email, якщо ви його вказали;',
+            'марка, модель, рік випуску, тип кузова і колір авто;',
+            'потрібна послуга, опції і ваш коментар;',
+            'мова і сторінка, з якої надіслано форму.',
+          ],
+          'Імʼя, телефон, марка, модель, тип кузова і потрібна послуга необхідні, щоб обробити заявку. Без них ми не зможемо розрахувати вартість. Решта полів необовʼязкові.',
+          'Через WhatsApp або телефон: дані і фото, які ви надсилаєте самі.',
+          'Під час відвідування сайту: технічні дані, як-от IP-адреса і тип браузера. Netlify обробляє їх для безпеки і усунення збоїв і зберігає за своїми строками.',
+          'На фото авто на цьому сайті немає читабельних номерів і людей, яких можна впізнати.',
         ],
       },
       {
-        title: 'Де зберігаються дані',
-        paragraphs: [
-          'Сайт і форма працюють на Netlify. Копія заявки надходить у внутрішній Telegram-чат V Guard Studio, щоб ми могли швидко відповісти. Якщо ви пишете нам у WhatsApp, діють також умови WhatsApp.',
+        title: 'Навіщо і на якій підставі',
+        blocks: [
+          [
+            'Відповісти на заявку і домовитися про візит: дії на ваш запит до укладення договору (ст. 6(1)(b) GDPR).',
+            'Виконати роботу і виставити рахунок: виконання договору і обов\'язок за законом (ст. 6(1)(b) і (c) GDPR).',
+            'Захищати сайт і відсіювати спам: наш законний інтерес (ст. 6(1)(f) GDPR).',
+          ],
+          'Ми не використовуємо ваші дані для розсилок чи реклами і не продаємо їх.',
         ],
       },
       {
-        title: 'Як довго',
-        paragraphs: [`Ми зберігаємо заявки не довше ${months} місяців, якщо з них не виникло замовлення, для якого дані потрібні в обліку довше.`],
+        title: 'Хто отримує ваші дані',
+        blocks: [
+          'Лише ті, без кого ми не обробимо заявку:',
+          [
+            'Netlify, Inc. (США): хостинг сайту і обробка заявок, зокрема автоматичний фільтр спаму;',
+            'Telegram: внутрішнє сповіщення працівникам про нову заявку з вашими контактами, щоб ми могли швидко передзвонити;',
+            'WhatsApp (Meta): лише якщо ви самі пишете нам у WhatsApp;',
+            'технічний адміністратор сайту, який працює за нашим дорученням.',
+          ],
+          'З усіма, хто обробляє дані за нашим дорученням, ми домовляємося про їхній захист.',
+        ],
       },
       {
-        title: 'Cookies',
-        paragraphs: [
-          'Сайт не використовує cookies, аналітику чи трекери. Google Maps відкривається лише тоді, коли ви самі натискаєте посилання.',
+        title: 'Дані за межами ЄС',
+        blocks: [
+          'Netlify, Inc. зареєстрована в США і є учасником EU-US Data Privacy Framework. Telegram і WhatsApp належать компаніям за межами Європейської економічної зони. Дані, що проходять через ці сервіси, можуть оброблятися там за їхніми правилами.',
+        ],
+      },
+      {
+        title: 'Скільки ми зберігаємо дані',
+        blocks: [
+          [
+            `Заявки без замовлення: до ${retentionMonths} місяців після останнього контакту.`,
+            'Дані клієнтів: стільки, скільки потрібно для роботи і гарантії. Рахунки зберігаємо 7 років, як вимагає закон.',
+            'Сповіщення в Telegram і повідомлення у WhatsApp зберігаємо не довше, ніж потрібно для заявки, роботи і гарантії.',
+          ],
+        ],
+      },
+      {
+        title: 'Файли cookie',
+        blocks: [
+          'Сайт не встановлює cookie і не використовує аналітику чи рекламні пікселі. Карти і соцмережі відкриваються лише після вашого кліку, на сайті відповідного сервісу. Там діють правила цього сервісу.',
+        ],
+      },
+      {
+        title: 'Безпека',
+        blocks: [
+          'Сайт працює через захищене зʼєднання (HTTPS). Доступ до ваших даних мають лише працівники, які обробляють заявку.',
         ],
       },
       {
         title: 'Ваші права',
-        paragraphs: [
-          `Ви можете переглянути, виправити або видалити свої дані. Звʼяжіться з нами за номером ${phone} або у WhatsApp. Якщо ви не згодні з тим, як ми обробляємо дані, можна подати скаргу до Autoriteit Persoonsgegevens.`,
+        blocks: [
+          `Ви можете попросити нас показати ваші дані, виправити, видалити або передати їх, наскільки це дозволяє GDPR у вашій ситуації. Також можете попросити обмежити обробку або заперечити проти неї. ${
+            email ? `Надішліть запит на ${email}.` : `Зверніться із запитом за телефоном ${phone}.`
+          } Ми відповімо протягом місяця і можемо попросити підтвердити вашу особу.`,
+          {
+            text: 'Якщо ви не згодні з тим, як ми обробляємо ваші дані, можете подати скаргу до нідерландського органу захисту даних Autoriteit Persoonsgegevens (autoriteitpersoonsgegevens.nl).',
+            link: ap,
+          },
         ],
+      },
+      {
+        title: 'Автоматизовані рішення',
+        blocks: ['Ми не ухвалюємо щодо вас рішень, які приймаються лише автоматично.'],
+      },
+      {
+        title: 'Зміни',
+        blocks: ['Ми можемо оновлювати цю політику. Дата вгорі показує, коли це сталося востаннє.'],
       },
     ],
   },
