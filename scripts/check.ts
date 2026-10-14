@@ -3,8 +3,10 @@
 // 2. Every NL page has a UA pair: each route key has both page files, and every
 //    page file is registered in src/i18n/routes.ts.
 // 3. D18: AI illustrations never in the list of work (scripts/illustrations-guard.ts).
+// 4. Every file listed in src/lib/photos.ts exists and is used elsewhere in src/: each listed
+//    file ships in dist/_astro, so a stale entry would publish a photo no page shows.
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
-import { join, relative, sep } from 'node:path';
+import { basename, join, relative, sep } from 'node:path';
 import { locales, routes } from '../src/i18n/routes.ts';
 import { checkIllustrations } from './illustrations-guard.ts';
 
@@ -82,8 +84,18 @@ for (const file of walk(pagesDir).filter((f) => isSpecial(f) && !f.includes(`${s
 
 problems.push(...checkIllustrations(root));
 
+const photosModule = join(srcDir, 'lib', 'photos.ts');
+const sources = walk(srcDir)
+  .filter((f) => textFile.test(f) && f !== photosModule)
+  .map((f) => readFileSync(f, 'utf8'));
+for (const [, path] of readFileSync(photosModule, 'utf8').matchAll(/'\.\.\/(assets\/[^']+)'/g)) {
+  const name = basename(path);
+  if (!existsSync(join(srcDir, path))) problems.push(`src/lib/photos.ts: ${path} does not exist`);
+  else if (!sources.some((s) => s.includes(name))) problems.push(`src/lib/photos.ts: ${name} is listed but not used in src/`);
+}
+
 if (problems.length) {
   console.error(`check: ${problems.length} problem(s)\n${problems.map((p) => `  ${p}`).join('\n')}`);
   process.exit(1);
 }
-console.log(`check: ok (${Object.keys(routes).length} route pairs, no placeholders or forbidden dashes in src/, no AI illustrations in the list of work)`);
+console.log(`check: ok (${Object.keys(routes).length} route pairs, no placeholders or forbidden dashes in src/, no AI illustrations in the list of work, no unused photos in src/lib/photos.ts)`);
