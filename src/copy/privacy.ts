@@ -1,4 +1,4 @@
-// Privacy (/privacy/, /uk/privacy/). Text from Oleksii, step 13 and its addendum (12.10.2026).
+// Privacy (/privacy/, /uk/privacy/). Text from Oleksii, step 13 and its addendum (12.10.2026), step 14 fixes.
 // Tokens come from site.ts: legal name and KvK (F14), address (F2), email (F13), phone (F11) and
 // the retention term. While the email is null (F13 ОЧІКУЄ), the two email sentences name only the
 // phone (owner decision 12.10.2026). No [SESSION] sentence: the form keeps no data in the browser.
@@ -58,11 +58,12 @@ export const privacyCopy: Record<Locale, PrivacyCopy> = {
           [
             'naam en telefoonnummer;',
             'e-mailadres, als u dat invult;',
-            'merk, model, bouwjaar, carrosserie en kleur van uw auto;',
-            'de gewenste dienst, opties en uw opmerking;',
+            'merk, model, bouwjaar en carrosserie van uw auto;',
+            'de gewenste dienst en opties, bij car wrapping ook de gewenste kleur of afwerking, en uw opmerking;',
             'de taal en de pagina van waaruit u het formulier verstuurt.',
           ],
-          'Naam, telefoonnummer, merk, model, carrosserie en de gewenste dienst zijn nodig om uw aanvraag te behandelen. Zonder deze gegevens kunnen wij geen offerte maken. De overige velden zijn vrijwillig.',
+          'Bij het verzenden slaat Netlify bij uw aanvraag ook het IP-adres, het browsertype en de verwijzende pagina op.',
+          'Naam, telefoonnummer, merk, model, carrosserie en de gewenste dienst met opties zijn nodig om uw aanvraag te behandelen. Zonder deze gegevens kunnen wij geen offerte maken. Bouwjaar, kleur, e-mailadres en opmerking zijn vrijwillig.',
           "Via WhatsApp of telefoon: de gegevens en foto's die u zelf stuurt.",
           'Bij een bezoek aan de website: technische gegevens zoals IP-adres en browsertype. Netlify verwerkt die voor beveiliging en het oplossen van storingen en bewaart ze volgens de eigen termijnen van Netlify.',
           "Foto's van auto's op deze website tonen geen leesbaar kenteken en geen herkenbare personen.",
@@ -85,7 +86,7 @@ export const privacyCopy: Record<Locale, PrivacyCopy> = {
           'Alleen partijen die wij nodig hebben om uw aanvraag te behandelen:',
           [
             'Netlify, Inc. (Verenigde Staten): hosting van de website en verwerking van formulieren, inclusief een automatisch spamfilter;',
-            'Telegram: interne melding van een nieuwe aanvraag met uw contactgegevens aan onze medewerkers, zodat wij u snel kunnen terugbellen;',
+            'Telegram: interne melding van een nieuwe aanvraag met alle gegevens uit het formulier aan onze medewerkers, zodat wij u snel kunnen terugbellen;',
             'WhatsApp (Meta): alleen als u ons zelf via WhatsApp benadert;',
             'de technisch beheerder van de website, die in onze opdracht werkt.',
           ],
@@ -117,7 +118,7 @@ export const privacyCopy: Record<Locale, PrivacyCopy> = {
       {
         title: 'Beveiliging',
         blocks: [
-          'De website werkt via een beveiligde verbinding (HTTPS). Alleen medewerkers die uw aanvraag behandelen, hebben toegang tot uw gegevens.',
+          'De website werkt via een beveiligde verbinding (HTTPS). Alleen onze medewerkers die uw aanvraag behandelen en de technisch beheerder van de website hebben toegang tot uw gegevens.',
         ],
       },
       {
@@ -170,11 +171,12 @@ export const privacyCopy: Record<Locale, PrivacyCopy> = {
           [
             "ім'я і номер телефону;",
             'email, якщо ви його вказали;',
-            'марка, модель, рік випуску, тип кузова і колір авто;',
-            'потрібна послуга, опції і ваш коментар;',
+            'марка, модель, рік випуску і тип кузова авто;',
+            'потрібна послуга й опції, для обклеювання також бажаний колір або фініш, і ваш коментар;',
             'мова і сторінка, з якої надіслано форму.',
           ],
-          'Імʼя, телефон, марка, модель, тип кузова і потрібна послуга необхідні, щоб обробити заявку. Без них ми не зможемо розрахувати вартість. Решта полів необовʼязкові.',
+          'Під час надсилання Netlify зберігає разом із заявкою також IP-адресу, тип браузера і сторінку, з якої ви прийшли.',
+          'Імʼя, телефон, марка, модель, тип кузова і потрібна послуга з опціями необхідні, щоб обробити заявку. Без них ми не зможемо розрахувати вартість. Рік випуску, колір, email і коментар необовʼязкові.',
           'Через WhatsApp або телефон: дані і фото, які ви надсилаєте самі.',
           'Під час відвідування сайту: технічні дані, як-от IP-адреса і тип браузера. Netlify обробляє їх для безпеки і усунення збоїв і зберігає за своїми строками.',
           'На фото авто на цьому сайті немає читабельних номерів і людей, яких можна впізнати.',
@@ -197,7 +199,7 @@ export const privacyCopy: Record<Locale, PrivacyCopy> = {
           'Лише ті, без кого ми не обробимо заявку:',
           [
             'Netlify, Inc. (США): хостинг сайту і обробка заявок, зокрема автоматичний фільтр спаму;',
-            'Telegram: внутрішнє сповіщення працівникам про нову заявку з вашими контактами, щоб ми могли швидко передзвонити;',
+            'Telegram: внутрішнє сповіщення працівникам про нову заявку з усіма даними з форми, щоб ми могли швидко передзвонити;',
             'WhatsApp (Meta): лише якщо ви самі пишете нам у WhatsApp;',
             'технічний адміністратор сайту, який працює за нашим дорученням.',
           ],
@@ -229,7 +231,7 @@ export const privacyCopy: Record<Locale, PrivacyCopy> = {
       {
         title: 'Безпека',
         blocks: [
-          'Сайт працює через захищене зʼєднання (HTTPS). Доступ до ваших даних мають лише працівники, які обробляють заявку.',
+          'Сайт працює через захищене зʼєднання (HTTPS). Доступ до ваших даних мають лише працівники, які обробляють заявку, і технічний адміністратор сайту.',
         ],
       },
       {

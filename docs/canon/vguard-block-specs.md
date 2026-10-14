@@ -57,7 +57,7 @@ Names and budgets come from `vguard-site-blueprint-vN.md`; if a limit here diffe
 
 ## 4. Lead blocks
 
-**QuoteForm (base, acceptance criterion).** Steps per Blueprint section 6. Rules: one question per step on mobile, Back button, progress «Stap 2 van 4», fields keep values on Back, phone required, email optional, privacy consent checkbox with link, honeypot field, clear error text in the field language. Submission through Netlify Forms; success screen with WhatsApp continuation (`wa.me/<number>?text=` URL-encoded summary).
+**QuoteForm (base, acceptance criterion).** Steps per Blueprint section 6. Rules: one question per step on mobile, Back button, progress «Stap 2 van 4», fields keep values on Back, phone required, email optional, no consent checkbox: an information line above the submit button links to the Privacy page of the page language (step 13: the request is processed under art. 6(1)(b) GDPR, so consent is not needed), honeypot field, clear error text in the field language. Submission through Netlify Forms; success screen with WhatsApp continuation (`wa.me/<number>?text=` URL-encoded summary).
 
 **QuoteSelector (bonus).** Same data and same Netlify form, but steps 1 and 3 use large tappable cards with a simple icon or a generic car silhouette with up to 4 zones. No model-specific images, no price calculation beyond an optional «vanaf» line from `services.ts`. Time box 6-8 hours; otherwise ship the base form.
 
