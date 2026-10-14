@@ -48,7 +48,7 @@ docs/canon/, docs/blueprints/, docs/prompts/
 
 ## Lead flow
 
-Form `name="offerte"` with `data-netlify="true"`, `netlify-honeypot="bot-field"`, hidden `form-name`. Fields: dienst, optie, merk, model, bouwjaar, carrosserie, naam, telefoon, email (optional), opmerking, taal, pagina, privacy. Success state shows the WhatsApp continuation built from `site.ts` WhatsApp number and URL-encoded summary. The function formats a plain-text Telegram message; a Telegram failure is logged and never breaks the submission.
+Form `name="offerte"` with `data-netlify="true"`, `netlify-honeypot="bot-field"`, hidden `form-name`. Fields: dienst, optie, merk, model, bouwjaar, carrosserie, naam, telefoon, email (optional), opmerking, taal, pagina. No consent checkbox: an information line above the submit button links to the Privacy page of the page language (step 13: art. 6(1)(b) GDPR, consent not needed). Success state shows the WhatsApp continuation built from `site.ts` WhatsApp number and URL-encoded summary. The function formats a plain-text Telegram message; a Telegram failure is logged and never breaks the submission.
 
 ## Workflow
 
