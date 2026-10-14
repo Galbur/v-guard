@@ -1,5 +1,5 @@
 ---
-car: { nl: "BMW 3 Serie", uk: "BMW 3 Serie" }
+car: { nl: "BMW 3 Serie", uk: "BMW 3 Series" }
 service: ramen-blinderen
 image: ../../assets/photos/bmw-front-p.png
 position: "center 58%"
