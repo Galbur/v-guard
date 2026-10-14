@@ -28,6 +28,12 @@ export const home = {
         more: 'Meer over car wrapping',
       },
     } satisfies Record<ServiceSlug, { title: string; text: string; more: string }>,
+    // Card illustrations (AI, D18): neutral alt; PPF and wrap keep the empty alt they have on their own pages.
+    cardAlts: {
+      ppf: '',
+      'ramen-blinderen': 'Handen brengen raamfolie aan met een rakel',
+      'car-wrapping': '',
+    } satisfies Record<ServiceSlug, string>,
     processTitle: 'Kwaliteit boven snelheid',
     processSub: 'Zo brengen we PPF en wrapfolie aan.',
     // Home only: the PPF page has its own steps.
@@ -66,6 +72,12 @@ export const home = {
         more: 'Детальніше про обклеювання',
       },
     } satisfies Record<ServiceSlug, { title: string; text: string; more: string }>,
+    // Card illustrations (AI, D18): neutral alt; PPF and wrap keep the empty alt they have on their own pages.
+    cardAlts: {
+      ppf: '',
+      'ramen-blinderen': 'Руки наносять плівку на скло ракелем',
+      'car-wrapping': '',
+    } satisfies Record<ServiceSlug, string>,
     processTitle: 'Якість важливіша за швидкість',
     processSub: 'Так ми встановлюємо захисну та вінілову плівку.',
     // Home only: the PPF page has its own steps.

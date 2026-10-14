@@ -270,6 +270,9 @@ export const tintFrom: Price = {
   from: true,
 };
 
+/** AI illustration (D18): allowed in illustrative slots, never in the list of finished work. */
+const illustration = (file: string) => fact(file, 'default', 'AI-ілюстрація (D18), замінити фото V Guard, коли буде');
+
 export const tint = {
   shades: fact([5, 20, 35, 50, 70], 'default', 'відсотки V Guard'),
   popularShade: fact(20, 'default', 'найпопулярніший тон, V Guard'),
@@ -305,6 +308,21 @@ export const tint = {
     'default',
     'процес тонування V Guard, замінить клієнт',
   ),
+  /** Hero illustrations (step 15): 375 portrait, 1280 landscape. */
+  images: {
+    hero375: illustration('tint-hero-375.jpg'),
+    hero1280: illustration('tint-hero-1280.jpg'),
+  },
+};
+
+/** Home illustrations (step 15): hero, service cards and the process block. Real photos go to the list of work. */
+export const homeImages = {
+  hero375: illustration('home-hero-375.jpg'),
+  hero1280: illustration('home-hero-1280.jpg'),
+  cardPpf: illustration('ppf-step-install.jpg'),
+  cardTint: illustration('tint-card.jpg'),
+  cardWrap: illustration('wrap-card-volledig.png'),
+  process: illustration('ppf-step-check.webp'),
 };
 
 // ---------------------------------------------------------------- Car wrapping
@@ -416,8 +434,6 @@ export interface WrapFinish {
   image: Fact<string>;
 }
 
-/** AI illustration (D18): allowed in illustrative slots, never in the list of finished work. */
-const illustration = (file: string) => fact(file, 'default', 'AI-ілюстрація (D18), замінити фото V Guard, коли буде');
 
 export const wrapFinishes: WrapFinish[] = [
   {
