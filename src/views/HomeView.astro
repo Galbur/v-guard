@@ -1,5 +1,6 @@
 ---
-// Home (/ and /uk/): mockup «VG Site 01 Home», Blueprint v1.3 section 3.
+// Home (/ and /uk/): mockup «VG Site 01 Home», Blueprint v1.3 section 3. Hero, service cards and the
+// process photo are AI illustrations (D18, step 15); real photos stay in the list of work.
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Hero from '../components/Hero.astro';
@@ -11,6 +12,7 @@ import ReviewsBlock from '../components/ReviewsBlock.astro';
 import QuoteEntry from '../components/QuoteEntry.astro';
 import ContactBlock from '../components/ContactBlock.astro';
 import { home } from '../copy/home.ts';
+import { homeImages as img } from '../data/services.ts';
 import { trustItems } from '../copy/shared.ts';
 import { t } from '../i18n/index.ts';
 import { localizedPath, type Locale } from '../i18n/routes.ts';
@@ -21,8 +23,6 @@ interface Props {
 
 const { locale } = Astro.props;
 const c = home[locale];
-const alt = (car: string, nl: string, uk: string) =>
-  locale === 'nl' ? `${car} met ${nl} door V Guard Studio in Vroomshoop` : `${car}: ${uk} від V Guard Studio у Vroomshoop`;
 const recent = (await getCollection('projects', (p) => p.data.home)).sort((a, b) => a.data.order - b.data.order).slice(0, 6);
 ---
 
@@ -33,24 +33,32 @@ const recent = (await getCollection('projects', (p) => p.data.home)).sort((a, b)
     sub={c.sub}
     chips={c.chips}
     align="right"
-    photos={{ mobile: { file: 'bmw-34-p.png', position: 'center 55%' }, desktop: { file: 'suv-blue-1.jpg', position: '35% 55%' } }}
+    photos={{
+      mobile: { file: img.hero375.value, position: 'center 50%' },
+      desktop: { file: img.hero1280.value, position: 'center 50%' },
+    }}
   />
   <ServiceCards
     locale={locale}
     title={c.servicesTitle}
     cards={[
-      { slug: 'ppf', ...c.cards.ppf, href: localizedPath('ppf', locale) },
+      {
+        slug: 'ppf',
+        ...c.cards.ppf,
+        href: localizedPath('ppf', locale),
+        image: { file: img.cardPpf.value, position: 'center', alt: c.cardAlts.ppf },
+      },
       {
         slug: 'ramen-blinderen',
         ...c.cards['ramen-blinderen'],
         href: localizedPath('tint', locale),
-        image: { file: 'passat-rear-1.jpg', position: 'center 60%', alt: alt('Volkswagen Passat', 'ramen blinderen', 'тонування') },
+        image: { file: img.cardTint.value, position: 'center', alt: c.cardAlts['ramen-blinderen'] },
       },
       {
         slug: 'car-wrapping',
         ...c.cards['car-wrapping'],
         href: localizedPath('wrap', locale),
-        image: { file: 'bmw-front-p.png', position: 'center 58%', alt: alt('BMW 3 Serie', 'car wrapping', 'car wrapping') },
+        image: { file: img.cardWrap.value, position: 'center', alt: c.cardAlts['car-wrapping'] },
       },
     ]}
   />
@@ -58,7 +66,7 @@ const recent = (await getCollection('projects', (p) => p.data.home)).sort((a, b)
     title={c.processTitle}
     sub={c.processSub}
     steps={c.steps}
-    image={{ file: 'hex-van-l2.jpg', alt: alt('Ford Transit Custom', 'ramen blinderen', 'тонування') }}
+    image={{ file: img.process.value, alt: '' }}
   />
   <ProjectGallery
     locale={locale}
@@ -69,8 +77,5 @@ const recent = (await getCollection('projects', (p) => p.data.home)).sort((a, b)
   <TrustBlock title={c.whyTitle} items={trustItems[locale]} />
   <ReviewsBlock locale={locale} title={c.reviewsTitle} linkLabel={c.reviewsLink} />
   <QuoteEntry locale={locale} title={c.quoteTitle} text={c.quoteText} />
-  <ContactBlock
-    locale={locale}
-    image={{ file: 'passat-rear-1.jpg', position: 'center 40%', alt: alt('Volkswagen Passat', 'ramen blinderen', 'тонування') }}
-  />
+  <ContactBlock locale={locale} />
 </Base>
