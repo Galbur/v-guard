@@ -44,9 +44,8 @@ export const site = {
     'default',
     'години V Guard (F15)',
   ),
-  // F14 legal name ОЧІКУЄ. Step 13 default (owner): legal entity behind the trade name, for the privacy page.
-  legalName: fact('V Guard Studio', 'default', 'юридична назва V Guard (F14)'),
-  // F14 KvK ПІДТВЕРДЖЕНО (надано V Guard)
+  // F14 ПІДТВЕРДЖЕНО (надано V Guard): legal entity behind the trade name (privacy page) and its KvK.
+  legalName: fact('V-GUARD', 'confirmed', 'юридична назва V Guard (F14)'),
   kvk: fact('97417513', 'confirmed', 'KvK V Guard (F14)'),
   // F13 ОЧІКУЄ. Public contact email for the privacy page. null until V Guard gives it (owner decision
   // 12.10.2026): the privacy page then names only the phone; check:defaults lists it, so --strict fails.
