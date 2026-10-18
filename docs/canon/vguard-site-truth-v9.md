@@ -145,10 +145,12 @@ E-commerce і онлайн-покупка · бронювання і кален�
 | `/` | `/uk/` | Головна | PPF, ramen blinderen, car wrapping Vroomshoop | Offerte / WhatsApp | 1 |
 | `/ppf/` | `/uk/ppf/` | PPF | PPF Vroomshoop; lakbescherming Twente | Offerte (PPF) | 1 |
 | `/ramen-blinderen/` | `/uk/tonuvannia/` | Тонування | ramen blinderen Vroomshoop; autoruiten tinten Twente | Offerte (tint) | 1 |
-| `/car-wrapping/` | `/uk/car-wrapping/` | Car wrapping | auto wrappen Vroomshoop; car wrapping Twente | Offerte (wrap) | 1 |
+| `/car-wrapping/` | `/uk/obkleiuvannia/` | Car wrapping | auto wrappen Vroomshoop; car wrapping Twente | Offerte (wrap) | 1 |
 | `/projecten/` | `/uk/proiekty/` | Проєкти | | Offerte | 1 |
 | `/contact/` | `/uk/kontakty/` | Контакти + форма | V Guard Studio contact | форма | 1 |
 | `/privacy/` | `/uk/privacy/` | Privacy | | | 1 |
+
+Старий UA-шлях wrap `/uk/car-wrapping/` (і без скісної риски в кінці) віддає 301 на `/uk/obkleiuvannia/` (`netlify.toml`).
 
 `LIVE_PAGES` до запуску порожній; preview має `noindex`.
 
