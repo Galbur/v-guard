@@ -6,9 +6,9 @@ import type { PageKey } from '../i18n/routes.ts';
 import { fact, type Localized } from '../data/fact.ts';
 
 export interface Phone {
-  /** As shown on the site, e.g. «06 12 34 56 78». */
+  /** As shown on the site (Dutch national format, pairs of digits after 06). */
   display: string;
-  /** E.164 for tel: and wa.me, e.g. «+31612345678». */
+  /** E.164, the canonical form (JSON-LD telephone). */
   e164: string;
 }
 
@@ -17,8 +17,8 @@ export interface Review {
   author: string;
 }
 
-// The phone number shown on the site is a default (F11 ОЧІКУЄ). Clickable tel: and wa.me
-// links never use it: they go to TEST_PHONE (E.164) from .env.local or the Netlify env.
+// The phone number shown on the site is V Guard's (F11 ПІДТВЕРДЖЕНО). Until launch the clickable
+// tel: and wa.me links do not use it: they go to TEST_PHONE (E.164) from .env.local or the Netlify env (D16).
 // Without TEST_PHONE the number is plain text and the Bellen / WhatsApp buttons are hidden,
 // so nobody calls or messages a random number. TEST_PHONE only works before launch: it is
 // ignored as soon as LIVE_PAGES is not empty (see linkPhone below).
@@ -33,8 +33,8 @@ export const site = {
     region: 'Overijssel',
     country: 'NL',
   },
-  // F11 ОЧІКУЄ
-  phone: fact<Phone>({ display: '06 12 34 56 78', e164: '+31612345678' }, 'default', 'телефон V Guard (F11)'),
+  // F11 ПІДТВЕРДЖЕНО (надано V Guard)
+  phone: fact<Phone>({ display: '06 59 14 76 35', e164: '+31659147635' }, 'confirmed', 'телефон V Guard (F11)'),
   // F15 ОЧІКУЄ
   hours: fact(
     {
@@ -44,9 +44,10 @@ export const site = {
     'default',
     'години V Guard (F15)',
   ),
-  // F14 ОЧІКУЄ. Step 13 default (owner): legal entity behind the trade name, for the privacy page.
+  // F14 legal name ОЧІКУЄ. Step 13 default (owner): legal entity behind the trade name, for the privacy page.
   legalName: fact('V Guard Studio', 'default', 'юридична назва V Guard (F14)'),
-  kvk: fact('12345678', 'default', 'KvK V Guard (F14)'),
+  // F14 KvK ПІДТВЕРДЖЕНО (надано V Guard)
+  kvk: fact('97417513', 'confirmed', 'KvK V Guard (F14)'),
   // F13 ОЧІКУЄ. Public contact email for the privacy page. null until V Guard gives it (owner decision
   // 12.10.2026): the privacy page then names only the phone; check:defaults lists it, so --strict fails.
   email: fact<string | null>(null, 'default', 'публічний email V Guard для Privacy (F13)'),
