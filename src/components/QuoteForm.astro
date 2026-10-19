@@ -19,7 +19,8 @@ import {
 } from '../data/services.ts';
 import { t, type UiKey } from '../i18n/index.ts';
 import { localizedPath, type Locale } from '../i18n/routes.ts';
-import { waLabels } from '../lib/wa-labels.ts';
+import { leadCopy } from '../copy/lead.ts';
+import { leadLabels, waLabels } from '../lib/wa-labels.ts';
 
 interface Props {
   locale: Locale;
@@ -60,6 +61,7 @@ const wrapLabels = {
   data-messages={JSON.stringify(messages)}
   data-wrap-labels={JSON.stringify(wrapLabels)}
   data-wa-labels={JSON.stringify(waLabels(locale))}
+  data-lead-labels={JSON.stringify(leadLabels())}
 >
   <form
     class="quote__card surface-light"
@@ -70,6 +72,8 @@ const wrapLabels = {
     aria-label={t('form.label', locale)}
   >
     <input type="hidden" name="form-name" value="offerte" />
+    {/* Ukrainian summary for the owner (Netlify email, step 23), filled by JS before sending; empty without JS. */}
+    <input type="hidden" name={leadCopy.fieldName} value="" />
     <input type="hidden" name="taal" value={locale} />
     <input type="hidden" name="pagina" value={pagePath} />
     <p class="visually-hidden" aria-hidden="true">
@@ -271,7 +275,9 @@ const wrapLabels = {
 </div>
 
 <script>
-  import { waText, type WaLabels } from '../lib/wa-text.ts';
+  import { leadCopy } from '../copy/lead.ts';
+  import { leadText, type LeadLabels } from '../lib/lead-text.ts';
+  import { waText, type WaLabels, type WaRequest } from '../lib/wa-text.ts';
 
   type Messages = Record<string, string>;
   type StepId = 'service' | 'car' | 'option' | 'contact';
@@ -286,6 +292,7 @@ const wrapLabels = {
     const form = root.querySelector<HTMLFormElement>('form')!;
     const messages: Messages = JSON.parse(root.dataset.messages ?? '{}');
     const labels: WaLabels = JSON.parse(root.dataset.waLabels ?? '{}');
+    const leadLabels: LeadLabels = JSON.parse(root.dataset.leadLabels ?? '{}');
     const steps = Array.from(form.querySelectorAll<HTMLFieldSetElement>('[data-step]'));
     const progress = form.querySelector<HTMLElement>('[data-progress]')!;
     const progressText = form.querySelector<HTMLElement>('[data-progress-text]')!;
@@ -455,6 +462,17 @@ const wrapLabels = {
       try {
         const delenField = form.querySelector<HTMLInputElement>('input[name="delen"]');
         if (delenField) delenField.value = chosenParts().join(',');
+        const leadField = form.elements.namedItem(leadCopy.fieldName);
+        if (leadField instanceof HTMLInputElement) {
+          leadField.value = leadText(leadLabels, {
+            ...request(),
+            naam: value('naam'),
+            telefoon: value('telefoon'),
+            email: value('email'),
+            opmerking: value('opmerking'),
+            taal: value('taal'),
+          });
+        }
         const body = new URLSearchParams(new FormData(form) as unknown as Record<string, string>);
         const res = await fetch('/', {
           method: 'POST',
@@ -471,20 +489,25 @@ const wrapLabels = {
       }
     });
 
+    // What was chosen, as form ids; disabled fields of other services are skipped.
+    function request(): WaRequest {
+      return {
+        dienst: service(),
+        optie: optie(),
+        delen: chosenParts(),
+        kleur: form.querySelector<HTMLInputElement>('input[name="kleur"]:not(:disabled)')?.value ?? '',
+        merk: value('merk'),
+        model: value('model'),
+        bouwjaar: value('bouwjaar'),
+        carrosserie: form.querySelector<HTMLInputElement>('input[name="carrosserie"]:checked:not(:disabled)')?.value,
+      };
+    }
+
     function showSuccess() {
       const link = success.querySelector<HTMLAnchorElement>('[data-wa-link]');
       if (link && root.dataset.wa) {
-        // Ids from the form, labels in the page language (wa-labels.ts); disabled fields of other services are skipped.
-        const text = waText(labels, {
-          dienst: service(),
-          optie: optie(),
-          delen: chosenParts(),
-          kleur: form.querySelector<HTMLInputElement>('input[name="kleur"]:not(:disabled)')?.value ?? '',
-          merk: value('merk'),
-          model: value('model'),
-          bouwjaar: value('bouwjaar'),
-          carrosserie: form.querySelector<HTMLInputElement>('input[name="carrosserie"]:checked:not(:disabled)')?.value,
-        });
+        // Labels in the page language (wa-labels.ts).
+        const text = waText(labels, request());
         link.href = `https://wa.me/${root.dataset.wa}?text=${encodeURIComponent(text)}`;
       }
       form.hidden = true;

@@ -1,63 +1,43 @@
 // Netlify event function: runs after every verified Netlify Forms submission and
-// forwards «offerte» requests to the internal V Guard Telegram chat (D4).
+// forwards «offerte» requests to the internal V Guard Telegram chat (D4), in Ukrainian (step 23).
 // TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID come from Netlify env vars only (D5).
 // A Telegram failure is logged and never breaks the submission.
 import type { Handler } from '@netlify/functions';
-import { adviceOption, bodyTypes, getService, wrapFormParts } from '../../src/data/services.ts';
+import { leadCopy } from '../../src/copy/lead.ts';
+import { leadText } from '../../src/lib/lead-text.ts';
+import { leadLabels } from '../../src/lib/wa-labels.ts';
 
-type FormData = Record<string, string | undefined>;
+type FormData = Record<string, string | string[] | undefined>;
 
-const EMPTY = '-';
+const str = (v: string | string[] | undefined) => (Array.isArray(v) ? v.join(',') : (v ?? ''));
 
-function serviceLabel(id: string | undefined): string {
-  if (!id) return EMPTY;
-  if (id === adviceOption.id) return adviceOption.label.nl;
-  return getService(id)?.label.nl ?? id;
-}
-
-function optionLabel(serviceId: string | undefined, optionId: string | undefined): string {
-  if (!optionId) return EMPTY;
-  return getService(serviceId ?? '')?.options.find((o) => o.id === optionId)?.label.nl ?? optionId;
-}
-
-function bodyTypeLabel(id: string | undefined): string | undefined {
-  if (!id) return undefined;
-  return bodyTypes.find((b) => b.id === id)?.label.nl ?? id;
-}
-
-const text = (value: string | undefined) => value?.trim() || EMPTY;
-
-/** Wrap «Losse delen»: part ids from the hidden «delen» field (or the raw checkbox without JS). */
-function partsLabel(data: FormData): string | undefined {
-  const ids = (data.delen || data.deel || '')
+/**
+ * Plain-text Telegram message (step 23): title, then the same Ukrainian text as the form field
+ * «Заявка». It is rebuilt here from the raw fields with the same function (lead-text.ts), so a
+ * submission without JS (empty field) reads the same and a hand-edited field cannot change it.
+ */
+export function formatMessage(data: FormData): string {
+  // Wrap «Losse delen»: part ids from the hidden «delen» field, or the raw checkboxes without JS.
+  const delen = str(data.delen || data.deel)
     .split(',')
     .map((id) => id.trim())
     .filter(Boolean);
-  if (!ids.length) return undefined;
-  return ids.map((id) => wrapFormParts.find((p) => p.formPart === id)?.formLabel.nl.toLowerCase() ?? id).join(', ');
-}
-
-/** Plain-text Telegram message (block specs section 4). Form data only. */
-export function formatMessage(data: FormData): string {
-  const car = [data.merk, data.model, data.bouwjaar, bodyTypeLabel(data.carrosserie)]
-    .map((v) => v?.trim())
-    .filter(Boolean)
-    .join(' ');
-  return [
-    'Nieuwe aanvraag',
-    `Dienst: ${serviceLabel(data.dienst)}`,
-    `Optie: ${optionLabel(data.dienst, data.optie)}`,
-    // Wrap only: chosen parts (step W4) and colour or finish (step W3).
-    ...(partsLabel(data) ? [`Delen: ${partsLabel(data)}`] : []),
-    ...(data.kleur?.trim() ? [`Kleur/finish: ${data.kleur.trim()}`] : []),
-    `Auto: ${car || EMPTY}`,
-    `Naam: ${text(data.naam)}`,
-    `Telefoon: ${text(data.telefoon)}`,
-    `E-mail: ${text(data.email)}`,
-    `Opmerking: ${text(data.opmerking)}`,
-    `Taal: ${text(data.taal)}`,
-    `Pagina: ${text(data.pagina)}`,
-  ].join('\n');
+  const text = leadText(leadLabels(), {
+    dienst: str(data.dienst),
+    optie: str(data.optie),
+    delen,
+    kleur: str(data.kleur),
+    merk: str(data.merk),
+    model: str(data.model),
+    bouwjaar: str(data.bouwjaar),
+    carrosserie: str(data.carrosserie),
+    naam: str(data.naam),
+    telefoon: str(data.telefoon),
+    email: str(data.email),
+    opmerking: str(data.opmerking),
+    taal: str(data.taal),
+  });
+  return `${leadCopy.telegramTitle}\n${text}`;
 }
 
 export async function sendTelegram(message: string, token: string, chatId: string): Promise<void> {
