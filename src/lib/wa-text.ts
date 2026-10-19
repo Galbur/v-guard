@@ -33,24 +33,32 @@ export interface WaRequest {
   carrosserie?: string;
 }
 
-const clean = (v: string | undefined) => (v ?? '').trim();
+export const clean = (v: string | undefined) => (v ?? '').trim();
+
+/** «PPF, Custom (losse delen)» / «Car wrapping, Losse delen (dak, spiegelkappen), kleur of finish: …». */
+export function serviceSummary(l: WaLabels, r: WaRequest): string {
+  const service = l.services[r.dienst] ?? clean(r.dienst);
+  const option = r.optie ? (l.options[r.dienst]?.[r.optie] ?? r.optie) : '';
+  const parts = (r.delen ?? []).map((id) => l.parts[id] ?? id).filter(Boolean);
+  const optionAndParts = option && parts.length ? `${option} (${parts.join(', ')})` : option || parts.join(', ');
+  const kleur = clean(r.kleur) ? `${l.kleur}: ${clean(r.kleur)}` : '';
+  return [service, optionAndParts, kleur].filter(Boolean).join(', ');
+}
+
+/** «BMW 3 Serie 2021, Sedan»; the year and the body are left out when empty. */
+export function carSummary(l: WaLabels, r: WaRequest): string {
+  const car = [r.merk, r.model, r.bouwjaar].map(clean).filter(Boolean).join(' ');
+  const body = r.carrosserie ? (l.bodies[r.carrosserie] ?? r.carrosserie) : '';
+  return [car, body].filter(Boolean).join(', ');
+}
 
 /**
  * Intro, then «Dienst: service, option (parts), kleur of finish: …», then «Auto: merk model jaar, body».
  * Empty values leave no separator or brackets behind.
  */
 export function waText(l: WaLabels, r: WaRequest): string {
-  const service = l.services[r.dienst] ?? clean(r.dienst);
-  const option = r.optie ? (l.options[r.dienst]?.[r.optie] ?? r.optie) : '';
-  const parts = (r.delen ?? []).map((id) => l.parts[id] ?? id).filter(Boolean);
-  const optionAndParts = option && parts.length ? `${option} (${parts.join(', ')})` : option || parts.join(', ');
-  const kleur = clean(r.kleur) ? `${l.kleur}: ${clean(r.kleur)}` : '';
-  const serviceLine = [service, optionAndParts, kleur].filter(Boolean).join(', ');
-
-  const car = [r.merk, r.model, r.bouwjaar].map(clean).filter(Boolean).join(' ');
-  const body = r.carrosserie ? (l.bodies[r.carrosserie] ?? r.carrosserie) : '';
-  const carLine = [car, body].filter(Boolean).join(', ');
-
+  const serviceLine = serviceSummary(l, r);
+  const carLine = carSummary(l, r);
   return [l.intro, serviceLine && `${l.service}: ${serviceLine}`, carLine && `${l.car}: ${carLine}`]
     .filter(Boolean)
     .join('\n');
