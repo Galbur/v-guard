@@ -80,10 +80,8 @@ export const nl = {
   'form.success.home': 'Terug naar home',
   'form.wa.intro': "Hallo V Guard Studio, hierbij foto's bij mijn aanvraag via de website.",
   'form.wa.service': 'Dienst',
-  'form.wa.option': 'Optie',
   'form.wa.car': 'Auto',
   'form.wa.kleur': 'Kleur of finish',
-  'form.wa.delen': 'Delen',
 } as const;
 
 export type UiKey = keyof typeof nl;

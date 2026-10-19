@@ -19,6 +19,7 @@ import {
 } from '../data/services.ts';
 import { t, type UiKey } from '../i18n/index.ts';
 import { localizedPath, type Locale } from '../i18n/routes.ts';
+import { waLabels } from '../lib/wa-labels.ts';
 
 interface Props {
   locale: Locale;
@@ -39,12 +40,6 @@ const messageKeys: UiKey[] = [
   'form.err.submit',
   'form.sending',
   'form.submit',
-  'form.wa.intro',
-  'form.wa.service',
-  'form.wa.option',
-  'form.wa.car',
-  'form.wa.kleur',
-  'form.wa.delen',
   'form.err.parts',
 ];
 const messages = Object.fromEntries(messageKeys.map((k) => [k, t(k, locale)]));
@@ -64,6 +59,7 @@ const wrapLabels = {
   data-wa={wa}
   data-messages={JSON.stringify(messages)}
   data-wrap-labels={JSON.stringify(wrapLabels)}
+  data-wa-labels={JSON.stringify(waLabels(locale))}
 >
   <form
     class="quote__card surface-light"
@@ -275,6 +271,8 @@ const wrapLabels = {
 </div>
 
 <script>
+  import { waText, type WaLabels } from '../lib/wa-text.ts';
+
   type Messages = Record<string, string>;
   type StepId = 'service' | 'car' | 'option' | 'contact';
 
@@ -287,6 +285,7 @@ const wrapLabels = {
   function init(root: HTMLElement) {
     const form = root.querySelector<HTMLFormElement>('form')!;
     const messages: Messages = JSON.parse(root.dataset.messages ?? '{}');
+    const labels: WaLabels = JSON.parse(root.dataset.waLabels ?? '{}');
     const steps = Array.from(form.querySelectorAll<HTMLFieldSetElement>('[data-step]'));
     const progress = form.querySelector<HTMLElement>('[data-progress]')!;
     const progressText = form.querySelector<HTMLElement>('[data-progress-text]')!;
@@ -475,19 +474,18 @@ const wrapLabels = {
     function showSuccess() {
       const link = success.querySelector<HTMLAnchorElement>('[data-wa-link]');
       if (link && root.dataset.wa) {
-        const car = [value('merk'), value('model'), value('bouwjaar')].filter(Boolean).join(' ');
-        const lines = [
-          messages['form.wa.intro'],
-          `${messages['form.wa.service']}: ${checkedLabel('dienst')}`,
-          checkedLabel('optie') && `${messages['form.wa.option']}: ${checkedLabel('optie')}`,
-          chosenParts().length &&
-            `${messages['form.wa.delen']}: ${chosenParts()
-              .map((id) => (wrapLabels.parts[id] ?? id).toLowerCase())
-              .join(', ')}`,
-          value('kleur') && `${messages['form.wa.kleur']}: ${value('kleur')}`,
-          `${messages['form.wa.car']}: ${[car, checkedLabel('carrosserie')].filter(Boolean).join(', ')}`,
-        ].filter(Boolean);
-        link.href = `https://wa.me/${root.dataset.wa}?text=${encodeURIComponent(lines.join('\n'))}`;
+        // Ids from the form, labels in the page language (wa-labels.ts); disabled fields of other services are skipped.
+        const text = waText(labels, {
+          dienst: service(),
+          optie: optie(),
+          delen: chosenParts(),
+          kleur: form.querySelector<HTMLInputElement>('input[name="kleur"]:not(:disabled)')?.value ?? '',
+          merk: value('merk'),
+          model: value('model'),
+          bouwjaar: value('bouwjaar'),
+          carrosserie: form.querySelector<HTMLInputElement>('input[name="carrosserie"]:checked:not(:disabled)')?.value,
+        });
+        link.href = `https://wa.me/${root.dataset.wa}?text=${encodeURIComponent(text)}`;
       }
       form.hidden = true;
       success.hidden = false;
