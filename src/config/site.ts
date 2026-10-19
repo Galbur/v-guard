@@ -47,10 +47,13 @@ export const site = {
   // F14 ПІДТВЕРДЖЕНО (надано V Guard): legal entity behind the trade name (privacy page) and its KvK.
   legalName: fact('V-GUARD', 'confirmed', 'юридична назва V Guard (F14)'),
   kvk: fact('97417513', 'confirmed', 'KvK V Guard (F14)'),
-  // F13 ОЧІКУЄ. Public contact email for the privacy page. null until V Guard gives it (owner decision
-  // 12.10.2026): the privacy page then names only the phone; check:defaults lists it, so --strict fails.
+  // Public contact email for the privacy page: not given yet (F13 is only the inbox for requests).
+  // null until V Guard gives it (owner decision 12.10.2026): the privacy page then names only the phone;
+  // check:defaults lists it, so --strict fails.
   email: fact<string | null>(null, 'default', 'публічний email V Guard для Privacy (F13)'),
-  emailNotify: null as string | null, // F13 ОЧІКУЄ; Netlify Forms notifications are set in the Netlify UI
+  // F13 ПІДТВЕРДЖЕНО (надано V Guard): inbox for new requests. Not shown on the site; Netlify Forms
+  // email notifications to it are set in the Netlify UI.
+  emailNotify: fact('vguardstudio1@gmail.com', 'confirmed', 'пошта для заявок V Guard (F13)'),
   // F16 ОЧІКУЄ. No URL, no link: a guessed profile URL could point to someone else.
   socials: {
     tiktok: null as string | null,
