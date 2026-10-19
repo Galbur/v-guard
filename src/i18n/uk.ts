@@ -82,8 +82,6 @@ export const uk: Record<UiKey, string> = {
   'form.success.home': 'На головну',
   'form.wa.intro': 'Вітаю, V Guard Studio! Надсилаю фото до заявки з сайту.',
   'form.wa.service': 'Послуга',
-  'form.wa.option': 'Варіант',
   'form.wa.car': 'Авто',
   'form.wa.kleur': 'Колір або фініш',
-  'form.wa.delen': 'Деталі',
 };
