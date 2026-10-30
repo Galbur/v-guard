@@ -33,6 +33,8 @@ export const site = {
     region: 'Overijssel',
     country: 'NL',
   },
+  // Pin of the Google Business Profile V-GUARD (JSON-LD geo).
+  geo: { latitude: 52.4545024, longitude: 6.5833402 },
   // F11 ПІДТВЕРДЖЕНО (надано V Guard)
   phone: fact<Phone>({ display: '06 59 14 76 35', e164: '+31659147635' }, 'confirmed', 'телефон V Guard (F11)'),
   // F15 ОЧІКУЄ
@@ -114,11 +116,8 @@ const mapsQuery = encodeURIComponent(`${site.name}, ${fullAddress}`);
 export const links = {
   // Plain links to Google Maps; nothing loads before a click (D7).
   route: `https://www.google.com/maps/dir/?api=1&destination=${mapsQuery}`,
-  reviews: fact(
-    `https://www.google.com/maps/search/?api=1&query=${mapsQuery}`,
-    'default',
-    'пряме посилання на відгуки GBP після активації профілю',
-  ),
+  // Google Business Profile V-GUARD: reviews link and JSON-LD hasMap.
+  maps: 'https://www.google.com/maps/place/V-GUARD/@52.5307958,6.3895358,10513m/data=!3m1!1e3!4m6!3m5!1s0x59f397c5f407243:0x21c8c536d4931e56!8m2!3d52.4545024!4d6.5833402!16s%2Fg%2F11zztv_1xc',
   // F10, F10b source
   rijksoverheid:
     'https://www.rijksoverheid.nl/onderwerpen/verkeersveiligheid/vraag-en-antwoord/mag-ik-folie-of-coating-aanbrengen-op-mijn-autoruiten',

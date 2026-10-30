@@ -3,7 +3,7 @@ import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import StickyMobileBar from '../components/StickyMobileBar.astro';
-import { LIVE_PAGES, site } from '../config/site.ts';
+import { LIVE_PAGES, links, site } from '../config/site.ts';
 import { t, type UiKey } from '../i18n/index.ts';
 import { hreflang, locales, localizedPath, type Locale, type PageKey } from '../i18n/routes.ts';
 
@@ -48,6 +48,8 @@ const business: Record<string, unknown> = {
     addressRegion: site.address.region,
     addressCountry: site.address.country,
   },
+  geo: { '@type': 'GeoCoordinates', latitude: site.geo.latitude, longitude: site.geo.longitude },
+  hasMap: links.maps,
   openingHours: site.hours.value.schema,
   areaServed: ['Vroomshoop', 'Twente'],
   ...(sameAs.length ? { sameAs } : {}),
