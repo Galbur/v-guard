@@ -6,7 +6,7 @@ position: "center 60%"
 detail: { nl: "", uk: "" }
 home: false
 order: 10
-# Step 15: real photo freed from the Home process block. Caption from Oleksii (car + service); to be checked with V Guard.
-status: default
+# Caption confirmed by V Guard by phone, 30.10.2026 (Site Truth D28).
+status: confirmed
 hint: "реальні авто і плівки з проєктів"
 ---

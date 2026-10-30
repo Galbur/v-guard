@@ -166,11 +166,11 @@ export const ppfPackages: Package[] = [
         nl: ['Voorbumper', 'volledige motorkap', 'voorschermen', 'spiegelkappen', 'koplampen'],
         uk: ['Передній бампер', 'увесь капот', 'передні крила', 'корпуси дзеркал', 'фари'],
       },
-      'default',
+      'confirmed',
       'точні зони V Guard',
     ),
     price: price(895, 'confirmed', 'Full Front, агресивний вхід; ринок ~€1.000-2.000', { from: true }),
-    duration: fact({ nl: '1-2 werkdagen', uk: '1-2 робочі дні' }, 'default', 'тривалість V Guard'),
+    duration: fact({ nl: '1-2 werkdagen', uk: '1-2 робочі дні' }, 'confirmed', 'тривалість V Guard'),
   },
   {
     id: 'full-body',
@@ -180,11 +180,11 @@ export const ppfPackages: Package[] = [
     highlight: 'full',
     zones: fact(
       { nl: ['Alle gelakte carrosseriedelen'], uk: ['Усі пофарбовані деталі кузова'] },
-      'default',
+      'confirmed',
       'точні зони V Guard',
     ),
     price: price(2995, 'confirmed', 'ринок ~€3.500-6.000', { from: true }),
-    duration: fact({ nl: '3-5 werkdagen', uk: '3-5 робочих днів' }, 'default', 'тривалість V Guard'),
+    duration: fact({ nl: '3-5 werkdagen', uk: '3-5 робочих днів' }, 'confirmed', 'тривалість V Guard'),
   },
   {
     id: 'gedeeltelijk',
@@ -195,12 +195,12 @@ export const ppfPackages: Package[] = [
     // Zones = the priced parts, so «vanaf» matches the parts listed on the card.
     zones: fact(
       { nl: partExamples('nl'), uk: partExamples('uk') },
-      'default',
+      'confirmed',
       'деталі з ppfParts (ціни за деталь)',
     ),
     parts: ppfParts,
     price: price(Math.min(...ppfParts.map((p) => p.price.amount)), 'confirmed', 'найнижча ціна за деталь', { from: true }),
-    duration: fact({ nl: 'per onderdeel', uk: 'за деталь' }, 'default', 'тривалість V Guard'),
+    duration: fact({ nl: 'per onderdeel', uk: 'за деталь' }, 'confirmed', 'тривалість V Guard'),
   },
 ];
 
@@ -209,7 +209,7 @@ export const ppfCare = fact<Localized>(
     nl: 'Was de auto de eerste 7 dagen niet, zodat de folie goed hecht. Daarna kun je normaal wassen. Richt een hogedrukspuit niet direct op de randen van de folie.',
     uk: 'Перші 7 днів не мийте авто, щоб плівка добре схопилася. Далі мийте як звичайно. Не спрямовуйте мийку високого тиску прямо на краї плівки.',
   },
-  'default',
+  'confirmed',
   'догляд V Guard',
 );
 
@@ -271,19 +271,19 @@ export const tintFrom: Price = {
 };
 
 /** AI illustration (D18): allowed in illustrative slots, never in the list of finished work. */
-const illustration = (file: string) => fact(file, 'default', 'AI-ілюстрація (D18), замінити фото V Guard, коли буде');
+const illustration = (file: string) => fact(file, 'illustration', 'AI-ілюстрація (D18), замінити фото V Guard, коли буде');
 
 export const tint = {
-  shades: fact([5, 20, 35, 50, 70], 'default', 'відсотки V Guard'),
-  popularShade: fact(20, 'default', 'найпопулярніший тон, V Guard'),
-  duration: fact<Localized>({ nl: '2-3 uur', uk: '2-3 години' }, 'default', 'тривалість V Guard'),
-  keepClosedDays: fact(3, 'default', 'V Guard'),
+  shades: fact([5, 20, 35, 50, 70], 'confirmed', 'відсотки V Guard'),
+  popularShade: fact(20, 'confirmed', 'найпопулярніший тон, V Guard'),
+  duration: fact<Localized>({ nl: '2-3 uur', uk: '2-3 години' }, 'confirmed', 'тривалість V Guard'),
+  keepClosedDays: fact(3, 'confirmed', 'V Guard'),
   care: fact<Localized>(
     {
       nl: 'Wacht een week met de binnenkant schoonmaken. Gebruik daarna een zachte doek en een schoonmaakmiddel zonder ammoniak.',
       uk: 'Тиждень не чіпайте внутрішній бік. Далі мʼяка ганчірка і засіб без аміаку.',
     },
-    'default',
+    'confirmed',
     'догляд V Guard',
   ),
   steps: fact<{ title: Localized; text: Localized }[]>(
@@ -305,7 +305,7 @@ export const tint = {
         text: { nl: 'We brengen de folie aan op de binnenzijde en controleren het resultaat.', uk: 'Встановлюємо плівку зсередини та перевіряємо якість монтажу.' },
       },
     ],
-    'default',
+    'confirmed',
     'процес тонування V Guard, замінить клієнт',
   ),
   /** Hero illustrations (step 15): 375 portrait, 1280 landscape. */
@@ -471,7 +471,7 @@ export const wrapFinishes: WrapFinish[] = [
 /** Which finishes V Guard offers (the list above). */
 export const wrapFinishList = fact(
   wrapFinishes.map((f) => f.label.nl),
-  'default',
+  'confirmed',
   'фініші V Guard',
 );
 
@@ -501,12 +501,12 @@ export const wrapColors = fact<WrapColor[]>(
 );
 
 export const wrap = {
-  fullDuration: fact<Localized>({ nl: '3-5 dagen', uk: '3-5 днів' }, 'default', 'тривалість повного wrap, V Guard'),
-  partsDuration: fact<Localized>({ nl: '1 dag', uk: '1 день' }, 'default', 'тривалість дах або дзеркала, V Guard'),
-  lifetime: fact<Localized>({ nl: '5-7 jaar', uk: '5-7 років' }, 'default', 'термін служби wrap, V Guard'),
-  brands: fact(['3M', 'Avery Dennison'], 'default', 'бренди плівки для wrap, V Guard'),
+  fullDuration: fact<Localized>({ nl: '3-5 dagen', uk: '3-5 днів' }, 'confirmed', 'тривалість повного wrap, V Guard'),
+  partsDuration: fact<Localized>({ nl: '1 dag', uk: '1 день' }, 'confirmed', 'тривалість дах або дзеркала, V Guard'),
+  lifetime: fact<Localized>({ nl: '5-7 jaar', uk: '5-7 років' }, 'confirmed', 'термін служби wrap, V Guard'),
+  brands: fact(['3M', 'Avery Dennison'], 'confirmed', 'бренди плівки для wrap, V Guard'),
   /** «Je kunt ook een proefstuk op je auto laten zetten.» */
-  proefstuk: fact(true, 'default', 'пробний шматок плівки на авто клієнта, V Guard'),
+  proefstuk: fact(true, 'confirmed', 'пробний шматок плівки на авто клієнта, V Guard'),
   /** Hero, compare and CTA illustrations. */
   images: {
     hero375: illustration('wrap-hero-375.png'),
@@ -607,7 +607,7 @@ export interface WrapRecent {
 }
 
 const jobMonth = () =>
-  fact<Localized>({ nl: 'okt 2026', uk: 'жовтень 2026' }, 'default', 'місяць роботи і підпис, V Guard');
+  fact<Localized>({ nl: 'okt 2026', uk: 'жовтень 2026' }, 'confirmed', 'місяць роботи і підпис, V Guard');
 
 /** «Recent opgeleverd»: real photos with captions from the mockup. */
 export const wrapRecent: WrapRecent[] = [

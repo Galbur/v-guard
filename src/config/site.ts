@@ -35,22 +35,24 @@ export const site = {
   geo: { latitude: 52.4545024, longitude: 6.5833402 },
   // F11 ПІДТВЕРДЖЕНО (надано V Guard)
   phone: fact<Phone>({ display: '06 59 14 76 35', e164: '+31659147635' }, 'confirmed', 'телефон V Guard (F11)'),
-  // F15 ОЧІКУЄ
+  // F15 ПІДТВЕРДЖЕНО (усно, 30.10.2026). spec feeds JSON-LD openingHoursSpecification.
   hours: fact(
     {
-      label: { nl: 'ma-vr 09:00-18:00, za 10:00-16:00', uk: 'пн-пт 09:00-18:00, сб 10:00-16:00' } as Localized,
-      schema: ['Mo-Fr 09:00-18:00', 'Sa 10:00-16:00'],
+      label: { nl: 'ma-vr 10:00-18:00 · za-zo 10:00-16:00', uk: 'пн-пт 10:00-18:00 · сб-нд 10:00-16:00' } as Localized,
+      spec: [
+        { days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'], opens: '10:00', closes: '18:00' },
+        { days: ['Saturday', 'Sunday'], opens: '10:00', closes: '16:00' },
+      ],
     },
-    'default',
+    'confirmed',
     'години V Guard (F15)',
   ),
   // F14 ПІДТВЕРДЖЕНО (надано V Guard): legal entity behind the trade name (privacy page) and its KvK.
   legalName: fact('V-GUARD', 'confirmed', 'юридична назва V Guard (F14)'),
   kvk: fact('97417513', 'confirmed', 'KvK V Guard (F14)'),
-  // Public contact email for the privacy page: not given yet (F13 is only the inbox for requests).
-  // null until V Guard gives it (owner decision 12.10.2026): the privacy page then names only the phone;
-  // check:defaults lists it, so --strict fails.
-  email: fact<string | null>(null, 'default', 'публічний email V Guard для Privacy (F13)'),
+  // Public contact email for the privacy page: none (F13: no public email for the site), so the
+  // privacy page names only the phone (owner decision 12.10.2026).
+  email: fact<string | null>(null, 'confirmed', 'публічного email V Guard немає (F13)'),
   // F13 ПІДТВЕРДЖЕНО (надано V Guard): inbox for new requests. Not shown on the site; Netlify Forms
   // email notifications to it are set in the Netlify UI.
   emailNotify: fact('vguardstudio1@gmail.com', 'confirmed', 'пошта для заявок V Guard (F13)'),
@@ -60,11 +62,11 @@ export const site = {
     instagram: null as string | null,
     facebook: null as string | null,
   },
-  // Not from the design prompt: proposed by the developer for the privacy page, to be checked with V Guard.
-  retentionMonths: fact(12, 'default', 'термін зберігання заявок; запропоновано розробником, перевірити з V Guard'),
+  // Retention of requests for the privacy page (Site Truth D28).
+  retentionMonths: fact(12, 'confirmed', 'термін зберігання заявок (D28)'),
   responseTime: fact<Localized>(
     { nl: 'binnen 1 werkdag', uk: 'протягом робочого дня' },
-    'default',
+    'confirmed',
     'термін відповіді V Guard',
   ),
 };

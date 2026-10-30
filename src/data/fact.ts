@@ -3,10 +3,12 @@
 // default: «value | hint» marker from the design prompt (R1). Only the value renders; the hint
 // stays in code and in `npm run check:defaults`. Before launch: check:defaults = 0
 // or explicit owner approval (CLAUDE.md rules 1-2).
+// illustration: an AI illustration standing in for a V Guard photo (D18). Allowed as is, so
+// check:defaults does not list it.
 // dormant: a default that only a switched-off feature uses (D19); it is not on the site, so
 // check:defaults leaves it out. It turns back into default when the feature is switched on.
 
-export type Status = 'confirmed' | 'spoken' | 'default' | 'dormant';
+export type Status = 'confirmed' | 'spoken' | 'default' | 'dormant' | 'illustration';
 export type Locale = 'nl' | 'uk';
 export type Localized<T = string> = Record<Locale, T>;
 
