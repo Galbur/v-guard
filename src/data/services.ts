@@ -133,13 +133,13 @@ export interface Package {
 }
 
 const ppfParts = [
-  { label: { nl: 'Koplampen', uk: 'Фари' }, price: price(99, 'default', 'ціни за деталь', { from: true }) },
-  { label: { nl: 'Instaplijsten', uk: 'Пороги' }, price: price(79, 'default', 'ціни за деталь', { from: true }) },
+  { label: { nl: 'Koplampen', uk: 'Фари' }, price: price(99, 'confirmed', 'ціни за деталь', { from: true }) },
+  { label: { nl: 'Instaplijsten', uk: 'Пороги' }, price: price(79, 'confirmed', 'ціни за деталь', { from: true }) },
   {
     label: { nl: 'Laadrand achterbumper', uk: 'Край заднього бампера' },
-    price: price(79, 'default', 'ціни за деталь', { from: true }),
+    price: price(79, 'confirmed', 'ціни за деталь', { from: true }),
   },
-  { label: { nl: 'Spiegelkappen', uk: 'Корпуси дзеркал' }, price: price(79, 'default', 'ціни за деталь', { from: true }) },
+  { label: { nl: 'Spiegelkappen', uk: 'Корпуси дзеркал' }, price: price(79, 'confirmed', 'ціни за деталь', { from: true }) },
 ];
 
 /** «Koplampen», «instaplijsten», ... from the priced parts; an optional prefix goes before the first. */
@@ -169,7 +169,7 @@ export const ppfPackages: Package[] = [
       'default',
       'точні зони V Guard',
     ),
-    price: price(895, 'default', 'Full Front, агресивний вхід; ринок ~€1.000-2.000', { from: true }),
+    price: price(895, 'confirmed', 'Full Front, агресивний вхід; ринок ~€1.000-2.000', { from: true }),
     duration: fact({ nl: '1-2 werkdagen', uk: '1-2 робочі дні' }, 'default', 'тривалість V Guard'),
   },
   {
@@ -183,7 +183,7 @@ export const ppfPackages: Package[] = [
       'default',
       'точні зони V Guard',
     ),
-    price: price(2995, 'default', 'ринок ~€3.500-6.000', { from: true }),
+    price: price(2995, 'confirmed', 'ринок ~€3.500-6.000', { from: true }),
     duration: fact({ nl: '3-5 werkdagen', uk: '3-5 робочих днів' }, 'default', 'тривалість V Guard'),
   },
   {
@@ -199,7 +199,7 @@ export const ppfPackages: Package[] = [
       'деталі з ppfParts (ціни за деталь)',
     ),
     parts: ppfParts,
-    price: price(Math.min(...ppfParts.map((p) => p.price.amount)), 'default', 'найнижча ціна за деталь', { from: true }),
+    price: price(Math.min(...ppfParts.map((p) => p.price.amount)), 'confirmed', 'найнижча ціна за деталь', { from: true }),
     duration: fact({ nl: 'per onderdeel', uk: 'за деталь' }, 'default', 'тривалість V Guard'),
   },
 ];
@@ -225,16 +225,16 @@ export interface PriceRow {
 const tintHint = 'нижній поріг ринку NL';
 // Achterzijde (from the B-pillar, standard film), incl. btw.
 export const tintBodyPrices: PriceRow[] = [
-  { id: 'hatchback-3', label: { nl: '3-deurs hatchback', uk: 'Тридверний хетчбек' }, price: price(129, 'default', `${tintHint}; V Guard озвучував €200 (P1)`) },
-  { id: 'hatchback-5', label: { nl: '5-deurs hatchback', uk: "П'ятидверний хетчбек" }, price: price(149, 'default', tintHint) },
-  { id: 'sedan-coupe', label: { nl: 'Sedan / coupé', uk: 'Седан / купе' }, price: price(179, 'default', tintHint) },
-  { id: 'stationwagon', label: { nl: 'Stationwagon', uk: 'Універсал' }, price: price(189, 'default', tintHint) },
-  { id: 'suv', label: { nl: 'SUV', uk: 'SUV' }, price: price(199, 'default', tintHint) },
-  { id: 'bus-mpv', label: { nl: 'Bestelbus / MPV', uk: 'Мікроавтобус / мінівен' }, price: price(249, 'default', tintHint) },
+  { id: 'hatchback-3', label: { nl: '3-deurs hatchback', uk: 'Тридверний хетчбек' }, price: price(129, 'confirmed', `${tintHint}; V Guard озвучував €200 (P1)`) },
+  { id: 'hatchback-5', label: { nl: '5-deurs hatchback', uk: "П'ятидверний хетчбек" }, price: price(149, 'confirmed', tintHint) },
+  { id: 'sedan-coupe', label: { nl: 'Sedan / coupé', uk: 'Седан / купе' }, price: price(179, 'confirmed', tintHint) },
+  { id: 'stationwagon', label: { nl: 'Stationwagon', uk: 'Універсал' }, price: price(189, 'confirmed', tintHint) },
+  { id: 'suv', label: { nl: 'SUV', uk: 'SUV' }, price: price(199, 'confirmed', tintHint) },
+  { id: 'bus-mpv', label: { nl: 'Bestelbus / MPV', uk: 'Мікроавтобус / мінівен' }, price: price(249, 'confirmed', tintHint) },
   {
     id: 'tesla',
     label: { nl: 'Tesla Model 3 / Model Y', uk: 'Tesla Model 3 / Model Y' },
-    price: price(179, 'default', 'EV-сегмент з ресерчу; без даху'),
+    price: price(179, 'confirmed', 'EV-сегмент з ресерчу; без даху'),
   },
 ];
 
@@ -243,24 +243,24 @@ export const tintOptionPrices: PriceRow[] = [
     id: 'voorste-zijruiten',
     formOption: 'voorste-zijruiten',
     label: { nl: 'Voorste zijruiten, lichte folie (min. 55% lichtdoorlatendheid)', uk: 'Передні бічні вікна, світла плівка (світлопропускання від 55%)' },
-    price: price(99, 'default', 'ринок €100-150', { plus: true }),
+    price: price(99, 'confirmed', 'ринок €100-150', { plus: true }),
   },
   {
     id: 'keramisch',
     label: { nl: 'Keramische warmtewerende folie', uk: 'Керамічна плівка для захисту від спеки' },
-    price: price(69, 'default', 'апгрейд, ринок +€70-100', { plus: true }),
+    price: price(69, 'confirmed', 'апгрейд, ринок +€70-100', { plus: true }),
   },
-  { id: 'achterruit', label: { nl: 'Alleen achterruit', uk: 'Лише заднє скло' }, price: price(79, 'default') },
+  { id: 'achterruit', label: { nl: 'Alleen achterruit', uk: 'Лише заднє скло' }, price: price(79, 'confirmed') },
   {
     id: 'chameleon',
     formOption: 'chameleon',
     label: { nl: 'Chameleon-folie voor de voorruit', uk: 'Плівка Chameleon на лобове скло' },
-    price: price(199, 'default', 'V Guard озвучував €500 (P3)', { from: true }),
+    price: price(199, 'confirmed', 'V Guard озвучував €500 (P3)', { from: true }),
   },
   {
     id: 'complete',
     label: { nl: 'Alle zij- en achterruiten', uk: 'Усі вікна (задні та передні бічні)' },
-    price: price(239, 'default', 'пакет зі знижкою; V Guard озвучував €450 (P2)', { from: true }),
+    price: price(239, 'confirmed', 'пакет зі знижкою; V Guard озвучував €450 (P2)', { from: true }),
   },
 ];
 
@@ -345,7 +345,7 @@ export interface WrapBody {
 }
 
 /** Volledige wrap on a hatchback; other bodies multiply it. */
-export const wrapBase: Price = price(1795, 'default', 'Hatchback; ринок ~€2.000-3.500', { from: true });
+export const wrapBase: Price = price(1795, 'confirmed', 'Hatchback; ринок ~€2.000-3.500', { from: true });
 
 /**
  * Defaults only the wrap configurator uses: 'dormant' while it is switched off (D19), so
@@ -400,7 +400,7 @@ export const wrapParts: WrapPart[] = [
     formPart: 'dak',
     label: { nl: 'Dak', uk: 'Дах' },
     formLabel: { nl: 'Dak', uk: 'Дах' },
-    price: price(249, 'default', 'дах, легкове авто', { from: true }),
+    price: price(249, 'confirmed', 'дах, легкове авто', { from: true }),
     vanPrice: price(349, configuratorStatus, 'дах, бус і автобус', { from: true }),
   },
   {
@@ -408,7 +408,7 @@ export const wrapParts: WrapPart[] = [
     formPart: 'spiegelkappen',
     label: { nl: 'Spiegelkappen', uk: 'Дзеркала' },
     formLabel: { nl: 'Spiegelkappen', uk: 'Дзеркала' },
-    price: price(69, 'default', 'ковпаки дзеркал, легкове авто', { from: true }),
+    price: price(69, 'confirmed', 'ковпаки дзеркал, легкове авто', { from: true }),
     vanPrice: price(89, configuratorStatus, 'дзеркала, бус і автобус', { from: true }),
   },
   {
@@ -416,12 +416,12 @@ export const wrapParts: WrapPart[] = [
     formPart: 'chrome-delete',
     label: { nl: 'Chroom (ontchromen)', uk: 'Хром (антихром)' },
     formLabel: { nl: 'Chrome delete', uk: 'Антихром' },
-    price: price(149, 'default', 'ринок від €175', { from: true }),
+    price: price(149, 'confirmed', 'ринок від €175', { from: true }),
   },
 ];
 
 /** Dak, spiegelkappen and chroom in black; not for a touringcar. */
-export const wrapPakket: Price = price(395, 'default', 'Black styling pakket', { from: true });
+export const wrapPakket: Price = price(395, 'confirmed', 'Black styling pakket', { from: true });
 
 /** Carbon look surcharge on the whole indication. */
 export const wrapCarbonSurcharge = fact(0.1, configuratorStatus, 'Carbon look +10%');
