@@ -17,11 +17,9 @@ export interface Review {
   author: string;
 }
 
-// The phone number shown on the site is V Guard's (F11 ПІДТВЕРДЖЕНО). Until launch the clickable
-// tel: and wa.me links do not use it: they go to TEST_PHONE (E.164) from .env.local or the Netlify env (D16).
-// Without TEST_PHONE the number is plain text and the Bellen / WhatsApp buttons are hidden,
-// so nobody calls or messages a random number. TEST_PHONE only works before launch: it is
-// ignored as soon as LIVE_PAGES is not empty (see linkPhone below).
+// The phone number shown on the site is V Guard's (F11 ПІДТВЕРДЖЕНО). Since launch (D25) the clickable
+// tel: and wa.me links use it. Before launch (LIVE_PAGES empty) they went to TEST_PHONE (E.164)
+// from .env.local or the Netlify env (D16); without it the Bellen / WhatsApp buttons were hidden.
 
 export const site = {
   name: 'V Guard Studio', // F1 ПІДТВЕРДЖЕНО
@@ -106,8 +104,8 @@ export const reviews = fact<Review[]>(
       author: 'Dennis, Ommen',
     },
   ],
-  'default',
-  'реальні відгуки Google після запуску профілю',
+  'confirmed',
+  'реальні відгуки клієнтів V Guard (Site Truth D26)',
 );
 
 export const fullAddress = `${site.address.street}, ${site.address.postalCode} ${site.address.locality}`;
@@ -134,10 +132,10 @@ export const features = {
   wrapConfigurator: false as boolean,
 };
 
-// Page keys from src/i18n/routes.ts that are launched. Empty until launch:
-// every page is noindex and the sitemap is empty. While empty, the whole site is
+// Page keys from src/i18n/routes.ts that are launched (D25: all pages, 30.10.2026).
+// Pages not listed are noindex and left out of the sitemap. While empty, the whole site is
 // a preview and all pages are linked; after launch only live pages are linked.
-export const LIVE_PAGES: PageKey[] = [];
+export const LIVE_PAGES: PageKey[] = ['home', 'ppf', 'tint', 'wrap', 'projects', 'contact', 'privacy'];
 
 /** Whether header, footer and other internal links may point to a page. */
 export function isLinked(key: PageKey): boolean {
@@ -149,16 +147,16 @@ export function waDigits(e164: string): string {
   return e164.replace(/\D/g, '');
 }
 
-/** E.164 number that tel: and wa.me links may use, or null (links hidden). */
+/** E.164 number that tel: and wa.me links may use, or null (links hidden). After launch: F11. */
 export const linkPhone: string | null =
-  LIVE_PAGES.length === 0 ? import.meta.env?.TEST_PHONE || process.env.TEST_PHONE || null : null;
+  LIVE_PAGES.length === 0 ? import.meta.env?.TEST_PHONE || process.env.TEST_PHONE || null : site.phone.value.e164;
 
-/** tel: link, or null when no TEST_PHONE is set. */
+/** tel: link, or null when no number may be linked. */
 export function telUrl(): string | null {
   return linkPhone ? `tel:${linkPhone}` : null;
 }
 
-/** wa.me link, or null when no TEST_PHONE is set. */
+/** wa.me link, or null when no number may be linked. */
 export function whatsappUrl(text?: string): string | null {
   if (!linkPhone) return null;
   const base = `https://wa.me/${waDigits(linkPhone)}`;

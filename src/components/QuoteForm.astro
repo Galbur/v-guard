@@ -44,7 +44,7 @@ const messageKeys: UiKey[] = [
   'form.err.parts',
 ];
 const messages = Object.fromEntries(messageKeys.map((k) => [k, t(k, locale)]));
-// Empty without TEST_PHONE: the WhatsApp continuation button is then not rendered.
+// Empty without a linkable number: the WhatsApp continuation button is then not rendered.
 const wa = linkPhone ? waDigits(linkPhone) : '';
 const pagePath = localizedPath('contact', locale);
 // Labels for the wrap configurator prefill (finish id and part ids in the URL).

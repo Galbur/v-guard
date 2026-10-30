@@ -4,7 +4,7 @@ Local car studio in Vroomshoop (NL): PPF, ramen blinderen, car wrapping. Small, 
 
 ## Canon
 
-Facts, prices, decisions: `docs/canon/vguard-site-truth-vN.md` (highest N, currently `vguard-site-truth-v10.md`). Structure and blocks: `docs/canon/vguard-site-blueprint-vN.md`. Page blueprints: `docs/blueprints/`. If a prompt conflicts with the canon, stop and report. Never invent a fact, price, warranty, brand or address.
+Facts, prices, decisions: `docs/canon/vguard-site-truth-vN.md` (highest N, currently `vguard-site-truth-v11.md`). Structure and blocks: `docs/canon/vguard-site-blueprint-vN.md`. Page blueprints: `docs/blueprints/`. If a prompt conflicts with the canon, stop and report. Never invent a fact, price, warranty, brand or address.
 
 ## Stack
 
