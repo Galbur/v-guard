@@ -69,26 +69,25 @@ export const site = {
   ),
 };
 
-// Trust facts (Site Truth section 5). F6 and F9 are ОЗВУЧЕНО; rendered in preview per R1.
+// Trust facts (Site Truth section 5). F6 to F9 ПІДТВЕРДЖЕНО (Oleksii, Site Truth D27).
 export const trust = {
-  workWarrantyYears: fact(3, 'spoken', 'F6 ОЗВУЧЕНО'),
-  filmWarrantyYears: fact({ ppf: 10, tint: 7 }, 'default', 'F7: PPF 5/7/10 залежно від бренду, тонування 5-7'),
-  certifiedPpf: fact(true, 'default', 'F8: після скану сертифіката Валери'),
-  brands: fact(['XPEL', 'BRAVIXX', 'LLumar'], 'spoken', 'F9 ОЗВУЧЕНО'),
-  // PPF page: manufacturer warranty per brand (F7 ОЗВУЧЕНО) and what it covers (default).
+  workWarrantyYears: fact(3, 'confirmed', 'F6'),
+  filmWarrantyYears: fact({ ppf: 10, tint: 7 }, 'confirmed', 'F7: PPF 5/7/10 залежно від бренду, тонування 5-7'),
+  certifiedPpf: fact(true, 'confirmed', 'F8'),
+  brands: fact(['XPEL', 'BRAVIXX', 'LLumar'], 'confirmed', 'F9'),
+  // PPF page: manufacturer warranty per brand (F7) and what it covers.
   ppfFilmWarranty: fact(
     {
       years: [5, 7, 10],
       covers: { nl: 'vergelen en loslaten', uk: 'пожовтіння і відшарування' } as Localized,
     },
-    'default',
-    'F7 ОЗВУЧЕНО: 5/7/10 залежно від бренду; покриття (vergelen, loslaten) за умовами виробника',
+    'confirmed',
+    'F7: 5/7/10 залежно від бренду; покриття (vergelen, loslaten) за умовами виробника',
   ),
-  tintBrands: fact(['LLumar', 'XPEL'], 'spoken', 'F9 ОЗВУЧЕНО: бренди для тонування з макета'),
+  tintBrands: fact(['LLumar', 'XPEL'], 'confirmed', 'F9: бренди для тонування з макета'),
 };
 
-// Google reviews (Blueprint ReviewsBlock). Defaults from the design prompt; owner decision
-// R1 06.10.2026: render in preview, replace with real Google reviews before launch.
+// Client reviews (Blueprint ReviewsBlock). Real reviews per Site Truth D26.
 export const reviews = fact<Review[]>(
   [
     {
