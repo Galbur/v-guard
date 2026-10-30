@@ -50,7 +50,12 @@ const business: Record<string, unknown> = {
   },
   geo: { '@type': 'GeoCoordinates', latitude: site.geo.latitude, longitude: site.geo.longitude },
   hasMap: links.maps,
-  openingHours: site.hours.value.schema,
+  openingHoursSpecification: site.hours.value.spec.map((h) => ({
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: h.days,
+    opens: h.opens,
+    closes: h.closes,
+  })),
   areaServed: ['Vroomshoop', 'Twente'],
   ...(sameAs.length ? { sameAs } : {}),
 };

@@ -6,7 +6,7 @@ position: "center 58%"
 detail: { nl: "voorruit met Chameleon-folie", uk: "лобове скло з плівкою Chameleon" }
 home: false
 order: 9
-# Step 15: real photo freed from the Home and tint pages. Caption from Oleksii; to be checked with V Guard.
-status: default
+# Caption confirmed by V Guard by phone, 30.10.2026 (Site Truth D28).
+status: confirmed
 hint: "реальні авто і плівки з проєктів"
 ---
