@@ -1,0 +1,90 @@
+---
+// Consent-gated trackers (D30): GA4 and Microsoft Clarity
+// after «Statistieken», GTM after «Statistieken» or «Marketing». Before consent: no request to
+// any third party. IDs only from site.ts (analytics); an empty ID switches a tracker off.
+// Bundled script, not is:inline: the Netlify CSP (script-src 'self') blocks inline scripts.
+// The IDs reach the script through data attributes, so nothing is hardcoded in the bundle.
+// Works with CookieConsent.astro: window.consentGiven, events consent-ready / consent-updated.
+import { analytics } from '../config/site.ts';
+
+const ids = {
+  ga4: analytics.ga4Id.value,
+  gtm: analytics.gtmId.value,
+  clarity: analytics.clarityId.value,
+};
+const any = ids.ga4 || ids.gtm || ids.clarity;
+---
+
+{any && <span id="vg-analytics" data-ga4={ids.ga4} data-gtm={ids.gtm} data-clarity={ids.clarity} hidden />}
+
+<script>
+  type Category = 'analytics' | 'marketing';
+  type Gate = { consentGiven?: (c: Category) => boolean };
+  type Queue = { (...args: unknown[]): void; q?: unknown[] };
+
+  const conf = document.getElementById('vg-analytics')?.dataset ?? {};
+  const w = window as unknown as Window & Gate & { dataLayer: unknown[]; gtag?: Queue; clarity?: Queue };
+  const loaded = { ga4: false, gtm: false, clarity: false };
+
+  function inject(src: string) {
+    const s = document.createElement('script');
+    s.async = true;
+    s.src = src;
+    document.head.appendChild(s);
+  }
+
+  function loadGa4(id: string) {
+    if (loaded.ga4) return;
+    loaded.ga4 = true;
+    inject(`https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(id)}`);
+    w.dataLayer = w.dataLayer || [];
+    // gtag needs the arguments object itself, as in Google's snippet.
+    w.gtag = function () {
+      // eslint-disable-next-line prefer-rest-params
+      w.dataLayer.push(arguments);
+    };
+    w.gtag('js', new Date());
+    w.gtag('config', id, { anonymize_ip: true });
+  }
+
+  function loadGtm(id: string) {
+    if (loaded.gtm) return;
+    loaded.gtm = true;
+    // Google's loader, run only after consent. No <noscript> iframe: without JS the gate cannot work.
+    w.dataLayer = w.dataLayer || [];
+    w.dataLayer.push({ 'gtm.start': Date.now(), event: 'gtm.js' });
+    inject(`https://www.googletagmanager.com/gtm.js?id=${encodeURIComponent(id)}`);
+  }
+
+  function loadClarity(id: string) {
+    if (loaded.clarity) return;
+    loaded.clarity = true;
+    // Microsoft's snippet: queue calls until the tag script is in.
+    w.clarity =
+      w.clarity ||
+      function (...args: unknown[]) {
+        (w.clarity!.q = w.clarity!.q || []).push(args);
+      };
+    inject(`https://www.clarity.ms/tag/${encodeURIComponent(id)}`);
+  }
+
+  function check() {
+    const given = w.consentGiven;
+    if (!given) return;
+    const stats = given('analytics');
+    const ads = given('marketing');
+    if (conf.ga4 && stats) loadGa4(conf.ga4);
+    if (conf.clarity && stats) loadClarity(conf.clarity);
+    if (conf.gtm && (stats || ads)) loadGtm(conf.gtm);
+    // Consent withdrawn after loading: tell the loaded tags to stop storing; nothing new loads.
+    if (!stats) {
+      if (loaded.ga4) w.gtag?.('consent', 'update', { analytics_storage: 'denied' });
+      if (loaded.clarity) w.clarity?.('consent', false);
+    }
+  }
+
+  document.addEventListener('consent-ready', check);
+  document.addEventListener('consent-updated', check);
+  // The banner script may have run first and already fired consent-ready.
+  check();
+</script>

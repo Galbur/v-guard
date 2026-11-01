@@ -82,6 +82,21 @@ export const nl = {
   'form.wa.service': 'Dienst',
   'form.wa.car': 'Auto',
   'form.wa.kleur': 'Kleur of finish',
+  'consent.title': 'Cookies op vguardstudio.com',
+  'consent.text':
+    'Wij gebruiken cookies voor statistieken over het gebruik van de site (Google Analytics, Google Tag Manager, Microsoft Clarity). Noodzakelijke cookies staan altijd aan.',
+  'consent.privacy': 'Privacyverklaring',
+  'consent.acceptAll': 'Alles accepteren',
+  'consent.necessaryOnly': 'Alleen noodzakelijk',
+  'consent.settings': 'Instellingen',
+  'consent.save': 'Keuze opslaan',
+  'consent.necessary': 'Noodzakelijk',
+  'consent.necessaryDesc': 'Nodig om de site te laten werken. Staat altijd aan.',
+  'consent.analytics': 'Statistieken',
+  'consent.analyticsDesc': 'Google Analytics 4 en Microsoft Clarity: welke pagina’s bezoekers gebruiken.',
+  'consent.marketing': 'Marketing',
+  'consent.marketingDesc': 'Google Tag Manager: tags voor advertentiecampagnes.',
+  'footer.cookies': 'Cookie-instellingen',
 } as const;
 
 export type UiKey = keyof typeof nl;

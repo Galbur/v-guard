@@ -1,0 +1,330 @@
+---
+// Cookie banner (D30). Three categories: necessary
+// (always on), analytics, marketing. Reject by default: until the visitor agrees, Analytics.astro
+// loads nothing. The choice lives in localStorage (vg_consent_*) with a version, so a policy
+// change can ask again by bumping VERSION.
+// Bundled script, not is:inline: the Netlify CSP (script-src 'self') blocks inline scripts.
+//
+// API on window: consentGiven(category), setConsent({ analytics, marketing }), openConsentBanner().
+// Events on document: consent-ready (once on load), consent-updated (on every change);
+// detail: { necessary, analytics, marketing }.
+// Any element with data-vg-consent="open" (footer «Cookie-instellingen») reopens the banner.
+import { t } from '../i18n/index.ts';
+import { localizedPath, type Locale } from '../i18n/routes.ts';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+---
+
+<div
+  id="vg-consent"
+  class="consent"
+  role="dialog"
+  aria-modal="false"
+  aria-labelledby="vg-consent-title"
+  aria-describedby="vg-consent-text"
+  tabindex="-1"
+  hidden
+>
+  <div class="consent__inner container">
+    <div class="consent__head">
+      <h2 id="vg-consent-title" class="consent__title">{t('consent.title', locale)}</h2>
+      <p id="vg-consent-text" class="consent__text">
+        {t('consent.text', locale)}{' '}
+        <a href={localizedPath('privacy', locale)}>{t('consent.privacy', locale)}</a>
+      </p>
+    </div>
+
+    <div class="consent__details" id="vg-consent-details" hidden>
+      <label class="consent__row consent__row--locked">
+        <input type="checkbox" checked disabled />
+        <span>
+          <span class="consent__name">{t('consent.necessary', locale)}</span>
+          <span class="consent__desc">{t('consent.necessaryDesc', locale)}</span>
+        </span>
+      </label>
+      <label class="consent__row">
+        <input type="checkbox" id="vg-consent-analytics" />
+        <span>
+          <span class="consent__name">{t('consent.analytics', locale)}</span>
+          <span class="consent__desc">{t('consent.analyticsDesc', locale)}</span>
+        </span>
+      </label>
+      <label class="consent__row">
+        <input type="checkbox" id="vg-consent-marketing" />
+        <span>
+          <span class="consent__name">{t('consent.marketing', locale)}</span>
+          <span class="consent__desc">{t('consent.marketingDesc', locale)}</span>
+        </span>
+      </label>
+    </div>
+
+    <div class="consent__actions">
+      <button type="button" class="consent__btn" data-vg-consent="reject">{t('consent.necessaryOnly', locale)}</button>
+      <button type="button" class="consent__btn" data-vg-consent="customize" aria-expanded="false" aria-controls="vg-consent-details">
+        {t('consent.settings', locale)}
+      </button>
+      <button type="button" class="consent__btn" data-vg-consent="save" id="vg-consent-save" hidden>
+        {t('consent.save', locale)}
+      </button>
+      <button type="button" class="consent__btn consent__btn--primary" data-vg-consent="accept-all">
+        {t('consent.acceptAll', locale)}
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  type Category = 'necessary' | 'analytics' | 'marketing';
+  type Choice = Record<Category, boolean>;
+
+  const VERSION = '1';
+  const VERSION_KEY = 'vg_consent_version';
+  const key = (c: Category) => `vg_consent_${c}`;
+
+  // localStorage can throw (private mode, blocked storage): treat that as «no consent».
+  const read = (k: string) => {
+    try {
+      return localStorage.getItem(k);
+    } catch {
+      return null;
+    }
+  };
+  const write = (k: string, v: string) => {
+    try {
+      localStorage.setItem(k, v);
+    } catch {
+      /* choice holds for this page view only */
+    }
+  };
+
+  const consentGiven = (c: Category) => c === 'necessary' || read(key(c)) === 'true';
+  const current = (): Choice => ({
+    necessary: true,
+    analytics: consentGiven('analytics'),
+    marketing: consentGiven('marketing'),
+  });
+
+  const banner = document.getElementById('vg-consent');
+  const details = document.getElementById('vg-consent-details');
+  const customize = document.querySelector<HTMLButtonElement>('[data-vg-consent="customize"]');
+  const save = document.getElementById('vg-consent-save');
+  const analytics = document.getElementById('vg-consent-analytics') as HTMLInputElement | null;
+  const marketing = document.getElementById('vg-consent-marketing') as HTMLInputElement | null;
+
+  function setConsent(map: { analytics?: boolean; marketing?: boolean }) {
+    const choice: Choice = { necessary: true, analytics: !!map.analytics, marketing: !!map.marketing };
+    (Object.keys(choice) as Category[]).forEach((c) => write(key(c), String(choice[c])));
+    write(VERSION_KEY, VERSION);
+    document.dispatchEvent(new CustomEvent('consent-updated', { detail: choice }));
+  }
+
+  function hide() {
+    if (banner) banner.hidden = true;
+  }
+
+  function openSettings() {
+    if (!details || !customize) return;
+    details.hidden = false;
+    customize.setAttribute('aria-expanded', 'true');
+    if (analytics) analytics.checked = consentGiven('analytics');
+    if (marketing) marketing.checked = consentGiven('marketing');
+    if (save) save.hidden = false;
+    // The toggles are open now: «Keuze opslaan» takes the place of «Instellingen».
+    customize.hidden = true;
+  }
+
+  function openConsentBanner() {
+    if (!banner) return;
+    banner.hidden = false;
+    openSettings();
+    banner.focus();
+  }
+
+  Object.assign(window, { consentGiven, setConsent, openConsentBanner });
+
+  document.addEventListener('click', (e) => {
+    const el = e.target instanceof Element ? e.target.closest('[data-vg-consent]') : null;
+    if (!el) return;
+    const action = el.getAttribute('data-vg-consent');
+    if (action === 'open') {
+      e.preventDefault();
+      openConsentBanner();
+    } else if (action === 'accept-all') {
+      setConsent({ analytics: true, marketing: true });
+      hide();
+    } else if (action === 'reject') {
+      setConsent({ analytics: false, marketing: false });
+      hide();
+    } else if (action === 'customize') {
+      openSettings();
+    } else if (action === 'save') {
+      setConsent({ analytics: !!analytics?.checked, marketing: !!marketing?.checked });
+      hide();
+    }
+  });
+
+  // Module scripts run after parsing, so the DOM is ready here.
+  if (banner && read(VERSION_KEY) !== VERSION) banner.hidden = false;
+  document.dispatchEvent(new CustomEvent('consent-ready', { detail: current() }));
+</script>
+
+<style>
+  .consent {
+    position: fixed;
+    inset: auto 0 0 0;
+    z-index: 60;
+    max-height: calc(100dvh - 16px);
+    overflow-y: auto;
+    background: var(--c-graphite);
+    border-top: 1px solid var(--c-border-dark);
+    box-shadow: 0 -16px 48px rgb(0 0 0 / 0.55);
+    color: var(--c-off-white);
+  }
+
+  .consent:focus {
+    outline: none;
+  }
+
+  .consent__inner {
+    display: grid;
+    gap: 16px;
+    padding-top: 18px;
+    padding-bottom: 18px;
+  }
+
+  .consent__title {
+    margin: 0 0 6px;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .consent__text {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--c-text-soft);
+  }
+
+  .consent__text a {
+    color: var(--c-gold);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .consent__details {
+    display: grid;
+    gap: 8px;
+  }
+
+  .consent__row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    min-height: 44px;
+    padding: 10px 12px;
+    border: 1px solid var(--c-line-dark);
+    border-radius: var(--r-btn);
+    cursor: pointer;
+  }
+
+  .consent__row--locked {
+    cursor: default;
+  }
+
+  .consent__row input {
+    flex: none;
+    width: 20px;
+    height: 20px;
+    margin: 1px 0 0;
+    accent-color: var(--c-gold);
+  }
+
+  .consent__row input:focus-visible {
+    outline: var(--focus);
+    outline-offset: var(--focus-offset);
+  }
+
+  .consent__name {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .consent__desc {
+    display: block;
+    font-size: 13px;
+    line-height: 1.45;
+    color: var(--c-muted);
+  }
+
+  .consent__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .consent__btn {
+    flex: 1 1 100%;
+    min-height: 44px;
+    padding: 0 16px;
+    border: 1px solid var(--c-border-dark);
+    border-radius: var(--r-btn);
+    background: transparent;
+    color: var(--c-off-white);
+    font: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .consent__btn:focus-visible {
+    outline: var(--focus);
+    outline-offset: var(--focus-offset);
+  }
+
+  .consent__btn--primary {
+    border-color: var(--c-gold);
+    background: var(--c-gold);
+    color: var(--c-black);
+  }
+
+  /* Phones and tablets: sit above StickyMobileBar (8 + 48 + 12 px and the safe area). */
+  @media (max-width: 63.99rem) {
+    .consent {
+      bottom: calc(69px + env(safe-area-inset-bottom));
+      max-height: calc(100dvh - 69px - env(safe-area-inset-bottom) - 16px);
+    }
+  }
+
+  @media (min-width: 40rem) {
+    .consent__btn {
+      flex: 1 1 auto;
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .consent__inner {
+      grid-template-columns: 1fr auto;
+      align-items: start;
+      column-gap: 32px;
+    }
+
+    .consent__details {
+      grid-column: 1 / -1;
+      grid-row: 2;
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .consent__actions {
+      justify-content: flex-end;
+    }
+
+    .consent__btn {
+      flex: none;
+    }
+  }
+</style>
