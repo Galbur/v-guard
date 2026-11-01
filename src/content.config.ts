@@ -45,6 +45,8 @@ const projects = defineCollection({
         images: z.array(z.object({ src: image(), alt: localized.optional() })).min(1).optional(),
         /** CSS object-position for 4:3 crops. */
         position: z.string().default('center'),
+        /** Done by a V Guard specialist outside the Vroomshoop building, photo from the client (D29). */
+        offsite: z.boolean().default(false),
         /** Shown in «Recent werk» on the home page. */
         home: z.boolean().default(false),
         order: z.number(),

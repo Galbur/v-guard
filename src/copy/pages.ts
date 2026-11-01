@@ -8,14 +8,14 @@ export const projectsCopy = {
     title: 'Projecten: PPF, ramen blinderen en wraps | V Guard Studio',
     description: 'Echte projecten van V Guard Studio in Vroomshoop: PPF, getinte ruiten en car wrapping.',
     h1: 'Projecten van V Guard Studio',
-    sub: "Echte auto's uit onze studio in Vroomshoop: PPF, getinte ruiten en wraps.",
+    sub: 'Werk van onze specialisten: PPF, getinte ruiten en wraps.',
     cta: { title: 'Jouw auto als volgende?', text: 'Vraag een offerte aan of stuur ons een WhatsApp.' } satisfies CtaBand,
   },
   uk: {
     title: 'Проєкти V Guard Studio',
     description: 'Справжні проєкти V Guard Studio у Vroomshoop: PPF, тонування і car wrapping.',
     h1: 'Проєкти V Guard Studio',
-    sub: 'Справжні авто з нашої студії у Vroomshoop: PPF, тонування і wrap.',
+    sub: 'Роботи наших спеціалістів: PPF, тонування і wrap.',
     cta: { title: 'Ваше авто наступне?', text: 'Отримайте оцінку або напишіть нам у WhatsApp.' } satisfies CtaBand,
   },
 } satisfies Record<Locale, unknown>;

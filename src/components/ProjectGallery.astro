@@ -41,8 +41,14 @@ const view = items.map((entry) => {
       : lead === 'ppf'
         ? [car, `PPF ${detail}`.trim()]
         : [car, detail || labels[0]?.toLowerCase(), p.film];
-  const alt =
-    locale === 'nl'
+  // Work done outside the Vroomshoop building (D29): no studio or town in the alt.
+  const alt = p.offsite
+    ? locale === 'nl'
+      ? `${car} met ${dienst[lead].nl} door een specialist van V Guard Studio`
+      : lead === 'ppf'
+        ? `${car} з PPF від спеціаліста V Guard Studio`
+        : `${car}: ${dienst[lead].uk} від спеціаліста V Guard Studio`
+    : locale === 'nl'
       ? `${car} met ${dienst[lead].nl} door V Guard Studio in Vroomshoop`
       : lead === 'ppf'
         ? `${car} з PPF від V Guard Studio у Vroomshoop`
