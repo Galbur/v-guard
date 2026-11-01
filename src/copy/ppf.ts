@@ -35,7 +35,7 @@ export const ppf = {
       { title: 'Aanbrengen', text: 'We brengen de folie zorgvuldig aan op de voorbereide lak.' },
       { title: 'Controle', text: 'We controleren de randen en het oppervlak voordat je de auto ophaalt.' },
     ] satisfies Step[],
-    galleryTitle: 'PPF van V Guard',
+    galleryTitle: 'Onze PPF-projecten',
     trust: [
       { icon: 'shield', text: `${years} jaar garantie op de montage.` },
       { icon: 'award', text: `Fabrieksgarantie op de folie: ${join(filmYears, 'of')} jaar, afhankelijk van het merk.` },
@@ -96,7 +96,7 @@ export const ppf = {
       { title: 'Монтаж', text: 'Встановлюємо плівку на підготовлену поверхню.' },
       { title: 'Перевірка', text: 'Перевіряємо краї та поверхню плівки перед видачею авто.' },
     ] satisfies Step[],
-    galleryTitle: 'PPF від V Guard',
+    galleryTitle: 'Наші PPF-проєкти',
     trust: [
       { icon: 'shield', text: `${years} роки гарантії на монтаж.` },
       { icon: 'award', text: `Гарантія виробника на плівку: ${join(filmYears, 'або')} років залежно від бренду.` },

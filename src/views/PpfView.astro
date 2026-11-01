@@ -2,6 +2,7 @@
 // PPF (/ppf/, /uk/ppf/): mockup «VG Site 02 PPF v2», Blueprint v1.3 service template.
 // Hero 1280 and step photos are AI-generated illustrations (D18), alt=""; Hero 375 is a real photo.
 import { getCollection } from 'astro:content';
+import { newestFirst } from '../lib/projects.ts';
 import Base from '../layouts/Base.astro';
 import Hero from '../components/Hero.astro';
 import AnswerBox from '../components/AnswerBox.astro';
@@ -23,7 +24,10 @@ interface Props {
 
 const { locale } = Astro.props;
 const c = ppf[locale];
-const projects = (await getCollection('projects', (p) => p.data.service === 'ppf')).sort((a, b) => a.data.order - b.data.order);
+// «Onze PPF-projecten»: confirmed PPF work, newest first, up to 6; the rest only on Projecten.
+const projects = (await getCollection('projects', (p) => p.data.services.includes('ppf') && p.data.status === 'confirmed'))
+  .sort(newestFirst)
+  .slice(0, 6);
 const url = new URL(localizedPath('ppf', locale), Astro.site ?? 'http://localhost').href;
 const schema = [
   serviceSchema({

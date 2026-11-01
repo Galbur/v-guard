@@ -2,6 +2,7 @@
 // Home (/ and /uk/): mockup «VG Site 01 Home», Blueprint v1.3 section 3. Hero, service cards and the
 // process photo are AI illustrations (D18, step 15); real photos stay in the list of work.
 import { getCollection } from 'astro:content';
+import { newestFirst } from '../lib/projects.ts';
 import Base from '../layouts/Base.astro';
 import Hero from '../components/Hero.astro';
 import ServiceCards from '../components/ServiceCards.astro';
@@ -23,7 +24,8 @@ interface Props {
 
 const { locale } = Astro.props;
 const c = home[locale];
-const recent = (await getCollection('projects', (p) => p.data.home)).sort((a, b) => a.data.order - b.data.order).slice(0, 6);
+// Up to 6 cards; with more, the 6 newest by date stay (undated ones count as oldest).
+const recent = (await getCollection('projects', (p) => p.data.home)).sort(newestFirst).slice(0, 6);
 ---
 
 <Base locale={locale} pageKey="home" title={c.title} description={c.description}>

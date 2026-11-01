@@ -87,6 +87,18 @@ const projectsDir = join(import.meta.dirname, '..', 'src', 'content', 'projects'
 for (const file of readdirSync(projectsDir).filter((f) => f.endsWith('.md'))) {
   const text = readFileSync(join(projectsDir, file), 'utf8');
   const get = (key: string) => text.match(new RegExp(`^${key}:\\s*(.+)$`, 'm'))?.[1]?.trim() ?? '';
+  // Single fields with their own status: model: { value: "A7", status: default, hint: "..." }
+  for (const [, key, body] of text.matchAll(/^(\w+):\s*\{(.*)\}\s*$/gm)) {
+    const fieldStatus = body.match(/status:\s*"?(\w+)"?/)?.[1];
+    if (fieldStatus !== 'default' && fieldStatus !== 'spoken') continue;
+    rows.push({
+      file: `src/content/projects/${file}`,
+      field: key,
+      status: fieldStatus,
+      value: body.match(/value:\s*(?:"([^"]*)"|(\w+))/)?.slice(1).find(Boolean) ?? '',
+      hint: body.match(/hint:\s*"([^"]*)"/)?.[1] ?? '',
+    });
+  }
   const status = get('status');
   if (status !== 'default' && status !== 'spoken') continue;
   const car = get('car').match(/nl:\s*"([^"]*)"/)?.[1] ?? '';
@@ -102,7 +114,7 @@ for (const file of readdirSync(projectsDir).filter((f) => f.endsWith('.md'))) {
 
 const cols: (keyof Row)[] = ['file', 'field', 'status', 'value', 'hint'];
 const cut = (s: string, n: number) => (s.length > n ? `${s.slice(0, n - 1)}…` : s);
-const limits: Record<keyof Row, number> = { file: 34, field: 44, status: 7, value: 60, hint: 60 };
+const limits: Record<keyof Row, number> = { file: 50, field: 44, status: 7, value: 60, hint: 60 };
 const widths = cols.map((c) => Math.max(c.length, ...rows.map((r) => cut(r[c], limits[c]).length)));
 const line = (cells: string[]) => `| ${cells.map((cell, i) => cell.padEnd(widths[i])).join(' | ')} |`;
 console.log(line(cols));
