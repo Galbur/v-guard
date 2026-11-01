@@ -477,11 +477,11 @@ const vanParts = wrapParts.filter((p) => p.vanPrice);
     display: contents;
   }
 
-  /* Preview: full width at 375, sticks to the top while the configurator is in view. */
+  /* Preview: full width at 375, sticks to the top (under the sticky header) while the configurator is in view. */
   .cfg__preview {
     grid-row: 1;
     position: sticky;
-    top: 0;
+    top: var(--header-h);
     z-index: 3;
     margin-inline: calc(-1 * var(--gutter));
     padding-bottom: 6px;
@@ -920,7 +920,7 @@ const vanParts = wrapParts.filter((p) => p.vanPrice);
       grid-column: 2;
       grid-row: 1;
       position: sticky;
-      top: 24px;
+      top: calc(var(--header-h) + 24px);
       display: flex;
       flex-direction: column;
       gap: 16px;
