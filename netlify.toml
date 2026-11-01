@@ -29,11 +29,13 @@
   to = "/uk/404/"
   status = 404
 
-# No third-party origins (D7): everything is served from the site itself.
+# No third-party origins (D7), except analytics after consent in the banner (D30): GA4 and GTM
+# (googletagmanager.com, google-analytics.com) and Microsoft Clarity (clarity.ms, c.bing.com).
+# Nothing from them loads before consent (src/components/Analytics.astro).
 [[headers]]
   for = "/*"
   [headers.values]
-    Content-Security-Policy = "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; form-action 'self'; frame-ancestors 'none'; base-uri 'self'; object-src 'none'"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' https://www.googletagmanager.com https://www.clarity.ms https://scripts.clarity.ms; style-src 'self'; img-src 'self' data: https://*.google-analytics.com https://*.googletagmanager.com https://*.clarity.ms https://c.bing.com; font-src 'self'; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://*.clarity.ms https://c.bing.com; form-action 'self'; frame-ancestors 'none'; base-uri 'self'; object-src 'none'"
     X-Content-Type-Options = "nosniff"
     X-Frame-Options = "DENY"
     Referrer-Policy = "strict-origin-when-cross-origin"

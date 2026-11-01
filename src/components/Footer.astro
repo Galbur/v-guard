@@ -67,6 +67,10 @@ const socials = [
 
     <div class="ftr__bottom">
       {isLinked('privacy') && <a href={localizedPath('privacy', locale)}>{t('nav.privacy', locale)}</a>}
+      {/* Reopens the cookie banner (CookieConsent.astro); a button, since it opens a dialog, not a page. */}
+      <button type="button" class="ftr__cookies" data-vg-consent="open">
+        {t('footer.cookies', locale)}
+      </button>
       <span>{t('footer.kvk', locale)} {site.kvk.value}</span>
     </div>
   </div>
@@ -146,18 +150,35 @@ const socials = [
 
   .ftr__bottom {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
+    column-gap: 16px;
     margin-top: 28px;
     padding-top: 16px;
     border-top: 1px solid var(--c-line-dark);
     font-size: 12px;
   }
 
-  .ftr__bottom a {
+  .ftr__bottom a,
+  .ftr__cookies {
     display: inline-flex;
     align-items: center;
     min-height: 44px;
+  }
+
+  .ftr__cookies {
+    padding: 0;
+    border: 0;
+    background: none;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+  }
+
+  .ftr__cookies:focus-visible {
+    outline: var(--focus);
+    outline-offset: var(--focus-offset);
   }
 
   @media (min-width: 64rem) {

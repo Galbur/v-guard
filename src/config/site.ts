@@ -133,6 +133,15 @@ export const features = {
   wrapConfigurator: false as boolean,
 };
 
+// Analytics behind the consent banner (D30): nothing loads before the visitor agrees.
+// GA4 and Clarity need «Statistieken», GTM needs «Statistieken» or «Marketing».
+// An empty string switches a tracker off. The Netlify CSP lists their origins (netlify.toml).
+export const analytics = {
+  ga4Id: fact('G-M2HT44FS99', 'confirmed', 'GA4 V Guard, Oleksii 01.11.2026 (D30)'),
+  gtmId: fact('GTM-T8C4LF2G', 'confirmed', 'GTM V Guard, Oleksii 01.11.2026 (D30)'),
+  clarityId: fact('z6tdv8yuh8', 'confirmed', 'Microsoft Clarity V Guard, Oleksii 01.11.2026 (D30)'),
+};
+
 // Page keys from src/i18n/routes.ts that are launched (D25: all pages, 30.10.2026).
 // Pages not listed are noindex and left out of the sitemap. While empty, the whole site is
 // a preview and all pages are linked; after launch only live pages are linked.
