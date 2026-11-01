@@ -111,7 +111,12 @@ const contactHref = localizedPath('contact', locale);
 </div>
 
 <style>
+  /* Sticky on every breakpoint: above the content, below the StickyMobileBar (50), the cookie
+     banner (60) and the menu popover (top layer). */
   .hdr {
+    position: sticky;
+    top: 0;
+    z-index: 40;
     background: var(--c-black);
     border-bottom: 1px solid var(--c-line-dark);
   }
