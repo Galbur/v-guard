@@ -4,7 +4,7 @@ Local car studio in Vroomshoop (NL): PPF, ramen blinderen, car wrapping. Small, 
 
 ## Canon
 
-Facts, prices, decisions: `docs/canon/vguard-site-truth-vN.md` (highest N, currently `vguard-site-truth-v11.md`). Structure and blocks: `docs/canon/vguard-site-blueprint-vN.md`. Page blueprints: `docs/blueprints/`. If a prompt conflicts with the canon, stop and report. Never invent a fact, price, warranty, brand or address.
+Facts, prices, decisions: `docs/canon/vguard-site-truth-vN.md` (highest N, currently `vguard-site-truth-v12.md`). Structure and blocks: `docs/canon/vguard-site-blueprint-vN.md`. Page blueprints: `docs/blueprints/`. If a prompt conflicts with the canon, stop and report. Never invent a fact, price, warranty, brand or address.
 
 ## Stack
 
@@ -54,6 +54,7 @@ Form `name="offerte"` with `data-netlify="true"`, `netlify-honeypot="bot-field"`
 
 - Step 0 of every task: read-only discovery with `file:line` evidence.
 - `npm run build` after every commit; fix all errors before the next step.
+- `npm run check:defaults -- --strict`: the double `--` is required.
 - Commit messages in English, imperative.
 - Never push, open a PR or deploy without an explicit command.
 - Report: what changed, commits, QA results, screenshots at 375 and 1280, «Не виконано / потрібне рішення».
