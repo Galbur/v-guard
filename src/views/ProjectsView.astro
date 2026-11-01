@@ -1,6 +1,7 @@
 ---
 // Projecten (/projecten/, /uk/proiekty/): mockup 6. Only projects with a real photo (R4).
 import { getCollection } from 'astro:content';
+import { newestFirst } from '../lib/projects.ts';
 import Base from '../layouts/Base.astro';
 import PageIntro from '../components/PageIntro.astro';
 import ProjectGallery from '../components/ProjectGallery.astro';
@@ -14,7 +15,7 @@ interface Props {
 
 const { locale } = Astro.props;
 const c = projectsCopy[locale];
-const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+const projects = (await getCollection('projects')).sort(newestFirst);
 ---
 
 <Base locale={locale} pageKey="projects" title={c.title} description={c.description}>

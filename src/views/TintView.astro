@@ -25,7 +25,7 @@ interface Props {
 
 const { locale } = Astro.props;
 const c = tintCopy[locale];
-const projects = (await getCollection('projects', (p) => p.data.service === 'ramen-blinderen'))
+const projects = (await getCollection('projects', (p) => p.data.services.includes('ramen-blinderen')))
   .sort((a, b) => a.data.order - b.data.order)
   .filter((p) => !p.id.includes('volvo'))
   .slice(0, 6);

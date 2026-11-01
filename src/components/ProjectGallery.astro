@@ -4,7 +4,7 @@
 // Optional filter on Projecten: CSS only (radio + :has), no JS.
 import type { CollectionEntry } from 'astro:content';
 import Photo from './Photo.astro';
-import { getService } from '../data/services.ts';
+import { getService, services } from '../data/services.ts';
 import { t } from '../i18n/index.ts';
 import type { Locale } from '../i18n/routes.ts';
 
@@ -32,28 +32,39 @@ const view = items.map((entry) => {
   const p = entry.data;
   const car = p.car[locale];
   const detail = p.detail[locale];
+  const [lead] = p.services;
+  const labels = p.services.map((s) => getService(s)?.label[locale]);
   // PPF on service pages: «{merk model} · PPF {pakket}».
   const parts =
     caption === 'service'
-      ? [car, getService(p.service)?.label[locale], detail]
-      : p.service === 'ppf'
+      ? [car, ...labels, detail]
+      : lead === 'ppf'
         ? [car, `PPF ${detail}`.trim()]
-        : [car, detail || getService(p.service)?.label[locale].toLowerCase(), p.film];
+        : [car, detail || labels[0]?.toLowerCase(), p.film];
+  const alt =
+    locale === 'nl'
+      ? `${car} met ${dienst[lead].nl} door V Guard Studio in Vroomshoop`
+      : lead === 'ppf'
+        ? `${car} з PPF від V Guard Studio у Vroomshoop`
+        : `${car}: ${dienst[lead].uk} від V Guard Studio у Vroomshoop`;
+  const count = p.images.length;
   return {
     id: entry.id,
-    service: p.service,
-    image: p.image,
+    services: p.services,
+    // Extra frames say which frame they are, so a screen reader does not hear the same alt three times.
+    images: p.images.map((img, i) => ({
+      src: img.src,
+      alt:
+        img.alt?.[locale] ??
+        (i === 0 ? alt : `${alt} (${locale === 'nl' ? `foto ${i + 1} van ${count}` : `фото ${i + 1} з ${count}`})`),
+    })),
     position: p.position,
     caption: parts.filter(Boolean).join(' · '),
-    alt:
-      locale === 'nl'
-        ? `${car} met ${dienst[p.service].nl} door V Guard Studio in Vroomshoop`
-        : p.service === 'ppf'
-          ? `${car} з PPF від V Guard Studio у Vroomshoop`
-          : `${car}: ${dienst[p.service].uk} від V Guard Studio у Vroomshoop`,
+    car,
   };
 });
-const servicesPresent = [...new Set(view.map((v) => v.service))];
+// Chips follow the service order of the site (PPF, ramen blinderen, car wrapping).
+const servicesPresent = services.map((s) => s.slug).filter((s) => view.some((v) => v.services.includes(s)));
 const filters = filter && servicesPresent.length > 1 ? servicesPresent : [];
 ---
 
@@ -89,17 +100,46 @@ const filters = filter && servicesPresent.length > 1 ? servicesPresent : [];
       )}
       <ul class="gallery__grid" role="list">
         {view.map((item) => (
-          <li data-service={item.service}>
+          <li data-services={item.services.join(' ')}>
             <figure>
-              <Photo
-                src={item.image}
-                alt={item.alt}
-                position={item.position}
-                ratio="4/3"
-                class="gallery__img"
-                widths={[360, 540, 720]}
-                sizes="(min-width: 64rem) 384px, calc(50vw - 22px)"
-              />
+              {item.images.length === 1 ? (
+                <Photo
+                  src={item.images[0].src}
+                  alt={item.images[0].alt}
+                  position={item.position}
+                  ratio="4/3"
+                  class="gallery__img"
+                  widths={[360, 540, 720]}
+                  sizes="(min-width: 64rem) 384px, calc(50vw - 22px)"
+                />
+              ) : (
+                // Several frames: a swipeable scroll-snap strip, first frame is the card photo. No JS.
+                <div class="gallery__frames">
+                  <ul
+                    class="gallery__strip"
+                    role="list"
+                    tabindex="0"
+                    aria-label={`${item.car}: ${item.images.length} ${locale === 'nl' ? "foto's" : 'фото'}`}
+                  >
+                    {item.images.map((img, i) => (
+                      <li>
+                        <Photo
+                          src={img.src}
+                          alt={img.alt}
+                          position={i === 0 ? item.position : 'center'}
+                          ratio="4/3"
+                          class="gallery__img"
+                          widths={[360, 540, 720]}
+                          sizes="(min-width: 64rem) 384px, calc(50vw - 22px)"
+                        />
+                      </li>
+                    ))}
+                  </ul>
+                  <span class="gallery__count" aria-hidden="true">
+                    {item.images.length} {locale === 'nl' ? "foto's" : 'фото'}
+                  </span>
+                </div>
+              )}
               <figcaption>{item.caption}</figcaption>
             </figure>
           </li>
@@ -133,6 +173,54 @@ const filters = filter && servicesPresent.length > 1 ? servicesPresent : [];
 
   :global(.gallery__img) {
     border-radius: var(--r-btn);
+  }
+
+  .gallery__frames {
+    position: relative;
+  }
+
+  .gallery__strip {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain;
+    border-radius: var(--r-btn);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    scrollbar-width: none;
+  }
+
+  .gallery__strip::-webkit-scrollbar {
+    display: none;
+  }
+
+  .gallery__strip:focus-visible {
+    outline: var(--focus);
+    outline-offset: var(--focus-offset);
+  }
+
+  .gallery__strip > li {
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+  }
+
+  .gallery__strip :global(.gallery__img) {
+    border-radius: 0;
+  }
+
+  /* Static hint that the photo swipes; the strip itself has the frame count in its label. */
+  .gallery__count {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    padding: 2px 8px;
+    border-radius: var(--r-pill);
+    background: rgb(var(--c-overlay) / 0.7);
+    color: var(--c-off-white);
+    font-size: 12px;
+    line-height: 20px;
+    pointer-events: none;
   }
 
   figcaption {
@@ -186,9 +274,9 @@ const filters = filter && servicesPresent.length > 1 ? servicesPresent : [];
     outline-offset: var(--focus-offset);
   }
 
-  .gallery:has(#pf-ppf:checked) li:not([data-service='ppf']),
-  .gallery:has(#pf-ramen-blinderen:checked) li:not([data-service='ramen-blinderen']),
-  .gallery:has(#pf-car-wrapping:checked) li:not([data-service='car-wrapping']) {
+  .gallery:has(#pf-ppf:checked) .gallery__grid > li:not([data-services~='ppf']),
+  .gallery:has(#pf-ramen-blinderen:checked) .gallery__grid > li:not([data-services~='ramen-blinderen']),
+  .gallery:has(#pf-car-wrapping:checked) .gallery__grid > li:not([data-services~='car-wrapping']) {
     display: none;
   }
 
@@ -217,6 +305,10 @@ const filters = filter && servicesPresent.length > 1 ? servicesPresent : [];
     figcaption {
       margin-top: 10px;
       font-size: 14px;
+    }
+
+    .gallery__strip {
+      scrollbar-width: thin;
     }
 
     .gallery__filter {
