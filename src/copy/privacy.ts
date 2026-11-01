@@ -2,6 +2,7 @@
 // Tokens come from site.ts: legal name and KvK (F14), address (F2), email (F13), phone (F11) and
 // the retention term. While the email is null (F13 ОЧІКУЄ), the two email sentences name only the
 // phone (owner decision 12.10.2026). No [SESSION] sentence: the form keeps no data in the browser.
+// «Cookies en statistieken»: GA4, GTM and Clarity behind the consent banner (D30, 01.11.2026).
 import { fullAddress, site } from '../config/site.ts';
 import type { Locale } from '../data/fact.ts';
 
@@ -29,7 +30,7 @@ const kvk = site.kvk.value;
 const email = site.email.value;
 const phone = site.phone.value.display;
 const retentionMonths = site.retentionMonths.value;
-const updatedIso = '2026-10-12';
+const updatedIso = '2026-11-01';
 
 const ap = { label: 'autoriteitpersoonsgegevens.nl', href: 'https://www.autoriteitpersoonsgegevens.nl' };
 
@@ -39,7 +40,7 @@ export const privacyCopy: Record<Locale, PrivacyCopy> = {
     description:
       'Hoe V Guard Studio in Vroomshoop omgaat met uw gegevens uit het offerteformulier, WhatsApp en telefoon.',
     h1: 'Privacyverklaring',
-    updated: { label: 'Laatst bijgewerkt:', date: '12 oktober 2026', iso: updatedIso },
+    updated: { label: 'Laatst bijgewerkt:', date: '1 november 2026', iso: updatedIso },
     intro:
       'V Guard Studio gaat zorgvuldig om met uw persoonsgegevens. Hier leest u welke gegevens wij verzamelen, waarom, hoe lang wij ze bewaren en welke rechten u heeft.',
     sections: [
@@ -110,9 +111,17 @@ export const privacyCopy: Record<Locale, PrivacyCopy> = {
         ],
       },
       {
-        title: 'Cookies',
+        title: 'Cookies en statistieken',
         blocks: [
-          'Deze website plaatst geen cookies en gebruikt geen analytics of advertentiepixels. Kaarten en sociale media openen pas na uw klik, op de website van die dienst. Daar gelden de voorwaarden van die dienst.',
+          'Met uw toestemming gebruiken wij deze diensten:',
+          [
+            'Google Analytics 4: statistieken over het gebruik van de site;',
+            'Microsoft Clarity: hoe bezoekers de pagina’s gebruiken, zoals klikken en scrollen;',
+            'Google Tag Manager: laadt tags van Google, voor statistieken en voor advertentiecampagnes.',
+          ],
+          'Deze diensten laden pas nadat u in de cookiebanner «Alles accepteren» kiest of ze bij «Instellingen» aanzet. Kiest u «Alleen noodzakelijk», dan laden ze niet. Uw keuze bewaren wij in uw browser.',
+          'U kunt uw keuze altijd wijzigen via «Cookie-instellingen» onderaan elke pagina.',
+          'Kaarten en sociale media openen pas na uw klik, op de website van die dienst. Daar gelden de voorwaarden van die dienst.',
         ],
       },
       {
@@ -150,7 +159,7 @@ export const privacyCopy: Record<Locale, PrivacyCopy> = {
     description:
       'Як V Guard Studio у Vroomshoop обробляє ваші дані з форми заявки, WhatsApp і телефонних дзвінків.',
     h1: 'Політика конфіденційності',
-    updated: { label: 'Оновлено:', date: '12 жовтня 2026', iso: updatedIso },
+    updated: { label: 'Оновлено:', date: '1 листопада 2026', iso: updatedIso },
     intro:
       'V Guard Studio дбайливо ставиться до ваших персональних даних. Тут пояснюємо, які дані ми збираємо, навіщо, скільки їх зберігаємо і які у вас права. Ця політика діє також нідерландською мовою; у разі розбіжностей переважає нідерландська версія.',
     sections: [
@@ -223,9 +232,17 @@ export const privacyCopy: Record<Locale, PrivacyCopy> = {
         ],
       },
       {
-        title: 'Файли cookie',
+        title: 'Cookie і статистика',
         blocks: [
-          'Сайт не встановлює cookie і не використовує аналітику чи рекламні пікселі. Карти і соцмережі відкриваються лише після вашого кліку, на сайті відповідного сервісу. Там діють правила цього сервісу.',
+          'З вашої згоди ми використовуємо такі сервіси:',
+          [
+            'Google Analytics 4: статистика відвідувань сайту;',
+            'Microsoft Clarity: як відвідувачі користуються сторінками, наприклад кліки і прокручування;',
+            'Google Tag Manager: завантажує теги Google для статистики і рекламних кампаній.',
+          ],
+          'Ці сервіси вмикаються лише після того, як ви оберете в банері cookie «Прийняти всі» або увімкнете їх у «Налаштуваннях». Якщо ви оберете «Лише необхідні», вони не завантажуються. Ваш вибір зберігається у вашому браузері.',
+          'Змінити вибір можна будь-коли через «Налаштування cookie» внизу кожної сторінки.',
+          'Карти і соцмережі відкриваються лише після вашого кліку, на сайті відповідного сервісу. Там діють правила цього сервісу.',
         ],
       },
       {

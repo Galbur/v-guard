@@ -37,7 +37,7 @@ docs/canon/, docs/blueprints/, docs/prompts/
 2. Prices only from `src/data/services.ts`, and only when `priceStatus === 'confirmed'`. Exception (owner decision R2, 06.10.2026): `priceStatus === 'default'` renders before launch; before launch `npm run check:defaults` = 0 or explicit owner approval. Format `€200`, «vanaf €200», thousands with a dot (`€1.795`). Ranges with a hyphen.
 3. NAP only from `src/config/site.ts`. Site, JSON-LD and footer read the same values.
 4. No U+2014 (em dash) or U+2013 (en dash) anywhere in copy.
-5. No video, no iframe, no third-party script, font or image before a user click. Fonts self-hosted. Google Maps only as a link or click-to-load.
+5. No video, no iframe, no third-party script, font or image before a user click. Fonts self-hosted. Google Maps only as a link or click-to-load. Exception: analytics (GA4, GTM, Clarity) after consent in the banner (D30).
 6. Secrets (`TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID`) only in Netlify env vars, read in the function. Never in `src/`.
 7. Every NL page has a UA pair with the same facts. Language switcher goes to the pair, not to the homepage.
 8. Forbidden wording: «nr. 1», «de beste», «perfect», «snelste», «XPEL certified/dealer», competitor names, any guarantee of results.
